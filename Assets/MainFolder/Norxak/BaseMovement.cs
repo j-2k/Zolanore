@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class BaseMovement : MonoBehaviour
 {
-    [SerializeField] bool rawMovement; //
-    [SerializeField] float movementSpeed; //
-    [SerializeField] float jumpSpeed; //
-    [SerializeField] float floorDistanceCheck; //1.1
-    [SerializeField] float grav; //
-    [SerializeField] float gravMultiplier; //
+    //Movement Vars
+    [SerializeField] bool rawMovement; // on for raw movement else off for lerp movement
+    [SerializeField] float movementSpeed; // 8
+    [SerializeField] float jumpSpeed; // 3
+    [SerializeField] float grav; // 9
+    [SerializeField] float gravMultiplier; // 1.2
     CharacterController cc;
-    float _dirY;
-    float hInput;
-    float vInput;
+    [SerializeField] float _dirY;
+    [SerializeField] float hInput;
+    [SerializeField] float vInput;
+
+    //Player Stat Vars
+    [SerializeField] int playerHP;
+    [SerializeField] int playerMP;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +30,22 @@ public class BaseMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Movement();
+        PlayerStats();
+    }
+
+    void Movement()
+    {
+
+        //debugs
         Debug.DrawRay(transform.position, cc.velocity, Color.green);
 
         float roundedMag = cc.velocity.magnitude;
         roundedMag = Mathf.RoundToInt(roundedMag);
         Debug.Log(roundedMag);
+        //
+
+
 
         if (rawMovement)
         {
@@ -42,23 +59,28 @@ public class BaseMovement : MonoBehaviour
         }
 
         Vector3 dir = new Vector3(hInput, 0, vInput);
-        dir.Normalize();
+        //dir.Normalize();
+
+
+        if (cc.velocity.magnitude > movementSpeed + 0.1f)
+        {
+            Debug.Log("mag over movement speed");
+        }
 
         //grav
         if (cc.isGrounded)
         {
+            Debug.Log("grounded");
+            _dirY = -0.1f;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _dirY = jumpSpeed;
             }
-            //grav = 0;
         }
         else
         {
-            //cc.Move(-transform.up * grav * Time.deltaTime);
-            //grav += gravMultiplier * Time.deltaTime;
-            //grav += 10 * Time.deltaTime;
-            if (cc.velocity.y <= 0)
+            Debug.Log("not grounded");
+            if (cc.velocity.y < 0)
             {
                 _dirY -= grav * gravMultiplier * Time.deltaTime;
             }
@@ -68,58 +90,54 @@ public class BaseMovement : MonoBehaviour
             }
         }
 
-
         dir.y = _dirY;
 
-        cc.Move(dir * movementSpeed * Time.deltaTime);
+        //cc.Move(dir * movementSpeed * Time.deltaTime);
+        cc.Move(Vector3.ClampMagnitude(dir, 1) * movementSpeed * Time.deltaTime);
+    }
 
-        if (cc.velocity.magnitude >= 5.1)
-        {
-            
-            Debug.Log("yoooo over 5berah");
-        }
-
-
-        //movement
-        /*
-        if (Input.GetKey(KeyCode.W))
-        {
-            //cc.Move(transform.forward * movementSpeed * Time.deltaTime);
-            hInput1 = movementSpeed;
-        }
-                else
-        {
-            hInput1 = 0;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            //cc.Move(-transform.right * movementSpeed * Time.deltaTime);
-            vInput1 = movementSpeed;
-        }
-                else
-        {
-            vInput1 = 0;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            //cc.Move(-transform.forward * movementSpeed * Time.deltaTime);
-            hInput2 = movementSpeed;
-        }
-                else
-        {
-            hInput2 = 0;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            //cc.Move(transform.right * movementSpeed * Time.deltaTime);
-            vInput2 = movementSpeed;
-        }
-                else
-        {
-            vInput2 = 0;
-        }
-        */
-
+    void PlayerStats()
+    {
 
     }
+
+    //old movement
+    /*
+    if (Input.GetKey(KeyCode.W))
+    {
+        //cc.Move(transform.forward * movementSpeed * Time.deltaTime);
+        hInput1 = movementSpeed;
+    }
+            else
+    {
+        hInput1 = 0;
+    }
+    if (Input.GetKey(KeyCode.A))
+    {
+        //cc.Move(-transform.right * movementSpeed * Time.deltaTime);
+        vInput1 = movementSpeed;
+    }
+            else
+    {
+        vInput1 = 0;
+    }
+    if (Input.GetKey(KeyCode.S))
+    {
+        //cc.Move(-transform.forward * movementSpeed * Time.deltaTime);
+        hInput2 = movementSpeed;
+    }
+            else
+    {
+        hInput2 = 0;
+    }
+    if (Input.GetKey(KeyCode.D))
+    {
+        //cc.Move(transform.right * movementSpeed * Time.deltaTime);
+        vInput2 = movementSpeed;
+    }
+            else
+    {
+        vInput2 = 0;
+    }
+    */
 }

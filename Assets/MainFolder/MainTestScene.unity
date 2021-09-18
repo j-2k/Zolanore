@@ -709,7 +709,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1400050461}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -807,11 +807,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416cd1061c33c1948a3124a78cd1fb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  rawMovement: 0
+  movementSpeed: 8
   jumpSpeed: 3
-  floorDistanceCheck: 1
   grav: 9
   gravMultiplier: 1.2
+  _dirY: 0
+  hInput: 0
+  vInput: 0
+  playerHP: 0
+  playerMP: 0
 --- !u!1 &1457111666
 GameObject:
   m_ObjectHideFlags: 0
