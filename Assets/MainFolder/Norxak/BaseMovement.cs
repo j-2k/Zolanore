@@ -19,6 +19,13 @@ public class BaseMovement : MonoBehaviour
     [SerializeField] int playerHP;
     [SerializeField] int playerMP;
 
+    //playercam
+    float mouseX, mouseY;
+    [SerializeField] float rotationSpeedCam;
+    [SerializeField] float zoomCam;
+    [SerializeField] Camera playerCam;
+    [SerializeField] Transform targetCam;
+    [SerializeField] 
 
 
     // Start is called before the first frame update
@@ -32,6 +39,7 @@ public class BaseMovement : MonoBehaviour
     {
         Movement();
         PlayerStats();
+        //PlayerCameraHandling();
     }
 
     void Movement()
@@ -100,6 +108,36 @@ public class BaseMovement : MonoBehaviour
     {
 
     }
+
+    void PlayerCameraHandling()
+    {
+        mouseX += Input.GetAxisRaw("Mouse X") * rotationSpeedCam;
+        mouseY -= Input.GetAxisRaw("Mouse Y") * rotationSpeedCam;
+        mouseY = Mathf.Clamp(mouseY, -90, 90);
+
+        /* no need child but have to -1 clamp
+        Quaternion rot = Quaternion.Euler(mouseY, mouseX, 0);
+        Vector3 zoomVec = new Vector3(0, 0, zoomCam);
+        playerCam.transform.position = targetCam.position + rot * zoomVec;
+        playerCam.transform.LookAt(targetCam.position);
+        */
+
+        targetCam.rotation = Quaternion.Euler(mouseY, mouseX, 0);
+        playerCam.transform.rotation = targetCam.transform.rotation;
+        playerCam.transform.position = targetCam.transform.position + new Vector3(0,0,zoomCam);
+
+
+        if (Input.mouseScrollDelta.y == 1)
+        {
+            zoomCam += 0.5f;
+        }
+        else if (Input.mouseScrollDelta.y == -1)
+        {
+            zoomCam -= 0.5f;
+        }
+        zoomCam = Mathf.Clamp(zoomCam, -10, 0);
+    }
+
 
     //old movement
     /*
