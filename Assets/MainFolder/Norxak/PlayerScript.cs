@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseMovement : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
     //Movement Vars
     [SerializeField] bool rawMovement; // on for raw movement else off for lerp movement
@@ -12,13 +12,17 @@ public class BaseMovement : MonoBehaviour
     [SerializeField] float gravMultiplier; // 1.2
     CharacterController cc;
     [SerializeField] float _dirY;
-    [SerializeField] float hInput;
-    [SerializeField] float vInput;
+    float hInput;
+    float vInput;
+
+    //cam refs
+    [SerializeField] Transform cameraRig;
 
     //Player Stat Vars
-    [SerializeField] int playerHP;
-    [SerializeField] int playerMP;
+    //[SerializeField] int playerHP;
+    //[SerializeField] int playerMP;
 
+    /*
     //playercam
     float mouseX, mouseY;
     [SerializeField] float rotationSpeedCam;
@@ -26,7 +30,7 @@ public class BaseMovement : MonoBehaviour
     [SerializeField] Camera playerCam;
     [SerializeField] Transform targetCam;
     [SerializeField] 
-
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +57,15 @@ public class BaseMovement : MonoBehaviour
         Debug.Log(roundedMag);
         //
 
+        if (Input.GetKey(KeyCode.Q))
+        {
+            cc.transform.Rotate(0, -200 * Time.deltaTime, 0);
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            cc.transform.Rotate(0, 200 * Time.deltaTime, 0);
+        }
 
 
         if (rawMovement)
@@ -66,8 +79,11 @@ public class BaseMovement : MonoBehaviour
             vInput = Input.GetAxis("Vertical");
         }
 
-        Vector3 dir = new Vector3(hInput, 0, vInput);
+        Vector3 jumpDir = new Vector3(0, 0, 0);
         //dir.Normalize();
+        
+        Vector3 forwardMovement = cameraRig.transform.forward * vInput;
+        Vector3 rightMovement = cameraRig.transform.right * hInput;
 
 
         if (cc.velocity.magnitude > movementSpeed + 0.1f)
@@ -98,10 +114,29 @@ public class BaseMovement : MonoBehaviour
             }
         }
 
-        dir.y = _dirY;
+        jumpDir.y = _dirY;
 
         //cc.Move(dir * movementSpeed * Time.deltaTime);
-        cc.Move(Vector3.ClampMagnitude(dir, 1) * movementSpeed * Time.deltaTime);
+        cc.Move(Vector3.ClampMagnitude(jumpDir + forwardMovement + rightMovement, 1) * movementSpeed * Time.deltaTime);
+        /*
+        if (cc.velocity.magnitude >= 0.05f)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, cameraRig.eulerAngles.y, transform.eulerAngles.z);
+        }
+        */
+
+        Vector3 vel = cc.velocity;
+        vel.y = 0f;
+        //cc.velocity = vel;
+        if (cc.velocity.magnitude <= 0.1f)
+        {
+            
+        }
+        else
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(vel), 10 * Time.deltaTime);
+        }
+
     }
 
     void PlayerStats()
@@ -109,19 +144,26 @@ public class BaseMovement : MonoBehaviour
 
     }
 
+    
     void PlayerCameraHandling()
     {
-        mouseX += Input.GetAxisRaw("Mouse X") * rotationSpeedCam;
-        mouseY -= Input.GetAxisRaw("Mouse Y") * rotationSpeedCam;
-        mouseY = Mathf.Clamp(mouseY, -90, 90);
-
+        //==
         /* no need child but have to -1 clamp
         Quaternion rot = Quaternion.Euler(mouseY, mouseX, 0);
         Vector3 zoomVec = new Vector3(0, 0, zoomCam);
         playerCam.transform.position = targetCam.position + rot * zoomVec;
         playerCam.transform.LookAt(targetCam.position);
-        */
+        =====
 
+        mouseX += Input.GetAxisRaw("Mouse X") * rotationSpeedCam;
+        mouseY -= Input.GetAxisRaw("Mouse Y") * rotationSpeedCam;
+        mouseY = Mathf.Clamp(mouseY, -90, 90);
+        
+        ==
+        ~~
+        ==
+
+        /*
         targetCam.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         playerCam.transform.rotation = targetCam.transform.rotation;
         playerCam.transform.position = targetCam.transform.position + new Vector3(0,0,zoomCam);
@@ -136,7 +178,9 @@ public class BaseMovement : MonoBehaviour
             zoomCam -= 0.5f;
         }
         zoomCam = Mathf.Clamp(zoomCam, -10, 0);
+        */
     }
+    
 
 
     //old movement
