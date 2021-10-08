@@ -80,8 +80,8 @@ public class CameraControllerMain : MonoBehaviour
         //new col line
         mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
 
-        currentRotY += Input.GetAxisRaw("Mouse X") * cameraSensitivity;
-        currentTiltX -= Input.GetAxisRaw("Mouse Y") * cameraSensitivity;
+        currentRotY += Input.GetAxisRaw("Mouse X") * cameraSensitivity ;
+        currentTiltX -= Input.GetAxisRaw("Mouse Y") * cameraSensitivity ;
 
         currentTiltX = Mathf.Clamp(currentTiltX, -90, 90);
 
@@ -134,7 +134,8 @@ public class CameraControllerMain : MonoBehaviour
             adjustedCamDistance = currentCameraDistance;
         }
 
-        Debug.Log(adjustedCamDistance);
+        //debug
+        //Debug.Log(adjustedCamDistance);
 
         if(camDebugCollision)
         {

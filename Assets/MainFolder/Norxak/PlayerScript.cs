@@ -15,22 +15,26 @@ public class PlayerScript : MonoBehaviour
     float hInput;
     float vInput;
 
+    //new jump
+    //[SerializeField] AnimationCurve jumpFallOff;
+    //[SerializeField] float jumpMultiplier;
+    //[SerializeField] KeyCode jumpKey;
+
+    bool isJumping;
+
+    //slopefix
+    [SerializeField] float slopeForce;
+    [SerializeField] float slopeForceRayLength;
+
+    float turnSmoothVelocity;
+    [SerializeField]float turnSmoothTime = 0.2f;
+
     //cam refs
     [SerializeField] Transform cameraRig;
 
     //Player Stat Vars
     //[SerializeField] int playerHP;
     //[SerializeField] int playerMP;
-
-    /*
-    //playercam
-    float mouseX, mouseY;
-    [SerializeField] float rotationSpeedCam;
-    [SerializeField] float zoomCam;
-    [SerializeField] Camera playerCam;
-    [SerializeField] Transform targetCam;
-    [SerializeField] 
-    */
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +46,8 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         Movement();
+        //Jump();
         PlayerStats();
-        //PlayerCameraHandling();
     }
 
     void Movement()
@@ -51,7 +55,6 @@ public class PlayerScript : MonoBehaviour
 
         //debugs
         Debug.DrawRay(transform.position, cc.velocity, Color.green);
-
         float roundedMag = cc.velocity.magnitude;
         roundedMag = Mathf.RoundToInt(roundedMag);
         Debug.Log(roundedMag);
@@ -79,25 +82,28 @@ public class PlayerScript : MonoBehaviour
             vInput = Input.GetAxis("Vertical");
         }
 
-        Vector3 jumpDir = new Vector3(0, 0, 0);
-        //dir.Normalize();
         
         Vector3 forwardMovement = cameraRig.transform.forward * vInput;
         Vector3 rightMovement = cameraRig.transform.right * hInput;
 
-
+        //debug
         if (cc.velocity.magnitude > movementSpeed + 0.1f)
         {
             Debug.Log("mag over movement speed");
         }
 
+        Vector3 jumpDir = new Vector3(0, 0, 0);
+        //dir.Normalize();
+        
         //grav
         if (cc.isGrounded)
         {
             Debug.Log("grounded");
+            isJumping = false;
             _dirY = -0.1f;
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                isJumping = true;
                 _dirY = jumpSpeed;
             }
         }
@@ -115,111 +121,73 @@ public class PlayerScript : MonoBehaviour
         }
 
         jumpDir.y = _dirY;
-
-        //cc.Move(dir * movementSpeed * Time.deltaTime);
+        
         cc.Move(Vector3.ClampMagnitude(jumpDir + forwardMovement + rightMovement, 1) * movementSpeed * Time.deltaTime);
-        /*
-        if (cc.velocity.magnitude >= 0.05f)
-        {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, cameraRig.eulerAngles.y, transform.eulerAngles.z);
-        }
-        */
 
-        Vector3 vel = cc.velocity;
-        vel.y = 0f;
-        //cc.velocity = vel;
-        if (cc.velocity.magnitude <= 0.1f)
+        if ((vInput != 0 || hInput != 0) && OnSlope())
         {
-            
-        }
-        else
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(vel), 10 * Time.deltaTime);
+            cc.Move(Vector3.down * cc.height / 2 * slopeForce * Time.deltaTime);
         }
 
+        //rotation trans
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 inputDir = input.normalized;
+
+        if (inputDir != Vector2.zero)
+        {
+            float targetRot = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cameraRig.eulerAngles.y;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVelocity, turnSmoothTime);
+        }
+    }
+
+    /*
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        {
+            isJumping = true;
+            StartCoroutine(JumpEvent());
+        }
+    }
+
+    IEnumerator JumpEvent()
+    {
+        float timeInAir = 0.0f;
+        
+        do
+        {
+            float jumpForce = jumpFallOff.Evaluate(timeInAir);
+            cc.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+            timeInAir += Time.deltaTime;
+            yield return null;
+        } while (!cc.isGrounded && cc.collisionFlags != CollisionFlags.Above);
+
+        isJumping = false;
+    }
+    */
+
+    bool OnSlope()
+    {
+        if (isJumping)
+        {
+            return false;
+        }
+
+        RaycastHit slopeHit;
+        Debug.DrawRay(transform.position, Vector3.down * (cc.height / 2 * slopeForceRayLength), Color.black);
+        if(Physics.Raycast(transform.position,Vector3.down,out slopeHit,cc.height/2 * slopeForceRayLength))
+        {
+            if(slopeHit.normal != Vector3.up)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void PlayerStats()
     {
 
     }
-
-    
-    void PlayerCameraHandling()
-    {
-        //==
-        /* no need child but have to -1 clamp
-        Quaternion rot = Quaternion.Euler(mouseY, mouseX, 0);
-        Vector3 zoomVec = new Vector3(0, 0, zoomCam);
-        playerCam.transform.position = targetCam.position + rot * zoomVec;
-        playerCam.transform.LookAt(targetCam.position);
-        =====
-
-        mouseX += Input.GetAxisRaw("Mouse X") * rotationSpeedCam;
-        mouseY -= Input.GetAxisRaw("Mouse Y") * rotationSpeedCam;
-        mouseY = Mathf.Clamp(mouseY, -90, 90);
-        
-        ==
-        ~~
-        ==
-
-        /*
-        targetCam.rotation = Quaternion.Euler(mouseY, mouseX, 0);
-        playerCam.transform.rotation = targetCam.transform.rotation;
-        playerCam.transform.position = targetCam.transform.position + new Vector3(0,0,zoomCam);
-
-
-        if (Input.mouseScrollDelta.y == 1)
-        {
-            zoomCam += 0.5f;
-        }
-        else if (Input.mouseScrollDelta.y == -1)
-        {
-            zoomCam -= 0.5f;
-        }
-        zoomCam = Mathf.Clamp(zoomCam, -10, 0);
-        */
-    }
-    
-
-
-    //old movement
-    /*
-    if (Input.GetKey(KeyCode.W))
-    {
-        //cc.Move(transform.forward * movementSpeed * Time.deltaTime);
-        hInput1 = movementSpeed;
-    }
-            else
-    {
-        hInput1 = 0;
-    }
-    if (Input.GetKey(KeyCode.A))
-    {
-        //cc.Move(-transform.right * movementSpeed * Time.deltaTime);
-        vInput1 = movementSpeed;
-    }
-            else
-    {
-        vInput1 = 0;
-    }
-    if (Input.GetKey(KeyCode.S))
-    {
-        //cc.Move(-transform.forward * movementSpeed * Time.deltaTime);
-        hInput2 = movementSpeed;
-    }
-            else
-    {
-        hInput2 = 0;
-    }
-    if (Input.GetKey(KeyCode.D))
-    {
-        //cc.Move(transform.right * movementSpeed * Time.deltaTime);
-        vInput2 = movementSpeed;
-    }
-            else
-    {
-        vInput2 = 0;
-    }
-    */
 }
