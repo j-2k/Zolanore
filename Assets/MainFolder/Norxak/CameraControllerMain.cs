@@ -21,6 +21,26 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] Transform tiltX;
     Camera mainCam;
 
+
+    //camera collisions
+    float smooth = 10f;
+    Vector3 camDir;
+    public Vector3 camDirAdjusted;
+    float distance;
+
+    //camcol2
+    [SerializeField] bool camDebugCollision;
+    [SerializeField] float camColClipping = 0.3f;
+    [SerializeField] LayerMask cameraLayer;
+    float adjustedCamDistance;
+    Ray camRay;
+    RaycastHit camRayHit;
+
+    private void Awake()
+    {
+        transform.SetParent(null);
+    }
+
     void Start()
     {
         player = FindObjectOfType<PlayerScript>();
@@ -34,11 +54,17 @@ public class CameraControllerMain : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //cam cols
+        camDir = mainCam.transform.localPosition.normalized;
+        distance = mainCam.transform.localPosition.magnitude;
     }
 
     void LateUpdate()
     {
         CameraHandler();
+        //CameraCollisions();
+        CameraCollisions2();
     }
 
     void CameraHandler()
@@ -49,7 +75,10 @@ public class CameraControllerMain : MonoBehaviour
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentRotY, transform.eulerAngles.z);
 
         tiltX.eulerAngles = new Vector3(currentTiltX, tiltX.eulerAngles.y, tiltX.eulerAngles.z);
-        mainCam.transform.position = transform.position + tiltX.forward * -currentCameraDistance;
+        //THSI LINE BELOW FOR CAM MOVEMENT/SCROLLING
+        //mainCam.transform.position = transform.position + tiltX.forward * -currentCameraDistance;
+        //new col line
+        mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
 
         currentRotY += Input.GetAxisRaw("Mouse X") * cameraSensitivity;
         currentTiltX -= Input.GetAxisRaw("Mouse Y") * cameraSensitivity;
@@ -67,4 +96,49 @@ public class CameraControllerMain : MonoBehaviour
 
         currentCameraDistance = Mathf.Clamp(currentCameraDistance, 0, cameraDistanceMax);
     }    
+
+    void CameraCollisions()
+    {
+        //Vector3 mainCameraPosition = transform.parent.TransformPoint(camDir * cameraDistanceMax);
+        Vector3 mainCameraPosition = mainCam.transform.parent.TransformPoint(camDir * cameraDistanceMax);
+        RaycastHit hit;
+
+        if (Physics.Linecast(mainCam.transform.parent.position, mainCameraPosition, out hit))
+        {
+            distance = Mathf.Clamp((hit.distance * 0.8f), 0, cameraDistanceMax);
+
+        }
+        else
+        {
+            distance = cameraDistanceMax;
+        }
+        mainCam.transform.localPosition = Vector3.Lerp(mainCam.transform.localPosition, camDir * distance, Time.deltaTime * smooth);
+
+    }
+
+    void CameraCollisions2()
+    {
+        float camDistance = currentCameraDistance + camColClipping;
+
+
+        camRay.origin = transform.position;
+        camRay.direction = -tiltX.forward;
+
+        //raycast setup
+        if(Physics.Raycast(camRay,out camRayHit,camDistance, cameraLayer))
+        {//VVV COLLIDING
+            adjustedCamDistance = Vector3.Distance(camRay.origin, camRayHit.point) - camColClipping;
+        }
+        else
+        {//VVV NOT COLLIDING
+            adjustedCamDistance = currentCameraDistance;
+        }
+
+        Debug.Log(adjustedCamDistance);
+
+        if(camDebugCollision)
+        {
+            Debug.DrawLine(camRay.origin, camRay.origin + camRay.direction * currentCameraDistance,Color.green);
+        }
+    }
 }

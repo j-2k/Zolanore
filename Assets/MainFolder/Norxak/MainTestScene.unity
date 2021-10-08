@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 172883991}
   - component: {fileID: 172883990}
   - component: {fileID: 172883989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 267800980}
   - component: {fileID: 267800979}
   - component: {fileID: 267800978}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -451,13 +451,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571493671}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.35, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8499999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 157243479}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1400050465}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &571493673
 MonoBehaviour:
@@ -476,6 +476,12 @@ MonoBehaviour:
   cameraSpeed: 2
   cameraSensitivity: 2
   tiltX: {fileID: 157243479}
+  camDirAdjusted: {x: 0, y: 0, z: 0}
+  camDebugCollision: 1
+  camColClipping: 0.1
+  cameraLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &628099469
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +494,7 @@ GameObject:
   - component: {fileID: 628099472}
   - component: {fileID: 628099471}
   - component: {fileID: 628099470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +682,7 @@ GameObject:
   - component: {fileID: 873645746}
   - component: {fileID: 873645745}
   - component: {fileID: 873645744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,6 +861,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1693958394}
+  - {fileID: 571493672}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -907,7 +914,7 @@ GameObject:
   - component: {fileID: 1457111669}
   - component: {fileID: 1457111668}
   - component: {fileID: 1457111667}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1094,7 +1101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2070729747}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
