@@ -63,8 +63,7 @@ public class CameraControllerMain : MonoBehaviour
     void LateUpdate()
     {
         CameraHandler();
-        //CameraCollisions();
-        CameraCollisions2();
+        CameraCollisions();
     }
 
     void CameraHandler()
@@ -99,27 +98,7 @@ public class CameraControllerMain : MonoBehaviour
 
     void CameraCollisions()
     {
-        //Vector3 mainCameraPosition = transform.parent.TransformPoint(camDir * cameraDistanceMax);
-        Vector3 mainCameraPosition = mainCam.transform.parent.TransformPoint(camDir * cameraDistanceMax);
-        RaycastHit hit;
-
-        if (Physics.Linecast(mainCam.transform.parent.position, mainCameraPosition, out hit))
-        {
-            distance = Mathf.Clamp((hit.distance * 0.8f), 0, cameraDistanceMax);
-
-        }
-        else
-        {
-            distance = cameraDistanceMax;
-        }
-        mainCam.transform.localPosition = Vector3.Lerp(mainCam.transform.localPosition, camDir * distance, Time.deltaTime * smooth);
-
-    }
-
-    void CameraCollisions2()
-    {
         float camDistance = currentCameraDistance + camColClipping;
-
 
         camRay.origin = transform.position;
         camRay.direction = -tiltX.forward;
@@ -133,9 +112,6 @@ public class CameraControllerMain : MonoBehaviour
         {//VVV NOT COLLIDING
             adjustedCamDistance = currentCameraDistance;
         }
-
-        //debug
-        //Debug.Log(adjustedCamDistance);
 
         if(camDebugCollision)
         {

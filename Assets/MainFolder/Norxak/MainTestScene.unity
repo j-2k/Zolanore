@@ -890,7 +890,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1400050461}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -998,6 +998,7 @@ MonoBehaviour:
   _dirY: 0
   slopeForce: 5
   slopeForceRayLength: 1.5
+  turnSmoothTime: 0.2
   cameraRig: {fileID: 571493672}
 --- !u!1 &1457111666
 GameObject:
