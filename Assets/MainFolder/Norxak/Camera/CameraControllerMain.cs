@@ -52,8 +52,8 @@ public class CameraControllerMain : MonoBehaviour
         tiltX.eulerAngles = new Vector3(currentTiltX, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCam.transform.position += tiltX.forward * -currentCameraDistance;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         //cam cols
         camDir = mainCam.transform.localPosition.normalized;

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    //debug
+    [SerializeField] bool isDebugging;
+
     //Movement Vars
     [SerializeField] bool rawMovement; // on for raw movement else off for lerp movement
     [SerializeField] float movementSpeed; // 8
     [SerializeField] float jumpSpeed; // 3
     [SerializeField] float grav; // 9
     [SerializeField] float gravMultiplier; // 1.2
-    [SerializeField] float _dirY;
-    [SerializeField] float hInput;
-    [SerializeField] float vInput;
+    float _dirY;
+    float hInput;
+    float vInput;
 
 
     //cc stuff
@@ -20,13 +23,15 @@ public class PlayerScript : MonoBehaviour
     //NEW WAY TO CHECK FOR SLOPE ANGLE BELOW
     Vector3 ccHitNormal;
 
-    [SerializeField] bool isJumping;
-    [SerializeField] bool isGrounded;
+    bool isJumping;
+    bool isGrounded;
     [SerializeField] float slideFriction;
 
     //slopefix downforces
     [SerializeField] float slopeForce;
     [SerializeField] float slopeForceRayLength;
+
+    [SerializeField] bool badSlopeFix;
 
     //turning
     float turnSmoothVelocity;
@@ -56,16 +61,29 @@ public class PlayerScript : MonoBehaviour
     void Movement()
     {
         //debugs
-        //MOVEMENT VEC
-        Debug.DrawRay(transform.position, cc.velocity, Color.cyan);
-        //SLOPE CC NORM HIT VEC
-        Debug.DrawRay(transform.position, ccHitNormal * 10, Color.red);
+        if (isDebugging)
+        {
+            //MOVEMENT VEC
+            Debug.DrawRay(transform.position, cc.velocity, Color.cyan);
+            //SLOPE CC NORM HIT VEC
+            Debug.DrawRay(transform.position, ccHitNormal * 10, Color.red);
 
-        Debug.Log(Vector3.Angle(Vector3.up, ccHitNormal) + "normal thing red debug");
-        //float roundedMag = cc.velocity.magnitude;
-        //roundedMag = Mathf.RoundToInt(roundedMag);
-        //Debug.Log(roundedMag);
-        //
+            Debug.Log(Vector3.Angle(Vector3.up, ccHitNormal) + "normal thing red debug");
+            //slope force
+            Debug.DrawRay(transform.position, Vector3.down * (cc.height / 2 * slopeForceRayLength), Color.white);
+            //float roundedMag = cc.velocity.magnitude;
+            //roundedMag = Mathf.RoundToInt(roundedMag);
+            //Debug.Log(roundedMag);
+            //
+            if (cc.isGrounded)
+            {
+                Debug.Log("grounded");
+            }
+            else
+            {
+                Debug.Log("not grounded");
+            }
+        }
 
         //raw movements
         if (rawMovement)
@@ -75,8 +93,25 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            hInput = Input.GetAxis("Horizontal");
-            vInput = Input.GetAxis("Vertical");
+            //bad fix for sliding down
+            if (badSlopeFix)
+            {
+                if (isGrounded)
+                {
+                    hInput = Input.GetAxis("Horizontal");
+                    vInput = Input.GetAxis("Vertical");
+                }
+                else
+                {
+                    hInput = 0;
+                    vInput = 0;
+                }
+            }
+            else
+            {
+                hInput = Input.GetAxis("Horizontal");
+                vInput = Input.GetAxis("Vertical");
+            }
         }
 
         //get movement + camera into account
@@ -95,7 +130,7 @@ public class PlayerScript : MonoBehaviour
 
         if (cc.isGrounded)
         {
-            Debug.Log("grounded");
+            //Debug.Log("grounded");
             isJumping = false;
             _dirY = -0.1f;
 
@@ -107,7 +142,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("not grounded");
+            //Debug.Log("not grounded");
             if (cc.velocity.y < 0)
             {
                 _dirY -= grav * gravMultiplier * Time.deltaTime;
@@ -124,8 +159,8 @@ public class PlayerScript : MonoBehaviour
 
         if (!isGrounded)
         {
-            velo.x += (((1f - ccHitNormal.y) * ccHitNormal.x)) * (1f - slideFriction);
-            velo.z += (((1f - ccHitNormal.y) * ccHitNormal.z)) * (1f - slideFriction);
+            velo.x += (((1f - ccHitNormal.y) * ccHitNormal.x)) * (1f - slideFriction); //*3;
+            velo.z += (((1f - ccHitNormal.y) * ccHitNormal.z)) * (1f - slideFriction); //*3;
             //NEEDS A FIX SOON // DELETED ALL HACKY SOLUTIONS
             //PROBLEM = GOING AGAINST A SLOPE WILL KEEP THE PLAYER STATIONARY * FIX THIS
         }
@@ -160,7 +195,6 @@ public class PlayerScript : MonoBehaviour
         }
 
         RaycastHit slopeHit;
-        Debug.DrawRay(transform.position, Vector3.down * (cc.height / 2 * slopeForceRayLength), Color.white);
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, cc.height / 2 * slopeForceRayLength))
         {
             if (slopeHit.normal != Vector3.up)
