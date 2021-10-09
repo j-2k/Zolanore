@@ -115,7 +115,7 @@ public class CameraControllerMain : MonoBehaviour
 
         if(camDebugCollision)
         {
-            Debug.DrawLine(camRay.origin, camRay.origin + camRay.direction * currentCameraDistance,Color.green);
+            Debug.DrawLine(camRay.origin, camRay.origin + camRay.direction * currentCameraDistance,Color.white);
         }
     }
 }

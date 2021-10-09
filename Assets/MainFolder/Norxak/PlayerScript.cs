@@ -10,24 +10,27 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float jumpSpeed; // 3
     [SerializeField] float grav; // 9
     [SerializeField] float gravMultiplier; // 1.2
-    CharacterController cc;
     [SerializeField] float _dirY;
-    float hInput;
-    float vInput;
+    [SerializeField] float hInput;
+    [SerializeField] float vInput;
 
-    //new jump
-    //[SerializeField] AnimationCurve jumpFallOff;
-    //[SerializeField] float jumpMultiplier;
-    //[SerializeField] KeyCode jumpKey;
 
-    bool isJumping;
+    //cc stuff
+    CharacterController cc;
+    //NEW WAY TO CHECK FOR SLOPE ANGLE BELOW
+    Vector3 ccHitNormal;
 
-    //slopefix
+    [SerializeField] bool isJumping;
+    [SerializeField] bool isGrounded;
+    [SerializeField] float slideFriction;
+
+    //slopefix downforces
     [SerializeField] float slopeForce;
     [SerializeField] float slopeForceRayLength;
 
+    //turning
     float turnSmoothVelocity;
-    [SerializeField]float turnSmoothTime = 0.2f;
+    [SerializeField] float turnSmoothTime = 0.2f;
 
     //cam refs
     [SerializeField] Transform cameraRig;
@@ -35,6 +38,7 @@ public class PlayerScript : MonoBehaviour
     //Player Stat Vars
     //[SerializeField] int playerHP;
     //[SerializeField] int playerMP;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,31 +50,24 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         Movement();
-        //Jump();
         PlayerStats();
     }
 
     void Movement()
     {
-
         //debugs
-        Debug.DrawRay(transform.position, cc.velocity, Color.green);
-        float roundedMag = cc.velocity.magnitude;
-        roundedMag = Mathf.RoundToInt(roundedMag);
-        Debug.Log(roundedMag);
+        //MOVEMENT VEC
+        Debug.DrawRay(transform.position, cc.velocity, Color.cyan);
+        //SLOPE CC NORM HIT VEC
+        Debug.DrawRay(transform.position, ccHitNormal * 10, Color.red);
+
+        Debug.Log(Vector3.Angle(Vector3.up, ccHitNormal) + "normal thing red debug");
+        //float roundedMag = cc.velocity.magnitude;
+        //roundedMag = Mathf.RoundToInt(roundedMag);
+        //Debug.Log(roundedMag);
         //
 
-        if (Input.GetKey(KeyCode.Q))
-        {
-            cc.transform.Rotate(0, -200 * Time.deltaTime, 0);
-        }
-
-        if (Input.GetKey(KeyCode.E))
-        {
-            cc.transform.Rotate(0, 200 * Time.deltaTime, 0);
-        }
-
-
+        //raw movements
         if (rawMovement)
         {
             hInput = Input.GetAxisRaw("Horizontal");
@@ -82,7 +79,7 @@ public class PlayerScript : MonoBehaviour
             vInput = Input.GetAxis("Vertical");
         }
 
-        
+        //get movement + camera into account
         Vector3 forwardMovement = cameraRig.transform.forward * vInput;
         Vector3 rightMovement = cameraRig.transform.right * hInput;
 
@@ -92,16 +89,17 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("mag over movement speed");
         }
 
+        //gravity & jump
         Vector3 jumpDir = new Vector3(0, 0, 0);
         //dir.Normalize();
-        
-        //grav
+
         if (cc.isGrounded)
         {
             Debug.Log("grounded");
             isJumping = false;
             _dirY = -0.1f;
-            if (Input.GetKeyDown(KeyCode.Space))
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 isJumping = true;
                 _dirY = jumpSpeed;
@@ -119,17 +117,31 @@ public class PlayerScript : MonoBehaviour
                 _dirY -= grav * Time.deltaTime;
             }
         }
-
         jumpDir.y = _dirY;
-        
-        cc.Move(Vector3.ClampMagnitude(jumpDir + forwardMovement + rightMovement, 1) * movementSpeed * Time.deltaTime);
 
-        if ((vInput != 0 || hInput != 0) && OnSlope())
+
+        Vector3 velo = jumpDir + forwardMovement + rightMovement;
+
+        if (!isGrounded)
+        {
+            velo.x += (((1f - ccHitNormal.y) * ccHitNormal.x)) * (1f - slideFriction);
+            velo.z += (((1f - ccHitNormal.y) * ccHitNormal.z)) * (1f - slideFriction);
+            //NEEDS A FIX SOON // DELETED ALL HACKY SOLUTIONS
+            //PROBLEM = GOING AGAINST A SLOPE WILL KEEP THE PLAYER STATIONARY * FIX THIS
+        }
+
+        //final movement
+        cc.Move(Vector3.ClampMagnitude(velo, 1) * movementSpeed * Time.deltaTime);
+
+        isGrounded = (Vector3.Angle(Vector3.up, ccHitNormal) <= cc.slopeLimit);
+
+        //downslope force
+        if (OnSlope()) //hInput != 0 ||vInput != 0 && 
         {
             cc.Move(Vector3.down * cc.height / 2 * slopeForce * Time.deltaTime);
         }
 
-        //rotation trans
+        //rotation transform
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
@@ -140,32 +152,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    /*
-    void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
-        {
-            isJumping = true;
-            StartCoroutine(JumpEvent());
-        }
-    }
-
-    IEnumerator JumpEvent()
-    {
-        float timeInAir = 0.0f;
-        
-        do
-        {
-            float jumpForce = jumpFallOff.Evaluate(timeInAir);
-            cc.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
-            timeInAir += Time.deltaTime;
-            yield return null;
-        } while (!cc.isGrounded && cc.collisionFlags != CollisionFlags.Above);
-
-        isJumping = false;
-    }
-    */
-
     bool OnSlope()
     {
         if (isJumping)
@@ -174,20 +160,24 @@ public class PlayerScript : MonoBehaviour
         }
 
         RaycastHit slopeHit;
-        Debug.DrawRay(transform.position, Vector3.down * (cc.height / 2 * slopeForceRayLength), Color.black);
-        if(Physics.Raycast(transform.position,Vector3.down,out slopeHit,cc.height/2 * slopeForceRayLength))
+        Debug.DrawRay(transform.position, Vector3.down * (cc.height / 2 * slopeForceRayLength), Color.white);
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, cc.height / 2 * slopeForceRayLength))
         {
-            if(slopeHit.normal != Vector3.up)
+            if (slopeHit.normal != Vector3.up)
             {
                 return true;
             }
         }
-
         return false;
     }
 
     void PlayerStats()
     {
 
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        ccHitNormal = hit.normal;
     }
 }
