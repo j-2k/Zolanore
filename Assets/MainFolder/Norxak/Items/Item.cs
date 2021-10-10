@@ -12,10 +12,16 @@ public class Item : ScriptableObject
 
     public bool isDefaultItem = false;
 
-    public int itemAmount = 1;
+    public bool isStackable;
 
+    /*
+    public int itemAmount = 1;
+    
     [Range(1,4)]
     public int itemMaxStack = 4;
+    */
+    
+    
 
     public virtual void Use()
     {
