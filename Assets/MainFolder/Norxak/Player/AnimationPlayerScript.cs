@@ -22,8 +22,8 @@ public class AnimationPlayerScript : MonoBehaviour
         cc = GetComponent<CharacterController>();
         playerSpeed = GetComponent<PlayerScript>();
         playerAnimator = GetComponentInChildren<Animator>();
-        accell = 0.3f;
-        decell = 0.75f;
+        accell = 2.5f;
+        decell = 3.5f;
         //simpleAnim = true;
     }
 
@@ -56,18 +56,27 @@ public class AnimationPlayerScript : MonoBehaviour
         else
         {
             //float speedPercent = cc.velocity.magnitude / 1;
-            if (hInput != 0 || vInput != 0 && velo < 1f)//if (!isWalking && hInput != 0 || vInput != 0)
+            if (hInput != 0 || vInput != 0 && velo <= 1f)//if (!isWalking && hInput != 0 || vInput != 0)
             {
-                velo += Time.deltaTime * accell;
+                if (velo >= 1)
+                {
+                    velo = 1;
+                }
+                else
+                {
+                    velo += Time.deltaTime * accell;
+                }
             }
             else 
             {
-                velo -= Time.deltaTime * decell;
-            }
-
-            if ((hInput == 0 || vInput == 0 && velo < 0f))
-            {
-                velo = 0;
+                if (velo <= 0)
+                {
+                    velo = 0;
+                }
+                else
+                {
+                    velo -= Time.deltaTime * decell;
+                }
             }
 
             playerAnimator.SetFloat("SpeedPercent", velo);//, accell, Time.deltaTime);
