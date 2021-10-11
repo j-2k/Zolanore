@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
 
     //Movement Vars
     [SerializeField] bool rawMovement; // on for raw movement else off for lerp movement
-    [SerializeField] float movementSpeed; // 8
+    public float movementSpeed; // 8 [SerializeField]
     [SerializeField] float jumpSpeed; // 3
     [SerializeField] float grav; // 9
     [SerializeField] float gravMultiplier; // 1.2
@@ -134,6 +134,8 @@ public class PlayerScript : MonoBehaviour
             isJumping = false;
             _dirY = -0.1f;
 
+            cc.slopeLimit = 50;
+
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 isJumping = true;
@@ -143,6 +145,9 @@ public class PlayerScript : MonoBehaviour
         else
         {
             //Debug.Log("not grounded");
+
+            cc.slopeLimit = 0;
+
             if (cc.velocity.y < 0)
             {
                 _dirY -= grav * gravMultiplier * Time.deltaTime;
