@@ -5,13 +5,13 @@ using UnityEngine;
 public class CameraControllerMain : MonoBehaviour
 {
     //keys
-    KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
+    //KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
 
     //vars
     [SerializeField] float cameraHeight = 1, cameraDistanceMax = 10;
-    float cameraMaxTilt = 90;
+    //float cameraMaxTilt = 90;
     [Range(0,4)]
-    [SerializeField] float cameraSpeed = 2;
+    //[SerializeField] float cameraSpeed = 2;
     float currentRotY, currentTiltX = 20, currentCameraDistance = 5;
     [Range(0, 10)]
     [SerializeField] float cameraSensitivity = 2;
@@ -23,7 +23,7 @@ public class CameraControllerMain : MonoBehaviour
 
 
     //camera collisions
-    float smooth = 10f;
+    //float smooth = 10f;
     Vector3 camDir;
     public Vector3 camDirAdjusted;
     float distance;

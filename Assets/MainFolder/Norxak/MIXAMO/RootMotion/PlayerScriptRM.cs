@@ -52,7 +52,7 @@ public class PlayerScriptRM : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         //anim
-        playerAnimator = GetComponentInChildren<Animator>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
