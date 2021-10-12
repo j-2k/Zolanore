@@ -56,31 +56,16 @@ public class AnimationPlayerScript : MonoBehaviour
         else
         {
             //float speedPercent = cc.velocity.magnitude / 1;
-            if (hInput != 0 || vInput != 0 && velo <= 1f)//if (!isWalking && hInput != 0 || vInput != 0)
+            if (hInput != 0 || vInput != 0)// && velo <= 1f)//if (!isWalking && hInput != 0 || vInput != 0)
             {
-                if (velo >= 1)
-                {
-                    velo = 1;
-                }
-                else
-                {
-                    velo += Time.deltaTime * accell;
-                }
+                velo += Time.deltaTime * accell;
             }
             else 
             {
-                if (velo <= 0)
-                {
-                    velo = 0;
-                }
-                else
-                {
-                    velo -= Time.deltaTime * decell;
-                }
+                velo -= Time.deltaTime * decell;
             }
-
+            velo = Mathf.Clamp(velo, 0, 1);
             playerAnimator.SetFloat("SpeedPercent", velo);//, accell, Time.deltaTime);
         }
-
     }
 }

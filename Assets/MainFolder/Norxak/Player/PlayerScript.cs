@@ -24,7 +24,7 @@ public class PlayerScript : MonoBehaviour
     Vector3 ccHitNormal;
 
     bool isJumping;
-    bool isGrounded;
+    bool ccIsGrounded;
     [SerializeField] float slideFriction;
 
     //slopefix downforces
@@ -43,7 +43,6 @@ public class PlayerScript : MonoBehaviour
     //Player Stat Vars
     //[SerializeField] int playerHP;
     //[SerializeField] int playerMP;
-
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +70,9 @@ public class PlayerScript : MonoBehaviour
             Debug.Log(Vector3.Angle(Vector3.up, ccHitNormal) + "normal thing red debug");
             //slope force
             Debug.DrawRay(transform.position, Vector3.down * (cc.height / 2 * slopeForceRayLength), Color.white);
-            //float roundedMag = cc.velocity.magnitude;
-            //roundedMag = Mathf.RoundToInt(roundedMag);
-            //Debug.Log(roundedMag);
+            float roundedMag = cc.velocity.magnitude;
+            roundedMag = Mathf.RoundToInt(roundedMag);
+            Debug.Log(roundedMag);
             //
             if (cc.isGrounded)
             {
@@ -96,7 +95,7 @@ public class PlayerScript : MonoBehaviour
             //bad fix for sliding down
             if (badSlopeFix)
             {
-                if (isGrounded)
+                if (ccIsGrounded)
                 {
                     hInput = Input.GetAxis("Horizontal");
                     vInput = Input.GetAxis("Vertical");
@@ -131,12 +130,13 @@ public class PlayerScript : MonoBehaviour
         if (cc.isGrounded)
         {
             //Debug.Log("grounded");
+
             isJumping = false;
             _dirY = -0.1f;
 
             cc.slopeLimit = 50;
 
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && ccIsGrounded)
             {
                 isJumping = true;
                 _dirY = jumpSpeed;
@@ -157,29 +157,31 @@ public class PlayerScript : MonoBehaviour
                 _dirY -= grav * Time.deltaTime;
             }
         }
+
         jumpDir.y = _dirY;
 
 
         Vector3 velo = jumpDir + forwardMovement + rightMovement;
 
-        if (!isGrounded)
+        if (!ccIsGrounded)
         {
             velo.x += (((1f - ccHitNormal.y) * ccHitNormal.x)) * (1f - slideFriction); //*3;
             velo.z += (((1f - ccHitNormal.y) * ccHitNormal.z)) * (1f - slideFriction); //*3;
-            //NEEDS A FIX SOON // DELETED ALL HACKY SOLUTIONS
-            //PROBLEM = GOING AGAINST A SLOPE WILL KEEP THE PLAYER STATIONARY * FIX THIS
+                                                                                       //NEEDS A FIX SOON // DELETED ALL HACKY SOLUTIONS
+                                                                                       //PROBLEM = GOING AGAINST A SLOPE WILL KEEP THE PLAYER STATIONARY * FIX THIS
         }
 
         //final movement
         cc.Move(Vector3.ClampMagnitude(velo, 1) * movementSpeed * Time.deltaTime);
 
-        isGrounded = (Vector3.Angle(Vector3.up, ccHitNormal) <= cc.slopeLimit);
+        ccIsGrounded = (Vector3.Angle(Vector3.up, ccHitNormal) <= cc.slopeLimit);
 
         //downslope force
         if (OnSlope()) //hInput != 0 ||vInput != 0 && 
         {
-            cc.Move(Vector3.down * cc.height / 2 * slopeForce * Time.deltaTime);
+            cc.Move((Vector3.down * cc.height / 2 * slopeForce) * Time.deltaTime);
         }
+
 
         //rotation transform
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
