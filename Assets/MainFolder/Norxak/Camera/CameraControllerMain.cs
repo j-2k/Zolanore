@@ -17,7 +17,7 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] float cameraSensitivity = 2;
 
     //ref
-    PlayerScript player;
+    Transform player;
     [SerializeField] Transform tiltX;
     Camera mainCam;
 
@@ -43,7 +43,7 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerScript>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCam = Camera.main;
 
         transform.position = player.transform.position + (Vector3.up * cameraHeight);

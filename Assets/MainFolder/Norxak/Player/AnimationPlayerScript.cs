@@ -9,7 +9,7 @@ public class AnimationPlayerScript : MonoBehaviour
     [SerializeField] float hInput;
     [SerializeField] float vInput;
     [SerializeField] bool isWalking;
-
+    [SerializeField] string paramNameAnim;
     [SerializeField] float accell;
     [SerializeField] float decell;
     float velo;
@@ -65,7 +65,7 @@ public class AnimationPlayerScript : MonoBehaviour
                 velo -= Time.deltaTime * decell;
             }
             velo = Mathf.Clamp(velo, 0, 1);
-            playerAnimator.SetFloat("SpeedPercent", velo);//, accell, Time.deltaTime);
+            playerAnimator.SetFloat(paramNameAnim, velo);//, accell, Time.deltaTime);
         }
     }
 }
