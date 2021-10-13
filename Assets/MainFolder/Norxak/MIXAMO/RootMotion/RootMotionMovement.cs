@@ -12,11 +12,12 @@ public class RootMotionMovement : MonoBehaviour
     [SerializeField] float jumpSpeed; // 3
     [SerializeField] float jumpCurve; // 3
     [SerializeField] float gravity; // 9
+
     float finalJumpCalc;
     [SerializeField] bool isJumping;
     Vector3 velocity;
-    
 
+    [SerializeField] bool isAttackStart;
 
 
 
@@ -39,6 +40,7 @@ public class RootMotionMovement : MonoBehaviour
     [SerializeField] float turnSmoothTime = 0.2f;
     [SerializeField] Transform cameraRig;
 
+    [SerializeField] GameObject sphereColl;
 
     // Start is called before the first frame update
     void Start()
@@ -67,9 +69,20 @@ public class RootMotionMovement : MonoBehaviour
             input.y = Input.GetAxis("Vertical");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isAttackStart)
         {
             PlayerJump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isJumping)
+        {
+            if (!isAttackStart)
+            {
+                //playerAnimator.applyRootMotion = false;
+                isAttackStart = true;
+                playerAnimator.SetTrigger("isAttacking");
+                rootMotion = Vector3.zero;
+            }
         }
 
         float movementDir = Mathf.Clamp01(input.magnitude);
@@ -79,15 +92,6 @@ public class RootMotionMovement : MonoBehaviour
 
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
-        RotationTransformCamera();
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            //playerAnimator.applyRootMotion = false;
-            playerAnimator.SetTrigger("isAttacking");
-            rootMotion = Vector3.zero;
-        }
-
-
         if (OnSteepSlope())
         {
             cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
@@ -104,6 +108,32 @@ public class RootMotionMovement : MonoBehaviour
             GroundedUpdate();
         }
 
+        RotationTransformCamera();
+    }
+
+    Collider[] hitColliders;
+    void DebugLogAttack()
+    {
+        Debug.Log("height attack");
+        //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
+
+        //damage
+        //-5
+        hitColliders = Physics.OverlapSphere(sphereColl.transform.position, sphereColl.transform.localScale.x/3);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.tag == "Enemy")
+            {
+                Debug.Log("I just hit an enemey");
+                hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(20);
+            }
+        }
+    }
+
+    void EndOfAttack()
+    {
+        isAttackStart = false;
     }
 
     private void GroundedUpdate()
@@ -213,16 +243,31 @@ public class RootMotionMovement : MonoBehaviour
         return moveDir * Time.deltaTime;
     }
 
+    bool oneRun;
+
     void RotationTransformCamera()
     {
-        //rotation transform
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Vector2 inputDir = input.normalized;
-
-        if (inputDir != Vector2.zero)
+        if (!isAttackStart)
         {
-            float targetRot = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cameraRig.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVelocity, turnSmoothTime);
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 inputDir = input.normalized;
+            //rotation transform
+            oneRun = false;
+            if (inputDir != Vector2.zero)
+            {
+                float targetRot = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cameraRig.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVelocity, turnSmoothTime);
+            }
+             
+        }
+        else
+        {
+            if (!oneRun)
+            {
+                float targetRot = cameraRig.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVelocity, 0);
+                oneRun = true;
+            }
         }
     }
 

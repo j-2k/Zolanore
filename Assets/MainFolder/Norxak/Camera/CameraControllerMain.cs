@@ -43,6 +43,10 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCam = Camera.main;
 
@@ -52,8 +56,6 @@ public class CameraControllerMain : MonoBehaviour
         tiltX.eulerAngles = new Vector3(currentTiltX, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCam.transform.position += tiltX.forward * -currentCameraDistance;
 
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
 
         //cam cols
         camDir = mainCam.transform.localPosition.normalized;
