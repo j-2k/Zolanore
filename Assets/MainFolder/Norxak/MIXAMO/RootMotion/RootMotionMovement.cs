@@ -80,7 +80,14 @@ public class RootMotionMovement : MonoBehaviour
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         RotationTransformCamera();
-        
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            //playerAnimator.applyRootMotion = false;
+            playerAnimator.SetTrigger("isAttacking");
+            rootMotion = Vector3.zero;
+        }
+
+
         if (OnSteepSlope())
         {
             cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);

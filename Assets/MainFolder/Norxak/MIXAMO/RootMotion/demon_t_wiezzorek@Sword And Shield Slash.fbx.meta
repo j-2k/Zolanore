@@ -1,32 +1,12 @@
 fileFormatVersion: 2
-guid: 3556a1615a795094cae54043046eb652
+guid: b3b461aa391737f4a8f5ebc88ca444f8
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Demon_MAT
-    second: {fileID: 2100000, guid: d0bcdf16625f66549b21532df51ca65c, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Demon__diffuse
-    second: {fileID: 2800000, guid: aa350c294c8eed3418ed13b18c28432f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Demon__normal
-    second: {fileID: 2800000, guid: 622166e29696b384c9f6137b80439bf5, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Demon__specular
-    second: {fileID: 2800000, guid: a8c82df44834dd04caa80975df0d0099, type: 3}
+    second: Sword And Shield Slash
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -53,7 +33,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Sword And Shield Slash
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -95,12 +104,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - cd66246f58308034aa3eae20fadf340e
-  - 2934541aa88baff4c8fdaa8b4baf9dab
-  - b5f1fe138b3c3c84aaf3445a3ab82f88
-  - 71297d6734340f147a6683c77901a8b2
-  - b3b461aa391737f4a8f5ebc88ca444f8
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -904,11 +908,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 3556a1615a795094cae54043046eb652, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
