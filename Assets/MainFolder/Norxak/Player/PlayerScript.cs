@@ -44,17 +44,33 @@ public class PlayerScript : MonoBehaviour
     //[SerializeField] int playerHP;
     //[SerializeField] int playerMP;
 
+    AnimationPlayerScript aps;
+    bool oneRun;
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        aps = GetComponentInChildren<AnimationPlayerScript>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        Movement();
-        PlayerStats();
+    {   
+        if (aps.isAttackNow)
+        {
+            if (!oneRun)
+            {
+                float targetRot = cameraRig.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVelocity, 0);
+                oneRun = true;
+            }
+        }
+        else
+        {
+            oneRun = false;
+            Movement();
+            PlayerStats();
+        }
     }
 
     void Movement()

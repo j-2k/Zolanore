@@ -134,6 +134,11 @@ public class RootMotionMovement : MonoBehaviour
     void EndOfAttack()
     {
         isAttackStart = false;
+        rootMotion = Vector3.zero;
+        rootMotion = Vector3.zero;
+        rootMotion = Vector3.zero;
+        rootMotion = Vector3.zero;
+        rootMotion = Vector3.zero;
     }
 
     private void GroundedUpdate()
