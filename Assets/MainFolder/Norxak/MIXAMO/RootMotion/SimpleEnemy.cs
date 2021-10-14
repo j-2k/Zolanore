@@ -27,7 +27,7 @@ public class SimpleEnemy : MonoBehaviour
 
         if (Vector3.Distance(transform.position, player.transform.position) <= 2)
         {
-            Debug.Log("attack or osmething");
+            Debug.Log("enemy is attack or osmething");
         }
         else
         {

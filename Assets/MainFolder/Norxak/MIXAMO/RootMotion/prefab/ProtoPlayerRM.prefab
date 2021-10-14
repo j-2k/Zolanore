@@ -1,5 +1,100 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &87339796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87339797}
+  - component: {fileID: 87339800}
+  - component: {fileID: 87339799}
+  - component: {fileID: 87339798}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87339797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87339796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 2.24}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_Children: []
+  m_Father: {fileID: 5504799100496081346}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &87339800
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87339796}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &87339799
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87339796}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &87339798
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87339796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5504799099635426251
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +326,19 @@ MonoBehaviour:
   cameraLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!65 &567697290
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5504799100495916514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1709217, y: 0.26587117, z: 3.3087888}
+  m_Center: {x: -0.00017471844, y: -0.0032381772, z: 2.2834482}
 --- !u!1 &5504799100716107585
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5504799100716107586
 Transform:
   m_ObjectHideFlags: 0
@@ -258,7 +366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5504799100716107585}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.1081104, y: 0.5, z: -0.30353308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -325,11 +433,13 @@ MonoBehaviour:
   jumpCurve: 0.3
   gravity: 20
   isJumping: 0
+  isAttackStart: 0
   slopeForceRayLength: 3
   slideDownSpeed: 8
   slideFriction: 0.3
   turnSmoothTime: 0.1
   cameraRig: {fileID: 5504799100009232028}
+  sphereColl: {fileID: 87339796}
 --- !u!114 &5504799100716107708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,9 +633,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 3556a1615a795094cae54043046eb652, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3556a1615a795094cae54043046eb652, type: 3}
---- !u!4 &5471381931863441944 stripped
+--- !u!4 &3082734046098262942 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3556a1615a795094cae54043046eb652, type: 3}
+  m_CorrespondingSourceObject: {fileID: -1824824446595371411, guid: 3556a1615a795094cae54043046eb652, type: 3}
   m_PrefabInstance: {fileID: 5504799099969037811}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4413876560585328644 stripped
@@ -533,9 +643,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -1070232985009656329, guid: 3556a1615a795094cae54043046eb652, type: 3}
   m_PrefabInstance: {fileID: 5504799099969037811}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3082734046098262942 stripped
+--- !u!4 &5471381931863441944 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -1824824446595371411, guid: 3556a1615a795094cae54043046eb652, type: 3}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3556a1615a795094cae54043046eb652, type: 3}
   m_PrefabInstance: {fileID: 5504799099969037811}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5504799100495948610
@@ -607,3 +717,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba58477d7691e144a0a24c07f308a44, type: 3}
+--- !u!1 &5504799100495916514 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 0ba58477d7691e144a0a24c07f308a44, type: 3}
+  m_PrefabInstance: {fileID: 5504799100495948610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5504799100496081346 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 0ba58477d7691e144a0a24c07f308a44, type: 3}
+  m_PrefabInstance: {fileID: 5504799100495948610}
+  m_PrefabAsset: {fileID: 0}

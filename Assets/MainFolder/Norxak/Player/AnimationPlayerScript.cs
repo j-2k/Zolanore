@@ -66,6 +66,7 @@ public class AnimationPlayerScript : MonoBehaviour
             }
             velo = Mathf.Clamp(velo, 0, 1);
             playerAnimator.SetFloat(paramNameAnim, velo);//, accell, Time.deltaTime);
+
         }
     }
 }
