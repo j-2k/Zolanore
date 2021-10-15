@@ -347,6 +347,9 @@ MonoBehaviour:
   badSlopeFix: 0
   turnSmoothTime: 0.1
   cameraRig: {fileID: 1943031282485741452}
+  god: 0
+  health: 0
+  hpBar: {fileID: 0}
 --- !u!1 &1943031283168900331
 GameObject:
   m_ObjectHideFlags: 0

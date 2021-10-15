@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Boss
+  - Orb
   layers:
   - Default
   - TransparentFX

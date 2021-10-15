@@ -12,7 +12,7 @@ public class RootMotionMovement : MonoBehaviour
     [SerializeField] float jumpSpeed; // 3
     [SerializeField] float jumpCurve; // 3
     [SerializeField] float gravity; // 9
-
+    [SerializeField] int outgoingDamage; // 20
     float finalJumpCalc;
     [SerializeField] bool isJumping;
     Vector3 velocity;
@@ -24,7 +24,7 @@ public class RootMotionMovement : MonoBehaviour
     //anims
     Animator playerAnimator;
     Vector2 input;
-    Vector3 rootMotion;
+    public Vector3 rootMotion;
 
     //slopefix downforces
     float slopeForce; //0.1f best value
@@ -42,9 +42,32 @@ public class RootMotionMovement : MonoBehaviour
 
     [SerializeField] GameObject sphereColl;
 
+    [SerializeField] bool god;
+    [SerializeField] int health;
+
+    [SerializeField] HPBar hpBar;
+    public void TakeDamageFromEnemy(int incDmg)
+    {
+        if (god)
+        {
+
+        }
+        else
+        {
+            health -= incDmg;
+            if (health <= 0)
+            {
+                this.enabled = false;
+            }
+        }
+        hpBar.SetHealth(health);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        health = 200;
+        hpBar.SetMaxHealth(health);
         slopeForce = 0.1f;// best value rn dont change
         cc = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
@@ -58,6 +81,7 @@ public class RootMotionMovement : MonoBehaviour
 
     void Update()
     {
+        hpBar.SetHealth(health);
         if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
         {
             input.x = Input.GetAxisRaw("Horizontal");
@@ -126,7 +150,14 @@ public class RootMotionMovement : MonoBehaviour
             if (hitCollider.tag == "Enemy")
             {
                 Debug.Log("I just hit an enemey");
-                hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(20);
+                //hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(outgoingDamage);
+                hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+            }
+            if(hitCollider.tag == "Orb")
+            {
+                Debug.Log("Boss hit");
+                hitCollider.GetComponent<RotateFast>().damageComingFromPlayer = outgoingDamage/2;
+                hitCollider.GetComponent<RotateFast>().isHit = true;
             }
         }
     }

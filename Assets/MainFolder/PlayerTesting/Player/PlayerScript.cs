@@ -46,16 +46,39 @@ public class PlayerScript : MonoBehaviour
 
     AnimationPlayerScript aps;
     bool oneRun;
+
+    [SerializeField] bool god;
+    [SerializeField] int health;
+    [SerializeField] HPBar hpBar;
+    public void TakeDamageFromEnemy(int incDmg)
+    {
+        if (god)
+        {
+
+        }
+        else
+        {
+            health -= incDmg;
+            if (health <= 0)
+            {
+                this.enabled = false;
+            }
+        }
+        hpBar.SetHealth(health);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        health = 200;
+        hpBar.SetMaxHealth(health);
         cc = GetComponent<CharacterController>();
         aps = GetComponentInChildren<AnimationPlayerScript>();
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         if (aps.isAttackNow)
         {
             if (!oneRun)

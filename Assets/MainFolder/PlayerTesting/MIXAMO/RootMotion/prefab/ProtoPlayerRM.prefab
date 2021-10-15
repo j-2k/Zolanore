@@ -194,7 +194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5504799099642769377
 Transform:
   m_ObjectHideFlags: 0
@@ -432,14 +432,19 @@ MonoBehaviour:
   jumpSpeed: 2
   jumpCurve: 0.3
   gravity: 20
+  outgoingDamage: 20
   isJumping: 0
   isAttackStart: 0
+  rootMotion: {x: 0, y: 0, z: 0}
   slopeForceRayLength: 3
   slideDownSpeed: 8
   slideFriction: 0.3
   turnSmoothTime: 0.1
   cameraRig: {fileID: 5504799100009232028}
   sphereColl: {fileID: 87339796}
+  god: 0
+  health: 0
+  hpBar: {fileID: 0}
 --- !u!114 &5504799100716107708
 MonoBehaviour:
   m_ObjectHideFlags: 0

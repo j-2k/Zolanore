@@ -77,6 +77,12 @@ public class AnimationPlayerScript : MonoBehaviour
                 Debug.Log("I just hit an enemey");
                 hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(20);
             }
+            if (hitCollider.tag == "Orb")
+            {
+                Debug.Log("Boss hit");
+                hitCollider.GetComponent<RotateFast>().damageComingFromPlayer = 20 / 2;
+                hitCollider.GetComponent<RotateFast>().isHit = true;
+            }
         }
     }
 
