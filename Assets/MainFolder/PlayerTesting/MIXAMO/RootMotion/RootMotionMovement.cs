@@ -60,14 +60,20 @@ public class RootMotionMovement : MonoBehaviour
                 this.enabled = false;
             }
         }
-        hpBar.SetHealth(health);
+        if (hpBar != null)
+        {
+            hpBar.SetHealth(health);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        health = 200;
-        hpBar.SetMaxHealth(health);
+        if (hpBar != null)
+        {
+            health = 200;
+            hpBar.SetMaxHealth(health);
+        }
         slopeForce = 0.1f;// best value rn dont change
         cc = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
@@ -81,7 +87,7 @@ public class RootMotionMovement : MonoBehaviour
 
     void Update()
     {
-        hpBar.SetHealth(health);
+
         if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
         {
             input.x = Input.GetAxisRaw("Horizontal");

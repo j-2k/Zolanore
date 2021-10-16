@@ -443,7 +443,7 @@ MonoBehaviour:
   cameraRig: {fileID: 5504799100009232028}
   sphereColl: {fileID: 87339796}
   god: 0
-  health: 0
+  health: 10
   hpBar: {fileID: 0}
 --- !u!114 &5504799100716107708
 MonoBehaviour:
