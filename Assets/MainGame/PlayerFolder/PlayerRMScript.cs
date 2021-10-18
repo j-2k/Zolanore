@@ -6,65 +6,43 @@ public class PlayerRMScript : MonoBehaviour
 {
     //Movement Vars
     CharacterController cc;
-    [SerializeField] bool rawMovement; // on for raw movement else off for lerp movement
-    [SerializeField] float movementSpeed; // 8 [SerializeField]
-    [SerializeField] float movementAir; 
-    [SerializeField] float jumpSpeed; // 3
-    [SerializeField] float jumpCurve; // 3
-    [SerializeField] float gravity; // 9
+    [SerializeField] bool rawMovement; // Keep off with RM
+    [SerializeField] float movementSpeed; // 1
+    [SerializeField] float movementAir; // 5
+    [SerializeField] float jumpSpeed; // 2
+    [SerializeField] float jumpCurve; // 0.3
+    [SerializeField] float gravity; // 20
     [SerializeField] int outgoingDamage; // 20
     float finalJumpCalc;
     [SerializeField] bool isJumping;
     Vector3 velocity;
 
     [SerializeField] bool isAttackStart;
-
-
+    [SerializeField] float attackColliderRadius;
 
     //anims
     Animator playerAnimator;
     Vector2 input;
-    public Vector3 rootMotion;
+    Vector3 rootMotion;
 
     //slopefix downforces
     float slopeForce; //0.1f best value
-    [SerializeField] float slopeForceRayLength;
-    [SerializeField] float slideDownSpeed;
-    [SerializeField] float slideFriction; //0.3
-    bool ccIsSlope;
+    [SerializeField] float slopeForceRayLength; //3
+    [SerializeField] float slideDownSpeed;//8
     RaycastHit slopeHit;
     RaycastHit ccHit;
 
     //turning & cam refs
     float turnSmoothVelocity;
-    [SerializeField] float turnSmoothTime = 0.2f;
+    [SerializeField] float turnSmoothTime = 0.1f; //0.1f
     [SerializeField] Transform cameraRig;
 
-    [SerializeField] GameObject sphereColl;
+    [SerializeField] GameObject sphereColl; //collision location
 
     [SerializeField] bool god;
     [SerializeField] int health;
 
     [SerializeField] HPBar hpBar;
-    public void TakeDamageFromEnemy(int incDmg)
-    {
-        if (god)
-        {
-
-        }
-        else
-        {
-            health -= incDmg;
-            if (health <= 0)
-            {
-                this.enabled = false;
-            }
-        }
-        if (hpBar != null)
-        {
-            hpBar.SetHealth(health);
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -104,15 +82,13 @@ public class PlayerRMScript : MonoBehaviour
             PlayerJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isJumping && !isAttackStart)
         {
-            if (!isAttackStart)
-            {
-                //playerAnimator.applyRootMotion = false;
-                isAttackStart = true;
-                playerAnimator.SetTrigger("isAttacking");
-                rootMotion = Vector3.zero;
-            }
+            //playerAnimator.applyRootMotion = false;
+            isAttackStart = true;
+            playerAnimator.SetTrigger("isAttacking");
+            rootMotion = Vector3.zero;
+
         }
 
         float movementDir = Mathf.Clamp01(input.magnitude);
@@ -120,7 +96,7 @@ public class PlayerRMScript : MonoBehaviour
         playerAnimator.SetFloat("rmVelocity", movementDir);
     }
 
-    void LateUpdate()//fixed update results in jerkiness for some reason with RMs
+    void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (OnSteepSlope())
         {
@@ -142,14 +118,14 @@ public class PlayerRMScript : MonoBehaviour
     }
 
     Collider[] hitColliders;
-    void DebugLogAttack()
+    void PeakofAttack()
     {
-        Debug.Log("height attack");
+        Debug.Log("Peak of Attack");
         //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
 
         //damage
         //-5
-        hitColliders = Physics.OverlapSphere(sphereColl.transform.position, sphereColl.transform.localScale.x/3);
+        hitColliders = Physics.OverlapSphere(sphereColl.transform.position, attackColliderRadius);
 
         foreach (Collider hitCollider in hitColliders)
         {
@@ -158,12 +134,6 @@ public class PlayerRMScript : MonoBehaviour
                 Debug.Log("I just hit an enemey");
                 //hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(outgoingDamage);
                 hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
-            }
-            if(hitCollider.tag == "Orb")
-            {
-                Debug.Log("Boss hit");
-                hitCollider.GetComponent<RotateFast>().damageComingFromPlayer = outgoingDamage/2;
-                hitCollider.GetComponent<RotateFast>().isHit = true;
             }
         }
     }
@@ -175,7 +145,6 @@ public class PlayerRMScript : MonoBehaviour
 
     private void GroundedUpdate()
     {
-
         Vector3 movementForward = rootMotion * movementSpeed;
         Vector3 downSlopeFix = Vector3.down * slopeForce;
         cc.Move(movementForward + downSlopeFix);
@@ -185,7 +154,6 @@ public class PlayerRMScript : MonoBehaviour
         {
             SetInAir(0);
         }
-
     }
 
     private void AirUpdate()
@@ -198,38 +166,6 @@ public class PlayerRMScript : MonoBehaviour
         rootMotion = Vector3.zero;
         playerAnimator.SetBool("isJumping", isJumping);
     }
-
-    #region old slope fix
-    /* in update 
-    if (!ccIsSlope)
-        {
-            velocity.x += (1f - ccHit.normal.y) * ccHit.normal.x* (1f - slideFriction);
-            velocity.z += (1f - ccHit.normal.y) * ccHit.normal.z* (1f - slideFriction);
-            AirUpdate2();
-}
-        else if(isJumping) //or also in air
-        {
-            AirUpdate();
-        }
-        else //isgrounded
-        {
-            GroundedUpdate();
-        }
-
-        ccIsSlope = (Vector3.Angle(Vector3.up, ccHit.normal) <= cc.slopeLimit);
-
-    /*
-    private void AirUpdate2()
-    {play with grav * # <---
-        velocity.y -= ( 3 * gravity) * 2 * (Time.deltaTime);
-        Vector3 displacement = velocity * Time.deltaTime;
-        displacement += AirMovement();
-        cc.Move(displacement);
-        isJumping = !cc.isGrounded;
-        rootMotion = Vector3.zero;
-        playerAnimator.SetBool("isJumping", isJumping);
-    }*/
-    #endregion
 
     void PlayerJump()
     {
@@ -306,6 +242,32 @@ public class PlayerRMScript : MonoBehaviour
                 oneRun = true;
             }
         }
+    }
+
+    public void TakeDamageFromEnemy(int incDmg)
+    {
+        if (god)
+        {
+
+        }
+        else
+        {
+            health -= incDmg;
+            if (health <= 0)
+            {
+                this.enabled = false;
+            }
+        }
+        if (hpBar != null)
+        {
+            hpBar.SetHealth(health);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(sphereColl.transform.position, attackColliderRadius);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)

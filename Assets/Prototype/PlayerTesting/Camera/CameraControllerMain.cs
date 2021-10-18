@@ -13,7 +13,7 @@ public class CameraControllerMain : MonoBehaviour
     [Range(0,4)]
     //[SerializeField] float cameraSpeed = 2;
     float currentRotY, currentTiltX = 20, currentCameraDistance = 5;
-    [Range(0, 10)]
+    [Range(0, 25)]
     [SerializeField] float cameraSensitivity = 2;
 
     //ref
@@ -81,8 +81,8 @@ public class CameraControllerMain : MonoBehaviour
         //new col line
         mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
 
-        currentRotY += Input.GetAxisRaw("Mouse X") * cameraSensitivity ;
-        currentTiltX -= Input.GetAxisRaw("Mouse Y") * cameraSensitivity ;
+        currentRotY += Input.GetAxisRaw("Mouse X") * (cameraSensitivity);
+        currentTiltX -= Input.GetAxisRaw("Mouse Y") * (cameraSensitivity);
 
         currentTiltX = Mathf.Clamp(currentTiltX, -90, 90);
 

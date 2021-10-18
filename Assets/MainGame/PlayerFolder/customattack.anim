@@ -45250,7 +45250,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.43333334
-    functionName: DebugLogAttack
+    functionName: PeakofAttack
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 861c92c72c24bb1479f4aba199745ba5, type: 3}
     floatParameter: 0
