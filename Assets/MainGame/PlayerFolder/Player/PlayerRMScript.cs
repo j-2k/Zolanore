@@ -114,25 +114,33 @@ public class PlayerRMScript : MonoBehaviour
 
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
-        if (OnSteepSlope())
+        if (!isAttackStart)
         {
-            cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
-            rootMotion = Vector3.zero;
-            isJumping = true;
-            //playerAnimator.SetBool("isJumping", true);
-        }
-        else if (isJumping) //or also in air
-        {
-            AirUpdate();
-        }
-        else //isgrounded
-        {
-            GroundedUpdate();
+            if (OnSteepSlope())
+            {
+                cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
+                rootMotion = Vector3.zero;
+                isJumping = true;
+                //playerAnimator.SetBool("isJumping", true);
+            }
+            else if (isJumping) //or also in air
+            {
+                AirUpdate();
+            }
+            else //isgrounded
+            {
+                GroundedUpdate();
+            }
         }
 
         RotationTransformCamera();
     }
 
+
+    /// <summary>
+    /// REVIST THIS DETECTION FOR ENEMIES HIT MAYBE USE A DIFF IN THE FUTURE THIS WAS ORIGINALLY PALCEHODLER
+    /// </summary>
+    /// 
     Collider[] hitColliders;
     void PeakofAttack()
     {

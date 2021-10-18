@@ -693,6 +693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalPlayerRM
       objectReference: {fileID: 0}
+    - target: {fileID: 8677585464154731525, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
+      propertyPath: isRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8677585464154731527, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
       propertyPath: m_RootOrder
       value: 1
