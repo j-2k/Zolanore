@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &90775430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8677585464154731524, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
+  m_PrefabInstance: {fileID: 1928692023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &90775431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90775430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00bd7b5616bfd234a96c25850e24ce28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &106416682
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +685,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8677585462475048422, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
+      propertyPath: m_TagString
+      value: CameraManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8677585464154731524, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
       propertyPath: m_Name
       value: FinalPlayerRM

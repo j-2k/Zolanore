@@ -22,6 +22,7 @@ public class PlayerRMScript : MonoBehaviour
 
     //anims
     Animator playerAnimator;
+    AnimatorStateInfo animState;
     Vector2 input;
     Vector3 rootMotion;
 
@@ -35,7 +36,7 @@ public class PlayerRMScript : MonoBehaviour
     //turning & cam refs
     float turnSmoothVelocity;
     [SerializeField] float turnSmoothTime = 0.1f; //0.1f
-    [SerializeField] Transform cameraRig;
+    Transform cameraRig;
 
     [SerializeField] GameObject sphereColl; //collision location
 
@@ -44,6 +45,7 @@ public class PlayerRMScript : MonoBehaviour
 
     [SerializeField] HPBar hpBar;
 
+    [SerializeField] bool isRootMotion;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,19 +54,35 @@ public class PlayerRMScript : MonoBehaviour
             health = 200;
             hpBar.SetMaxHealth(health);
         }
+        cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         slopeForce = 0.1f;// best value rn dont change
         cc = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
         finalJumpCalc = Mathf.Sqrt(2 * gravity * jumpSpeed);
     }
 
+    //handled by script in inspector is because of this
     private void OnAnimatorMove()
     {
-        rootMotion += playerAnimator.deltaPosition;
-    }
+        animState = playerAnimator.GetCurrentAnimatorStateInfo(0);
 
+        if (isRootMotion)
+        {
+            rootMotion += playerAnimator.deltaPosition;
+        }
+    }
+    
     void Update()
     {
+        if (cc.isGrounded)
+        {
+            Debug.Log("grounded");
+        }
+        else
+        {
+            Debug.Log("Not Grounded");
+        }
+
 
         if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
         {
@@ -82,13 +100,11 @@ public class PlayerRMScript : MonoBehaviour
             PlayerJump();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isJumping && !isAttackStart)
+        if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttackStart)
         {
-            //playerAnimator.applyRootMotion = false;
             isAttackStart = true;
             playerAnimator.SetTrigger("isAttacking");
             rootMotion = Vector3.zero;
-
         }
 
         float movementDir = Mathf.Clamp01(input.magnitude);
@@ -143,14 +159,35 @@ public class PlayerRMScript : MonoBehaviour
 
     private void GroundedUpdate()
     {
-        Vector3 movementForward = rootMotion * movementSpeed;
-        Vector3 downSlopeFix = Vector3.down * slopeForce;
-        cc.Move(movementForward + downSlopeFix);
-        rootMotion = Vector3.zero;
-
-        if (!cc.isGrounded)
+        if (isRootMotion)
         {
-            SetInAir(0);
+            movementSpeed = 1;
+            slopeForce = 0.1f;
+            Vector3 movementForward = rootMotion * movementSpeed;
+            Vector3 downSlopeFix = Vector3.down * slopeForce;
+            cc.Move(movementForward + downSlopeFix);
+            rootMotion = Vector3.zero;
+
+            if (!cc.isGrounded)
+            {
+                SetInAir(0);
+            }
+        }
+        else
+        {
+            slopeForce = 20;
+            movementSpeed = 10;
+            Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
+            Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
+            Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
+            Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
+
+            cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
+            if (!cc.isGrounded)
+            {
+                SetInAir(0);
+            }
+            
         }
     }
 
@@ -175,15 +212,29 @@ public class PlayerRMScript : MonoBehaviour
 
     void SetInAir(float jumpVelo)
     {
-        isJumping = true;
-        velocity = playerAnimator.velocity * jumpCurve * movementSpeed;
-        velocity.y = jumpVelo;
-        playerAnimator.SetBool("isJumping", true);
+            isJumping = true;
+        if (isRootMotion)
+        {
+            velocity = playerAnimator.velocity * jumpCurve * movementSpeed;
+        }
+        else
+        {
+            velocity = playerAnimator.velocity * jumpCurve * (movementSpeed / 6);
+        }
+            playerAnimator.SetBool("isJumping", true);
+            velocity.y = jumpVelo;
     }
 
     Vector3 AirMovement()
     {
-        return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * movementAir * Time.deltaTime;
+        if (isRootMotion)
+        {
+            return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * movementAir * Time.deltaTime;
+        }
+        else
+        {
+            return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * (movementAir-2) * Time.deltaTime;
+        }
     }
 
     bool OnSteepSlope()
@@ -272,4 +323,6 @@ public class PlayerRMScript : MonoBehaviour
     {
         ccHit.normal = hit.normal;
     }
+
+
 }
