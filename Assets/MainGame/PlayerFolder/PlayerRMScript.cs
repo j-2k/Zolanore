@@ -96,7 +96,7 @@ public class PlayerRMScript : MonoBehaviour
         playerAnimator.SetFloat("rmVelocity", movementDir);
     }
 
-    void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
+    void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (OnSteepSlope())
         {
@@ -123,8 +123,6 @@ public class PlayerRMScript : MonoBehaviour
         Debug.Log("Peak of Attack");
         //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
 
-        //damage
-        //-5
         hitColliders = Physics.OverlapSphere(sphereColl.transform.position, attackColliderRadius);
 
         foreach (Collider hitCollider in hitColliders)
