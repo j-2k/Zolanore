@@ -31,8 +31,6 @@ public class LevelSystem : MonoBehaviour
     {
         currentXP = 0;
         onXPGainedDelegate += XPGainedFunction;
-
-        onXPGainedDelegate(0,0);
     }
 
     // Update is called once per frame
@@ -42,7 +40,7 @@ public class LevelSystem : MonoBehaviour
     }
 
     
-    public void XPGainedFunction(int incEnemyLevel,int incXP)
+    void XPGainedFunction(int incEnemyLevel,int incXP)
     {
         Debug.Log("An Enemy of Level of " + incEnemyLevel + " Died. It Dropped " + incXP + "XP! Now we will add XP based on ur level which is level " + currentLevel);
 
