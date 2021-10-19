@@ -19,7 +19,7 @@ public class EnemyProtoVersion : MonoBehaviour
     void Start()
     {
         xp = 100;
-        enemyLevel = 5;
+        enemyLevel = 1;
         levelSystem = LevelSystem.instance;
         health = 10;
         timer = 0;

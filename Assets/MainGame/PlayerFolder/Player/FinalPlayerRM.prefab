@@ -140,8 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bd7b5616bfd234a96c25850e24ce28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 5
+  currentLevel: 1
   currentXP: 0
+  targetXP: 0
 --- !u!65 &3749250662979710159
 BoxCollider:
   m_ObjectHideFlags: 0
