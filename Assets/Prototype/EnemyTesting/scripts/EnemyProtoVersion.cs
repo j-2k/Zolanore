@@ -5,16 +5,23 @@ using UnityEngine.AI;
 
 public class EnemyProtoVersion : MonoBehaviour
 {
-    int health;
+    [SerializeField] int health;
     NavMeshAgent agent;
     Transform player;
     [SerializeField] GameObject childTrigger;
     bool isAttacking;
     float timer;
+    int xp;
+    int enemyLevel;
+
+    LevelSystem levelSystem;
     // Start is called before the first frame update
     void Start()
     {
-        health = 100;
+        xp = 100;
+        enemyLevel = 5;
+        levelSystem = LevelSystem.instance;
+        health = 10;
         timer = 0;
         //childTrigger = GetComponentInChildren<GameObject>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -60,7 +67,17 @@ public class EnemyProtoVersion : MonoBehaviour
         health -= incDmg;
         if (health <= 0)
         {
+            //SendXPToPlayer(xp);
+            levelSystem.onXPGainedDelegate.Invoke(enemyLevel,xp);
             Destroy(gameObject);
         }
     }
+
+    /*
+    void SendXPToPlayer(int xp)
+    {
+        Debug.Log("Giving Player " + xp);
+        levelSystem.currentXP += xp;
+    }
+    */
 }
