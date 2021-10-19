@@ -62,12 +62,14 @@ public class LevelSystem : MonoBehaviour
                 {
                     currentXP = currentXP - targetXP;
                     currentLevel++;
-                    targetXP += targetXP / 20;
+                    targetXP += targetXP * 1; //*1 will double target everytime // it was /20 | *1 = 100 , 200, 400, 800 | /2 = 100, 150,300,600,
                 }
 
-                Debug.Log(" new xp =" + newXP + " enemylvl is = " + incEnemyLevel + " currlevel I is " + (currentLevel + i));
+                Debug.Log(" new xp =" + newXP + " enemylvl is = " + incEnemyLevel + " currlevel is " + currentLevel);
                 return;
             }
+            //maybe be nicer here & dont penalize for first iterator / if lvl diff is +1/-1
+            j -= 0.1f;
 
             /*
             if (incEnemyLevel == currentLevel - i)
@@ -101,9 +103,9 @@ public class LevelSystem : MonoBehaviour
                 }
             }*/
 
-            j -= 0.1f;
         }
 
+        /*
         if (incEnemyLevel == currentLevel || incEnemyLevel == currentLevel - 1 || incEnemyLevel == currentLevel + 1)
         {
             Debug.Log("Ran EQUAL");
@@ -118,7 +120,6 @@ public class LevelSystem : MonoBehaviour
 
 
         }
-        /*
         else if (incEnemyLevel <= currentLevel - 2)
         {
             Debug.Log("Ran DOWN");
