@@ -725,29 +725,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8677585462475048422, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-      propertyPath: m_TagString
-      value: CameraManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8677585463080590501, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8677585463080590503, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8677585464154731524, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
       propertyPath: m_Name
       value: FinalPlayerRM
-      objectReference: {fileID: 0}
-    - target: {fileID: 8677585464154731525, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-      propertyPath: god
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8677585464154731525, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-      propertyPath: isRootMotion
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8677585464154731527, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
       propertyPath: m_RootOrder
@@ -795,25 +775,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
---- !u!1 &1928692024 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8677585463080590501, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-  m_PrefabInstance: {fileID: 1928692023}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1928692025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1928692024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bd7b5616bfd234a96c25850e24ce28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevel: 5
-  currentXP: 0
 --- !u!1 &2002248442
 GameObject:
   m_ObjectHideFlags: 0
