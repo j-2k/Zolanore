@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class CharacterPanelManager : MonoBehaviour
 {
+
+
     //THISIS THE WHOLE CHARACTER PANEL MANAGER
     [SerializeField] Inventory inventory;
     [SerializeField] EquipmentPanel equipmentPanel;
 
     private void Awake()
     {
-        
         inventory.OnItemRightClickEvent += EquipFromInventory;
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
     }
