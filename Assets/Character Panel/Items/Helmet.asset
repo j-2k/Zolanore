@@ -17,7 +17,7 @@ MonoBehaviour:
   StrengthBonus: 0
   DexterityBonus: 0
   IntelligenceBonus: 0
-  DefenceBonus: 15
+  DefenceBonus: 5
   StrengthPercentBonus: 0
   DexterityPercentBonus: 0
   IntelligencePercentBonus: 0

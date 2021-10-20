@@ -40,7 +40,15 @@ public class StatPanel : MonoBehaviour
             statDisplays[i].ValueText.text = stats[i].Value.ToString();
         }
     }
-    
+
+    public void ResetAllStatValue()
+    {
+        for (int i = 0; i < stats.Length; i++)
+        {
+            stats[i].BaseValue = 0;
+        }
+        UpdateStatValue();
+    }
 
     public void UpdateStatNames()
     {

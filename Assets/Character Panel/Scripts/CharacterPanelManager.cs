@@ -26,6 +26,37 @@ public class CharacterPanelManager : MonoBehaviour
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
     }
 
+    /*
+    //trying out level skill system where when u level up u gain 2 points to spend fre ein each skill slot seems to work
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("was" + Defence.BaseValue);
+            Defence.BaseValue++;
+            Debug.Log("now" + Defence.BaseValue);
+            statPanel.UpdateStatValue();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            //hack fix fast is to make sure player spent all free point sbefore resseting or else they will dupe find a nice fix or do this hack fix
+            Debug.Log("resetting all stat values");
+            statPanel.ResetAllStatValue();
+
+            int level = 5;
+
+            //give 2 free points per level
+            int freePoints = level * 2;
+            
+
+
+            Debug.Log("you have " + freePoints + " points to spend after resetting ur skill levels");
+        }
+    }
+    */
+
     //noway of checking if this item is equippable so we do the check here
     private void EquipFromInventory(Item item)
     {//if the item is an type of equippable item we equip it
