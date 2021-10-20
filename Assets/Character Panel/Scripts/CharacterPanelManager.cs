@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharacterPanelManager : MonoBehaviour
 {
-
+    //https://youtu.be/ez-YTf64Jn4?t=420
+        //https://youtu.be/ez-YTf64Jn4?t=451
 
     //THISIS THE WHOLE CHARACTER PANEL MANAGER
     [SerializeField] Inventory inventory;

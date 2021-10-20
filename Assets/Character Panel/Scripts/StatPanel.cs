@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatPanel : MonoBehaviour
 {
-    
+    //https://youtu.be/ez-YTf64Jn4?t=578
     [SerializeField] StatDisplay[] statDisplays;
     [SerializeField] string[] statNames;
 
