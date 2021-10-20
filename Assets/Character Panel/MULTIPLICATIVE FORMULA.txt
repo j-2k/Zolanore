@@ -1,0 +1,9 @@
+n = SUM OF ALL BONUS BASE SPECIFIC STATS
+
+eB% = EQUIPMENT BONUS PERCENT
+
+(((((n) eB%1 + 1) eB%2 + 1) eB%3 + 1) eB%4 + 1)
+
+//
+
+make a skill point system where if the player levels up give him 2 points to spent on 1 of the stats on the character panel

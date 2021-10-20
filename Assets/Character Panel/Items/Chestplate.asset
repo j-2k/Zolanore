@@ -17,5 +17,9 @@ MonoBehaviour:
   StrengthBonus: 0
   DexterityBonus: 0
   IntelligenceBonus: 0
-  DefenceBonus: 2
+  DefenceBonus: 3
+  StrengthPercentBonus: 0
+  DexterityPercentBonus: 0
+  IntelligencePercentBonus: 0
+  DefencePercentBonus: 10
   EquipmentType: 3

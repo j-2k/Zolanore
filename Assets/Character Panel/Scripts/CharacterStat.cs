@@ -45,6 +45,7 @@ namespace Juma.CharacterStats
         public CharacterStat(float baseValue) : this()
         {
             BaseValue = baseValue;
+
             /*
             statModifiers = new List<StatModifier>();
             StatModifiers = statModifiers.AsReadOnly(); //this StatModifier will reference the orig statModifier & prohibit changes if however we do changes 

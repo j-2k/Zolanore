@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 110099519}
-  _item: {fileID: 11400000, guid: 49f961864e35364419dc737c8540720b, type: 2}
+  _item: {fileID: 11400000, guid: 46162e62a2c69ae48b61c7a10a80f664, type: 2}
 --- !u!1 &163179058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,7 +4034,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8de85d6d8e954384f983929f6195eb7c, type: 2}
   - {fileID: 11400000, guid: 787d9b5de08a2d547a0057afad22315f, type: 2}
   - {fileID: 11400000, guid: 598cd9f615f8c3948924d852feba132f, type: 2}
-  - {fileID: 11400000, guid: 49f961864e35364419dc737c8540720b, type: 2}
   - {fileID: 11400000, guid: 46162e62a2c69ae48b61c7a10a80f664, type: 2}
   itemsParent: {fileID: 1978540421}
   itemSlots:
@@ -4257,7 +4256,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921991546}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4301,7 +4300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1921991548}
-  _item: {fileID: 11400000, guid: 46162e62a2c69ae48b61c7a10a80f664, type: 2}
+  _item: {fileID: 0}
 --- !u!1 &1978540420
 GameObject:
   m_ObjectHideFlags: 0
