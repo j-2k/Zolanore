@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Juma.CharacterStats;
 
 public class StatPanel : MonoBehaviour
 {
-    //https://youtu.be/ez-YTf64Jn4?t=578
+
     [SerializeField] StatDisplay[] statDisplays;
     [SerializeField] string[] statNames;
 
-    //private CharacterStat[] stats;
+    private CharacterStat[] stats;
 
     private void OnValidate()
     {
@@ -16,7 +15,7 @@ public class StatPanel : MonoBehaviour
         UpdateStatNames();
     }
 
-    /*
+    
     public void SetStats(params CharacterStat[] charStats)
     {
         stats = charStats;
@@ -33,7 +32,7 @@ public class StatPanel : MonoBehaviour
         }
     }
     
-
+    //UIrefresh
     public void UpdateStatValue()
     {
         for (int i = 0; i < stats.Length; i++)
@@ -41,7 +40,7 @@ public class StatPanel : MonoBehaviour
             statDisplays[i].ValueText.text = stats[i].Value.ToString();
         }
     }
-    */
+    
 
     public void UpdateStatNames()
     {

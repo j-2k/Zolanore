@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Juma.CharacterStats;
 
 public class CharacterPanelManager : MonoBehaviour
 {
-    //https://youtu.be/ez-YTf64Jn4?t=420
-        //https://youtu.be/ez-YTf64Jn4?t=451
+    //ADD NEW STATS HERE
+    public CharacterStat Strength;
+    public CharacterStat Dexterity;
+    public CharacterStat Intelligence;
+    public CharacterStat Defence;
+    //
 
     //THISIS THE WHOLE CHARACTER PANEL MANAGER
     [SerializeField] Inventory inventory;
     [SerializeField] EquipmentPanel equipmentPanel;
+    [SerializeField] StatPanel statPanel;
 
     private void Awake()
     {
+        statPanel.SetStats(Strength, Dexterity, Intelligence, Defence);
+        statPanel.UpdateStatValue();
+
         inventory.OnItemRightClickEvent += EquipFromInventory;
         equipmentPanel.OnItemRightClickedEvent += UnequipFromEquipPanel;
     }
@@ -50,7 +59,11 @@ public class CharacterPanelManager : MonoBehaviour
                 if (previousItem != null)
                 {
                     inventory.AddItem(previousItem);
+                    previousItem.Unequip(this);
+                    statPanel.UpdateStatValue();
                 }
+                equippableItem.Equip(this);
+                statPanel.UpdateStatValue();
             }
             else
             {
@@ -65,6 +78,8 @@ public class CharacterPanelManager : MonoBehaviour
         //check if the inven is full first
         if (!inventory.isInventoryFull() && equipmentPanel.RemoveItem(equippableItem))
         {
+            equippableItem.Unequip(this);
+            statPanel.UpdateStatValue();
             inventory.AddItem(equippableItem);
         }
     }

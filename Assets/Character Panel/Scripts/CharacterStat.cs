@@ -123,7 +123,7 @@ namespace Juma.CharacterStats
                 {
                     sumPercentAdd += mod.Value;
 
-                    if (i + 1 >= statModifiers.Count || statModifiers[i].Type != StatModType.PercentAdd)
+                    if (i + 1 >= statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
                     {
                         finalValue *= 1 + sumPercentAdd;
                         sumPercentAdd = 0;
@@ -131,13 +131,16 @@ namespace Juma.CharacterStats
                 }
                 else if (mod.Type == StatModType.PercentMult)
                 {
-                    finalValue *= 1 + mod.Value;
+                    finalValue *= 1 + (mod.Value/100);
+                    //finalValue *= 1 + mod.Value;
                 }
 
-                finalValue += statModifiers[i].Value;
+                //why the fuck did i write this here what the fuck am i doing
+                //finalValue += statModifiers[i].Value;
             }
 
-            //12.0001 != 12 float error avoid
+            //12.0001 != 12 float error avoid wewird float calc errors change the rounded decimal to test & play around with it
+            //return (float)Math.Round(finalValue, 4);
             return (float)Math.Round(finalValue, 4);
         }
     }
