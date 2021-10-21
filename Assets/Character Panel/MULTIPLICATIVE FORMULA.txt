@@ -15,3 +15,8 @@ AREAS WHERE WE INITIALIZE THE DIFFERENT STATS THEY CAN BE FOUND IN THESE SCRIPTS
 ItemTooltips
 EquippableItem
 CharacterPanelManager
+
+//
+
+rounding in stattooltips
+rounding in characterstats

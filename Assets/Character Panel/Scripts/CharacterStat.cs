@@ -142,7 +142,7 @@ namespace Juma.CharacterStats
 
             //12.0001 != 12 float error avoid wewird float calc errors change the rounded decimal to test & play around with it
             //return (float)Math.Round(finalValue, 4);
-            return (float)Math.Round(finalValue, 4);
+            return (float)Math.Round(finalValue, 2);
         }
     }
 }
