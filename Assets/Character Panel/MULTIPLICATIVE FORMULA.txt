@@ -7,3 +7,11 @@ eB% = EQUIPMENT BONUS PERCENT
 //
 
 make a skill point system where if the player levels up give him 2 points to spent on 1 of the stats on the character panel
+
+//
+
+AREAS WHERE WE INITIALIZE THE DIFFERENT STATS THEY CAN BE FOUND IN THESE SCRIPTS
+
+ItemTooltips
+EquippableItem
+CharacterPanelManager
