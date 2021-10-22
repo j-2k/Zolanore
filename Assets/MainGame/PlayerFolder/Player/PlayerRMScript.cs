@@ -223,7 +223,7 @@ public class PlayerRMScript : MonoBehaviour
             isJumping = true;
         if (isRootMotion)
         {
-            velocity = playerAnimator.velocity * jumpCurve * movementSpeed;
+            velocity = playerAnimator.velocity * jumpCurve * (movementSpeed / 2);
         }
         else
         {
@@ -237,7 +237,7 @@ public class PlayerRMScript : MonoBehaviour
     {
         if (isRootMotion)
         {
-            return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * movementAir * Time.deltaTime;
+            return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * (movementAir-1) * Time.deltaTime;
         }
         else
         {
