@@ -30,7 +30,7 @@ public class ItemChest : MonoBehaviour
     {
         if (!isEmpty && isInRange && Input.GetKeyDown(itemPickup))
         {
-            inventory.AddItem(item);
+            inventory.AddItem(Instantiate(item));
             isEmpty = true;
         }
     }
@@ -50,7 +50,7 @@ public class ItemChest : MonoBehaviour
         if (gameObject.CompareTag("Player"))
         {
             isInRange = state;
-            //enabeled = state
+            //text enabeled = state
         }
     }    
 }

@@ -117,23 +117,12 @@ public class CharacterPanelManager : MonoBehaviour
 
     private void Drop(ItemSlot dropItemSlot)
     {
+        if (draggableItem == null) return;
+
         if (dropItemSlot.CanReceiveItem(draggedSlot.Item) && draggedSlot.CanReceiveItem(dropItemSlot.Item))
         {
             EquippableItem dragItem = draggedSlot.Item as EquippableItem;
             EquippableItem dropitem = dropItemSlot.Item as EquippableItem;
-
-            if (draggedSlot is EquipmentSlot)
-            {
-                if (dragItem != null)
-                {
-                    dragItem.Unequip(this);
-                }
-
-                if(dropitem != null)
-                {
-                    dropitem.Equip(this);
-                }
-            }
 
             if (dropItemSlot is EquipmentSlot)
             {
@@ -147,6 +136,19 @@ public class CharacterPanelManager : MonoBehaviour
                     dropitem.Unequip(this);
                 }
             }
+            if (draggedSlot is EquipmentSlot)
+            {
+                if (dragItem != null)
+                {
+                    dragItem.Unequip(this);
+                }
+
+                if(dropitem != null)
+                {
+                    dropitem.Equip(this);
+                }
+            }
+
             statPanel.UpdateStatValue();
 
             Item draggedItem = draggedSlot.Item;

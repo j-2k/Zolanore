@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
         //for every item we have we assign it to a item slot
         for (; i < startingItems.Count && i < itemSlots.Length; i++)
         {
-            itemSlots[i].Item = startingItems[i];
+            itemSlots[i].Item = Instantiate(startingItems[i]);
         }
 
         //for remaining slot with no items set to null
@@ -74,6 +74,7 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    
     public bool RemoveItem(Item item)
     {
         //vice versa of add
@@ -86,6 +87,24 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+
+    //new remove item with ID
+    public Item RemoveItem(string itemID)
+    {
+        //vice versa of add
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            Item item = itemSlots[i].Item;
+            //go through all items & check the slots if there is a item we compare its id to the ID we are looking for when we find it just empty & return the item reference
+            if (item != null && item.ID == itemID)
+            {
+                itemSlots[i].Item = null;
+                return item;
+            }
+        }
+        return null;
     }
 
     public bool isInventoryFull()
