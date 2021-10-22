@@ -9,7 +9,7 @@ public class ItemChest : MonoBehaviour
     [SerializeField] KeyCode itemPickup = KeyCode.E;
 
     bool isInRange = false;
-    bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
+    [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class ItemChest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isEmpty && isInRange && Input.GetKeyDown(itemPickup))
+        if (!isEmpty && !inventory.isInventoryFull() && isInRange && Input.GetKeyDown(itemPickup))
         {
             inventory.AddItem(Instantiate(item));
             isEmpty = true;
