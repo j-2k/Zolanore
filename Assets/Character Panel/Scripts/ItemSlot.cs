@@ -53,6 +53,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
     }
 
+    public virtual bool CanReceiveItem(Item item)
+    {
+        return true;
+
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         //check if the item slot was clicked to equip a item

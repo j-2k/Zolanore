@@ -9,14 +9,26 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
 
-    public event Action<Item> OnItemRightClickEvent;
+    public event Action<ItemSlot> OnPointerEnterEvent;
+    public event Action<ItemSlot> OnPointerExitEvent;
+    public event Action<ItemSlot> OnRightClickEvent;
+    public event Action<ItemSlot> OnBeginDragEvent;
+    public event Action<ItemSlot> OnDragEvent;
+    public event Action<ItemSlot> OnEndDragEvent;
+    public event Action<ItemSlot> OnDropEvent;
 
     private void Start()
     {
         //listener for the itemslots event
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlots[i].OnRightClickEvent += OnItemRightClickEvent;
+            itemSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
+            itemSlots[i].OnPointerExitEvent += OnPointerExitEvent;
+            itemSlots[i].OnRightClickEvent += OnRightClickEvent;
+            itemSlots[i].OnBeginDragEvent += OnBeginDragEvent;
+            itemSlots[i].OnDragEvent += OnDragEvent;
+            itemSlots[i].OnEndDragEvent += OnEndDragEvent;
+            itemSlots[i].OnDropEvent += OnDropEvent;
         }
         SetStartingItems();
     }
