@@ -2,26 +2,41 @@ using UnityEngine;
 
 public class InventoryInput : MonoBehaviour
 {
-    [SerializeField] GameObject inventoryGameObject;
-    [SerializeField] KeyCode[] toggleInventoryKeys;
+    [SerializeField] KeyCode toggleInventoryPanelKey;
+    [SerializeField] GameObject inventoryPanelGameobject;
+    [SerializeField] KeyCode toggleEquipmentPanelKey;
+    [SerializeField] GameObject equipmentPanelGameObject;
+
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < toggleInventoryKeys.Length; i++)
+        if (Input.GetKeyDown(toggleInventoryPanelKey))
         {
-            if (Input.GetKeyDown(toggleInventoryKeys[i]))
+            inventoryPanelGameobject.SetActive(!inventoryPanelGameobject.activeSelf);
+
+            if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
             {
-                inventoryGameObject.SetActive(!inventoryGameObject.activeSelf);
-                if (inventoryGameObject.activeSelf)
-                {
-                    ShowMouseCursor();
-                }
-                else
-                {
-                    HideMouseCursor();
-                }
-                break;
+                ShowMouseCursor();
+            }
+            else
+            {
+                HideMouseCursor();
+            }
+        }
+
+
+        if (Input.GetKeyDown(toggleEquipmentPanelKey))
+        {
+            equipmentPanelGameObject.SetActive(!equipmentPanelGameObject.activeSelf);
+
+            if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
+            {
+                ShowMouseCursor();
+            }
+            else
+            {
+                HideMouseCursor();
             }
         }
     }
@@ -38,4 +53,10 @@ public class InventoryInput : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Confined;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    public void ToggleEquipmentPanel()
+    {
+        equipmentPanelGameObject.SetActive(!equipmentPanelGameObject.activeSelf);
+    }
+
 }
