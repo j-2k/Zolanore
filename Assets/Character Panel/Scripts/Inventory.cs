@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] List<Item> items;
+    [SerializeField] List<Item> startingItems;
     [SerializeField] Transform itemsParent;
     [SerializeField] ItemSlot[] itemSlots;
 
@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
         {
             itemSlots[i].OnRightClickEvent += OnItemRightClickEvent;
         }
-        RefreshUI();
+        SetStartingItems();
     }
 
     private void OnValidate()
@@ -28,17 +28,17 @@ public class Inventory : MonoBehaviour
             itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
         }
 
-        RefreshUI();
+        SetStartingItems();
     }
 
-    void RefreshUI()
+    void SetStartingItems()
     {
         int i = 0;
 
         //for every item we have we assign it to a item slot
-        for (; i < items.Count && i < itemSlots.Length; i++)
+        for (; i < startingItems.Count && i < itemSlots.Length; i++)
         {
-            itemSlots[i].Item = items[i];
+            itemSlots[i].Item = startingItems[i];
         }
 
         //for remaining slot with no items set to null
@@ -50,30 +50,45 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (isInventoryFull())
+        //loop through all item slots the first null slot will place the item in it 
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            return false;
+            if (itemSlots[i].Item == null)
+            {
+                itemSlots[i].Item = item;
+                return true;
+            }
         }
-
-        items.Add(item);
-        RefreshUI();
-        return true;
+        return false;
     }
 
     public bool RemoveItem(Item item)
     {
-        if (items.Remove(item))
+        //vice versa of add
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            RefreshUI();
-            return true;
+            if (itemSlots[i].Item == item)
+            {
+                itemSlots[i].Item = null;
+                return true;
+            }
         }
-
         return false;
     }
 
     public bool isInventoryFull()
     {
-        return items.Count >= itemSlots.Length;
+        //go through all slots if any slot is null != full
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (itemSlots[i].Item == null)
+            {
+                return false;
+            }
+        }
+
+        //go through all slots if 0 slot is null == full
+        return true;
     }
 
 }
