@@ -13,12 +13,12 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        RefreshUI();
         //listener for the itemslots event
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i].OnRightClickEvent += OnItemRightClickEvent;
         }
+        RefreshUI();
     }
 
     private void OnValidate()
