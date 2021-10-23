@@ -20,7 +20,7 @@ public class CharacterPanelManager : MonoBehaviour
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] Image draggableItem;
 
-    private ItemSlot draggedSlot;
+    private BaseItemSlot draggedSlot;
 
     private void OnValidate()
     {
@@ -58,7 +58,7 @@ public class CharacterPanelManager : MonoBehaviour
         equipmentPanel.OnDropEvent += Drop;
     }
 
-    private void Equip(ItemSlot itemSlot)
+    private void Equip(BaseItemSlot itemSlot)
     {
         EquippableItem equippableItem = itemSlot.Item as EquippableItem;
         if (equippableItem != null)
@@ -67,7 +67,7 @@ public class CharacterPanelManager : MonoBehaviour
         }
     }
 
-    private void Unequip(ItemSlot itemSlot)
+    private void Unequip(BaseItemSlot itemSlot)
     {
         EquippableItem equippableItem = itemSlot.Item as EquippableItem;
         if (equippableItem != null)
@@ -76,7 +76,7 @@ public class CharacterPanelManager : MonoBehaviour
         }
     }
 
-    private void ShowTooltip(ItemSlot itemSlot)
+    private void ShowTooltip(BaseItemSlot itemSlot)
     {
         EquippableItem equippableItem = itemSlot.Item as EquippableItem;
         if (equippableItem != null)
@@ -85,12 +85,12 @@ public class CharacterPanelManager : MonoBehaviour
         }
     }
 
-    private void HideTooltip(ItemSlot itemSlot)
+    private void HideTooltip(BaseItemSlot itemSlot)
     {
         itemTooltip.HideTooltip();
     }
 
-    private void BeginDrag(ItemSlot itemSlot)
+    private void BeginDrag(BaseItemSlot itemSlot)
     {
         if (itemSlot.Item != null)
         {
@@ -101,13 +101,13 @@ public class CharacterPanelManager : MonoBehaviour
         }
     }
 
-    private void EndDrag(ItemSlot itemSlot)
+    private void EndDrag(BaseItemSlot itemSlot)
     {
         draggedSlot = null;
         draggableItem.enabled = false;
     }
 
-    private void Drag(ItemSlot itemSlot)
+    private void Drag(BaseItemSlot itemSlot)
     {
         if (draggableItem.enabled)
         {
@@ -115,7 +115,7 @@ public class CharacterPanelManager : MonoBehaviour
         }
     }
 
-    private void Drop(ItemSlot dropItemSlot)
+    private void Drop(BaseItemSlot dropItemSlot)
     {
         if (draggableItem == null) return;
 
@@ -235,7 +235,7 @@ public class CharacterPanelManager : MonoBehaviour
     public void Unequip(EquippableItem equippableItem)
     {
         //check if the inven is full first
-        if (!inventory.isInventoryFull() && equipmentPanel.RemoveItem(equippableItem))
+        if (!inventory.IsFull() && equipmentPanel.RemoveItem(equippableItem))
         {
             equippableItem.Unequip(this);
             statPanel.UpdateStatValue();

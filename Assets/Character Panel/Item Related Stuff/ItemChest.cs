@@ -28,7 +28,7 @@ public class ItemChest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isEmpty && !inventory.isInventoryFull() && isInRange && Input.GetKeyDown(itemPickup))
+        if (!isEmpty && !inventory.IsFull() && isInRange && Input.GetKeyDown(itemPickup))
         {
             Item itemCopy = item.GetCopy();
             if (inventory.AddItem(itemCopy))

@@ -3,19 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : ItemContainer
 {
     [SerializeField] List<Item> startingItems;
     [SerializeField] Transform itemsParent;
-    [SerializeField] ItemSlot[] itemSlots;
 
-    public event Action<ItemSlot> OnPointerEnterEvent;
-    public event Action<ItemSlot> OnPointerExitEvent;
-    public event Action<ItemSlot> OnRightClickEvent;
-    public event Action<ItemSlot> OnBeginDragEvent;
-    public event Action<ItemSlot> OnDragEvent;
-    public event Action<ItemSlot> OnEndDragEvent;
-    public event Action<ItemSlot> OnDropEvent;
+    public event Action<BaseItemSlot> OnPointerEnterEvent;
+    public event Action<BaseItemSlot> OnPointerExitEvent;
+    public event Action<BaseItemSlot> OnRightClickEvent;
+    public event Action<BaseItemSlot> OnBeginDragEvent;
+    public event Action<BaseItemSlot> OnDragEvent;
+    public event Action<BaseItemSlot> OnEndDragEvent;
+    public event Action<BaseItemSlot> OnDropEvent;
 
     private void Start()
     {
@@ -61,77 +60,4 @@ public class Inventory : MonoBehaviour
             itemSlots[i].Amount = 0;
         }
     }
-
-    public bool AddItem(Item item)
-    {
-        //loop through all item slots the first null slot will place the item in it 
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            if (itemSlots[i].Item == null || (itemSlots[i].Item.ID == item.ID && itemSlots[i].Amount < item.MaxStack))
-            {
-                itemSlots[i].Item = item;
-                itemSlots[i].Amount++;
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    
-    public bool RemoveItem(Item item)
-    {
-        //vice versa of add
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            if (itemSlots[i].Item == item)
-            {
-                itemSlots[i].Amount--;
-                if (itemSlots[i].Amount == 0)
-                {
-                    itemSlots[i].Item = null;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    //new remove item with ID
-    public Item RemoveItem(string itemID)
-    {
-        //vice versa of add
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            Item item = itemSlots[i].Item;
-            //go through all items & check the slots if there is a item we compare its id to the ID we are looking for when we find it just empty & return the item reference
-            if (item != null && item.ID == itemID)
-            {
-                itemSlots[i].Amount--;
-                if (itemSlots[i].Amount == 0)
-                {
-                    itemSlots[i].Item = null;
-                }
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public bool isInventoryFull()
-    {
-        //go through all slots if any slot is null != full
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            if (itemSlots[i].Item == null)
-            {
-                return false;
-            }
-        }
-
-        //go through all slots if 0 slot is null == full
-        return true;
-    }
-
 }
