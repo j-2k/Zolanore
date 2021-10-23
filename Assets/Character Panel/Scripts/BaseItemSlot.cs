@@ -49,10 +49,24 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         set 
         { 
             _amount = value;
-            amountText.enabled = _item != null && _item.MaxStack > 1 && _amount > 1;
-            if (amountText.enabled)
+
+            if (_amount < 0)
             {
-                amountText.text = _amount.ToString();
+                _amount = 0;
+            }
+
+            if (_amount == 0)
+            {
+                Item = null;
+            }
+
+            if (amountText != null)
+            {
+                amountText.enabled = _item != null && _amount > 1;
+                if (amountText.enabled)
+                {
+                    amountText.text = _amount.ToString();
+                }
             }
         }
     }
@@ -70,6 +84,12 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         }
 
     }
+
+    public virtual bool CanAddStack (Item item, int amount = 1)
+    {
+        return Item != null && Item.ID == item.ID;
+    }
+
 
     public virtual bool CanReceiveItem(Item item)
     {

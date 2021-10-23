@@ -20,7 +20,7 @@ public class CharacterPanelManager : MonoBehaviour
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] Image draggableItem;
 
-    private BaseItemSlot draggedSlot;
+    private BaseItemSlot dragItemSlot;
 
     private void OnValidate()
     {
@@ -94,7 +94,7 @@ public class CharacterPanelManager : MonoBehaviour
     {
         if (itemSlot.Item != null)
         {
-            draggedSlot = itemSlot;
+            dragItemSlot = itemSlot;
             draggableItem.sprite = itemSlot.Item.Icon;
             draggableItem.transform.position = Input.mousePosition;
             draggableItem.enabled = true;
@@ -103,7 +103,7 @@ public class CharacterPanelManager : MonoBehaviour
 
     private void EndDrag(BaseItemSlot itemSlot)
     {
-        draggedSlot = null;
+        dragItemSlot = null;
         draggableItem.enabled = false;
     }
 
@@ -117,59 +117,71 @@ public class CharacterPanelManager : MonoBehaviour
 
     private void Drop(BaseItemSlot dropItemSlot)
     {
-        if (draggableItem == null) return;
+        if (dragItemSlot == null) return;
 
         //can add stack if dragItemSlot.Item to dropItemSlot
-        /*
-        if ()
+        
+        if (dropItemSlot.CanAddStack(dragItemSlot.Item))
         {
-            //Add stacks untill drgpitemslot is full
-            //remove the same number of stacks from drag itemslot
+            AddStacks(dropItemSlot);
         }
-        else
-        */
-        if (dropItemSlot.CanReceiveItem(draggedSlot.Item) && draggedSlot.CanReceiveItem(dropItemSlot.Item))
+        else if (dropItemSlot.CanReceiveItem(dragItemSlot.Item) && dragItemSlot.CanReceiveItem(dropItemSlot.Item))
         {
-            EquippableItem dragItem = draggedSlot.Item as EquippableItem;
-            EquippableItem dropitem = dropItemSlot.Item as EquippableItem;
+            SwapItems(dropItemSlot);
+        }
+    }
 
-            if (dropItemSlot is EquipmentSlot)
+    private void SwapItems(BaseItemSlot dropItemSlot)
+    {
+        EquippableItem dragItem = dragItemSlot.Item as EquippableItem;
+        EquippableItem dropitem = dropItemSlot.Item as EquippableItem;
+
+        if (dropItemSlot is EquipmentSlot)
+        {
+            if (dragItem != null)
             {
-                if (dragItem != null)
-                {
-                    dragItem.Equip(this);
-                }
-
-                if (dropitem != null)
-                {
-                    dropitem.Unequip(this);
-                }
-            }
-            if (draggedSlot is EquipmentSlot)
-            {
-                if (dragItem != null)
-                {
-                    dragItem.Unequip(this);
-                }
-
-                if(dropitem != null)
-                {
-                    dropitem.Equip(this);
-                }
+                dragItem.Equip(this);
             }
 
-            statPanel.UpdateStatValue();
-
-            Item draggedItem = draggedSlot.Item;
-            int draggedItemAmount = draggedSlot.Amount;
-
-            draggedSlot.Item = dropItemSlot.Item;
-            draggedSlot.Amount = dropItemSlot.Amount;
-
-            dropItemSlot.Item = draggedItem;
-            dropItemSlot.Amount = draggedItemAmount;
-
+            if (dropitem != null)
+            {
+                dropitem.Unequip(this);
+            }
         }
+        if (dragItemSlot is EquipmentSlot)
+        {
+            if (dragItem != null)
+            {
+                dragItem.Unequip(this);
+            }
+
+            if (dropitem != null)
+            {
+                dropitem.Equip(this);
+            }
+        }
+
+        statPanel.UpdateStatValue();
+
+        Item draggedItem = dragItemSlot.Item;
+        int draggedItemAmount = dragItemSlot.Amount;
+
+        dragItemSlot.Item = dropItemSlot.Item;
+        dragItemSlot.Amount = dropItemSlot.Amount;
+
+        dropItemSlot.Item = draggedItem;
+        dropItemSlot.Amount = draggedItemAmount;
+    }
+
+    private void AddStacks(BaseItemSlot dropItemSlot)
+    {
+        //Add stacks untill drgpitemslot is full
+        //remove the same number of stacks from drag itemslot
+        int numAddableStacks = dropItemSlot.Item.MaxStack - dropItemSlot.Amount;
+        int stacksToAdd = Mathf.Min(numAddableStacks, dragItemSlot.Amount);
+
+        dropItemSlot.Amount += stacksToAdd;
+        dragItemSlot.Amount -= stacksToAdd;
     }
 
     /*

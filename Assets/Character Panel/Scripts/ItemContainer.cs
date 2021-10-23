@@ -12,7 +12,7 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
         //loop through all item slots the first null slot will place the item in it 
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i].Item == null || (itemSlots[i].Item.ID == item.ID && itemSlots[i].Amount < item.MaxStack))
+            if (itemSlots[i].Item == null || itemSlots[i].CanAddStack(item))
             {
                 itemSlots[i].Item = item;
                 itemSlots[i].Amount++;
@@ -30,10 +30,6 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
             if (itemSlots[i].Item == item)
             {
                 itemSlots[i].Amount--;
-                if (itemSlots[i].Amount == 0)
-                {
-                    itemSlots[i].Item = null;
-                }
                 return true;
             }
         }
@@ -52,10 +48,6 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
             if (item != null && item.ID == itemID)
             {
                 itemSlots[i].Amount--;
-                if (itemSlots[i].Amount == 0)
-                {
-                    itemSlots[i].Item = null;
-                }
                 return item;
             }
         }
