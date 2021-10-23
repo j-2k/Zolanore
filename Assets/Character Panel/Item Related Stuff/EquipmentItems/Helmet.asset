@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Chestplate
+  m_Name: Helmet
   m_EditorClassIdentifier: 
-  ItemName: Chestplate
-  Icon: {fileID: 21300000, guid: dc8b5851f7d0f0a46b0316d23eaa94eb, type: 3}
+  id: 8de85d6d8e954384f983929f6195eb7c
+  ItemName: Helmet of pepe
+  Icon: {fileID: 21300000, guid: 1992cb11246a6114482ffbc19e498382, type: 3}
+  MaxStack: 1
   StrengthBonus: 0
   DexterityBonus: 0
   IntelligenceBonus: 0
-  DefenceBonus: 3
+  DefenceBonus: 5
   StrengthPercentBonus: 0
   DexterityPercentBonus: 0
   IntelligencePercentBonus: 0
-  DefencePercentBonus: 22
-  EquipmentType: 3
+  DefencePercentBonus: 10
+  EquipmentType: 2
+  itemLore: 'pepe the frog helmet '

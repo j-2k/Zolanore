@@ -18,7 +18,7 @@ public enum EquipmentType
 }
 
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Items/Equippable Item")]
 public class EquippableItem : Item
 {
     public int StrengthBonus;
@@ -32,6 +32,8 @@ public class EquippableItem : Item
     public int DefencePercentBonus;
     [Space]
     public EquipmentType EquipmentType;
+
+    [SerializeField] string itemLore;
 
     public override Item GetCopy()
     {
@@ -94,5 +96,64 @@ public class EquippableItem : Item
         character.Dexterity.RemoveAllModifiersFromSource(this);
         character.Intelligence.RemoveAllModifiersFromSource(this);
         character.Defence.RemoveAllModifiersFromSource(this);
+    }
+
+    public override string GetItemType()
+    {
+        return EquipmentType.ToString();
+    }
+
+    public override string GetDescription()
+    {
+        sb.Length = 0;
+        AddStat(StrengthBonus, "Strength");
+        AddStat(DexterityBonus, "Dexterity");
+        AddStat(IntelligenceBonus, "Intelligence");
+        AddStat(DefenceBonus, "Defence");
+
+        AddStat(StrengthPercentBonus, "Strength", isPercentMult: true);
+        AddStat(DexterityPercentBonus, "Dexterity", isPercentMult: true);
+        AddStat(IntelligencePercentBonus, "Intelligence", isPercentMult: true);
+        AddStat(DefencePercentBonus, "Defence", isPercentMult: true);
+        return sb.ToString();
+    }
+
+    public override string GetDescriptionLore()
+    {
+        sbLore.Length = 0;
+        sbLore.Append(itemLore);
+        return sbLore.ToString();
+    }
+
+    private void AddStat(float value, string statName, bool isPercentMult = false)
+    {
+        if (value != 0)
+        {
+            if (sb.Length > 0)
+            {
+                sb.AppendLine();
+            }
+
+            if (value > 0)
+            {
+                sb.Append("+");
+            }
+
+            if (isPercentMult)
+            {
+                sb.Append(value);
+                //sb.Append(value * 100);
+                sb.Append("% ");
+            }
+            else
+            {
+                sb.Append(value);
+                sb.Append(" ");
+            }
+
+            //sb.Append(value);
+            //sb.Append(" ");
+            sb.Append(statName);
+        }
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Boss
   - Orb
   - CameraManager
+  - CharacterPanel
   layers:
   - Default
   - TransparentFX
