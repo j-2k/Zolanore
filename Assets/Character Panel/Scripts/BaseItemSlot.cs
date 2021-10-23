@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 	[SerializeField] protected Image image;
-	[SerializeField] protected Text amountText;
+	[SerializeField] protected TextMeshProUGUI amountText;
 
 	public event Action<BaseItemSlot> OnPointerEnterEvent;
 	public event Action<BaseItemSlot> OnPointerExitEvent;
@@ -82,7 +83,7 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 			image = GetComponent<Image>();
 
 		if (amountText == null)
-			amountText = GetComponentInChildren<Text>();
+			amountText = GetComponentInChildren<TextMeshProUGUI>();
 
 		Item = _item;
 		Amount = _amount;
