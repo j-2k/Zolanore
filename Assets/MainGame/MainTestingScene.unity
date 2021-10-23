@@ -503,31 +503,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250368160}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &340019605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Helmet(Clone)
-  m_EditorClassIdentifier: 
-  id: 
-  ItemName: Helmet of pepe
-  Icon: {fileID: 21300000, guid: 1992cb11246a6114482ffbc19e498382, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 5
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 10
-  EquipmentType: 2
 --- !u!1 &355694258
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,31 +633,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &552830748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Chestplate(Clone)
-  m_EditorClassIdentifier: 
-  id: 46162e62a2c69ae48b61c7a10a80f664
-  ItemName: Chestplate
-  Icon: {fileID: 21300000, guid: dc8b5851f7d0f0a46b0316d23eaa94eb, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 3
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 22
-  EquipmentType: 3
 --- !u!1 &555975381
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,18 +794,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6148840243645714004, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 340019605}
-    - target: {fileID: 6148840243938381942, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 1358448567}
-    - target: {fileID: 6148840243976306066, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 1204644098}
     - target: {fileID: 6148840244066899170, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
       propertyPath: m_Name
       value: Char+Inven Panel
@@ -944,14 +882,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6148840244383953259, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 1424739668}
-    - target: {fileID: 6148840245077142967, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
-      propertyPath: _item
-      value: 
-      objectReference: {fileID: 1646458408}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
 --- !u!1001 &972416609
@@ -1114,81 +1044,6 @@ Transform:
   m_Father: {fileID: 1627711949}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1204644098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Platelegs(Clone)
-  m_EditorClassIdentifier: 
-  id: 
-  ItemName: Platelegs
-  Icon: {fileID: 21300000, guid: c81643b51f2729e4a879e1b71ca9ef78, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 12
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 67
-  EquipmentType: 4
---- !u!114 &1358448567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Sword(Clone)
-  m_EditorClassIdentifier: 
-  id: 
-  ItemName: Sword
-  Icon: {fileID: 21300000, guid: fcf3ceb93afb09346a6415b39dea36dc, type: 3}
-  MaxStack: 1
-  StrengthBonus: 10
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 0
-  StrengthPercentBonus: 100
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 0
-  EquipmentType: 0
---- !u!114 &1424739668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Chestplate(Clone)
-  m_EditorClassIdentifier: 
-  id: 
-  ItemName: Chestplate
-  Icon: {fileID: 21300000, guid: dc8b5851f7d0f0a46b0316d23eaa94eb, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 3
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 22
-  EquipmentType: 3
 --- !u!114 &1529870301 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6148840244296639272, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -1200,49 +1055,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7079355fa0d88414abecb2c33ddc08c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1582789962 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8677585464154731524, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
-  m_PrefabInstance: {fileID: 1928692023}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1582789963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582789962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6a061718d8d1546842495bd7367b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealthFinal: 0
---- !u!114 &1621392509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Shield(Clone)
-  m_EditorClassIdentifier: 
-  id: 3d122e64552c2d546bd669d908514046
-  ItemName: 
-  Icon: {fileID: 21300000, guid: a9f4a2f16cc4ddb4b982906cf70c0d3d, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 1
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 0
-  EquipmentType: 0
 --- !u!1 &1627711948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,56 +1119,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 3, z: 5}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1635399014
+--- !u!1 &1842461703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8677585463080590501, guid: ef5a99e46912cfb4e85057d9bff058e5, type: 3}
+  m_PrefabInstance: {fileID: 1928692023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1842461706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1842461703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Sword(Clone)
+  m_Script: {fileID: 11500000, guid: 9f6a061718d8d1546842495bd7367b38, type: 3}
+  m_Name: 
   m_EditorClassIdentifier: 
-  id: 787d9b5de08a2d547a0057afad22315f
-  ItemName: Sword
-  Icon: {fileID: 21300000, guid: fcf3ceb93afb09346a6415b39dea36dc, type: 3}
-  MaxStack: 1
-  StrengthBonus: 10
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 0
-  StrengthPercentBonus: 100
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 0
-  EquipmentType: 0
---- !u!114 &1646458408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Shield(Clone)
-  m_EditorClassIdentifier: 
-  id: 
-  ItemName: 
-  Icon: {fileID: 21300000, guid: a9f4a2f16cc4ddb4b982906cf70c0d3d, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 1
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 0
-  EquipmentType: 0
+  playerHealthFinal: 0
 --- !u!1 &1849689681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,31 +1232,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849689681}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1885841210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Helmet(Clone)
-  m_EditorClassIdentifier: 
-  id: 8de85d6d8e954384f983929f6195eb7c
-  ItemName: Helmet of pepe
-  Icon: {fileID: 21300000, guid: 1992cb11246a6114482ffbc19e498382, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 5
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 10
-  EquipmentType: 2
 --- !u!1001 &1928692023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1579,31 +1334,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2005746493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab64081fbcafe4087bec474aba35bc, type: 3}
-  m_Name: Platelegs(Clone)
-  m_EditorClassIdentifier: 
-  id: 598cd9f615f8c3948924d852feba132f
-  ItemName: Platelegs
-  Icon: {fileID: 21300000, guid: c81643b51f2729e4a879e1b71ca9ef78, type: 3}
-  MaxStack: 1
-  StrengthBonus: 0
-  DexterityBonus: 0
-  IntelligenceBonus: 0
-  DefenceBonus: 12
-  StrengthPercentBonus: 0
-  DexterityPercentBonus: 0
-  IntelligencePercentBonus: 0
-  DefencePercentBonus: 67
-  EquipmentType: 4
 --- !u!4 &2104912291 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7234724786792475319, guid: b01c81f6df831f74a82163205f58d93e, type: 3}

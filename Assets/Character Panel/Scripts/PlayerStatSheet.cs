@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerStatSheet : MonoBehaviour
 {
-    CharacterPanelManager characterStats;
+    CharacterManager characterStats;
     public int playerHealthFinal;
 
     private void Start()
     {
-        characterStats = GameObject.FindGameObjectWithTag("CharacterPanel").GetComponent<CharacterPanelManager>();
+        //characterStats = GameObject.FindGameObjectWithTag("CharacterPanel").GetComponent<CharacterPanelManager>();
     }
 
     private void Update()

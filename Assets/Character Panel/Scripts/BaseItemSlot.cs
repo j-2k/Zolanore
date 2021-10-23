@@ -1,127 +1,123 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 
 public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] Image image;
-    [SerializeField] TextMeshProUGUI amountText;
+	[SerializeField] protected Image image;
+	[SerializeField] protected Text amountText;
 
-    public event Action<BaseItemSlot> OnPointerEnterEvent;
-    public event Action<BaseItemSlot> OnPointerExitEvent;
-    public event Action<BaseItemSlot> OnRightClickEvent;
+	public event Action<BaseItemSlot> OnPointerEnterEvent;
+	public event Action<BaseItemSlot> OnPointerExitEvent;
+	public event Action<BaseItemSlot> OnRightClickEvent;
 
-    [SerializeField] Item _item;
+	protected bool isPointerOver;
 
-    private Color normalColor = Color.white;
-    private Color disabledColor = Color.clear;
+	protected Color normalColor = Color.white;
+	protected Color disabledColor = new Color(1, 1, 1, 0);
 
-    public Item Item
-    {
-        get
-        {
-            return _item;
-        }
-        set
-        {
-            _item = value;
+	protected Item _item;
+	public Item Item
+	{
+		get { return _item; }
+		set
+		{
+			_item = value;
+			if (_item == null && Amount != 0) Amount = 0;
 
-            if (_item == null)
-            {
-                image.color = disabledColor;
-            }
-            else
-            {
-                image.color = normalColor;
-                image.sprite = _item.Icon;
-            }
-        }
-    }
+			if (_item == null)
+			{
+				image.sprite = null;
+				image.color = disabledColor;
+			}
+			else
+			{
+				image.sprite = _item.Icon;
+				image.color = normalColor;
+			}
 
-    private int _amount;
-    public int Amount
-    {
-        get { return _amount; }
-        set 
-        { 
-            _amount = value;
+			if (isPointerOver)
+			{
+				OnPointerExit(null);
+				OnPointerEnter(null);
+			}
+		}
+	}
 
-            if (_amount < 0)
-            {
-                _amount = 0;
-            }
+	private int _amount;
+	public int Amount
+	{
+		get { return _amount; }
+		set
+		{
+			_amount = value;
+			if (_amount < 0) _amount = 0;
+			if (_amount == 0 && Item != null) Item = null;
 
-            if (_amount == 0)
-            {
-                Item = null;
-            }
+			if (amountText != null)
+			{
+				amountText.enabled = _item != null && _amount > 1;
+				if (amountText.enabled)
+				{
+					amountText.text = _amount.ToString();
+				}
+			}
+		}
+	}
 
-            if (amountText != null)
-            {
-                amountText.enabled = _item != null && _amount > 1;
-                if (amountText.enabled)
-                {
-                    amountText.text = _amount.ToString();
-                }
-            }
-        }
-    }
+	public virtual bool CanAddStack(Item item, int amount = 1)
+	{
+		return Item != null && Item.ID == item.ID;
+	}
 
-    protected virtual void OnValidate()
-    {
-        if (image == null)
-        {
-            image = GetComponent<Image>();
-        }
+	public virtual bool CanReceiveItem(Item item)
+	{
+		return false;
+	}
 
-        if (amountText == null)
-        {
-            amountText = GetComponentInChildren<TextMeshProUGUI>();
-        }
+	protected virtual void OnValidate()
+	{
+		if (image == null)
+			image = GetComponent<Image>();
 
-    }
+		if (amountText == null)
+			amountText = GetComponentInChildren<Text>();
 
-    public virtual bool CanAddStack (Item item, int amount = 1)
-    {
-        return Item != null && Item.ID == item.ID;
-    }
+		Item = _item;
+		Amount = _amount;
+	}
 
+	protected virtual void OnDisable()
+	{
+		if (isPointerOver)
+		{
+			OnPointerExit(null);
+		}
+	}
 
-    public virtual bool CanReceiveItem(Item item)
-    {
-        return false;
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
+		{
+			if (OnRightClickEvent != null)
+				OnRightClickEvent(this);
+		}
+	}
 
-    }
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		isPointerOver = true;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        //check if the item slot was clicked to equip a item
-        if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (OnRightClickEvent != null)
-            {
-                OnRightClickEvent(this);
-            }
-        }
-    }
+		if (OnPointerEnterEvent != null)
+			OnPointerEnterEvent(this);
+	}
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (OnPointerEnterEvent != null)
-        {
-            OnPointerEnterEvent(this);
-        }
-    }
+	public void OnPointerExit(PointerEventData eventData)
+	{
+		isPointerOver = false;
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (OnPointerExitEvent != null)
-        {
-            OnPointerExitEvent(this);
-        }
-    }
+		if (OnPointerExitEvent != null)
+			OnPointerExitEvent(this);
+	}
 }

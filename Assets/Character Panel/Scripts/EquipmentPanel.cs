@@ -21,13 +21,13 @@ public class EquipmentPanel : MonoBehaviour
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            equipmentSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
-            equipmentSlots[i].OnPointerExitEvent += OnPointerExitEvent;
-            equipmentSlots[i].OnRightClickEvent += OnRightClickEvent;
-            equipmentSlots[i].OnBeginDragEvent += OnBeginDragEvent;
-            equipmentSlots[i].OnDragEvent += OnDragEvent;
-            equipmentSlots[i].OnEndDragEvent += OnEndDragEvent;
-            equipmentSlots[i].OnDropEvent += OnDropEvent;
+            equipmentSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+            equipmentSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+            equipmentSlots[i].OnRightClickEvent += slot => OnRightClickEvent(slot);
+            equipmentSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+            equipmentSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+            equipmentSlots[i].OnEndDragEvent += slot => OnEndDragEvent(slot);
+            equipmentSlots[i].OnDropEvent += slot => OnDropEvent(slot);
         }
     }
 
@@ -44,6 +44,7 @@ public class EquipmentPanel : MonoBehaviour
             {
                 previousItem = (EquippableItem)equipmentSlots[i].Item;
                 equipmentSlots[i].Item = equippableItem;
+                equipmentSlots[i].Amount = 1;
                 return true;
             }
         }
@@ -58,6 +59,7 @@ public class EquipmentPanel : MonoBehaviour
             if (equipmentSlots[i].Item == equippableItem)
             {
                 equipmentSlots[i].Item = null;
+                equipmentSlots[i].Amount = 0;
                 return true;
             }
         }

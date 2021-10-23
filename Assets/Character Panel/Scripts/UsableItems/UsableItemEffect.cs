@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class UsableItemEffect : ScriptableObject
 {
-    public abstract void ExecuteEffect(UsableItem parentItem, CharacterPanelManager characterPanelManager);
+    public abstract void ExecuteEffect(UsableItem parentItem, CharacterManager characterPanelManager);
 
     public abstract string GetDescription();
 

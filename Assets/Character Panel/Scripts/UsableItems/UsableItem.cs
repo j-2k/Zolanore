@@ -11,7 +11,7 @@ public class UsableItem : Item
 
     [SerializeField] string itemLore;
 
-    public virtual void Use(CharacterPanelManager character)
+    public virtual void Use(CharacterManager character)
     {
         foreach (UsableItemEffect effect in Effects)
         {

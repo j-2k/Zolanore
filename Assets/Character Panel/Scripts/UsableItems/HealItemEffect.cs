@@ -8,9 +8,9 @@ public class HealItemEffect : UsableItemEffect
 {
     public int healthAmount;
 
-    public override void ExecuteEffect(UsableItem parentItem, CharacterPanelManager characterPanelManager)
+    public override void ExecuteEffect(UsableItem parentItem, CharacterManager characterPanelManager)
     {
-        characterPanelManager.health += healthAmount;
+        characterPanelManager.playerHealth += healthAmount;
     }
 
     public override string GetDescription()
@@ -20,6 +20,6 @@ public class HealItemEffect : UsableItemEffect
 
     public override string GetDescriptionLore()
     {
-        return "Lore stuff.";
+        return "this text should be changed to the scriptable object description!!";
     }
 }

@@ -45,7 +45,7 @@ public class EquippableItem : Item
         Destroy(this);
     }
 
-    public void Equip(CharacterPanelManager character)
+    public void Equip(CharacterManager character)
     {
         if (StrengthBonus != 0)
         {
@@ -90,7 +90,7 @@ public class EquippableItem : Item
 
     }
 
-    public void Unequip(CharacterPanelManager character)
+    public void Unequip(CharacterManager character)
     {
         character.Strength.RemoveAllModifiersFromSource(this);
         character.Dexterity.RemoveAllModifiersFromSource(this);

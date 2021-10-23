@@ -9,10 +9,20 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
 
     public virtual bool AddItem(Item item)
     {
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (itemSlots[i].CanAddStack(item))
+            {
+                itemSlots[i].Item = item;
+                itemSlots[i].Amount++;
+                return true;
+            }
+        }
+
         //loop through all item slots the first null slot will place the item in it 
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i].Item == null || itemSlots[i].CanAddStack(item))
+            if (itemSlots[i].Item == null)
             {
                 itemSlots[i].Item = item;
                 itemSlots[i].Amount++;
@@ -63,7 +73,7 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
             Item item = itemSlots[i].Item;
             if (item != null && item.ID == itemID)
             {
-                number++;
+                number += itemSlots[i].Amount;
             }
         }
         return number;
@@ -82,5 +92,13 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
 
         //go through all slots if 0 slot is null == full
         return true;
+    }
+
+    public virtual void Clear()
+    {
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].Item = null;
+        }
     }
 }

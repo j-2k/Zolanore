@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : ItemContainer
 {
-    [SerializeField] List<Item> startingItems;
+    [SerializeField] Item[] startingItems;
     [SerializeField] Transform itemsParent;
 
     public event Action<BaseItemSlot> OnPointerEnterEvent;
@@ -21,13 +21,13 @@ public class Inventory : ItemContainer
         //listener for the itemslots event
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlots[i].OnPointerEnterEvent += OnPointerEnterEvent;
-            itemSlots[i].OnPointerExitEvent += OnPointerExitEvent;
-            itemSlots[i].OnRightClickEvent += OnRightClickEvent;
-            itemSlots[i].OnBeginDragEvent += OnBeginDragEvent;
-            itemSlots[i].OnDragEvent += OnDragEvent;
-            itemSlots[i].OnEndDragEvent += OnEndDragEvent;
-            itemSlots[i].OnDropEvent += OnDropEvent;
+            itemSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
+            itemSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
+            itemSlots[i].OnRightClickEvent += slot => OnRightClickEvent(slot);
+            itemSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
+            itemSlots[i].OnDragEvent += slot => OnDragEvent(slot);
+            itemSlots[i].OnEndDragEvent += slot => OnEndDragEvent(slot);
+            itemSlots[i].OnDropEvent += slot => OnDropEvent(slot);
         }
         SetStartingItems();
     }
@@ -44,20 +44,10 @@ public class Inventory : ItemContainer
 
     void SetStartingItems()
     {
-        int i = 0;
-
-        //for every item we have we assign it to a item slot
-        for (; i < startingItems.Count && i < itemSlots.Length; i++)
+        Clear();
+        for (int i = 0; i < startingItems.Length; i++)
         {
-            itemSlots[i].Item = startingItems[i].GetCopy();
-            itemSlots[i].Amount = 1;
-        }
-
-        //for remaining slot with no items set to null
-        for (; i < itemSlots.Length; i++)
-        {
-            itemSlots[i].Item = null;
-            itemSlots[i].Amount = 0;
+            AddItem(startingItems[i].GetCopy());
         }
     }
 }

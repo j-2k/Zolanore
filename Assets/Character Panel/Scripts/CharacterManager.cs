@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Juma.CharacterStats;
 
-public class CharacterPanelManager : MonoBehaviour
+public class CharacterManager : MonoBehaviour
 {
-    public int health = 50;
+    public int playerHealth = 100;
 
     //ADD NEW STATS HERE
     public CharacterStat Strength;
@@ -34,6 +34,7 @@ public class CharacterPanelManager : MonoBehaviour
 
     private void Awake()
     {
+
         statPanel.SetStats(Strength, Dexterity, Intelligence, Defence);
         statPanel.UpdateStatValue();
 
@@ -60,13 +61,46 @@ public class CharacterPanelManager : MonoBehaviour
         equipmentPanel.OnDropEvent += Drop;
     }
 
+
+    /*
+    //trying out level skill system where when u level up u gain 2 points to spend fre ein each skill slot seems to work
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("was" + Defence.BaseValue);
+            Defence.BaseValue++;
+            Debug.Log("now" + Defence.BaseValue);
+            statPanel.UpdateStatValue();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            //hack fix fast is to make sure player spent all free point sbefore resseting or else they will dupe find a nice fix or do this hack fix
+            Debug.Log("resetting all stat values");
+            statPanel.ResetAllStatValue();
+
+            int level = 5;
+
+            //give 2 free points per level
+            int freePoints = level * 2;
+            
+
+
+            Debug.Log("you have " + freePoints + " points to spend after resetting ur skill levels");
+        }
+    }
+    */
+
+
     private void InventoryRightClick(BaseItemSlot itemSlot)
     {
         if (itemSlot.Item is EquippableItem)
         {
-            Equip((EquippableItem) itemSlot.Item);
+            Equip((EquippableItem)itemSlot.Item);
         }
-        else if ( itemSlot.Item is UsableItem)
+        else if (itemSlot.Item is UsableItem)
         {
             UsableItem usableItem = (UsableItem)itemSlot.Item;
             usableItem.Use(this);
@@ -86,6 +120,7 @@ public class CharacterPanelManager : MonoBehaviour
             Unequip((EquippableItem)itemSlot.Item);
         }
     }
+
 
     private void ShowTooltip(BaseItemSlot itemSlot)
     {
@@ -129,8 +164,6 @@ public class CharacterPanelManager : MonoBehaviour
     {
         if (dragItemSlot == null) return;
 
-        //can add stack if dragItemSlot.Item to dropItemSlot
-        
         if (dropItemSlot.CanAddStack(dragItemSlot.Item))
         {
             AddStacks(dropItemSlot);
@@ -140,48 +173,63 @@ public class CharacterPanelManager : MonoBehaviour
             SwapItems(dropItemSlot);
         }
     }
+    
+    private void SwapItems(BaseItemSlot dropItemSlot)
+    {
+		EquippableItem dragEquipItem = dragItemSlot.Item as EquippableItem;
+		EquippableItem dropEquipItem = dropItemSlot.Item as EquippableItem;
 
+		if (dropItemSlot is EquipmentSlot)
+		{
+			if (dragEquipItem != null) dragEquipItem.Equip(this);
+			if (dropEquipItem != null) dropEquipItem.Unequip(this);
+		}
+		if (dragItemSlot is EquipmentSlot)
+		{
+			if (dragEquipItem != null) dragEquipItem.Unequip(this);
+			if (dropEquipItem != null) dropEquipItem.Equip(this);
+		}
+		statPanel.UpdateStatValue();
+
+		Item draggedItem = dragItemSlot.Item;
+		int draggedItemAmount = dragItemSlot.Amount;
+
+		dragItemSlot.Item = dropItemSlot.Item;
+		dragItemSlot.Amount = dropItemSlot.Amount;
+
+		dropItemSlot.Item = draggedItem;
+		dropItemSlot.Amount = draggedItemAmount;
+    }
+    
+    /*
     private void SwapItems(BaseItemSlot dropItemSlot)
     {
         EquippableItem dragItem = dragItemSlot.Item as EquippableItem;
-        EquippableItem dropitem = dropItemSlot.Item as EquippableItem;
-
-        if (dropItemSlot is EquipmentSlot)
-        {
-            if (dragItem != null)
-            {
-                dragItem.Equip(this);
-            }
-
-            if (dropitem != null)
-            {
-                dropitem.Unequip(this);
-            }
-        }
+        EquippableItem dropItem = dropItemSlot.Item as EquippableItem;
         if (dragItemSlot is EquipmentSlot)
         {
-            if (dragItem != null)
-            {
-                dragItem.Unequip(this);
-            }
+            if (dragItem != null) Unequip(dragItem);
+            if (dropItem != null) Equip(dropItem);
 
-            if (dropitem != null)
-            {
-                dropitem.Equip(this);
-            }
         }
-
+        if (dropItemSlot is EquipmentSlot)
+        {
+            if (dragItem != null) Equip(dragItem);
+            if (dropItem != null) Unequip(dropItem);
+        }
         statPanel.UpdateStatValue();
+        if (!(dragItemSlot is EquipmentSlot) && !(dropItemSlot is EquipmentSlot))
+        {
+            Item draggedItem = dragItemSlot.Item;
+            int draggedItemAmount = dragItemSlot.Amount;
 
-        Item draggedItem = dragItemSlot.Item;
-        int draggedItemAmount = dragItemSlot.Amount;
+            dragItemSlot.Item = dropItemSlot.Item;
+            dragItemSlot.Amount = dropItemSlot.Amount;
 
-        dragItemSlot.Item = dropItemSlot.Item;
-        dragItemSlot.Amount = dropItemSlot.Amount;
-
-        dropItemSlot.Item = draggedItem;
-        dropItemSlot.Amount = draggedItemAmount;
-    }
+            dropItemSlot.Item = draggedItem;
+            dropItemSlot.Amount = draggedItemAmount;
+        }
+    }*/
 
     private void AddStacks(BaseItemSlot dropItemSlot)
     {
@@ -193,37 +241,6 @@ public class CharacterPanelManager : MonoBehaviour
         dropItemSlot.Amount += stacksToAdd;
         dragItemSlot.Amount -= stacksToAdd;
     }
-
-    /*
-    //trying out level skill system where when u level up u gain 2 points to spend fre ein each skill slot seems to work
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("was" + Defence.BaseValue);
-            Defence.BaseValue++;
-            Debug.Log("now" + Defence.BaseValue);
-            statPanel.UpdateStatValue();
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            //hack fix fast is to make sure player spent all free point sbefore resseting or else they will dupe find a nice fix or do this hack fix
-            Debug.Log("resetting all stat values");
-            statPanel.ResetAllStatValue();
-
-            int level = 5;
-
-            //give 2 free points per level
-            int freePoints = level * 2;
-            
-
-
-            Debug.Log("you have " + freePoints + " points to spend after resetting ur skill levels");
-        }
-    }
-    */
 
     public void Equip(EquippableItem equippableItem)
     {
