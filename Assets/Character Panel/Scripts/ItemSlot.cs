@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     [SerializeField] Image image;
+    [SerializeField] TextMeshProUGUI amountText;
 
     public event Action<ItemSlot> OnPointerEnterEvent;
     public event Action<ItemSlot> OnPointerExitEvent;
@@ -44,11 +46,31 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         }
     }
 
+    private int _amount;
+    public int Amount
+    {
+        get { return _amount; }
+        set 
+        { 
+            _amount = value;
+            amountText.enabled = _item != null && _item.MaxStack > 1 && _amount > 1;
+            if (amountText.enabled)
+            {
+                amountText.text = _amount.ToString();
+            }
+        }
+    }
+
     protected virtual void OnValidate()
     {
         if (image == null)
         {
             image = GetComponent<Image>();
+        }
+
+        if (amountText == null)
+        {
+            amountText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
     }

@@ -7,7 +7,7 @@ public class ItemChest : MonoBehaviour
     [SerializeField] Item item;
     [SerializeField] Inventory inventory;
     [SerializeField] KeyCode itemPickup = KeyCode.E;
-
+    [SerializeField] int amount = 1;
     [SerializeField] bool isInRange = false;
     [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
 
@@ -30,8 +30,19 @@ public class ItemChest : MonoBehaviour
     {
         if (!isEmpty && !inventory.isInventoryFull() && isInRange && Input.GetKeyDown(itemPickup))
         {
-            inventory.AddItem(Instantiate(item));
-            isEmpty = true;
+            Item itemCopy = item.GetCopy();
+            if (inventory.AddItem(itemCopy))
+            {
+                amount--;
+                if (amount <= 0)
+                {
+                    isEmpty = true;
+                }
+            }
+            else
+            {
+                itemCopy.Destroy();
+            }
         }
     }
 

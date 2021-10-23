@@ -50,13 +50,15 @@ public class Inventory : MonoBehaviour
         //for every item we have we assign it to a item slot
         for (; i < startingItems.Count && i < itemSlots.Length; i++)
         {
-            itemSlots[i].Item = Instantiate(startingItems[i]);
+            itemSlots[i].Item = startingItems[i].GetCopy();
+            itemSlots[i].Amount = 1;
         }
 
         //for remaining slot with no items set to null
         for (; i < itemSlots.Length; i++)
         {
             itemSlots[i].Item = null;
+            itemSlots[i].Amount = 0;
         }
     }
 
@@ -65,14 +67,16 @@ public class Inventory : MonoBehaviour
         //loop through all item slots the first null slot will place the item in it 
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i].Item == null)
+            if (itemSlots[i].Item == null || (itemSlots[i].Item.ID == item.ID && itemSlots[i].Amount < item.MaxStack))
             {
                 itemSlots[i].Item = item;
+                itemSlots[i].Amount++;
                 return true;
             }
         }
         return false;
     }
+
 
     
     public bool RemoveItem(Item item)
@@ -82,7 +86,11 @@ public class Inventory : MonoBehaviour
         {
             if (itemSlots[i].Item == item)
             {
-                itemSlots[i].Item = null;
+                itemSlots[i].Amount--;
+                if (itemSlots[i].Amount == 0)
+                {
+                    itemSlots[i].Item = null;
+                }
                 return true;
             }
         }
@@ -100,7 +108,11 @@ public class Inventory : MonoBehaviour
             //go through all items & check the slots if there is a item we compare its id to the ID we are looking for when we find it just empty & return the item reference
             if (item != null && item.ID == itemID)
             {
-                itemSlots[i].Item = null;
+                itemSlots[i].Amount--;
+                if (itemSlots[i].Amount == 0)
+                {
+                    itemSlots[i].Item = null;
+                }
                 return item;
             }
         }

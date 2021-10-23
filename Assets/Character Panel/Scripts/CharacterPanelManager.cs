@@ -119,6 +119,15 @@ public class CharacterPanelManager : MonoBehaviour
     {
         if (draggableItem == null) return;
 
+        //can add stack if dragItemSlot.Item to dropItemSlot
+        /*
+        if ()
+        {
+            //Add stacks untill drgpitemslot is full
+            //remove the same number of stacks from drag itemslot
+        }
+        else
+        */
         if (dropItemSlot.CanReceiveItem(draggedSlot.Item) && draggedSlot.CanReceiveItem(dropItemSlot.Item))
         {
             EquippableItem dragItem = draggedSlot.Item as EquippableItem;
@@ -152,8 +161,14 @@ public class CharacterPanelManager : MonoBehaviour
             statPanel.UpdateStatValue();
 
             Item draggedItem = draggedSlot.Item;
+            int draggedItemAmount = draggedSlot.Amount;
+
             draggedSlot.Item = dropItemSlot.Item;
+            draggedSlot.Amount = dropItemSlot.Amount;
+
             dropItemSlot.Item = draggedItem;
+            dropItemSlot.Amount = draggedItemAmount;
+
         }
     }
 
