@@ -17,6 +17,10 @@ public class EnemyAgent : MonoBehaviour
     public float walkSpeed;
     public float chaseSpeed;
 
+    [Header("Wander")]
+    public float walkRadius;
+    public float wanderSpeed;
+
     [Header("Distance Check")]
     public float distanceToDetect;      // Distance to start Checking for player
     public float proximityDistance;     // Distance to detech player without vision
@@ -28,7 +32,7 @@ public class EnemyAgent : MonoBehaviour
     public GameObject bullet;
     public float bulletSpeed, fireRate;
 
-    private NavMeshAgent navmesh;
+    [HideInInspector] public NavMeshAgent navmesh;
     public Selector<EnemyAgent> root;
 
     private void Awake()
