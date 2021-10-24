@@ -8,8 +8,17 @@ public class PlayerCloseCheckNode : Node<EnemyAgent>
     {
         var distance = Vector3.Distance(owner.transform.position, owner.player.transform.position);
 
-        if (distance < owner.proximityDistance) return NodeState.SUCCESS;
-        else return NodeState.FAILURE;
+        if (distance < owner.proximityDistance)
+        {
+            owner.playerDetected = true;
+            return NodeState.SUCCESS;
+        }
+        else
+        {
+            owner.playerDetected = false;
+            return NodeState.FAILURE;
+        }
+
     }
 
 }

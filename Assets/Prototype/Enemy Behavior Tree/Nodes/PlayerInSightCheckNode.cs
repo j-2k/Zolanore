@@ -14,7 +14,12 @@ public class PlayerInSightCheckNode : Node<EnemyAgent>
         {
             if (hit.collider.tag == "Player")
             {
+                owner.playerDetected = true;
                 return NodeState.SUCCESS;
+            }
+            else
+            {
+                owner.playerDetected = false;
             }
         }
         return NodeState.FAILURE;
