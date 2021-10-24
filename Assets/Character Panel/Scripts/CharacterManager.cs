@@ -21,6 +21,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] StatPanel statPanel;
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] Image draggableItem;
+    [SerializeField] DropItemArea dropItemArea;
 
     private BaseItemSlot dragItemSlot;
 
@@ -59,6 +60,7 @@ public class CharacterManager : MonoBehaviour
 
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;
+        dropItemArea.OnDropEvent += DropItemOutsideUI;
     }
 
 
@@ -172,6 +174,17 @@ public class CharacterManager : MonoBehaviour
         {
             SwapItems(dropItemSlot);
         }
+    }
+
+    private void DropItemOutsideUI()
+    {
+        if (dragItemSlot == null)
+        {
+            return;
+        }
+
+        dragItemSlot.Item.Destroy();
+        dragItemSlot.Item = null;
     }
     
     private void SwapItems(BaseItemSlot dropItemSlot)
