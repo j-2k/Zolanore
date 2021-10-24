@@ -22,6 +22,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] Image draggableItem;
     [SerializeField] DropItemArea dropItemArea;
+    [SerializeField] DestoryQuestion destroyQuestion;
 
     private BaseItemSlot dragItemSlot;
 
@@ -183,8 +184,15 @@ public class CharacterManager : MonoBehaviour
             return;
         }
 
-        dragItemSlot.Item.Destroy();
-        dragItemSlot.Item = null;
+        destroyQuestion.Show();
+        BaseItemSlot baseItemSlot = dragItemSlot;
+        destroyQuestion.OnYesEvent += () => DestoryItemInSlot(baseItemSlot); //() => lambra expression creating a empty function that receieves no arguments with ()
+    }
+
+    private void DestoryItemInSlot(BaseItemSlot baseItemSlot)
+    {
+        baseItemSlot.Item.Destroy();
+        baseItemSlot.Item = null;
     }
     
     private void SwapItems(BaseItemSlot dropItemSlot)
