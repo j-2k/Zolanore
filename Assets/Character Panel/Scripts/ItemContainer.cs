@@ -7,6 +7,21 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
 {
     [SerializeField] protected ItemSlot[] itemSlots;
 
+    public virtual bool CanAddItem(Item item, int amount = 1)
+    {
+        int freeSpaces = 0;
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            if (itemSlot.Item == null || itemSlot.Item.ID == item.ID)
+            {
+                freeSpaces += item.MaxStack - itemSlot.Amount;
+            }
+        }
+
+        return freeSpaces >= amount;
+    }
+
     public virtual bool AddItem(Item item)
     {
         for (int i = 0; i < itemSlots.Length; i++)
@@ -77,21 +92,6 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
             }
         }
         return number;
-    }
-
-    public virtual bool IsFull()
-    {
-        //go through all slots if any slot is null != full
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            if (itemSlots[i].Item == null)
-            {
-                return false;
-            }
-        }
-
-        //go through all slots if 0 slot is null == full
-        return true;
     }
 
     public virtual void Clear()
