@@ -11,6 +11,7 @@ public class ItemBank : ItemContainer
 
     bool isOpen;
 
+    private CharacterManager characterManager;
 
     protected override void OnValidate()
     {
@@ -26,6 +27,7 @@ public class ItemBank : ItemContainer
     {
         base.Start();
         itemsParent.gameObject.SetActive(false);
+        characterManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CharacterManager>();
     }
 
     // Update is called once per frame
@@ -35,6 +37,15 @@ public class ItemBank : ItemContainer
         {
             isOpen = !isOpen;
             itemsParent.gameObject.SetActive(isOpen);
+
+            if (isOpen)
+            {
+                characterManager.OpenItemContainer(this);
+            }
+            else
+            {
+                characterManager.CloseItemContainer(this);
+            }
         }
     }
 
@@ -54,11 +65,25 @@ public class ItemBank : ItemContainer
         {
             isInRange = state;
             //text enabeled = state
+
             if (!isInRange && isOpen)
             {
                 isOpen = false;
                 itemsParent.gameObject.SetActive(false);
+                characterManager.CloseItemContainer(this);
             }
+
+            /*
+            if(isInRange)
+            {
+                characterManager = gameObject.GetComponent<CharacterManager>();
+            }
+            else
+            {
+                characterManager = null;
+            }
+            */
+
         }
     }
 }

@@ -939,7 +939,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -76, y: -50}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &282842107
@@ -12698,7 +12698,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6148840244930097796}
-  - component: {fileID: 1645387141}
   m_Layer: 5
   m_Name: CharacterPanel
   m_TagString: CharacterPanel
@@ -12727,32 +12726,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1645387141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6148840244930097797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1106eef1334025b449f0a046c18033c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: 100
-  Strength:
-    BaseValue: 1
-  Dexterity:
-    BaseValue: 1
-  Intelligence:
-    BaseValue: 1
-  Defence:
-    BaseValue: 1
-  inventory: {fileID: 6148840244296639272}
-  equipmentPanel: {fileID: 6148840244478372102}
-  statPanel: {fileID: 6148840244516150559}
-  itemTooltip: {fileID: 6148840243204462681}
-  draggableItem: {fileID: 6148840244665665675}
 --- !u!1 &6148840244930312888
 GameObject:
   m_ObjectHideFlags: 0

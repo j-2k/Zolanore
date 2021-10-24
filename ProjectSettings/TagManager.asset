@@ -9,6 +9,7 @@ TagManager:
   - Orb
   - CameraManager
   - CharacterPanel
+  - GameManager
   layers:
   - Default
   - TransparentFX

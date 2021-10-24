@@ -282,4 +282,71 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    private ItemContainer openItemContainer;
+
+    private void TransferToItemContainer(BaseItemSlot baseItemSlot)
+    {
+        Item item = baseItemSlot.Item;
+        if(item != null && openItemContainer.CanAddItem(item))
+        {
+            inventory.RemoveItem(item);
+            openItemContainer.AddItem(item);
+        }
+    }
+
+    private void TransferToInventory(BaseItemSlot baseItemSlot)
+    {
+        Item item = baseItemSlot.Item;
+        if (item != null && openItemContainer.CanAddItem(item))
+        {
+            openItemContainer.RemoveItem(item);
+            inventory.AddItem(item);
+        }
+    }
+
+    public void OpenItemContainer(ItemContainer itemContainer)
+    {
+        openItemContainer = itemContainer;
+
+        inventory.OnRightClickEvent -= InventoryRightClick;
+        inventory.OnRightClickEvent += TransferToItemContainer;
+
+        itemContainer.OnRightClickEvent += TransferToInventory;
+
+        itemContainer.OnPointerEnterEvent += ShowTooltip;
+        itemContainer.OnPointerExitEvent += HideTooltip;
+        itemContainer.OnBeginDragEvent += BeginDrag;
+        itemContainer.OnEndDragEvent += EndDrag;
+        itemContainer.OnDragEvent += Drag;
+        itemContainer.OnDropEvent += Drop;
+    }
+
+    public void CloseItemContainer(ItemContainer itemContainer)
+    {
+        openItemContainer = itemContainer;
+
+        inventory.OnRightClickEvent += InventoryRightClick;
+        inventory.OnRightClickEvent -= TransferToItemContainer;
+
+        itemContainer.OnRightClickEvent -= TransferToInventory;
+
+        itemContainer.OnPointerEnterEvent -= ShowTooltip;
+        itemContainer.OnPointerExitEvent -= HideTooltip;
+        itemContainer.OnBeginDragEvent -= BeginDrag;
+        itemContainer.OnEndDragEvent -= EndDrag;
+        itemContainer.OnDragEvent -= Drag;
+        itemContainer.OnDropEvent -= Drop;
+    }
+
+    /*
+    public void OpenItemContainer(ItemBank itemBank)
+    {
+
+    }
+
+    public void CloseItemContainer(ItemBank itemBank)
+    {
+
+    }
+    */
 }
