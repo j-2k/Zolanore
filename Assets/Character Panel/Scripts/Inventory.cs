@@ -8,35 +8,17 @@ public class Inventory : ItemContainer
     [SerializeField] Item[] startingItems;
     [SerializeField] Transform itemsParent;
 
-    public event Action<BaseItemSlot> OnPointerEnterEvent;
-    public event Action<BaseItemSlot> OnPointerExitEvent;
-    public event Action<BaseItemSlot> OnRightClickEvent;
-    public event Action<BaseItemSlot> OnBeginDragEvent;
-    public event Action<BaseItemSlot> OnDragEvent;
-    public event Action<BaseItemSlot> OnEndDragEvent;
-    public event Action<BaseItemSlot> OnDropEvent;
-
-    private void Start()
+    protected override void Start()
     {
-        //listener for the itemslots event
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            itemSlots[i].OnPointerEnterEvent += slot => OnPointerEnterEvent(slot);
-            itemSlots[i].OnPointerExitEvent += slot => OnPointerExitEvent(slot);
-            itemSlots[i].OnRightClickEvent += slot => OnRightClickEvent(slot);
-            itemSlots[i].OnBeginDragEvent += slot => OnBeginDragEvent(slot);
-            itemSlots[i].OnDragEvent += slot => OnDragEvent(slot);
-            itemSlots[i].OnEndDragEvent += slot => OnEndDragEvent(slot);
-            itemSlots[i].OnDropEvent += slot => OnDropEvent(slot);
-        }
+        base.Start();
         SetStartingItems();
     }
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
         if (itemsParent != null)
         {
-            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
+            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true); //add objects that are even disabled
         }
 
         SetStartingItems();
