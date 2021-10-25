@@ -33,7 +33,8 @@ public class SkillPointSpend : MonoBehaviour
             character.Strength.BaseValue++;
             character.UpdateStatSkillPoint();
         }
-        else
+
+        if (levelSystem.skillPointsToSpend <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -47,7 +48,8 @@ public class SkillPointSpend : MonoBehaviour
             character.Dexterity.BaseValue++;
             character.UpdateStatSkillPoint();
         }
-        else
+
+        if (levelSystem.skillPointsToSpend <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -61,7 +63,8 @@ public class SkillPointSpend : MonoBehaviour
             character.Intelligence.BaseValue++;
             character.UpdateStatSkillPoint();
         }
-        else
+
+        if (levelSystem.skillPointsToSpend <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -75,9 +78,13 @@ public class SkillPointSpend : MonoBehaviour
             character.Defence.BaseValue++;
             character.UpdateStatSkillPoint();
         }
-        else
+
+
+        if (levelSystem.skillPointsToSpend <= 0)
         {
             gameObject.SetActive(false);
         }
     }
+
+
 }

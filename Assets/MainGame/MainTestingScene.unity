@@ -926,6 +926,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 921928276, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
+      propertyPath: m_Name
+      value: DestroyQuestion
+      objectReference: {fileID: 0}
     - target: {fileID: 6148840244066899170, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
       propertyPath: m_Name
       value: Char+Inven Panel

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class LevelSystem : MonoBehaviour
     public delegate void OnXPGained(int enemyLevel, int xp);
     public OnXPGained onXPGainedDelegate;
 
+    public Action levelUpAction;
+
     public int currentLevel;
     public int currentXP;
     [SerializeField] int targetXP;
@@ -47,7 +50,9 @@ public class LevelSystem : MonoBehaviour
         targetXP = 100;
         skillPointsTotal = currentLevel * skillPointsGainedPerLevel;
         onXPGainedDelegate += XPGainedFunction;
-
+        levelUpAction += LevelUp;
+        levelUpAction += LevelSkillPoint;
+        levelUpAction += CheckSkillPoints;
     }
 
     // Update is called once per frame
@@ -57,6 +62,7 @@ public class LevelSystem : MonoBehaviour
         {
             ResetAllSkillPoints();
         }
+
     }
 
     
@@ -77,8 +83,7 @@ public class LevelSystem : MonoBehaviour
 
                 while (currentXP >= targetXP)
                 {
-                    LevelUp();
-                    LevelSkillPoint();
+                    levelUpAction.Invoke();
                 }
 
                 Debug.Log(" new xp =" + newXP + " enemylvl is = " + incEnemyLevel + " currlevel is " + currentLevel);
@@ -182,7 +187,7 @@ public class LevelSystem : MonoBehaviour
 
     public void ResetAllSkillPoints()
     {
-        skillPointsToSpend = skillPointsTotal;
+        skillPointsToSpend = skillPointsTotal - 2;
 
         character.Strength.BaseValue = 1;
         character.Dexterity.BaseValue = 1;
@@ -190,5 +195,14 @@ public class LevelSystem : MonoBehaviour
         character.Defence.BaseValue = 1;
 
         character.UpdateStatSkillPoint();
+
+        if (skillPointsToSpend > 0)
+        {
+            skillPointSpend.gameObject.SetActive(true);
+        }
+        else
+        {
+            skillPointSpend.gameObject.SetActive(false);
+        }
     }
 }

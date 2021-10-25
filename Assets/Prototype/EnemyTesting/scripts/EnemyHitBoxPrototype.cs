@@ -55,13 +55,13 @@ public class EnemyHitBoxPrototype : MonoBehaviour
             if (isPlayerRootMotion)
             {
                 Debug.Log("Making player take 10 dmg");
-                rmPlayer.TakeDamageFromEnemy(10);
+                //rmPlayer.TakeDamageFromEnemy(10);
                 gameObject.SetActive(false);
             }
             else
             {
                 Debug.Log("Making player take 10 dmg");
-                smPlayer.TakeDamageFromEnemy(10);
+                //smPlayer.TakeDamageFromEnemy(10);
                 gameObject.SetActive(false);
             }
         }

@@ -40,20 +40,10 @@ public class PlayerRMScript : MonoBehaviour
 
     [SerializeField] GameObject sphereColl; //collision location
 
-    [SerializeField] bool god;
-    [SerializeField] int health;
-
-    [SerializeField] HPBar hpBar;
-
     [SerializeField] bool isRootMotion;
     // Start is called before the first frame update
     void Start()
     {
-        if (hpBar != null)
-        {
-            health = 200;
-            hpBar.SetMaxHealth(health);
-        }
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         slopeForce = 0.1f;// best value rn dont change
         cc = GetComponent<CharacterController>();
@@ -298,26 +288,6 @@ public class PlayerRMScript : MonoBehaviour
                 transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRot, ref turnSmoothVelocity, 0);
                 oneRun = true;
             }
-        }
-    }
-
-    public void TakeDamageFromEnemy(int incDmg)
-    {
-        if (god)
-        {
-
-        }
-        else
-        {
-            health -= incDmg;
-            if (health <= 0)
-            {
-                this.enabled = false;
-            }
-        }
-        if (hpBar != null)
-        {
-            hpBar.SetHealth(health);
         }
     }
 

@@ -31,8 +31,6 @@ public class CharacterManager : MonoBehaviour
 
     LevelSystem levelSystem;
 
-
-
     private void OnValidate()
     {
         if (itemTooltip == null)
@@ -45,6 +43,7 @@ public class CharacterManager : MonoBehaviour
     {
         statPanel.SetStats(Strength, Dexterity, Intelligence, Defence);
         statPanel.UpdateStatValue();
+
 
         //setup events;
         inventory.OnRightClickEvent += InventoryRightClick;
@@ -68,11 +67,14 @@ public class CharacterManager : MonoBehaviour
         inventory.OnDropEvent += Drop;
         equipmentPanel.OnDropEvent += Drop;
         dropItemArea.OnDropEvent += DropItemOutsideUI;
+
+        levelSystem = LevelSystem.instance;
+
+        levelSystem.levelUpAction += OnLevelUp;
     }
 
     private void Start()
     {
-        levelSystem = LevelSystem.instance;
 
         playerMaxHealth = 100;
         playerCurrentHealth = playerMaxHealth;
@@ -115,7 +117,11 @@ public class CharacterManager : MonoBehaviour
 
 
 
-
+    void OnLevelUp()
+    {
+        playerMaxHealth += 20;
+        playerCurrentHealth = playerMaxHealth;
+    }
 
 
 
