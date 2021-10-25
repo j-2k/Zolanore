@@ -312,7 +312,7 @@ public class CharacterManager : MonoBehaviour
     public void Unequip(EquippableItem equippableItem)
     {
         //check if the inven is full first
-        if (!inventory.CanAddItem(equippableItem) && equipmentPanel.RemoveItem(equippableItem))
+        if (inventory.CanAddItem(equippableItem) && equipmentPanel.RemoveItem(equippableItem))
         {
             equippableItem.Unequip(this);
             statPanel.UpdateStatValue();
