@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -27,19 +28,35 @@ public class LevelSystem : MonoBehaviour
     public int currentXP;
     [SerializeField] int targetXP;
 
+    int skillPointsTotal;
+    public int skillPointsToSpend;
+
+    private int skillPointsGainedPerLevel = 2;
+
+    [SerializeField] SkillPointSpend skillPointSpend;
+    [SerializeField] Text levelValueText;
+
+    CharacterManager character;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelValueText.text = currentLevel.ToString();
+        character = GetComponentInParent<CharacterManager>();
         currentXP = 0;
         targetXP = 100;
-
+        skillPointsTotal = currentLevel * skillPointsGainedPerLevel;
         onXPGainedDelegate += XPGainedFunction;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            ResetAllSkillPoints();
+        }
     }
 
     
@@ -60,9 +77,8 @@ public class LevelSystem : MonoBehaviour
 
                 while (currentXP >= targetXP)
                 {
-                    currentXP = currentXP - targetXP;
-                    currentLevel++;
-                    targetXP += targetXP * 1; //*1 will double target everytime // it was /20 | *1 = 100 , 200, 400, 800 | /2 = 100, 150,300,600,
+                    LevelUp();
+                    LevelSkillPoint();
                 }
 
                 Debug.Log(" new xp =" + newXP + " enemylvl is = " + incEnemyLevel + " currlevel is " + currentLevel);
@@ -136,5 +152,43 @@ public class LevelSystem : MonoBehaviour
         }
         */
     }
-    
+
+    private void LevelUp()
+    {
+        currentXP = currentXP - targetXP;
+        currentLevel++;
+        levelValueText.text = currentLevel.ToString();
+        targetXP += targetXP * 1; //*1 will double target everytime // it was /20 | *1 = 100 , 200, 400, 800 | /2 = 100, 150,300,600,
+    }
+
+    void LevelSkillPoint()
+    {
+        skillPointsTotal = currentLevel * skillPointsGainedPerLevel;
+        skillPointsToSpend += 2;
+        CheckSkillPoints();
+    }
+
+    public void CheckSkillPoints()
+    {
+        if (skillPointsToSpend > 0)
+        {
+            skillPointSpend.gameObject.SetActive(true);
+        }
+        else
+        {
+            skillPointSpend.gameObject.SetActive(false);
+        }
+    }
+
+    public void ResetAllSkillPoints()
+    {
+        skillPointsToSpend = skillPointsTotal;
+
+        character.Strength.BaseValue = 1;
+        character.Dexterity.BaseValue = 1;
+        character.Intelligence.BaseValue = 1;
+        character.Defence.BaseValue = 1;
+
+        character.UpdateStatSkillPoint();
+    }
 }

@@ -27,7 +27,7 @@ public class ItemBank : ItemContainer
     {
         base.Start();
         itemsParent.gameObject.SetActive(false);
-        characterManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CharacterManager>();
+        //characterManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CharacterManager>();
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class ItemBank : ItemContainer
                 characterManager.CloseItemContainer(this);
             }
 
-            /*
+            
             if(isInRange)
             {
                 characterManager = gameObject.GetComponent<CharacterManager>();
@@ -82,7 +82,7 @@ public class ItemBank : ItemContainer
             {
                 characterManager = null;
             }
-            */
+            
 
         }
     }

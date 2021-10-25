@@ -6,7 +6,10 @@ using Juma.CharacterStats;
 
 public class CharacterManager : MonoBehaviour
 {
-    public int playerHealth = 100;
+    //Player Stats
+    int playerMaxHealth = 100;
+    public int playerCurrentHealth = 100;
+
 
     //ADD NEW STATS HERE
     public CharacterStat Strength;
@@ -26,6 +29,10 @@ public class CharacterManager : MonoBehaviour
 
     private BaseItemSlot dragItemSlot;
 
+    LevelSystem levelSystem;
+
+
+
     private void OnValidate()
     {
         if (itemTooltip == null)
@@ -36,7 +43,6 @@ public class CharacterManager : MonoBehaviour
 
     private void Awake()
     {
-
         statPanel.SetStats(Strength, Dexterity, Intelligence, Defence);
         statPanel.UpdateStatValue();
 
@@ -64,11 +70,22 @@ public class CharacterManager : MonoBehaviour
         dropItemArea.OnDropEvent += DropItemOutsideUI;
     }
 
+    private void Start()
+    {
+        levelSystem = LevelSystem.instance;
 
-    /*
+        playerMaxHealth = 100;
+        playerCurrentHealth = playerMaxHealth;
+
+
+    }
+
+    
     //trying out level skill system where when u level up u gain 2 points to spend fre ein each skill slot seems to work
     private void Update()
     {
+
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("was" + Defence.BaseValue);
@@ -93,8 +110,28 @@ public class CharacterManager : MonoBehaviour
 
             Debug.Log("you have " + freePoints + " points to spend after resetting ur skill levels");
         }
+        */
     }
-    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private void InventoryRightClick(BaseItemSlot itemSlot)
@@ -221,36 +258,6 @@ public class CharacterManager : MonoBehaviour
 		dropItemSlot.Item = draggedItem;
 		dropItemSlot.Amount = draggedItemAmount;
     }
-    
-    /*
-    private void SwapItems(BaseItemSlot dropItemSlot)
-    {
-        EquippableItem dragItem = dragItemSlot.Item as EquippableItem;
-        EquippableItem dropItem = dropItemSlot.Item as EquippableItem;
-        if (dragItemSlot is EquipmentSlot)
-        {
-            if (dragItem != null) Unequip(dragItem);
-            if (dropItem != null) Equip(dropItem);
-
-        }
-        if (dropItemSlot is EquipmentSlot)
-        {
-            if (dragItem != null) Equip(dragItem);
-            if (dropItem != null) Unequip(dropItem);
-        }
-        statPanel.UpdateStatValue();
-        if (!(dragItemSlot is EquipmentSlot) && !(dropItemSlot is EquipmentSlot))
-        {
-            Item draggedItem = dragItemSlot.Item;
-            int draggedItemAmount = dragItemSlot.Amount;
-
-            dragItemSlot.Item = dropItemSlot.Item;
-            dragItemSlot.Amount = dropItemSlot.Amount;
-
-            dropItemSlot.Item = draggedItem;
-            dropItemSlot.Amount = draggedItemAmount;
-        }
-    }*/
 
     private void AddStacks(BaseItemSlot dropItemSlot)
     {
@@ -357,6 +364,11 @@ public class CharacterManager : MonoBehaviour
         itemContainer.OnEndDragEvent -= EndDrag;
         itemContainer.OnDragEvent -= Drag;
         itemContainer.OnDropEvent -= Drop;
+    }
+
+    public void UpdateStatSkillPoint()
+    {
+        statPanel.UpdateStatValue();
     }
 
     /*

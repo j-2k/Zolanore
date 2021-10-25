@@ -90,11 +90,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8677585463080590500}
-  - component: {fileID: 8677585463080590503}
   - component: {fileID: 1928692025}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,21 +112,6 @@ Transform:
   m_Father: {fileID: 8677585464154731527}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8677585463080590503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8677585463080590501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827b1baab64b4834a9727fdb3d3d1c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items: []
-  inventorySpace: 10
-  itemsParent: {fileID: 0}
 --- !u!114 &1928692025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +127,9 @@ MonoBehaviour:
   currentLevel: 1
   currentXP: 0
   targetXP: 0
+  skillPointsToSpend: 0
+  skillPointSpend: {fileID: 0}
+  levelValueText: {fileID: 0}
 --- !u!65 &3749250662979710159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -168,6 +155,7 @@ GameObject:
   - component: {fileID: 8677585464154731768}
   - component: {fileID: 8677585464154731526}
   - component: {fileID: 8677585464154731525}
+  - component: {fileID: 1059804249}
   m_Layer: 0
   m_Name: FinalPlayerRM
   m_TagString: Player
@@ -259,6 +247,34 @@ MonoBehaviour:
   health: 200
   hpBar: {fileID: 0}
   isRootMotion: 0
+--- !u!114 &1059804249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677585464154731524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1106eef1334025b449f0a046c18033c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCurrentHealth: 100
+  Strength:
+    BaseValue: 1
+  Dexterity:
+    BaseValue: 1
+  Intelligence:
+    BaseValue: 1
+  Defence:
+    BaseValue: 1
+  inventory: {fileID: 0}
+  equipmentPanel: {fileID: 0}
+  statPanel: {fileID: 0}
+  itemTooltip: {fileID: 0}
+  draggableItem: {fileID: 0}
+  dropItemArea: {fileID: 0}
+  destroyQuestion: {fileID: 0}
 --- !u!1001 &3577123529761533279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,6 +327,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
+      propertyPath: cameraHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraSensitivity
       value: 2
       objectReference: {fileID: 0}
@@ -318,7 +338,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraRotY
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5316645481269370952, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
 --- !u!4 &8677585462475048409 stripped
 Transform:

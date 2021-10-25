@@ -10,7 +10,7 @@ public class HealItemEffect : UsableItemEffect
 
     public override void ExecuteEffect(UsableItem parentItem, CharacterManager characterPanelManager)
     {
-        characterPanelManager.playerHealth += healthAmount;
+        characterPanelManager.playerCurrentHealth += healthAmount;
     }
 
     public override string GetDescription()
