@@ -19,6 +19,12 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             _stat = value;
             UpdateStatValue();
+
+            if (isPointerOver)
+            {
+                OnPointerExit(null);
+                OnPointerEnter(null);
+            }
         }
     }
 
@@ -41,6 +47,8 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] Text valueText;
     [SerializeField] StatTooltip tooltip;
 
+    bool isPointerOver = true;
+
     private void OnValidate()
     {
         Text[] texts = GetComponentsInChildren<Text>();
@@ -53,13 +61,22 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
 
+    private void OnDisable()
+    {
+        if (isPointerOver)
+        OnPointerExit(null);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        isPointerOver = true;
+
         tooltip.ShowTooltip(Stat, Name);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        isPointerOver = false;
 
         tooltip.HideTooltip();
     }
