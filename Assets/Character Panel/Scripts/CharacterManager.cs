@@ -30,6 +30,8 @@ public class CharacterManager : MonoBehaviour
     private BaseItemSlot dragItemSlot;
 
     LevelSystem levelSystem;
+    PlayerMain playerScript;
+
 
     private void OnValidate()
     {
@@ -71,6 +73,8 @@ public class CharacterManager : MonoBehaviour
         levelSystem = LevelSystem.instance;
 
         levelSystem.levelUpAction += OnLevelUp;
+
+        playerScript = GetComponent<PlayerMain>();
     }
 
     private void Start()

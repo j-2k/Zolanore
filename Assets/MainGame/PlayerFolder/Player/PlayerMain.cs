@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRMScript : MonoBehaviour
+public class PlayerMain : MonoBehaviour
 {
     //Movement Vars
     CharacterController cc;
@@ -12,7 +12,7 @@ public class PlayerRMScript : MonoBehaviour
     [SerializeField] float jumpSpeed; // 2
     [SerializeField] float jumpCurve; // 0.3
     [SerializeField] float gravity; // 20
-    [SerializeField] int outgoingDamage; // 20
+    public int outgoingDamage; // 20
     float finalJumpCalc;
     [SerializeField] bool isJumping;
     Vector3 velocity;
@@ -41,10 +41,16 @@ public class PlayerRMScript : MonoBehaviour
     [SerializeField] GameObject sphereColl; //collision location
 
     [SerializeField] bool isRootMotion;
+
+    CharacterManager characterManager;
+    LevelSystem levelSystem;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelSystem = LevelSystem.instance;
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
+        characterManager = GetComponent<CharacterManager>();
         slopeForce = 0.1f;// best value rn dont change
         cc = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
@@ -138,6 +144,11 @@ public class PlayerRMScript : MonoBehaviour
         //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
 
         hitColliders = Physics.OverlapSphere(sphereColl.transform.position, attackColliderRadius);
+
+        //out going dmg calc maybe change in the future for better results to scale to higher lvls
+        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(0.7f,1.1f));
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(1.5f, 2.5f) + levelBasedDmg);
+
 
         foreach (Collider hitCollider in hitColliders)
         {
