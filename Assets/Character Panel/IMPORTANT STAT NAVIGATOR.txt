@@ -12,11 +12,15 @@ make a skill point system where if the player levels up give him 2 points to spe
 
 AREAS WHERE WE INITIALIZE THE DIFFERENT STATS THEY CAN BE FOUND IN THESE SCRIPTS
 
-ItemTooltips
-EquippableItem
-CharacterPanelManager
+ItemTooltips cs X
+EquippableItem cs
+CharacterManager cs
 
-//
+(FOR SKILL POINTS MANAGEMENT)
+SKILLPOINTSPEND cs
+LEVELSYSTEM cs
+
+//ROUNDNIG STAT VALUES
 
 rounding in stattooltips
 rounding in characterstats
