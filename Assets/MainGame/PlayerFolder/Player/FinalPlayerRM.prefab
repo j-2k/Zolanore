@@ -91,6 +91,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8677585463080590500}
   - component: {fileID: 1928692025}
+  - component: {fileID: 1888493850}
+  - component: {fileID: 1888493851}
+  - component: {fileID: 1888493853}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -130,6 +133,51 @@ MonoBehaviour:
   skillPointsToSpend: 0
   skillPointSpend: {fileID: 0}
   levelValueText: {fileID: 0}
+--- !u!114 &1888493850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677585463080590501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cc906838754944f8a1996891bd3edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: b6e903b59da48784bb7d99050c823a65, type: 2}
+  cooldownTime: 0
+  abilityKey: 49
+--- !u!114 &1888493851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677585463080590501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cc906838754944f8a1996891bd3edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: 2333f45e04a5dc74391238ef5e7427af, type: 2}
+  cooldownTime: 0
+  abilityKey: 50
+--- !u!114 &1888493853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677585463080590501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d43e13714d6a804a8b6b38527e3b9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAbilityExecs:
+  - {fileID: 1888493850}
+  - {fileID: 1888493851}
 --- !u!65 &3749250662979710159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -242,11 +290,10 @@ MonoBehaviour:
   slopeForceRayLength: 3
   slideDownSpeed: 8
   turnSmoothTime: 0.1
+  cameraRig: {fileID: 0}
   sphereColl: {fileID: 3749250663439089745}
-  god: 1
-  health: 200
-  hpBar: {fileID: 0}
   isRootMotion: 0
+  playerInput: 0
 --- !u!114 &1059804249
 MonoBehaviour:
   m_ObjectHideFlags: 0

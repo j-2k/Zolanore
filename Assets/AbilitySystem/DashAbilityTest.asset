@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DashAbilityTest
   m_EditorClassIdentifier: 
   name: 
-  cooldownTime: 1
-  activeTime: 0.5
+  cooldownTime: 4
+  activeTime: 1
   singleTrigger: 0
   dashSpeed: 20

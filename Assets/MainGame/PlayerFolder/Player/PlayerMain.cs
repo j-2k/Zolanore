@@ -109,8 +109,6 @@ public class PlayerMain : MonoBehaviour
             float movementDir = Mathf.Clamp01(input.magnitude);
             movementDir = Mathf.Clamp(movementDir, 0, 1);
             playerAnimator.SetFloat("rmVelocity", movementDir);
-
-            RotationTransformCamera();
         }
         else
         {
@@ -141,6 +139,8 @@ public class PlayerMain : MonoBehaviour
                     GroundedUpdate();
                 }
             }
+
+            RotationTransformCamera();
         }
     }
 

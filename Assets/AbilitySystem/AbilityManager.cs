@@ -4,67 +4,30 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-    [SerializeField] Ability ability;
-    GameObject player;
-    float cooldownTime;
-    float activeTime;
+    #region Singleton LevelSystem Instance
+    public static AbilityManager instance;
 
-    enum AbilityState
+    void Awake()
     {
-        ready,
-        active,
-        cooldown
-    }
-
-    AbilityState abilityState = AbilityState.ready;
-
-    [SerializeField] KeyCode abilityKey;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        switch (abilityState)
+        if (instance != null)
         {
-            case AbilityState.ready:
-                if (Input.GetKeyDown(abilityKey))
-                {
-                    ability.OnActivate(player);
-                    abilityState = AbilityState.active;
-                    activeTime = ability.activeTime;
-                }
-                break;
-            case AbilityState.active:
-                ability.AbilityUpdateActive(player);
-                if (activeTime > 0)
-                {
-                    activeTime -= Time.deltaTime;
-                }
-                else
-                {
-                    ability.OnBeginCoolDown(player);
-                    abilityState = AbilityState.cooldown;
-                    cooldownTime = ability.cooldownTime;
-                }
-                break;
-            case AbilityState.cooldown:
-                ability.AbilityUpdateCooldown(player);
-                if (cooldownTime > 0)
-                {
-                    cooldownTime -= Time.deltaTime;
-                }
-                else
-                {
-                    abilityState = AbilityState.ready;
-                }
-                break;
-            default:
-                break;
+            Debug.Log("Another Level System Script?? bug check");
+            return;
         }
+
+        instance = this;
+    }
+    #endregion
+
+    //change ability styles here i think
+
+    public AbilityExecuter[] meleeAbilityExecs;
+
+    public delegate void GCDSTART();
+    public static event GCDSTART onGCD;
+
+    public void StartGCD()
+    {
+        onGCD.Invoke();
     }
 }
