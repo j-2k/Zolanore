@@ -7,11 +7,12 @@ public class AbilityExecuter : MonoBehaviour
 {
     [SerializeField] Ability ability;
     GameObject player;
-    [SerializeField] float cooldownTime;
+    public float cooldownTime;
+    public float cooldownTimeMax;
     float activeTime;
     float gcd = 3;
 
-    enum AbilityState
+    public enum AbilityState
     {
         ready,
         active,
@@ -19,7 +20,7 @@ public class AbilityExecuter : MonoBehaviour
         gcd
     }
 
-    AbilityState abilityState = AbilityState.ready;
+    public AbilityState abilityState = AbilityState.ready;
 
     [SerializeField] KeyCode abilityKey;
 
@@ -30,6 +31,8 @@ public class AbilityExecuter : MonoBehaviour
     {
         AbilityManager.onGCD += GCDCooldown;
         player = GameObject.FindGameObjectWithTag("Player");
+        cooldownTime = ability.cooldownTime;
+        cooldownTimeMax = cooldownTime;
     }
 
     // Update is called once per frame
@@ -86,7 +89,6 @@ public class AbilityExecuter : MonoBehaviour
             abilityState = AbilityState.cooldown;
             cooldownTime = gcd;
         }
-
         if (cooldownTime <= gcd)
         {
             cooldownTime = gcd;
