@@ -46,7 +46,7 @@ public class AbilityCooldownUI : MonoBehaviour
                 image.fillAmount = 1;
                 gcdOneRun = false;
             }
-            image.fillAmount -= 1 / 3f * Time.deltaTime; //i wasted 2 hours because the denominator had to be a float kms
+            image.fillAmount -= 1 / 3f * Time.deltaTime; //i wasted 2 hours because the denominator had to be a float kms proven with this line                 abilityManager.meleeAbilityExecs[indexAbility].gcdMax
         }
         else
         {

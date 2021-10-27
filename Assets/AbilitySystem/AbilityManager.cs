@@ -23,8 +23,17 @@ public class AbilityManager : MonoBehaviour
 
     public AbilityExecuter[] meleeAbilityExecs;
 
+    //public AbilityExecuter[] magicAbilityExecs;
+
+    //public AbilityExecuter[] rangedAbilityExecs;
+
     public delegate void GCDSTART();
     public static event GCDSTART onGCD;
+
+    private void Start()
+    {
+        //meleeAbilityExecs = GetComponents<AbilityExecuter>();   //universal abilites maybe
+    }
 
     public void StartGCD()
     {

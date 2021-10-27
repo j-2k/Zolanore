@@ -7,11 +7,11 @@ public class AbilityExecuter : MonoBehaviour
 {
     [SerializeField] Ability ability;
     GameObject player;
-    public float cooldownTime;
+    float cooldownTime;
     public float cooldownTimeMax;
     float activeTime;
-    public float gcd = 3;
-    public float gcdMax = 3;
+    float gcd = 3;
+
     public enum AbilityState
     {
         ready,
@@ -29,8 +29,7 @@ public class AbilityExecuter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gcdMax = 3;
-    AbilityManager.onGCD += GCDCooldown;
+        AbilityManager.onGCD += GCDCooldown;
         player = GameObject.FindGameObjectWithTag("Player");
         cooldownTime = ability.cooldownTime;
         cooldownTimeMax = cooldownTime;
