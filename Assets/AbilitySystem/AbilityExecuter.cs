@@ -10,8 +10,8 @@ public class AbilityExecuter : MonoBehaviour
     public float cooldownTime;
     public float cooldownTimeMax;
     float activeTime;
-    float gcd = 3;
-
+    public float gcd = 3;
+    public float gcdMax = 3;
     public enum AbilityState
     {
         ready,
@@ -29,7 +29,8 @@ public class AbilityExecuter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AbilityManager.onGCD += GCDCooldown;
+        gcdMax = 3;
+    AbilityManager.onGCD += GCDCooldown;
         player = GameObject.FindGameObjectWithTag("Player");
         cooldownTime = ability.cooldownTime;
         cooldownTimeMax = cooldownTime;
@@ -76,6 +77,19 @@ public class AbilityExecuter : MonoBehaviour
                     abilityState = AbilityState.ready;
                 }
                 break;
+            case AbilityState.gcd:
+                ability.AbilityUpdateCooldown(player);
+                if (gcd > 0)
+                {
+                    gcd -= Time.deltaTime;
+                }
+                else
+                {
+                    abilityState = AbilityState.ready;
+                    gcd = 3;
+                    gcdTrigger = false;
+                }
+                break;
             default:
                 break;
         }
@@ -86,12 +100,13 @@ public class AbilityExecuter : MonoBehaviour
         if (!gcdTrigger)
         {
             Debug.Log("trigger gcd func");
-            abilityState = AbilityState.cooldown;
-            cooldownTime = gcd;
+            abilityState = AbilityState.gcd;
+            gcd = 3;
         }
         if (cooldownTime <= gcd)
         {
-            cooldownTime = gcd;
+            cooldownTime = 0;
+            abilityState = AbilityState.gcd;
         }
     }
 }
