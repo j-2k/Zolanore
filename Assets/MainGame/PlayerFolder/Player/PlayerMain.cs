@@ -36,7 +36,7 @@ public class PlayerMain : MonoBehaviour
     //turning & cam refs
     float turnSmoothVelocity;
     [SerializeField] float turnSmoothTime = 0.1f; //0.1f
-    Transform cameraRig;
+    public Transform cameraRig;
 
     [SerializeField] GameObject sphereColl; //collision location
 
@@ -45,9 +45,11 @@ public class PlayerMain : MonoBehaviour
     CharacterManager characterManager;
     LevelSystem levelSystem;
 
+    public bool playerInput;
     // Start is called before the first frame update
     void Start()
     {
+        playerInput = true;
         levelSystem = LevelSystem.instance;
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         characterManager = GetComponent<CharacterManager>();
@@ -79,57 +81,67 @@ public class PlayerMain : MonoBehaviour
             Debug.Log("Not Grounded");
         }
 
-
-        if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
+        if (playerInput)
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
+            if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
+            {
+                input.x = Input.GetAxisRaw("Horizontal");
+                input.y = Input.GetAxisRaw("Vertical");
+            }
+            else
+            {
+                input.x = Input.GetAxis("Horizontal");
+                input.y = Input.GetAxis("Vertical");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && !isAttackStart)
+            {
+                PlayerJump();
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttackStart)
+            {
+                isAttackStart = true;
+                playerAnimator.SetTrigger("isAttacking");
+                rootMotion = Vector3.zero;
+            }
+
+            float movementDir = Mathf.Clamp01(input.magnitude);
+            movementDir = Mathf.Clamp(movementDir, 0, 1);
+            playerAnimator.SetFloat("rmVelocity", movementDir);
+
+            RotationTransformCamera();
         }
         else
         {
-            input.x = Input.GetAxis("Horizontal");
-            input.y = Input.GetAxis("Vertical");
+            playerAnimator.SetFloat("rmVelocity", 0);
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && !isAttackStart)
-        {
-            PlayerJump();
-        }
-
-        if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttackStart)
-        {
-            isAttackStart = true;
-            playerAnimator.SetTrigger("isAttacking");
-            rootMotion = Vector3.zero;
-        }
-
-        float movementDir = Mathf.Clamp01(input.magnitude);
-        movementDir = Mathf.Clamp(movementDir, 0, 1);
-        playerAnimator.SetFloat("rmVelocity", movementDir);
+        
     }
 
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
-        if (!isAttackStart)
+        if (playerInput)
         {
-            if (OnSteepSlope())
+            if (!isAttackStart)
             {
-                cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
-                rootMotion = Vector3.zero;
-                isJumping = true;
-                //playerAnimator.SetBool("isJumping", true);
-            }
-            else if (isJumping) //or also in air
-            {
-                AirUpdate();
-            }
-            else //isgrounded
-            {
-                GroundedUpdate();
+                if (OnSteepSlope())
+                {
+                    cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
+                    rootMotion = Vector3.zero;
+                    isJumping = true;
+                    //playerAnimator.SetBool("isJumping", true);
+                }
+                else if (isJumping) //or also in air
+                {
+                    AirUpdate();
+                }
+                else //isgrounded
+                {
+                    GroundedUpdate();
+                }
             }
         }
-
-        RotationTransformCamera();
     }
 
 

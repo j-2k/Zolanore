@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbilityManager : MonoBehaviour
 {
     [SerializeField] Ability ability;
+    GameObject player;
     float cooldownTime;
     float activeTime;
 
@@ -22,7 +23,7 @@ public class AbilityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        abilityKey = KeyCode.Alpha1;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -33,26 +34,26 @@ public class AbilityManager : MonoBehaviour
             case AbilityState.ready:
                 if (Input.GetKeyDown(abilityKey))
                 {
-                    ability.OnActivate(gameObject);
+                    ability.OnActivate(player);
                     abilityState = AbilityState.active;
                     activeTime = ability.activeTime;
                 }
                 break;
             case AbilityState.active:
-                ability.AbilityUpdateActive(gameObject);
+                ability.AbilityUpdateActive(player);
                 if (activeTime > 0)
                 {
                     activeTime -= Time.deltaTime;
                 }
                 else
                 {
-                    ability.OnBeginCoolDown(gameObject);
+                    ability.OnBeginCoolDown(player);
                     abilityState = AbilityState.cooldown;
                     cooldownTime = ability.cooldownTime;
                 }
                 break;
             case AbilityState.cooldown:
-                ability.AbilityUpdateCooldown(gameObject);
+                ability.AbilityUpdateCooldown(player);
                 if (cooldownTime > 0)
                 {
                     cooldownTime -= Time.deltaTime;
