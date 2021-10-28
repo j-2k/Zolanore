@@ -8,11 +8,13 @@ public class DashAbility : Ability
     PlayerMain player;
     CharacterController cc;
     public float dashSpeed;
+    Transform meshTransform;
 
     public override void CacheStart(GameObject parent)
     {
         player = parent.GetComponent<PlayerMain>();
         cc = parent.GetComponent<CharacterController>();
+        meshTransform = parent.transform.GetChild(0);
     }
 
     public override void OnActivate(GameObject parent)
@@ -24,8 +26,10 @@ public class DashAbility : Ability
     bool oneRun = true;
     public override void AbilityUpdateActive(GameObject parent)
     {
+
         if (oneRun)
         {
+            meshTransform.transform.localRotation = Quaternion.identity;
             float smooth = 0.1f;
             float targetRot = player.cameraRig.eulerAngles.y;
             player.gameObject.transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(player.gameObject.transform.eulerAngles.y, targetRot, ref smooth, 0);
@@ -40,6 +44,7 @@ public class DashAbility : Ability
     {
         oneRun = true;
         player.isUsingAbility = false;
+        meshTransform.transform.localRotation = Quaternion.identity;
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)

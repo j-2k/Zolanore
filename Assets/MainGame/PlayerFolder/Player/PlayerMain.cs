@@ -81,18 +81,19 @@ public class PlayerMain : MonoBehaviour
             Debug.Log("Not Grounded");
         }
 
+        if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
+        {
+            input.x = Input.GetAxisRaw("Horizontal");
+            input.y = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            input.x = Input.GetAxis("Horizontal");
+            input.y = Input.GetAxis("Vertical");
+        }
+
         if (!isUsingAbility)
         {
-            if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
-            {
-                input.x = Input.GetAxisRaw("Horizontal");
-                input.y = Input.GetAxisRaw("Vertical");
-            }
-            else
-            {
-                input.x = Input.GetAxis("Horizontal");
-                input.y = Input.GetAxis("Vertical");
-            }
 
             if (Input.GetKeyDown(KeyCode.Space) && !isAttackStart)
             {
@@ -123,27 +124,37 @@ public class PlayerMain : MonoBehaviour
         {
             if (!isAttackStart)
             {
-                if (OnSteepSlope())
-                {
-                    cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
-                    rootMotion = Vector3.zero;
-                    isJumping = true;
-                    //playerAnimator.SetBool("isJumping", true);
-                }
-                else if (isJumping) //or also in air
-                {
-                    AirUpdate();
-                }
-                else //isgrounded
-                {
-                    GroundedUpdate();
-                }
+                MainMovement();
             }
 
             RotationTransformCamera();
         }
+        Debug.Log(cc.velocity.magnitude);
     }
 
+    public void MainMovement()
+    {
+        if (cc.velocity.magnitude >= movementSpeed * 1.2f)
+        {
+            Debug.LogWarning("Very fast");
+            GroundedUpdateNormalized();
+        }
+        else if (OnSteepSlope())
+        {
+            cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
+            rootMotion = Vector3.zero;
+            isJumping = true;
+            //playerAnimator.SetBool("isJumping", true);
+        }
+        else if (isJumping) //or also in air
+        {
+            AirUpdate();
+        }
+        else //isgrounded
+        {
+            GroundedUpdate();
+        }
+    }
 
     /// <summary>
     /// REVIST THIS DETECTION FOR ENEMIES HIT MAYBE USE A DIFF IN THE FUTURE THIS WAS ORIGINALLY PALCEHODLER
@@ -204,6 +215,11 @@ public class PlayerMain : MonoBehaviour
         }
     }
 
+    public void AOEAttack()
+    {
+
+    }
+
     void EndOfAttack()
     {
         isAttackStart = false;
@@ -240,6 +256,22 @@ public class PlayerMain : MonoBehaviour
                 SetInAir(0);
             }
             
+        }
+    }
+
+    public void GroundedUpdateNormalized()
+    {
+        slopeForce = 20;
+        movementSpeed = 10;
+        Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
+        Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
+        Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
+        Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
+
+        cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
+        if (!cc.isGrounded)
+        {
+            SetInAir(0);
         }
     }
 
