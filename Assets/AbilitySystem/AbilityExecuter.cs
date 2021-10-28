@@ -100,7 +100,6 @@ public class AbilityExecuter : MonoBehaviour
     {
         if (!gcdTrigger)
         {
-            Debug.Log("trigger gcd func");
             abilityState = AbilityState.gcd;
             gcd = 3;
         }

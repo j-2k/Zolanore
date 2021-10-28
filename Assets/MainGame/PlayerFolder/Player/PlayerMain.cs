@@ -209,7 +209,7 @@ public class PlayerMain : MonoBehaviour
         isAttackStart = false;
     }
 
-    private void GroundedUpdate()
+    public void GroundedUpdate()
     {
         if (isRootMotion)
         {

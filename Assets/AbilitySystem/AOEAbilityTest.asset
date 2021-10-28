@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c44ad1ab9f37fcb4082e83b966348216, type: 3}
-  m_Name: DashAbilityTest
+  m_Script: {fileID: 11500000, guid: 02db6b6dee4522f48bbcee881ee0597a, type: 3}
+  m_Name: AOEAbilityTest
   m_EditorClassIdentifier: 
   name: 
-  cooldownTime: 8
-  activeTime: 1
+  cooldownTime: 20
+  activeTime: 3
   singleTrigger: 0
-  dashSpeed: 20
