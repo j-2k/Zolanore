@@ -14,6 +14,8 @@ public class EnemyProtoVersion : MonoBehaviour
     int xp;
     int enemyLevel;
 
+    public uint hitID;
+
     LevelSystem levelSystem;
     // Start is called before the first frame update
     void Start()

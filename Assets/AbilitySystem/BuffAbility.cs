@@ -16,7 +16,6 @@ public class BuffAbility : Ability
 
     public override void OnActivate(GameObject parent)
     {
-        Debug.Log("Actiavetability");
         meshTransform = parent.transform.GetChild(0);
         scaleIncrease = 1;
         cm.Strength.BaseValue += 10f;

@@ -18,6 +18,7 @@ public class DashAbility : Ability
     public override void OnActivate(GameObject parent)
     {
         player.isUsingAbility = true;
+        player.DashID();
     }
 
     bool oneRun = true;
@@ -32,6 +33,7 @@ public class DashAbility : Ability
         }
 
         cc.Move(((player.gameObject.transform.forward) * dashSpeed) * Time.deltaTime); //(player.gameObject.transform.forward + Vector3.down )
+        player.DashAttack();
     }
 
     public override void OnBeginCoolDown(GameObject parent)
@@ -44,6 +46,7 @@ public class DashAbility : Ability
     {
 
     }
+
     /*
     void PeakofAttack()
     {

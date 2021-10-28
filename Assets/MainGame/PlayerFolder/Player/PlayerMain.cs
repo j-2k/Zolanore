@@ -173,6 +173,37 @@ public class PlayerMain : MonoBehaviour
         }
     }
 
+    uint attackID;
+
+    public void DashID()
+    {
+        //When sword is swung
+        attackID = (uint) Random.Range(0, uint.MaxValue);
+    }
+
+    public void DashAttack()
+    {
+        hitColliders = Physics.OverlapSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
+
+        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(0.7f, 1.1f));
+
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.5f, 1f) + levelBasedDmg);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.tag == "Enemy")
+            {
+                Debug.Log("I just hit an enemey");
+                if (hitCollider.GetComponent<EnemyProtoVersion>().hitID != attackID)
+                {
+                    // Hit enemy
+                    hitCollider.GetComponent<EnemyProtoVersion>().hitID = attackID;
+                    hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+                }
+            }
+        }
+    }
+
     void EndOfAttack()
     {
         isAttackStart = false;
@@ -318,6 +349,8 @@ public class PlayerMain : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(sphereColl.transform.position, attackColliderRadius);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
