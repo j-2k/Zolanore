@@ -27,8 +27,10 @@ public class AbilityManager : MonoBehaviour
 
     //public AbilityExecuter[] rangedAbilityExecs;
 
-    public delegate void GCDSTART();
-    public static event GCDSTART onGCD;
+    public delegate void AbilityDelegate();
+    public static event AbilityDelegate OnGCD;
+    public static event AbilityDelegate OnCancelAbility;
+    
 
     private void Start()
     {
@@ -37,6 +39,11 @@ public class AbilityManager : MonoBehaviour
 
     public void StartGCD()
     {
-        onGCD.Invoke();
+        OnGCD.Invoke();
+    }
+
+    public void CancelAbilites()
+    {
+        OnCancelAbility.Invoke();
     }
 }

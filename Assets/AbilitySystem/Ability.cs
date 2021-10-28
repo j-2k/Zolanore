@@ -8,6 +8,7 @@ public class Ability : ScriptableObject
     public float cooldownTime;
     public float activeTime;
     public bool singleTrigger;
+    public bool bypassCancel;
 
     public virtual void CacheStart(GameObject parent)
     {

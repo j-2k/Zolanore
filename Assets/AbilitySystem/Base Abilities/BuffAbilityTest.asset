@@ -16,4 +16,5 @@ MonoBehaviour:
   cooldownTime: 16
   activeTime: 6
   singleTrigger: 0
-  scaleIncrease: 2
+  bypassCancel: 1
+  scaleIncrease: 1
