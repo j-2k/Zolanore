@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02db6b6dee4522f48bbcee881ee0597a, type: 3}
-  m_Name: AOEAbilityTest
+  m_Script: {fileID: 11500000, guid: fb7eab95aa1cb7c4d83e7d9307cb03a1, type: 3}
+  m_Name: BuffAbilityTest
   m_EditorClassIdentifier: 
   name: 
-  cooldownTime: 20
-  activeTime: 3
+  cooldownTime: 16
+  activeTime: 6
   singleTrigger: 0
+  scaleIncrease: 2

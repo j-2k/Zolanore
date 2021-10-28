@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc4356c51ce62b418ec8019fd9c87b3, type: 3}
-  m_Name: BuffAbilityTest
+  m_Script: {fileID: 11500000, guid: 1e156323db9e97144860c71eb6a1490a, type: 3}
+  m_Name: DashAbilityTest
   m_EditorClassIdentifier: 
   name: 
-  cooldownTime: 16
-  activeTime: 7
+  cooldownTime: 6
+  activeTime: 1
   singleTrigger: 0
-  scaleIncrease: 1
+  dashSpeed: 20

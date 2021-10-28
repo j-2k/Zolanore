@@ -32,7 +32,7 @@ public class AbilityManager : MonoBehaviour
 
     private void Start()
     {
-        //meleeAbilityExecs = GetComponents<AbilityExecuter>();   //universal abilites maybe
+        meleeAbilityExecs = GetComponents<AbilityExecuter>();   //universal abilites maybe
     }
 
     public void StartGCD()
