@@ -196,7 +196,7 @@ public class PlayerMain : MonoBehaviour
     {
         hitColliders = Physics.OverlapSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
 
-        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(0.7f, 1.1f));
+        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 1.5f));
 
         outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.5f, 1f) + levelBasedDmg);
 
@@ -217,7 +217,20 @@ public class PlayerMain : MonoBehaviour
 
     public void AOEAttack()
     {
+        hitColliders = Physics.OverlapSphere(transform.position, 5);
 
+        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 1.5f));
+
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.6f, 0.8f) + levelBasedDmg);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.tag == "Enemy")
+            {
+                Debug.Log("I just hit an enemey");
+                hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+            }
+        }
     }
 
     void EndOfAttack()
@@ -383,6 +396,8 @@ public class PlayerMain : MonoBehaviour
         Gizmos.DrawWireSphere(sphereColl.transform.position, attackColliderRadius);
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 5);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
