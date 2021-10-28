@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: b6e903b59da48784bb7d99050c823a65, type: 2}
-  cooldownTime: 0
+  cooldownTimeMax: 0
+  abilityState: 0
   abilityKey: 49
 --- !u!114 &1888493851
 MonoBehaviour:
@@ -161,7 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 2333f45e04a5dc74391238ef5e7427af, type: 2}
-  cooldownTime: 0
+  cooldownTimeMax: 0
+  abilityState: 0
   abilityKey: 50
 --- !u!114 &1888493853
 MonoBehaviour:
@@ -293,7 +295,7 @@ MonoBehaviour:
   cameraRig: {fileID: 0}
   sphereColl: {fileID: 3749250663439089745}
   isRootMotion: 0
-  playerInput: 0
+  isUsingAbility: 0
 --- !u!114 &1059804249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +378,10 @@ PrefabInstance:
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraHeight
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
+      propertyPath: cameraDistanceMax
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraSensitivity

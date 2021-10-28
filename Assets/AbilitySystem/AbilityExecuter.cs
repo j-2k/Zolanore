@@ -33,6 +33,8 @@ public class AbilityExecuter : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         cooldownTime = ability.cooldownTime;
         cooldownTimeMax = cooldownTime;
+
+        ability.CacheStart(player);
     }
 
     // Update is called once per frame

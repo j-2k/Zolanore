@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffAbilityTest
   m_EditorClassIdentifier: 
   name: 
-  cooldownTime: 6
-  activeTime: 1
+  cooldownTime: 16
+  activeTime: 7
   singleTrigger: 0
   scaleIncrease: 1

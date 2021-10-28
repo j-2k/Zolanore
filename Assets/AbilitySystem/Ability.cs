@@ -9,6 +9,11 @@ public class Ability : ScriptableObject
     public float activeTime;
     public bool singleTrigger;
 
+    public virtual void CacheStart(GameObject parent)
+    {
+
+    }
+
     public virtual void OnActivate(GameObject parent)
     {
 

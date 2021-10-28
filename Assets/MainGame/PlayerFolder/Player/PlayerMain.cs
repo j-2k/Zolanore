@@ -45,11 +45,11 @@ public class PlayerMain : MonoBehaviour
     CharacterManager characterManager;
     LevelSystem levelSystem;
 
-    public bool playerInput;
+    public bool isUsingAbility;
     // Start is called before the first frame update
     void Start()
     {
-        playerInput = true;
+        isUsingAbility = false;
         levelSystem = LevelSystem.instance;
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         characterManager = GetComponent<CharacterManager>();
@@ -81,7 +81,7 @@ public class PlayerMain : MonoBehaviour
             Debug.Log("Not Grounded");
         }
 
-        if (playerInput)
+        if (!isUsingAbility)
         {
             if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
             {
@@ -119,7 +119,7 @@ public class PlayerMain : MonoBehaviour
 
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
-        if (playerInput)
+        if (!isUsingAbility)
         {
             if (!isAttackStart)
             {

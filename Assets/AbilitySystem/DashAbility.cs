@@ -9,11 +9,15 @@ public class DashAbility : Ability
     CharacterController cc;
     public float dashSpeed;
 
-    public override void OnActivate(GameObject parent)
+    public override void CacheStart(GameObject parent)
     {
         player = parent.GetComponent<PlayerMain>();
         cc = parent.GetComponent<CharacterController>();
-        player.playerInput = false;
+    }
+
+    public override void OnActivate(GameObject parent)
+    {
+        player.isUsingAbility = true;
     }
 
     bool oneRun = true;
@@ -33,7 +37,7 @@ public class DashAbility : Ability
     public override void OnBeginCoolDown(GameObject parent)
     {
         oneRun = true;
-        player.playerInput = true;
+        player.isUsingAbility = false;
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)
