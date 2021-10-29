@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
     CharacterController cc;
     [SerializeField] bool rawMovement;          // Keep off with rm and on and sm
     [SerializeField] float movementSpeed;       // 9
-    [SerializeField] float movementAir;         // 3
-    [SerializeField] float jumpSpeed;           // 3
-    [SerializeField] float jumpCurve;           // 0.3
+    [SerializeField] float movementAir;         // 6
+    [SerializeField] float jumpSpeed;           // 2
+    [SerializeField] float jumpCurve;           // 0.1
     [SerializeField] float gravity;             // 25
     public int outgoingDamage;
     float finalJumpCalc;

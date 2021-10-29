@@ -27,6 +27,7 @@ public class AbilityExecuter : MonoBehaviour
     bool triggerGCD = false;
     bool cancelAbility = false;
     bool triggerCancel = false;
+
     // Start is called before the first frame update
     void Start()
     {
