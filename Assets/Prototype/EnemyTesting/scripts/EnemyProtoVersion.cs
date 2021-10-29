@@ -75,6 +75,15 @@ public class EnemyProtoVersion : MonoBehaviour
         }
     }
 
+    public void TakeDamageFromPlayerPrototype(int incDmg)
+    {
+        health -= incDmg;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     /*
     void SendXPToPlayer(int xp)
     {

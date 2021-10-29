@@ -157,7 +157,7 @@ public class RootMotionMovement : MonoBehaviour
             {
                 Debug.Log("I just hit an enemey");
                 //hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(outgoingDamage);
-                hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+                hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayerPrototype(outgoingDamage);
             }
             if(hitCollider.tag == "Orb")
             {

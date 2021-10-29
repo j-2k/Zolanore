@@ -392,12 +392,14 @@ public class PlayerMain : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        /*
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(sphereColl.transform.position, attackColliderRadius);
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 5);
+        */
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
