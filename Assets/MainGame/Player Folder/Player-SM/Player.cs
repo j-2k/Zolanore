@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     Vector2 input;
 
     //slopefix downforces
-    float slopeForce; //0.1f best value
+    float slopeForce = 20; //0.1f best value
     [SerializeField] float slopeForceRayLength; //3
     [SerializeField] float slideDownSpeed;//8
     RaycastHit slopeHit;
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         }
         
     }
-
+    /*
     void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (!isUsingAbility)
@@ -121,15 +121,32 @@ public class Player : MonoBehaviour
             //RotationTransformCamera();
         }
     }
+    */
+    
+    void LateUpdate()//fixed update results in jerkiness for some reason with RMs
+    {
+        if (!isUsingAbility)
+        {
+            if (!isAttackStart)
+            {
+                MainMovement();
+            }
+            RotationTransformCamera();
+        }
+    }
+    
 
     public void MainMovement()
     {
+        /*
         if (cc.velocity.magnitude >= movementSpeed * 1.2f)
         {
             Debug.LogWarning("Very fast");
             GroundedUpdateNormalized();
         }
-        else if (OnSteepSlope())
+        else 
+        
+        */if (OnSteepSlope())
         {
             cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
             isJumping = true;
@@ -229,8 +246,6 @@ public class Player : MonoBehaviour
 
     public void GroundedUpdate()
     {
-        slopeForce = 20;
-        movementSpeed = 10;
         Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
         Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
@@ -245,8 +260,6 @@ public class Player : MonoBehaviour
 
     public void GroundedUpdateNormalized()
     {
-        slopeForce = 20;
-        movementSpeed = 10;
         Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
         Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);

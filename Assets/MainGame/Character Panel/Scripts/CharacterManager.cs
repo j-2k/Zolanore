@@ -72,7 +72,7 @@ public class CharacterManager : MonoBehaviour
 
         levelSystem = LevelSystem.instance;
 
-        levelSystem.levelUpAction += OnLevelUp;
+        //levelSystem.levelUpAction += OnLevelUp;
 
         playerScript = GetComponent<Player>();
     }
