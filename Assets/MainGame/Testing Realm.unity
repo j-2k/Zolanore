@@ -2109,7 +2109,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
 --- !u!4 &1936275103 stripped
 Transform:
@@ -2660,9 +2661,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1a561f838e2a943b6049a422525d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawMovement: 0
+  rawMovement: 1
   movementSpeed: 9
-  movementAir: 8
+  movementAir: 3
   jumpSpeed: 3
   jumpCurve: 0.3
   gravity: 25

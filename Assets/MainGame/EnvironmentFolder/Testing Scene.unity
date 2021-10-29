@@ -1107,6 +1107,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1728085333}
+  - component: {fileID: 1728085334}
+  - component: {fileID: 1728085335}
   m_Layer: 0
   m_Name: PlayerEmpty
   m_TagString: Player
@@ -1130,6 +1132,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728085334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728085332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb60d30f1145ba439fe91f65785e5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawMovement: 0
+  movementSpeed: 5
+  movementAir: 3
+  jumpSpeed: 3
+  jumpCurve: 0.3
+  gravity: 20
+  outgoingDamage: 0
+  isJumping: 0
+  isAttackStart: 0
+  attackColliderRadius: 0
+  playerAnimator: {fileID: 0}
+  slopeForce: 10
+  slopeForceRayLength: 3
+  slideDownSpeed: 8
+  turnSmoothTime: 0.1
+  cameraRig: {fileID: 0}
+  isUsingAbility: 0
+--- !u!143 &1728085335
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728085332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1880203876
 GameObject:
   m_ObjectHideFlags: 0

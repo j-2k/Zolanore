@@ -6,13 +6,13 @@ public class Player : MonoBehaviour
 {
     //Movement Vars
     CharacterController cc;
-    [SerializeField] bool rawMovement; // Keep off with RM
-    [SerializeField] float movementSpeed; // 1
-    [SerializeField] float movementAir; // 5
-    [SerializeField] float jumpSpeed; // 2
-    [SerializeField] float jumpCurve; // 0.3
-    [SerializeField] float gravity; // 20
-    public int outgoingDamage; // 20
+    [SerializeField] bool rawMovement;          // Keep off with rm and on and sm
+    [SerializeField] float movementSpeed;       // 9
+    [SerializeField] float movementAir;         // 3
+    [SerializeField] float jumpSpeed;           // 3
+    [SerializeField] float jumpCurve;           // 0.3
+    [SerializeField] float gravity;             // 25
+    public int outgoingDamage;
     float finalJumpCalc;
     [SerializeField] bool isJumping;
     Vector3 velocity;
@@ -25,9 +25,9 @@ public class Player : MonoBehaviour
     Vector2 input;
 
     //slopefix downforces
-    [SerializeField] float slopeForce = 20; //0.1f best value
+    [SerializeField] float slopeForce = 12;     //12 best value
     [SerializeField] float slopeForceRayLength; //3
-    [SerializeField] float slideDownSpeed;//8
+    [SerializeField] float slideDownSpeed;      //8
     RaycastHit slopeHit;
     RaycastHit ccHit;
 
@@ -36,12 +36,13 @@ public class Player : MonoBehaviour
     [SerializeField] float turnSmoothTime = 0.1f; //0.1f
     public Transform cameraRig;
 
-    [SerializeField] GameObject sphereColl; //collision location
+    [SerializeField] GameObject sphereColl;     //collision location
 
     CharacterManager characterManager;
     LevelSystem levelSystem;
 
     public bool isUsingAbility;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,28 +101,7 @@ public class Player : MonoBehaviour
         }
         
     }
-    /*
-    void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
-    {
-        if (!isUsingAbility)
-        {
-            if (!isAttackStart)
-            {
-                MainMovement();
-            }
-            RotationTransformCamera();
-        }
-    }
 
-    private void LateUpdate()
-    {
-        if (!isUsingAbility)
-        {
-            //RotationTransformCamera();
-        }
-    }
-    */
-    
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (!isUsingAbility)
@@ -145,7 +125,9 @@ public class Player : MonoBehaviour
         }
         else 
         
-        */if (OnSteepSlope())
+        */
+        
+        if (OnSteepSlope())
         {
             cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
             isJumping = true;
@@ -161,6 +143,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region Player Attack Related Funcs
     /// <summary>
     /// REVIST THIS DETECTION FOR ENEMIES HIT MAYBE USE A DIFF IN THE FUTURE THIS WAS ORIGINALLY PALCEHODLER
     /// </summary>
@@ -242,6 +225,7 @@ public class Player : MonoBehaviour
     {
         isAttackStart = false;
     }
+    #endregion Player Attack Related Funcs
 
     public void GroundedUpdate()
     {
@@ -292,16 +276,14 @@ public class Player : MonoBehaviour
     void SetInAir(float jumpVelo)
     {
         isJumping = true;
-        velocity = playerAnimator.velocity * jumpCurve * (movementSpeed / 6);
+        velocity = cc.velocity.normalized * (movementSpeed * jumpCurve);
         playerAnimator.SetBool("isJumping", true);
         velocity.y = jumpVelo;
     }
 
     Vector3 AirMovement()
     {
-
-        return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * (movementAir - 2) * Time.deltaTime;
-
+        return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * movementAir * Time.deltaTime;
     }
 
     bool OnSteepSlope()
