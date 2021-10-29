@@ -962,6 +962,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2002248443}
     m_Modifications:
+    - target: {fileID: 7234724786792475313, guid: b01c81f6df831f74a82163205f58d93e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9df4ebd0a4d8dcc4ebb6c3ae52212143, type: 2}
     - target: {fileID: 7234724786792475315, guid: b01c81f6df831f74a82163205f58d93e, type: 3}
       propertyPath: m_Name
       value: Plane
