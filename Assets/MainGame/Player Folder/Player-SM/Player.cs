@@ -41,12 +41,13 @@ public class Player : MonoBehaviour
     CharacterManager characterManager;
     LevelSystem levelSystem;
 
-    public bool isUsingAbility;
-
+    public bool isMovingAbility;
+    Transform hitboxPos;
     // Start is called before the first frame update
     void Start()
     {
-        isUsingAbility = false;
+        hitboxPos = transform.GetChild(1);
+        isMovingAbility = false;
         levelSystem = LevelSystem.instance;
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         characterManager = GetComponent<CharacterManager>();
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
             input.y = Input.GetAxis("Vertical");
         }
 
-        if (!isUsingAbility)
+        if (!isMovingAbility)
         {
 
             if (Input.GetKeyDown(KeyCode.Space) && !isAttackStart)
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
 
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
-        if (!isUsingAbility)
+        if (!isMovingAbility)
         {
             if (!isAttackStart)
             {
@@ -117,21 +118,16 @@ public class Player : MonoBehaviour
 
     public void MainMovement()
     {
-        /*
-        if (cc.velocity.magnitude >= movementSpeed * 1.2f)
+        if (cc.velocity.magnitude >= movementSpeed * 2)
         {
-            Debug.LogWarning("Very fast");
-            GroundedUpdateNormalized();
+            Debug.LogWarning("Very fast running 1 grounded update normalized");
+            GroundedUpdate();
         }
-        else 
-        
-        */
-        
+
         if (OnSteepSlope())
         {
             cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
             isJumping = true;
-            //playerAnimator.SetBool("isJumping", true);
         }
         else if (isJumping) //or also in air
         {
@@ -143,18 +139,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    #region Player Attack Related Funcs
+
     /// <summary>
     /// REVIST THIS DETECTION FOR ENEMIES HIT MAYBE USE A DIFF IN THE FUTURE THIS WAS ORIGINALLY PALCEHODLER
     /// </summary>
-    /// 
+    #region Player Attack Related Funcs
     Collider[] hitColliders;
     void PeakofAttack()
     {
         Debug.Log("Peak of Attack");
         //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
-
-        hitColliders = Physics.OverlapSphere(sphereColl.transform.position, attackColliderRadius);
+        
+        hitColliders = Physics.OverlapSphere(hitboxPos.transform.position, attackColliderRadius);
 
         //out going dmg calc maybe change in the future for better results to scale to higher lvls
         int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(0.7f,1.1f));
@@ -228,20 +224,6 @@ public class Player : MonoBehaviour
     #endregion Player Attack Related Funcs
 
     public void GroundedUpdate()
-    {
-        Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
-        Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
-        Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
-        Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
-
-        cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
-        if (!cc.isGrounded)
-        {
-            SetInAir(0);
-        }
-    }
-
-    public void GroundedUpdateNormalized()
     {
         Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
         Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
@@ -350,6 +332,11 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 5);
+        if (hitboxPos != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(hitboxPos.transform.position, 1.75f);
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)

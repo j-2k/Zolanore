@@ -19,14 +19,14 @@ public class DashAbility : Ability
 
     public override void OnActivate(GameObject parent)
     {
-        player.isUsingAbility = true;
+        player.isMovingAbility = true;
         player.DashID();
     }
 
     bool oneRun = true;
     public override void AbilityUpdateActive(GameObject parent)
     {
-
+        player.isMovingAbility = true;
         if (oneRun)
         {
             meshTransform.transform.localRotation = Quaternion.identity;
@@ -35,7 +35,6 @@ public class DashAbility : Ability
             player.gameObject.transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(player.gameObject.transform.eulerAngles.y, targetRot, ref smooth, 0);
             oneRun = false;
         }
-
         cc.Move(((player.gameObject.transform.forward) * dashSpeed) * Time.deltaTime); //(player.gameObject.transform.forward + Vector3.down )
         player.DashAttack();
     }
@@ -43,7 +42,7 @@ public class DashAbility : Ability
     public override void OnBeginCoolDown(GameObject parent)
     {
         oneRun = true;
-        player.isUsingAbility = false;
+        player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;
     }
 

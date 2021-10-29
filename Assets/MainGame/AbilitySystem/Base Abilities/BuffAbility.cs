@@ -8,10 +8,12 @@ public class BuffAbility : Ability
     public float scaleIncrease;
     Transform meshTransform;
     CharacterManager cm;
+    Player player;
 
     public override void CacheStart(GameObject parent)
     {
         cm = parent.GetComponent<CharacterManager>();
+        player = parent.GetComponent<Player>();
     }
 
     public override void OnActivate(GameObject parent)
@@ -20,6 +22,7 @@ public class BuffAbility : Ability
         scaleIncrease = 1;
         cm.Strength.BaseValue += 10f;
         cm.UpdateStatSkillPoint();
+        player.isMovingAbility = false;
     }
 
     public override void AbilityUpdateActive(GameObject parent)

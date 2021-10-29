@@ -20,7 +20,7 @@ public class AOEAbility : Ability
     public override void OnActivate(GameObject parent)
     {
         timer = 0;
-        player.isUsingAbility = true;
+        player.isMovingAbility = true;
     }
 
     public override void AbilityUpdateActive(GameObject parent)
@@ -39,7 +39,7 @@ public class AOEAbility : Ability
 
     public override void OnBeginCoolDown(GameObject parent)
     {
-        player.isUsingAbility = false;
+        player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;
     }
 
