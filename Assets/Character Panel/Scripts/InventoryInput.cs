@@ -10,6 +10,7 @@ public class InventoryInput : MonoBehaviour
     [SerializeField] KeyCode toggleEquipmentPanelKey;
     [SerializeField] GameObject equipmentPanelGameObject;
 
+    [SerializeField] GameObject abilityBarGameObject;
     private void Start()
     {
         StartCoroutine(InventoryFixEarly());
@@ -30,6 +31,15 @@ public class InventoryInput : MonoBehaviour
             {
                 HideMouseCursor();
             }
+
+            if (!inventoryPanelGameobject.activeSelf && !equipmentPanelGameObject.activeSelf)
+            {
+                abilityBarGameObject.SetActive(true);
+            }
+            else
+            {
+                abilityBarGameObject.SetActive(false);
+            }
         }
 
 
@@ -44,6 +54,15 @@ public class InventoryInput : MonoBehaviour
             else
             {
                 HideMouseCursor();
+            }
+
+            if (!inventoryPanelGameobject.activeSelf && !equipmentPanelGameObject.activeSelf)
+            {
+                abilityBarGameObject.SetActive(true);
+            }
+            else
+            {
+                abilityBarGameObject.SetActive(false);
             }
         }
     }

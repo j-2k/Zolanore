@@ -4727,7 +4727,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031983389}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
@@ -4737,8 +4737,8 @@ RectTransform:
   - {fileID: 131585883}
   - {fileID: 429383396}
   - {fileID: 25780487}
-  m_Father: {fileID: 6148840244066899182}
-  m_RootOrder: 9
+  m_Father: {fileID: 8481831712109062601}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -10390,6 +10390,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4998872259382355780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8481831712109062601}
+  m_Layer: 5
+  m_Name: AllAbilityBars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8481831712109062601
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4998872259382355780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1031983390}
+  m_Father: {fileID: 6148840244066899182}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6148840243047488431
 GameObject:
   m_ObjectHideFlags: 0
@@ -13704,7 +13740,7 @@ RectTransform:
   - {fileID: 6148840244141291439}
   - {fileID: 1949639624}
   - {fileID: 921928277}
-  - {fileID: 1031983390}
+  - {fileID: 8481831712109062601}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13826,6 +13862,7 @@ MonoBehaviour:
   inventoryPanelGameobject: {fileID: 6148840244296639276}
   toggleEquipmentPanelKey: 99
   equipmentPanelGameObject: {fileID: 6148840243661838375}
+  abilityBarGameObject: {fileID: 4998872259382355780}
 --- !u!1 &6148840244174698262
 GameObject:
   m_ObjectHideFlags: 0
