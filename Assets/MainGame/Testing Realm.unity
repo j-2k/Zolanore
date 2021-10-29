@@ -2097,8 +2097,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: DEMONWALKSKIN
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5866666021909216657, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
+    - target: {fileID: 5866666021909216657, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3cca35c13488ef949a8d87a937531ede, type: 2}
+    - target: {fileID: 5866666021909216657, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eda3d3b056f92aa49a36313a75932e2a, type: 3}
 --- !u!4 &1936275103 stripped
 Transform:
@@ -2600,7 +2611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8677585462930205474
 Transform:
   m_ObjectHideFlags: 0
@@ -2650,8 +2661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawMovement: 0
-  movementSpeed: 10
-  movementAir: 7
+  movementSpeed: 6
+  movementAir: 8
   jumpSpeed: 3
   jumpCurve: 0.3
   gravity: 20
@@ -2659,6 +2670,7 @@ MonoBehaviour:
   isJumping: 0
   isAttackStart: 0
   attackColliderRadius: 1.25
+  playerAnimator: {fileID: 0}
   slopeForceRayLength: 3
   slideDownSpeed: 8
   turnSmoothTime: 0.1

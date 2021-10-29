@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] float attackColliderRadius;
 
     //anims
-    Animator playerAnimator;
+    [SerializeField] Animator playerAnimator;
     Vector2 input;
 
     //slopefix downforces
