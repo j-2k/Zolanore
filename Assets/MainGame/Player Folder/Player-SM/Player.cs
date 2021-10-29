@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     Vector2 input;
 
     //slopefix downforces
-    float slopeForce = 20; //0.1f best value
+    [SerializeField] float slopeForce = 20; //0.1f best value
     [SerializeField] float slopeForceRayLength; //3
     [SerializeField] float slideDownSpeed;//8
     RaycastHit slopeHit;
@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
         levelSystem = LevelSystem.instance;
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         characterManager = GetComponent<CharacterManager>();
-        slopeForce = 0.1f;// best value rn dont change
         cc = GetComponent<CharacterController>();
         playerAnimator = GetComponent<Animator>();
         finalJumpCalc = Mathf.Sqrt(2 * gravity * jumpSpeed);

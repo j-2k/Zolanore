@@ -2611,7 +2611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8677585462930205474
 Transform:
   m_ObjectHideFlags: 0
@@ -2661,16 +2661,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawMovement: 0
-  movementSpeed: 6
+  movementSpeed: 9
   movementAir: 8
   jumpSpeed: 3
   jumpCurve: 0.3
-  gravity: 20
+  gravity: 25
   outgoingDamage: 20
   isJumping: 0
   isAttackStart: 0
   attackColliderRadius: 1.25
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 8677585462930205475}
+  slopeForce: 12
   slopeForceRayLength: 3
   slideDownSpeed: 8
   turnSmoothTime: 0.1
