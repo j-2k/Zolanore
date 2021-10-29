@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/AOEAbility")]
 public class AOEAbility : Ability
 {
-    PlayerMain player;
+    Player player;
     Transform meshTransform;
     CharacterController cc;
     float timer = 0;
 
     public override void CacheStart(GameObject parent)
     {
-        player = parent.GetComponent<PlayerMain>();
+        player = parent.GetComponent<Player>();
         meshTransform = parent.transform.GetChild(0);
         cc = parent.GetComponent<CharacterController>();
     }

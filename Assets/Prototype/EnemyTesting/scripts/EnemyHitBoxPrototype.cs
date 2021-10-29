@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHitBoxPrototype : MonoBehaviour
 {
     //RootMotionMovement rmPlayer;
-    PlayerMain rmPlayer;
+    Player rmPlayer;
     PlayerScript smPlayer;
 
     [SerializeField] bool isPlayerRootMotion;
@@ -15,7 +15,7 @@ public class EnemyHitBoxPrototype : MonoBehaviour
         if (rmPlayer == null)
         {
             //rmPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<RootMotionMovement>();
-            rmPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMain>();
+            rmPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             if (rmPlayer !=null)
             {
                 isPlayerRootMotion = true;
