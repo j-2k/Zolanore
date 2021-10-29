@@ -233,9 +233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rawMovement: 1
   movementSpeed: 9
-  movementAir: 3
-  jumpSpeed: 3
-  jumpCurve: 0.3
+  movementAir: 6
+  jumpSpeed: 2
+  jumpCurve: 0.1
   gravity: 25
   outgoingDamage: 0
   isJumping: 0

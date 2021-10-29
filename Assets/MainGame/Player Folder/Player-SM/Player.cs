@@ -265,7 +265,7 @@ public class Player : MonoBehaviour
 
     Vector3 AirMovement()
     {
-        return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)) * movementAir * Time.deltaTime;
+        return ((cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x)).normalized * movementAir * Time.deltaTime;
     }
 
     bool OnSteepSlope()
