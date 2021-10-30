@@ -10,6 +10,7 @@ TagManager:
   - CameraManager
   - CharacterPanel
   - GameManager
+  - Familiar
   layers:
   - Default
   - TransparentFX

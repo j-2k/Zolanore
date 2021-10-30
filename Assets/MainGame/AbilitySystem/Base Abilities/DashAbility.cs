@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/DashAbility")]
 public class DashAbility : Ability
 {
-    Player player;
+    PlayerManager player;
     CharacterController cc;
     public float dashSpeed;
     Transform meshTransform;
 
     public override void CacheStart(GameObject parent)
     {
-        player = parent.GetComponent<Player>();
+        player = parent.GetComponent<PlayerManager>();
         cc = parent.GetComponent<CharacterController>();
         meshTransform = parent.transform.GetChild(0);
     }
