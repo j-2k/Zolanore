@@ -14,7 +14,7 @@ public class FamiliarFollowState : State
     float teleTimer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         timeToTeleport = 6;
 
@@ -43,7 +43,7 @@ public class FamiliarFollowState : State
         {
             familiarAgent.SetDestination(player.transform.position);
 
-            if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)
+            if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)//5+3
             {
                 teleTimer += Time.deltaTime;
                 if (teleTimer >= timeToTeleport)

@@ -13,7 +13,7 @@ public class FamiliarAttackState : State
     float catchUpTimer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //getting componenets
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
@@ -31,27 +31,32 @@ public class FamiliarAttackState : State
 
     public override State runCurrentState()
     {
-        if (playerFamiliar.focusEnemy == null || Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= 12)
+        if (playerFamiliar.focusEnemy == null)
         {
+            playerFamiliar.isEnemyHit = false;
             return followState;
         }
         else
         {
-            familiarAgent.SetDestination(playerFamiliar.focusEnemy.transform.position);
-            
-            if (familiarAgent.remainingDistance <= 2)
-            {
-                AttackEnemy();
+            Debug.Log("going to enemy");
+            if (Vector3.Distance(familiarAgent.transform.position, playerFamiliar.focusEnemy.transform.position) <= familiarAgent.stoppingDistance) //familiarAgent.stoppingDistance this shit fucked me for 2 hours i had another number instead
+            {   //IF U WANT TO CHANGE THE DISTANCE OF THE ATTACK RANGE YOU MUST CHANGE THE STOPPING DISTANCE  = familiarAgent.stoppingDistance I MESSED UP BEFORE
+                Debug.Log("FAMILIAR IS ATTACKING!!!");
+                playerFamiliar.isEnemyHit = false;
+                return followState;
             }
-            else
+            else if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= 12)
             {
-                /*
+                familiarAgent.SetDestination(playerFamiliar.focusEnemy.transform.position);
                 catchUpTimer += Time.deltaTime;
+                Debug.Log("inside catchup");
                 if (catchUpTimer >= 5)
                 {
-                    familiarAgent.transform.position = player.transform.position;
+                    Debug.Log("folow playerstate");
+                    playerFamiliar.isEnemyHit = false;
+                    catchUpTimer = 0;
+                    return followState;
                 }
-                */
             }
 
             return this;
@@ -60,6 +65,7 @@ public class FamiliarAttackState : State
 
     void AttackEnemy()
     {
-        Debug.Log("Swinging at enemy");
+        Debug.Log("FAMILIAR IS ATTACKING!!!");
+        playerFamiliar.isEnemyHit = false;
     }
 }
