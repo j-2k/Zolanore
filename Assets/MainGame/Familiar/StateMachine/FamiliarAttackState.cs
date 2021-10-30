@@ -33,39 +33,44 @@ public class FamiliarAttackState : State
     {
         if (playerFamiliar.focusEnemy == null)
         {
-            playerFamiliar.isEnemyHit = false;
-            return followState;
+            return FollowState();
         }
         else
         {
+            familiarAgent.SetDestination(playerFamiliar.focusEnemy.transform.position);
+
+            familiarAgent.stoppingDistance = 3;
+
             Debug.Log("going to enemy");
             if (Vector3.Distance(familiarAgent.transform.position, playerFamiliar.focusEnemy.transform.position) <= familiarAgent.stoppingDistance) //familiarAgent.stoppingDistance this shit fucked me for 2 hours i had another number instead
             {   //IF U WANT TO CHANGE THE DISTANCE OF THE ATTACK RANGE YOU MUST CHANGE THE STOPPING DISTANCE  = familiarAgent.stoppingDistance I MESSED UP BEFORE
                 Debug.Log("FAMILIAR IS ATTACKING!!!");
-                playerFamiliar.isEnemyHit = false;
-                return followState;
+                return FollowState();
             }
-            else if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= 12)
+            else if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= 15)
             {
-                familiarAgent.SetDestination(playerFamiliar.focusEnemy.transform.position);
                 catchUpTimer += Time.deltaTime;
                 Debug.Log("inside catchup");
                 if (catchUpTimer >= 5)
                 {
-                    Debug.Log("folow playerstate");
-                    playerFamiliar.isEnemyHit = false;
-                    catchUpTimer = 0;
-                    return followState;
+                    return FollowState();
                 }
+            }
+            else
+            {
+                catchUpTimer = 0;
             }
 
             return this;
         }
     }
 
-    void AttackEnemy()
+    FamiliarFollowState FollowState()
     {
-        Debug.Log("FAMILIAR IS ATTACKING!!!");
+        Debug.Log("Attack To Following State");
+        familiarAgent.stoppingDistance = 5;
         playerFamiliar.isEnemyHit = false;
+        catchUpTimer = 0;
+        return followState;
     }
 }
