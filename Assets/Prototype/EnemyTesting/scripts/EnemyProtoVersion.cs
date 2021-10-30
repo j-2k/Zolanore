@@ -23,7 +23,7 @@ public class EnemyProtoVersion : MonoBehaviour
         xp = 100;
         enemyLevel = 1;
         levelSystem = LevelSystem.instance;
-        health = 10;
+        health = 20;
         timer = 0;
         //childTrigger = GetComponentInChildren<GameObject>();
         player = GameObject.FindGameObjectWithTag("Player").transform;

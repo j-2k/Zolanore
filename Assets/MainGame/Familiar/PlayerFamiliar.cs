@@ -5,40 +5,16 @@ using UnityEngine.AI;
 
 public class PlayerFamiliar : MonoBehaviour
 {
-    NavMeshAgent familiarAgent;
-    GameObject player;
-    float timeToTeleport;
-    float teleTimer;
-    // Start is called before the first frame update
-    void Start()
+    public State[] states;
+    public NavMeshAgent agentFamiliar;
+    public GameObject player;
+    public GameObject focusEnemy;
+    public bool isEnemyHit;
+
+    private void Awake()
     {
-        timeToTeleport = 5;
+        states = GetComponentsInChildren<State>();
         player = GameObject.FindGameObjectWithTag("Player");
-        familiarAgent = GetComponentInChildren<NavMeshAgent>();
-        familiarAgent.SetDestination(player.transform.position);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        familiarAgent.SetDestination(player.transform.position);
-
-        if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)
-        {
-            Debug.Log("farcontinuouse");
-            teleTimer += Time.deltaTime;
-            if (teleTimer >= timeToTeleport)
-            {
-                familiarAgent.gameObject.transform.position = player.transform.position;
-                teleTimer = 0;
-            }
-        }
-        else
-        {
-            teleTimer = 0;
-        }
-
-        
-        
+        agentFamiliar = GetComponent<NavMeshAgent>();
     }
 }

@@ -27,6 +27,10 @@ public class StateManager : MonoBehaviour
 {
     [SerializeField] State currentState;
 
+    private void Start()
+    {
+        currentState = GetComponentInChildren<FamiliarFollowState>();
+    }
 
     // Update is called once per frame
     void Update()

@@ -41,9 +41,12 @@ public class PlayerManager : MonoBehaviour
 
     public bool isMovingAbility;
     Transform hitboxPos;
+
+    PlayerFamiliar playerFamiliar;
     // Start is called before the first frame update
     void Start()
     {
+        playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();
         hitboxPos = transform.GetChild(1);
         isMovingAbility = false;
         levelSystem = LevelSystem.instance;
@@ -143,6 +146,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     #region Player Attack Related Funcs
     Collider[] hitColliders;
+    bool oneRunFamiliar = true;
     void PeakofAttack()
     {
         Debug.Log("Peak of Attack");
@@ -162,8 +166,15 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("I just hit an enemey");
                 //hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(outgoingDamage);
                 hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+                if (oneRunFamiliar)
+                {
+                    playerFamiliar.focusEnemy = hitCollider.GetComponent<EnemyProtoVersion>().gameObject;
+                    playerFamiliar.isEnemyHit = true;
+                    oneRunFamiliar = false;
+                }
             }
         }
+        oneRunFamiliar = true;
     }
 
     uint attackID;
