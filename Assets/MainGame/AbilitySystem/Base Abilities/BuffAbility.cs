@@ -14,11 +14,11 @@ public class BuffAbility : Ability
     {
         cm = parent.GetComponent<CharacterManager>();
         player = parent.GetComponent<PlayerManager>();
+        meshTransform = parent.transform.GetChild(0);
     }
 
     public override void OnActivate(GameObject parent)
     {
-        meshTransform = parent.transform.GetChild(0);
         scaleIncrease = 1;
         cm.Strength.BaseValue += 10f;
         cm.UpdateStatSkillPoint();

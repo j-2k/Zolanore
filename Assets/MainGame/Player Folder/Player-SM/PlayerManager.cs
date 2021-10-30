@@ -36,8 +36,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float turnSmoothTime = 0.1f; //0.1f
     public Transform cameraRig;
 
-    [SerializeField] GameObject sphereColl;     //collision location
-
     CharacterManager characterManager;
     LevelSystem levelSystem;
 
@@ -326,8 +324,6 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(sphereColl.transform.position, attackColliderRadius);
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
         Gizmos.color = Color.green;
