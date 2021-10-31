@@ -22,15 +22,23 @@ public class FamiliarAbility : Ability
         playerFamiliar.agentFamiliar.speed = 7.5f;
     }
 
+    bool once = true;
+
     public override void AbilityUpdateActive(GameObject parent)
     {
-        
+        if (once)
+        {
+            playerFamiliar.callFamiliarBack = false;
+            once = false;
+        }
+        Debug.Log("FAMILIAR ABILITY ACTIVE");
     }
 
     public override void OnBeginCoolDown(GameObject parent)
     {
         playerFamiliar.agentFamiliar.speed = 5;
         playerFamiliar.abilityTrigger = false;
+        once = true;
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)

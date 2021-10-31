@@ -1520,17 +1520,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b01c81f6df831f74a82163205f58d93e, type: 3}
---- !u!114 &1111298303 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1697568071173322790, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
-  m_PrefabInstance: {fileID: 1697568070917106682}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28160c2f53a184e4bbdff73c4215348d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1154011195 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1154011195, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -2158,10 +2147,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1697568070600096028, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
-      propertyPath: attackState
-      value: 
-      objectReference: {fileID: 1111298303}
     - target: {fileID: 1697568071972167352, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
       propertyPath: player
       value: 
@@ -2504,6 +2489,14 @@ PrefabInstance:
     - target: {fileID: 217346400217418923, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945680261308840626, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+      propertyPath: ability
+      value: 
+      objectReference: {fileID: 11400000, guid: c768019e3f172b24e886dffcb3abfaa9, type: 2}
+    - target: {fileID: 5945680261308840626, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+      propertyPath: abilityKey
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 8892587702508662005, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: inventory

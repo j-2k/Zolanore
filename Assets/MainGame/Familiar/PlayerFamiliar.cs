@@ -12,6 +12,7 @@ public class PlayerFamiliar : MonoBehaviour
     public bool isAggressiveFamiliar;
     public bool callFamiliarBack;
     public bool abilityTrigger;
+    public EnemyProtoVersion enemyAbilityFocus;
 
     private void Awake()
     {

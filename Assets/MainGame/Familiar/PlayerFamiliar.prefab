@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1748078254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1748078255}
+  - component: {fileID: 1748078256}
+  m_Layer: 10
+  m_Name: AbilityState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1748078255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748078254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1697568071972167353}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1748078256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748078254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f5017bbb7171743b9c966bbfc2e441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followState: {fileID: 1697568070600096028}
+  attackState: {fileID: 1697568071173322790}
 --- !u!1 &1697568070600096030
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseState: {fileID: 1697568071075701186}
+  abilityState: {fileID: 1748078256}
 --- !u!1 &1697568070738957630
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +121,7 @@ Transform:
   m_LocalScale: {x: 0.36945868, y: 0.32575, z: 1.0625032}
   m_Children: []
   m_Father: {fileID: 1697568071972167353}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1697568070738957618
 MeshFilter:
@@ -213,7 +259,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1697568071972167353}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1697568071173322790
 MonoBehaviour:
@@ -262,6 +308,7 @@ Transform:
   - {fileID: 1697568072381860187}
   - {fileID: 1697568070600096031}
   - {fileID: 1697568071075701197}
+  - {fileID: 1748078255}
   - {fileID: 1697568071173322785}
   - {fileID: 1697568070738957631}
   m_Father: {fileID: 0}
@@ -285,6 +332,8 @@ MonoBehaviour:
   isEnemyHit: 0
   isAggressiveFamiliar: 1
   callFamiliarBack: 0
+  abilityTrigger: 0
+  enemyAbilityFocus: {fileID: 0}
 --- !u!114 &1697568071972167355
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8892587703643822518}
   - component: {fileID: 8892587703643822519}
   - component: {fileID: 7783218131109182658}
+  - component: {fileID: 5945680261308840626}
   - component: {fileID: 8892587703643822513}
   m_Layer: 9
   m_Name: GameManager
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 8005667dc0e75e24994bd6066d637591, type: 2}
   cooldownTimeMax: 0
+  abilityType: 0
   abilityState: 0
   abilityKey: 49
 --- !u!114 &8892587703643822519
@@ -113,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: a2ca75b9ae1246142b7202e088d00a46, type: 2}
   cooldownTimeMax: 0
+  abilityType: 0
   abilityState: 0
   abilityKey: 50
 --- !u!114 &7783218131109182658
@@ -129,6 +132,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: afaf6151e93c66b41825e3aefe8305cf, type: 2}
   cooldownTimeMax: 0
+  abilityType: 0
+  abilityState: 0
+  abilityKey: 51
+--- !u!114 &5945680261308840626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217346399143027721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cc906838754944f8a1996891bd3edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: afaf6151e93c66b41825e3aefe8305cf, type: 2}
+  cooldownTimeMax: 0
+  abilityType: 0
   abilityState: 0
   abilityKey: 51
 --- !u!114 &8892587703643822513
@@ -143,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d43e13714d6a804a8b6b38527e3b9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAbilityExecs: []
+  allAbilities: []
 --- !u!1 &217346400217418920
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +268,6 @@ MonoBehaviour:
   slideDownSpeed: 8
   turnSmoothTime: 0.1
   cameraRig: {fileID: 0}
-  sphereColl: {fileID: 0}
   isMovingAbility: 0
 --- !u!114 &8892587702508662005
 MonoBehaviour:

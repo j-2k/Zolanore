@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class FamiliarFollowState : State
 {
     [SerializeField] FamiliarChaseState chaseState;
-    [SerializeField] FamiliarAttackState attackState;
+    [SerializeField] FamiliarAbilityState abilityState;
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
     GameObject player;
@@ -29,7 +29,8 @@ public class FamiliarFollowState : State
         {
             if (playerFamiliar.abilityTrigger)
             {
-                return attackState;
+                playerFamiliar.enemyAbilityFocus = playerFamiliar.lastestEnemyHit.GetComponent<EnemyProtoVersion>();
+                return abilityState;
             }
             playerFamiliar.callFamiliarBack = false;
             return chaseState;
@@ -37,7 +38,6 @@ public class FamiliarFollowState : State
         else
         {
             familiarAgent.SetDestination(player.transform.position);
-
             if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)//5+3
             {
                 teleTimer += Time.deltaTime;

@@ -9,8 +9,8 @@ public class FamiliarAttackState : State
     [SerializeField] FamiliarChaseState chaseState;
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
-    GameObject player;
-
+    CharacterManager playerStats;
+    
     EnemyProtoVersion enemyCache;
 
     float attackTimer;
@@ -25,7 +25,7 @@ public class FamiliarAttackState : State
 
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
         familiarAgent = GetComponentInParent<NavMeshAgent>();
-        player = playerFamiliar.player;
+        playerStats = playerFamiliar.player.GetComponent<CharacterManager>();
     }
 
     bool assignOnce = true;
@@ -46,6 +46,23 @@ public class FamiliarAttackState : State
         {
             attackTimer += Time.deltaTime;
         }
+
+        if (playerFamiliar.enemyAbilityFocus != null && playerFamiliar.abilityTrigger)
+        {
+            if (attackTimer >= 3)
+            {
+                Debug.Log("<color=blue>Attacked Enemy</color>" + enemyCache.name);
+                attackTimer = 0;
+                AttackEnemyWithAbility();
+                return FinishedAttacking();
+            }
+        }
+        else if (playerFamiliar.enemyAbilityFocus == null && !playerFamiliar.abilityTrigger)
+        {
+            return FinishedAttacking();
+        }
+        
+
 
         if (playerFamiliar.isAggressiveFamiliar && !isFarFromPlayer)//if player is not far continue attacking
         {//keep attacking the enemy untill it dies player must be in range at all times
@@ -68,7 +85,7 @@ public class FamiliarAttackState : State
             }
         }
 
-        if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= 15)
+        if (Vector3.Distance(familiarAgent.transform.position, playerStats.transform.position) >= 15)
         {
             isFarFromPlayer = true;
         }
@@ -84,6 +101,7 @@ public class FamiliarAttackState : State
     {
         attackTimer = 0;
         familiarAgent.stoppingDistance = 5;
+        familiarAgent.speed = 5;
         playerFamiliar.isEnemyHit = false;
         playerFamiliar.callFamiliarBack = false;
         assignOnce = true;
@@ -107,10 +125,27 @@ public class FamiliarAttackState : State
         }
     }
 
+    void AttackEnemyWithAbility()
+    {
+        if (playerFamiliar.enemyAbilityFocus != null)
+        {
+            playerFamiliar.enemyAbilityFocus.TakeDamageFromFamiliar(AbilityCalculationFamiliar());
+        }
+    }
+
+    int AbilityCalculationFamiliar()
+    {
+        int levelBasedDMG = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 2f));
+        int finalDMG = (int)(levelBasedDMG * Random.Range(0.8f, 1.2f) + (playerStats.Strength.Value * Random.Range(0.8f,1.2f)));
+        playerFamiliar.abilityTrigger = false;
+        Debug.Log("Dealing " + finalDMG + " ABILITY DMG by familiar!");
+        return finalDMG;
+    }
+
     int DamageCalculationFamiliar()
     {
         int levelBasedDMG = (int)((levelSystem.currentLevel * 2)* Random.Range(0.5f,1.5f));
-        int finalDMG = (int)(levelBasedDMG * Random.Range(0.5f, 2f));
+        int finalDMG = (int)(levelBasedDMG * Random.Range(0.8f, 1.2f));
         Debug.Log("Dealing " + finalDMG + " DMG by familiar!");
         
         return finalDMG;
