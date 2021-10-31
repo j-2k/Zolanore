@@ -11,30 +11,17 @@ public class FamiliarAttackState : State
     NavMeshAgent familiarAgent;
     GameObject player;
 
-    [SerializeField] GameObject enemyCache;
+    GameObject enemyCache;
 
     float attackTimer;
     bool isFarFromPlayer;
-    [SerializeField] int runs = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        //getting componenets
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
-        for (int i = 0; i < playerFamiliar.states.Length; i++)
-        {
-            if (playerFamiliar.states[i].name == "FollowState")
-            {
-                followState = (FamiliarFollowState)playerFamiliar.states[i];
-            }
-            if (playerFamiliar.states[i].name == "ChaseState")
-            {
-                chaseState = (FamiliarChaseState)playerFamiliar.states[i];
-            }
-        }
-
+        familiarAgent = GetComponentInParent<NavMeshAgent>();
         player = playerFamiliar.player;
-        familiarAgent = playerFamiliar.agentFamiliar;
     }
 
     bool assignOnce = true;

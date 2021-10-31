@@ -15,22 +15,9 @@ public class FamiliarChaseState : State
 
     void Start()
     {
-        //getting componenets
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
-        for (int i = 0; i < playerFamiliar.states.Length; i++)
-        {
-            if (playerFamiliar.states[i].name == "FollowState")
-            {
-                followState = (FamiliarFollowState)playerFamiliar.states[i];
-            }
-            if (playerFamiliar.states[i].name == "AttackState")
-            {
-                attackState = (FamiliarAttackState)playerFamiliar.states[i];
-            }
-        }
-
+        familiarAgent = GetComponentInParent<NavMeshAgent>();
         player = playerFamiliar.player;
-        familiarAgent = playerFamiliar.agentFamiliar;
     }
 
     public override State runCurrentState()

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class PlayerFamiliar : MonoBehaviour
 {
-    public State[] states;
     public NavMeshAgent agentFamiliar;
     public GameObject player;
     public GameObject lastestEnemyHit;
@@ -15,7 +14,6 @@ public class PlayerFamiliar : MonoBehaviour
 
     private void Awake()
     {
-        states = GetComponentsInChildren<State>();
         player = GameObject.FindGameObjectWithTag("Player");
         agentFamiliar = GetComponent<NavMeshAgent>();
     }

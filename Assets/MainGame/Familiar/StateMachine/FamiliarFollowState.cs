@@ -16,20 +16,9 @@ public class FamiliarFollowState : State
     void Start()
     {
         timeToTeleport = 6;
-
-        //getting componenets
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
-        for (int i = 0; i < playerFamiliar.states.Length; i++)
-        {
-            if (playerFamiliar.states[i].name == "ChaseState")
-            {
-                chaseState = (FamiliarChaseState)playerFamiliar.states[i];
-                break;
-            }
-        }
-
+        familiarAgent = GetComponentInParent<NavMeshAgent>();
         player = playerFamiliar.player;
-        familiarAgent = playerFamiliar.agentFamiliar;
     }
 
     // Update is called once per frame
