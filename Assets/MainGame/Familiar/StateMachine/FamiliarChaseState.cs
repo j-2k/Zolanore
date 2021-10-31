@@ -13,7 +13,7 @@ public class FamiliarChaseState : State
 
     float catchUpTimer;
 
-    void Awake()
+    void Start()
     {
         //getting componenets
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();

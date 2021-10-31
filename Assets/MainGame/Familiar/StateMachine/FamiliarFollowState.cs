@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class FamiliarFollowState : State
 {
-    [SerializeField] FamiliarChaseState attackState;
+    [SerializeField] FamiliarChaseState chaseState;
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
     GameObject player;
@@ -13,7 +13,7 @@ public class FamiliarFollowState : State
     float timeToTeleport;
     float teleTimer;
 
-    void Awake()
+    void Start()
     {
         timeToTeleport = 6;
 
@@ -23,7 +23,7 @@ public class FamiliarFollowState : State
         {
             if (playerFamiliar.states[i].name == "ChaseState")
             {
-                attackState = (FamiliarChaseState)playerFamiliar.states[i];
+                chaseState = (FamiliarChaseState)playerFamiliar.states[i];
                 break;
             }
         }
@@ -37,7 +37,7 @@ public class FamiliarFollowState : State
     {
         if (playerFamiliar.isEnemyHit)
         {
-            return attackState;
+            return chaseState;
         }
         else
         {
