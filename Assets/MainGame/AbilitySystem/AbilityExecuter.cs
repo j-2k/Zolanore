@@ -89,12 +89,13 @@ public class AbilityExecuter : MonoBehaviour
                     triggerCancel = false;
                     //if bypass is true we dont cancel
                     //if bypass is false  && cancel is true cancel ability
-                    if (!ability.bypassCancel && cancelAbility)                     //1st aoe =/ trigger cancel= false / cancel ability = false | TRUE > DELEGATE X > FALSE > FALSE / RUNNING
+                    if (!ability.bypassCancel && cancelAbility || ability.singleTrigger)                     //1st aoe =/ trigger cancel= false / cancel ability = false | TRUE > DELEGATE X > FALSE > FALSE / RUNNING
                     {                                                               //2nd dash =/ trigger cancel = true > DELEGATE FALSE >  / cancel ability = TRUE | TRUE > DELEGATE FALSE > FALSE > FALSE
                         ability.OnBeginCoolDown(player);
                         abilityState = AbilityState.cooldown;
                         cooldownTime = ability.cooldownTime;
                     }
+
                     activeTime -= Time.deltaTime;
                 }
                 else

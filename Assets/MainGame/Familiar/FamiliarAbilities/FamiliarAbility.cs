@@ -31,6 +31,12 @@ public class FamiliarAbility : Ability
             playerFamiliar.callFamiliarBack = false;
             once = false;
         }
+
+        if (!playerFamiliar.abilityTrigger)
+        {
+            singleTrigger = true;
+        }
+
         Debug.Log("FAMILIAR ABILITY ACTIVE");
     }
 
@@ -38,6 +44,7 @@ public class FamiliarAbility : Ability
     {
         playerFamiliar.agentFamiliar.speed = 5;
         playerFamiliar.abilityTrigger = false;
+        singleTrigger = false;
         once = true;
     }
 
