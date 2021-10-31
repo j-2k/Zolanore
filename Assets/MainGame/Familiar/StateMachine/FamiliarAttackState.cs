@@ -43,11 +43,11 @@ public class FamiliarAttackState : State
     {
         if (assignOnce)
         {
-            enemyCache = playerFamiliar.focusEnemy;
+            enemyCache = playerFamiliar.lastestEnemyHit;
             assignOnce = false;
         }
 
-        if (playerFamiliar.focusEnemy == null)
+        if (playerFamiliar.lastestEnemyHit == null || playerFamiliar.callFamiliarBack)
         {
             return FinishedAttacking();
         }
@@ -65,7 +65,7 @@ public class FamiliarAttackState : State
 
                 if (!isFarFromPlayer)
                 {
-                    return chaseState;
+                    return AggressiveAttack();
                 }
                 else
                 {
@@ -97,8 +97,19 @@ public class FamiliarAttackState : State
     FamiliarFollowState FinishedAttacking()
     {
         attackTimer = 0;
+        familiarAgent.stoppingDistance = 5;
         playerFamiliar.isEnemyHit = false;
+        playerFamiliar.callFamiliarBack = false;
         assignOnce = true;
         return followState;
+    }
+
+    FamiliarChaseState AggressiveAttack()
+    {
+        attackTimer = 0;
+        playerFamiliar.isEnemyHit = false;
+        playerFamiliar.callFamiliarBack = false;
+        assignOnce = true;
+        return chaseState;
     }
 }

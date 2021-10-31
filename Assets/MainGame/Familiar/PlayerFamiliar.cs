@@ -8,9 +8,10 @@ public class PlayerFamiliar : MonoBehaviour
     public State[] states;
     public NavMeshAgent agentFamiliar;
     public GameObject player;
-    public GameObject focusEnemy;
+    public GameObject lastestEnemyHit;
     public bool isEnemyHit;
     public bool isAggressiveFamiliar;
+    public bool callFamiliarBack;
 
     private void Awake()
     {

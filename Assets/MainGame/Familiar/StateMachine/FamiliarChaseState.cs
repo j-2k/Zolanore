@@ -35,17 +35,17 @@ public class FamiliarChaseState : State
 
     public override State runCurrentState()
     {
-        if (playerFamiliar.focusEnemy == null)
+        if (playerFamiliar.lastestEnemyHit == null || playerFamiliar.callFamiliarBack)
         {
             return FollowState();
         }
         else
         {
-            familiarAgent.SetDestination(playerFamiliar.focusEnemy.transform.position);
+            familiarAgent.SetDestination(playerFamiliar.lastestEnemyHit.transform.position);
 
             familiarAgent.stoppingDistance = 3;
 
-            if (Vector3.Distance(familiarAgent.transform.position, playerFamiliar.focusEnemy.transform.position) <= familiarAgent.stoppingDistance) //familiarAgent.stoppingDistance this shit fucked me for 2 hours i had another number instead
+            if (Vector3.Distance(familiarAgent.transform.position, playerFamiliar.lastestEnemyHit.transform.position) <= familiarAgent.stoppingDistance) //familiarAgent.stoppingDistance this shit fucked me for 2 hours i had another number instead
             {   //IF U WANT TO CHANGE THE DISTANCE OF THE ATTACK RANGE YOU MUST CHANGE THE STOPPING DISTANCE  = familiarAgent.stoppingDistance I MESSED UP BEFORE
                 Debug.Log("FAMILIAR IS IN RANGE CHANGING TO ATTACK STATE");
                 return attackState;
@@ -73,6 +73,7 @@ public class FamiliarChaseState : State
         Debug.Log("Attack To Following State");
         familiarAgent.stoppingDistance = 5;
         playerFamiliar.isEnemyHit = false;
+        playerFamiliar.callFamiliarBack = false;
         catchUpTimer = 0;
         return followState;
     }

@@ -37,6 +37,7 @@ public class FamiliarFollowState : State
     {
         if (playerFamiliar.isEnemyHit)
         {
+            playerFamiliar.callFamiliarBack = false;
             return chaseState;
         }
         else

@@ -79,6 +79,11 @@ public class PlayerManager : MonoBehaviour
             input.y = Input.GetAxis("Vertical");
         }
 
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            playerFamiliar.callFamiliarBack = true;
+        }
+
         if (!isMovingAbility)
         {
 
@@ -168,7 +173,7 @@ public class PlayerManager : MonoBehaviour
                 hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
                 if (oneRunFamiliar)
                 {
-                    playerFamiliar.focusEnemy = hitCollider.GetComponent<EnemyProtoVersion>().gameObject;
+                    playerFamiliar.lastestEnemyHit = hitCollider.GetComponent<EnemyProtoVersion>().gameObject;
                     playerFamiliar.isEnemyHit = true;
                     oneRunFamiliar = false;
                 }
