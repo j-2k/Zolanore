@@ -46,21 +46,6 @@ public class FamiliarAttackState : State
         {
             attackTimer += Time.deltaTime;
         }
-
-        if (playerFamiliar.enemyAbilityFocus != null && playerFamiliar.abilityTrigger)
-        {
-            if (attackTimer >= 3)
-            {
-                Debug.Log("<color=blue>Attacked Enemy</color>" + enemyCache.name);
-                attackTimer = 0;
-                AttackEnemyWithAbility();
-                return FinishedAttacking();
-            }
-        }
-        else if (playerFamiliar.enemyAbilityFocus == null && !playerFamiliar.abilityTrigger)
-        {
-            return FinishedAttacking();
-        }
         
 
 
@@ -123,23 +108,6 @@ public class FamiliarAttackState : State
         {
             enemyCache.TakeDamageFromFamiliar(DamageCalculationFamiliar());
         }
-    }
-
-    void AttackEnemyWithAbility()
-    {
-        if (playerFamiliar.enemyAbilityFocus != null)
-        {
-            playerFamiliar.enemyAbilityFocus.TakeDamageFromFamiliar(AbilityCalculationFamiliar());
-        }
-    }
-
-    int AbilityCalculationFamiliar()
-    {
-        int levelBasedDMG = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 2f));
-        int finalDMG = (int)(levelBasedDMG * Random.Range(0.8f, 1.2f) + (playerStats.Strength.Value * Random.Range(0.8f,1.2f)));
-        playerFamiliar.abilityTrigger = false;
-        Debug.Log("Dealing " + finalDMG + " ABILITY DMG by familiar!");
-        return finalDMG;
     }
 
     int DamageCalculationFamiliar()

@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &109041065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109041066}
+  - component: {fileID: 3789928259114119773}
+  m_Layer: 10
+  m_Name: AbilityAttackState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109041066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109041065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1697568071972167353}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3789928259114119773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109041065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f13c4ebee41a10b429ece022e467fe3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followState: {fileID: 1697568070600096028}
 --- !u!1 &1748078254
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followState: {fileID: 1697568070600096028}
-  attackState: {fileID: 1697568071173322790}
+  abilityAttackState: {fileID: 3789928259114119773}
 --- !u!1 &1697568070600096030
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +165,7 @@ Transform:
   m_LocalScale: {x: 0.36945868, y: 0.32575, z: 1.0625032}
   m_Children: []
   m_Father: {fileID: 1697568071972167353}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1697568070738957618
 MeshFilter:
@@ -310,6 +354,7 @@ Transform:
   - {fileID: 1697568071075701197}
   - {fileID: 1748078255}
   - {fileID: 1697568071173322785}
+  - {fileID: 109041066}
   - {fileID: 1697568070738957631}
   m_Father: {fileID: 0}
   m_RootOrder: 0
