@@ -26,7 +26,7 @@ public class AbilityCooldownUI : MonoBehaviour
         //idk this implemntation is disgusting and i hate looking at it and it worked im going to bed iv been awake for 16+ hours with 2 hours of sleep prior will fix this later if needed
 
         //WORLD OF WARCRAFT LIKE ABILITY BAR GCD IMPLEMENTATION
-        if (abilityManager.meleeAbilityExecs[indexAbility].abilityState == AbilityExecuter.AbilityState.cooldown)
+        if (abilityManager.allAbilities[indexAbility].abilityState == AbilityExecuter.AbilityState.cooldown)
         {
             if (cooldownOneRun)
             {
@@ -35,11 +35,11 @@ public class AbilityCooldownUI : MonoBehaviour
             }
             else
             {
-                image.fillAmount -= 1 / abilityManager.meleeAbilityExecs[indexAbility].cooldownTimeMax * Time.deltaTime;
+                image.fillAmount -= 1 / abilityManager.allAbilities[indexAbility].cooldownTimeMax * Time.deltaTime;
             }
             
         }
-        else if (abilityManager.meleeAbilityExecs[indexAbility].abilityState == AbilityExecuter.AbilityState.gcd)
+        else if (abilityManager.allAbilities[indexAbility].abilityState == AbilityExecuter.AbilityState.gcd)
         {
             if (gcdOneRun)
             {

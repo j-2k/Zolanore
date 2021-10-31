@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(menuName = "Abilities/AOEAbility")]
 public class AOEAbility : Ability
 {
@@ -12,6 +13,7 @@ public class AOEAbility : Ability
 
     public override void CacheStart(GameObject parent)
     {
+        combatType = CombatType.Melee;
         player = parent.GetComponent<PlayerManager>();
         meshTransform = parent.transform.GetChild(0);
         cc = parent.GetComponent<CharacterController>();

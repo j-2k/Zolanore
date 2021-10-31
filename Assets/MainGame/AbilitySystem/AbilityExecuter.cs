@@ -7,10 +7,13 @@ public class AbilityExecuter : MonoBehaviour
 {
     [SerializeField] Ability ability;
     GameObject player;
+
     float cooldownTime;
     public float cooldownTimeMax;
     float activeTime;
     float gcd = 3;
+
+    public CombatType abilityType;
 
     public enum AbilityState
     {
@@ -31,6 +34,7 @@ public class AbilityExecuter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         AbilityManager.OnGCD += GCDCooldown;
         AbilityManager.OnCancelAbility += CancelCurrentAbility;
         player = GameObject.FindGameObjectWithTag("Player");
@@ -38,6 +42,27 @@ public class AbilityExecuter : MonoBehaviour
         cooldownTimeMax = cooldownTime;
 
         ability.CacheStart(player);
+
+        if (ability.combatType == CombatType.Melee)
+        {
+            abilityType = CombatType.Melee;
+            return;
+        }
+        else if (ability.combatType == CombatType.Ranged)
+        {
+            abilityType = CombatType.Ranged;
+            return;
+        }
+        else if (ability.combatType == CombatType.Magic)
+        {
+            abilityType = CombatType.Magic;
+            return;
+        }
+        else if (ability.combatType == CombatType.Familiar)
+        {
+            abilityType = CombatType.Familiar;
+            return;
+        }
     }
 
     // Update is called once per frame

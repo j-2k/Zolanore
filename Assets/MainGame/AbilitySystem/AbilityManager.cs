@@ -21,11 +21,18 @@ public class AbilityManager : MonoBehaviour
 
     //change ability styles here i think
 
-    public AbilityExecuter[] meleeAbilityExecs;
+    public AbilityExecuter[] allAbilities;
 
-    //public AbilityExecuter[] magicAbilityExecs;
 
-    //public AbilityExecuter[] rangedAbilityExecs;
+    /*
+    public List<AbilityExecuter> meleeAbilityExecs;
+
+    public List<AbilityExecuter> rangedAbilityExecs;
+
+    public List<AbilityExecuter> magicAbilityExecs;
+
+    public List<AbilityExecuter> familiarAbilityExecs;
+    */
 
     public delegate void AbilityDelegate();
     public static event AbilityDelegate OnGCD;
@@ -34,7 +41,29 @@ public class AbilityManager : MonoBehaviour
 
     private void Start()
     {
-        meleeAbilityExecs = GetComponents<AbilityExecuter>();   //universal abilites maybe
+        allAbilities = GetComponents<AbilityExecuter>();   //universal abilites maybe
+
+        /*
+        for (int i = 0; i < allAbilities.Length; i++)
+        {
+            if (allAbilities[i].abilityType == CombatType.Melee)
+            {
+                meleeAbilityExecs.Add(allAbilities[i]);
+            }
+            else if (allAbilities[i].abilityType == CombatType.Ranged)
+            {
+                rangedAbilityExecs.Add(allAbilities[i]);
+            }
+            else if(allAbilities[i].abilityType == CombatType.Magic)
+            {
+                magicAbilityExecs.Add(allAbilities[i]);
+            }
+            else if(allAbilities[i].abilityType == CombatType.Familiar)
+            {
+                familiarAbilityExecs.Add(allAbilities[i]);
+            }
+        }
+        */
     }
 
     public void StartGCD()
