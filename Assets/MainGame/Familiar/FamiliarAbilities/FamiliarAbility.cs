@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Abilities/FamiliarAbility")]
+public class FamiliarAbility : Ability
+{
+    PlayerFamiliar playerFamiliar;
+    StateManager stateManager;
+    public override void CacheStart(GameObject parent)
+    {
+        combatType = CombatType.Familiar;
+        playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();
+        stateManager = playerFamiliar.gameObject.GetComponent<StateManager>();
+    }
+
+    public override void OnActivate(GameObject parent)
+    {
+        playerFamiliar.callFamiliarBack = true;
+        playerFamiliar.isEnemyHit = false;
+        playerFamiliar.abilityTrigger = true;
+        playerFamiliar.agentFamiliar.speed = 7.5f;
+    }
+
+    public override void AbilityUpdateActive(GameObject parent)
+    {
+        
+    }
+
+    public override void OnBeginCoolDown(GameObject parent)
+    {
+        playerFamiliar.agentFamiliar.speed = 5;
+        playerFamiliar.abilityTrigger = false;
+    }
+
+    public override void AbilityUpdateCooldown(GameObject parent)
+    {
+
+    }
+}

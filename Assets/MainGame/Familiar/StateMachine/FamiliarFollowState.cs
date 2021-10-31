@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class FamiliarFollowState : State
 {
     [SerializeField] FamiliarChaseState chaseState;
+    [SerializeField] FamiliarAttackState attackState;
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
     GameObject player;
@@ -26,6 +27,10 @@ public class FamiliarFollowState : State
     {
         if (playerFamiliar.isEnemyHit)
         {
+            if (playerFamiliar.abilityTrigger)
+            {
+                return attackState;
+            }
             playerFamiliar.callFamiliarBack = false;
             return chaseState;
         }

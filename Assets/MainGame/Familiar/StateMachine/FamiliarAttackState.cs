@@ -11,14 +11,18 @@ public class FamiliarAttackState : State
     NavMeshAgent familiarAgent;
     GameObject player;
 
-    GameObject enemyCache;
+    EnemyProtoVersion enemyCache;
 
     float attackTimer;
     bool isFarFromPlayer;
 
+    LevelSystem levelSystem;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelSystem = LevelSystem.instance;
+
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
         familiarAgent = GetComponentInParent<NavMeshAgent>();
         player = playerFamiliar.player;
@@ -30,11 +34,11 @@ public class FamiliarAttackState : State
     {
         if (assignOnce)
         {
-            enemyCache = playerFamiliar.lastestEnemyHit;
+            enemyCache = playerFamiliar.lastestEnemyHit.GetComponent<EnemyProtoVersion>();
             assignOnce = false;
         }
 
-        if (playerFamiliar.lastestEnemyHit == null || playerFamiliar.callFamiliarBack)
+        if (playerFamiliar.lastestEnemyHit == null || playerFamiliar.callFamiliarBack || enemyCache == null)
         {
             return FinishedAttacking();
         }
@@ -43,28 +47,23 @@ public class FamiliarAttackState : State
             attackTimer += Time.deltaTime;
         }
 
-        if (playerFamiliar.isAggressiveFamiliar)
+        if (playerFamiliar.isAggressiveFamiliar && !isFarFromPlayer)//if player is not far continue attacking
         {//keep attacking the enemy untill it dies player must be in range at all times
             if (attackTimer >= 3)
             {
                 Debug.Log("<color=blue>Attacked Enemy</color>" + enemyCache.name);
                 attackTimer = 0;
-
-                if (!isFarFromPlayer)
-                {
-                    return AggressiveAttack();
-                }
-                else
-                {
-                    return FinishedAttacking();
-                }
+                AttackEnemyCache();
+                return AggressiveAttack();
             }
         }
-        else
+        else//if player is far attack the enemy & go back to player
         {//attack once and return if not aggro
             if (attackTimer >= 3)
             {
+                attackTimer = 0;
                 Debug.Log("<color=blue>Attacked Enemy</color>" + enemyCache.name);
+                AttackEnemyCache();
                 return FinishedAttacking();
             }
         }
@@ -98,5 +97,22 @@ public class FamiliarAttackState : State
         playerFamiliar.callFamiliarBack = false;
         assignOnce = true;
         return chaseState;
+    }
+
+    void AttackEnemyCache()
+    {
+        if (enemyCache != null)
+        {
+            enemyCache.TakeDamageFromFamiliar(DamageCalculationFamiliar());
+        }
+    }
+
+    int DamageCalculationFamiliar()
+    {
+        int levelBasedDMG = (int)((levelSystem.currentLevel * 2)* Random.Range(0.5f,1.5f));
+        int finalDMG = (int)(levelBasedDMG * Random.Range(0.5f, 2f));
+        Debug.Log("Dealing " + finalDMG + " DMG by familiar!");
+        
+        return finalDMG;
     }
 }

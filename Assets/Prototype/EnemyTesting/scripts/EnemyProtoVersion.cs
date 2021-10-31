@@ -75,6 +75,17 @@ public class EnemyProtoVersion : MonoBehaviour
         }
     }
 
+    public void TakeDamageFromFamiliar(int incDmg)
+    {
+        health -= incDmg;
+        if (health <= 0)
+        {
+            //SendXPToPlayer(xp);
+            levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+            Destroy(gameObject);
+        }
+    }
+
     public void TakeDamageFromPlayerPrototype(int incDmg)
     {
         health -= incDmg;
