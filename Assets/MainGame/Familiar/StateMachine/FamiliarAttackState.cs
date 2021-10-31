@@ -11,10 +11,11 @@ public class FamiliarAttackState : State
     NavMeshAgent familiarAgent;
     GameObject player;
 
-    [SerializeField] EnemyProtoVersion enemyCache;
+    [SerializeField] GameObject enemyCache;
 
     float attackTimer;
-
+    bool isFarFromPlayer;
+    [SerializeField] int runs = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,8 +37,16 @@ public class FamiliarAttackState : State
         familiarAgent = playerFamiliar.agentFamiliar;
     }
 
+    bool assignOnce = true;
+
     public override State runCurrentState()
     {
+        if (assignOnce)
+        {
+            enemyCache = playerFamiliar.focusEnemy;
+            assignOnce = false;
+        }
+
         if (playerFamiliar.focusEnemy == null)
         {
             return FinishedAttacking();
@@ -49,20 +58,37 @@ public class FamiliarAttackState : State
 
         if (playerFamiliar.isAggressiveFamiliar)
         {//keep attacking the enemy untill it dies player must be in range at all times
-            if (attackTimer >= 1)
+            if (attackTimer >= 3)
             {
-                Debug.Log("<color=blue>Attacked Enemy</color>");
+                Debug.Log("<color=blue>Attacked Enemy</color>" + enemyCache.name);
                 attackTimer = 0;
-                return chaseState;
+
+                if (!isFarFromPlayer)
+                {
+                    return chaseState;
+                }
+                else
+                {
+                    return FinishedAttacking();
+                }
             }
         }
         else
         {//attack once and return if not aggro
-            if (attackTimer >= 1)
+            if (attackTimer >= 3)
             {
-                Debug.Log("<color=blue>Attacked Enemy</color>");
+                Debug.Log("<color=blue>Attacked Enemy</color>" + enemyCache.name);
                 return FinishedAttacking();
             }
+        }
+
+        if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= 15)
+        {
+            isFarFromPlayer = true;
+        }
+        else
+        {
+            isFarFromPlayer = false;
         }
 
         return this;
@@ -72,6 +98,7 @@ public class FamiliarAttackState : State
     {
         attackTimer = 0;
         playerFamiliar.isEnemyHit = false;
+        assignOnce = true;
         return followState;
     }
 }
