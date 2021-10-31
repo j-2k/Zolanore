@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class FamiliarFollowState : State
 {
-    [SerializeField] FamiliarAttackState attackState;
+    [SerializeField] FamiliarChaseState attackState;
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
     GameObject player;
@@ -13,7 +13,6 @@ public class FamiliarFollowState : State
     float timeToTeleport;
     float teleTimer;
 
-    // Start is called before the first frame update
     void Awake()
     {
         timeToTeleport = 6;
@@ -22,9 +21,10 @@ public class FamiliarFollowState : State
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
         for (int i = 0; i < playerFamiliar.states.Length; i++)
         {
-            if (playerFamiliar.states[i].name == "AttackState")
+            if (playerFamiliar.states[i].name == "ChaseState")
             {
-                attackState = (FamiliarAttackState)playerFamiliar.states[i];
+                attackState = (FamiliarChaseState)playerFamiliar.states[i];
+                break;
             }
         }
 

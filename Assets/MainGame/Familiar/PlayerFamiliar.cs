@@ -10,6 +10,7 @@ public class PlayerFamiliar : MonoBehaviour
     public GameObject player;
     public GameObject focusEnemy;
     public bool isEnemyHit;
+    public bool isAggressiveFamiliar;
 
     private void Awake()
     {

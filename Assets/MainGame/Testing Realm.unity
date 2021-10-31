@@ -753,7 +753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4680240232570272984, guid: 6c4466b650bfd8047a4e628f4f5607fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.9474487
+      value: 37.29
       objectReference: {fileID: 0}
     - target: {fileID: 4680240232570272984, guid: 6c4466b650bfd8047a4e628f4f5607fb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -789,7 +789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5732703497981473340, guid: 6c4466b650bfd8047a4e628f4f5607fb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c4466b650bfd8047a4e628f4f5607fb, type: 3}
@@ -802,6 +802,49 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &828085210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 828085211}
+  - component: {fileID: 828085212}
+  m_Layer: 10
+  m_Name: AttackState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &828085211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828085210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1767023265}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &828085212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828085210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28160c2f53a184e4bbdff73c4215348d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &897537506
@@ -1355,7 +1398,7 @@ GameObject:
   - component: {fileID: 999033399}
   - component: {fileID: 999033400}
   m_Layer: 10
-  m_Name: AttackState
+  m_Name: ChaseState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1752,6 +1795,7 @@ Transform:
   m_Children:
   - {fileID: 522638053}
   - {fileID: 999033399}
+  - {fileID: 828085211}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1805,8 +1849,9 @@ MonoBehaviour:
   states: []
   agentFamiliar: {fileID: 0}
   player: {fileID: 0}
-  enemy: {fileID: 0}
+  focusEnemy: {fileID: 0}
   isEnemyHit: 0
+  isAggressiveFamiliar: 0
 --- !u!114 &1792105052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1792105052, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
