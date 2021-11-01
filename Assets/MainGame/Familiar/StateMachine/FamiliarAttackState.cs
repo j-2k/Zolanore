@@ -11,7 +11,7 @@ public class FamiliarAttackState : State
     NavMeshAgent familiarAgent;
     CharacterManager playerStats;
     
-    EnemyProtoVersion enemyCache;
+    EnemyStatManager enemyCache;
 
     float attackTimer;
     bool isFarFromPlayer;
@@ -34,7 +34,7 @@ public class FamiliarAttackState : State
     {
         if (assignOnce)
         {
-            enemyCache = playerFamiliar.lastestEnemyHit.GetComponent<EnemyProtoVersion>();
+            enemyCache = playerFamiliar.lastestEnemyHit.GetComponent<EnemyStatManager>();
             assignOnce = false;
         }
 

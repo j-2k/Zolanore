@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyStatManager : MonoBehaviour
 {//a very simple enemy stat manager need to expand on this more later on
     [Header("Assign Level & extra stats")]
     [SerializeField] int enemyLevel;
@@ -36,56 +36,6 @@ public class EnemyManager : MonoBehaviour
 
     }
 
-
-    bool oneRun;
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-         * 
-        timer = 0;
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
-         * vars
-         * 
-         *     
-    Transform player;
-    [SerializeField] GameObject childTrigger;
-    bool isAttacking;
-    float timer;
-    
-    /*
-        if (!isAttacking)
-        {
-            agent.SetDestination(player.position);
-
-            if (Vector3.Distance(player.transform.position, transform.position) <= 3f)
-            {
-                isAttacking = true;
-                oneRun = true;
-            }
-        }
-        else
-        {
-            timer += Time.deltaTime;
-            if (timer >= 1f)
-            {
-                if (oneRun)
-                {
-                    childTrigger.SetActive(true);
-                    oneRun = false;
-                }
-
-                if (timer >= 3.5f)
-                {
-                    isAttacking = false;
-                    childTrigger.SetActive(false);
-                    timer = 0;
-                }
-            }
-        }
-        */
-    }
-
     public void TakeDamageFromPlayer(int incDmg)
     {
         incDmg -= defence;
@@ -93,7 +43,6 @@ public class EnemyManager : MonoBehaviour
         curHealth -= incDmg;
         if (curHealth <= 0)
         {
-            //SendXPToPlayer(xp);
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
             Destroy(gameObject);
         }
@@ -106,7 +55,6 @@ public class EnemyManager : MonoBehaviour
         curHealth -= incDmg;
         if (curHealth <= 0)
         {
-            //SendXPToPlayer(xp);
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
             Destroy(gameObject);
         }

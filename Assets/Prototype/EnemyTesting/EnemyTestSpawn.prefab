@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 9011155916276321429}
   - component: {fileID: 4240335842412398660}
   - component: {fileID: 3663472911703307952}
+  - component: {fileID: 8190507893500132858}
   - component: {fileID: 1687610636990150973}
   m_Layer: 0
   m_Name: EnemyTestSpawn
@@ -305,6 +306,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   childTrigger: {fileID: 6214103110484471110}
+  hitID: 0
+--- !u!114 &8190507893500132858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5732703497981473340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442d6c9d9976e914aa10a1c18d305e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLevel: 1
+  healthAdd: 0
+  defence: 0
+  maxHealth: 0
+  curHealth: 0
+  xp: 0
+  hitID: 0
 --- !u!195 &1687610636990150973
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -315,7 +336,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

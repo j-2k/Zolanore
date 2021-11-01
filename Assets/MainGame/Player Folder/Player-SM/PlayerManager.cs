@@ -170,8 +170,8 @@ public class PlayerManager : MonoBehaviour
         hitColliders = Physics.OverlapSphere(hitboxPos.transform.position, attackColliderRadius);
 
         //out going dmg calc maybe change in the future for better results to scale to higher lvls
-        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(0.7f,1.1f));
-        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(1.5f, 2.5f) + levelBasedDmg);
+        int levelBasedDmg = (int)((levelSystem.currentLevel + 10) * Random.Range(0.7f,1.1f));//help early game be useless lategame
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(1.5f, 2.5f) + levelBasedDmg); //help lategame be useless early game
 
 
         foreach (Collider hitCollider in hitColliders)
@@ -180,10 +180,10 @@ public class PlayerManager : MonoBehaviour
             {
                 Debug.Log("I just hit an enemey");
                 //hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(outgoingDamage);
-                hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+                hitCollider.GetComponent<EnemyStatManager>().TakeDamageFromPlayer(outgoingDamage);
                 if (oneRunFamiliar)
                 {
-                    playerFamiliar.lastestEnemyHit = hitCollider.GetComponent<EnemyProtoVersion>().gameObject;
+                    playerFamiliar.lastestEnemyHit = hitCollider.GetComponent<EnemyStatManager>().gameObject;
                     playerFamiliar.isEnemyHit = true;
                     oneRunFamiliar = false;
                 }
@@ -213,11 +213,11 @@ public class PlayerManager : MonoBehaviour
             if (hitCollider.tag == "Enemy")
             {
                 Debug.Log("I just hit an enemey");
-                if (hitCollider.GetComponent<EnemyProtoVersion>().hitID != attackID)
+                if (hitCollider.GetComponent<EnemyStatManager>().hitID != attackID)
                 {
                     // Hit enemy
-                    hitCollider.GetComponent<EnemyProtoVersion>().hitID = attackID;
-                    hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+                    hitCollider.GetComponent<EnemyStatManager>().hitID = attackID;
+                    hitCollider.GetComponent<EnemyStatManager>().TakeDamageFromPlayer(outgoingDamage);
                 }
             }
         }
@@ -236,7 +236,7 @@ public class PlayerManager : MonoBehaviour
             if (hitCollider.tag == "Enemy")
             {
                 Debug.Log("I just hit an enemey");
-                hitCollider.GetComponent<EnemyProtoVersion>().TakeDamageFromPlayer(outgoingDamage);
+                hitCollider.GetComponent<EnemyStatManager>().TakeDamageFromPlayer(outgoingDamage);
             }
         }
     }

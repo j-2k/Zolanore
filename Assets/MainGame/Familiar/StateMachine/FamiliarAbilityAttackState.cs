@@ -10,7 +10,7 @@ public class FamiliarAbilityAttackState : State
     NavMeshAgent familiarAgent;
     CharacterManager playerStats;
     
-    EnemyProtoVersion enemyCache;
+    EnemyStatManager enemyCache;
 
     float attackTimer;
     bool isFarFromPlayer;

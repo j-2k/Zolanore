@@ -90,56 +90,29 @@ public class CharacterManager : MonoBehaviour
     private void Update()
     {
 
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("was" + Defence.BaseValue);
-            Defence.BaseValue++;
-            Debug.Log("now" + Defence.BaseValue);
-            statPanel.UpdateStatValue();
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            //hack fix fast is to make sure player spent all free point sbefore resseting or else they will dupe find a nice fix or do this hack fix
-            Debug.Log("resetting all stat values");
-            statPanel.ResetAllStatValue();
-
-            int level = 5;
-
-            //give 2 free points per level
-            int freePoints = level * 2;
-            
-
-
-            Debug.Log("you have " + freePoints + " points to spend after resetting ur skill levels");
-        }
-        */
     }
 
+    public void TakeDamageFromEnemy(int incDmg)
+    {
+        incDmg -= Mathf.RoundToInt(Defence.Value);
+        incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
+        playerCurrentHealth -= incDmg;
+        if (playerCurrentHealth <= 0)
+        {
+            //player died
+            //respawn in some location
+            //play death animation then at the end of death animation trigger anim event to send the player to respawn location
+            
+        }
+    }
 
+    
 
     void OnLevelUp()
     {
         playerMaxHealth += 20;
         playerCurrentHealth = playerMaxHealth;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
