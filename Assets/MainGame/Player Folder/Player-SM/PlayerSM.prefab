@@ -263,6 +263,8 @@ MonoBehaviour:
   isAttackStart: 0
   attackColliderRadius: 1.75
   playerAnimator: {fileID: 217346400217418922}
+  accell: 4
+  decell: 3
   slopeForce: 12
   slopeForceRayLength: 3
   slideDownSpeed: 8

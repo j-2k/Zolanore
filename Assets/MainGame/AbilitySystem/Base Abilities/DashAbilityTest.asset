@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e156323db9e97144860c71eb6a1490a, type: 3}
   m_Name: DashAbilityTest
   m_EditorClassIdentifier: 
-  name: 
-  cooldownTime: 6
+  abilityName: 
+  combatType: 0
+  cooldownTime: 2
   activeTime: 1
   singleTrigger: 0
+  bypassCancel: 0
   dashSpeed: 20

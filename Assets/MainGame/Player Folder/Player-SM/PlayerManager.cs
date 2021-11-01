@@ -23,6 +23,9 @@ public class PlayerManager : MonoBehaviour
     //anims
     [SerializeField] Animator playerAnimator;
     Vector2 input;
+    [SerializeField] float accell; //4
+    [SerializeField] float decell; //3
+    float movementDir;
 
     //slopefix downforces
     [SerializeField] float slopeForce = 12;     //12 best value
@@ -56,7 +59,6 @@ public class PlayerManager : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         finalJumpCalc = Mathf.Sqrt(2 * gravity * jumpSpeed);
     }
-    
     void Update()
     {
         if (cc.isGrounded)
@@ -98,9 +100,23 @@ public class PlayerManager : MonoBehaviour
                 playerAnimator.SetTrigger("isAttacking");
             }
 
-            float movementDir = Mathf.Clamp01(input.magnitude);
+            //movementDir = Mathf.Clamp01(input.magnitude);
+            //movementDir = Mathf.Clamp(movementDir, 0, 1);
+            //playerAnimator.SetFloat("rmVelocity", movementDir);
+
+            if (input.x != 0 || input.y != 0)
+            {
+                //moving
+                movementDir += accell * Time.deltaTime;
+            }
+            else if (input.x == 0 && input.y == 0)
+            {
+                movementDir -= decell * Time.deltaTime;
+            }
+
             movementDir = Mathf.Clamp(movementDir, 0, 1);
             playerAnimator.SetFloat("rmVelocity", movementDir);
+
         }
         else
         {
