@@ -37,15 +37,7 @@ public class FamiliarFollowState : State
                 else if (playerFamiliar.lastestEnemyHit != null)
                 {
                     playerFamiliar.enemyAbilityFocus = playerFamiliar.lastestEnemyHit.GetComponent<EnemyProtoVersion>();
-                    if (playerFamiliar.enemyAbilityFocus != null)
-                    {
-                        return abilityState;
-                    }
-                    else
-                    {
-                        playerFamiliar.isEnemyHit = false;
-                        return this;
-                    }
+                    return abilityState;
                 }
             }
             playerFamiliar.callFamiliarBack = false;

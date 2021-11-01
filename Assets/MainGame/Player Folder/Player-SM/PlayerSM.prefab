@@ -147,11 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cc906838754944f8a1996891bd3edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: afaf6151e93c66b41825e3aefe8305cf, type: 2}
+  ability: {fileID: 11400000, guid: c768019e3f172b24e886dffcb3abfaa9, type: 2}
   cooldownTimeMax: 0
   abilityType: 0
   abilityState: 0
-  abilityKey: 51
+  abilityKey: 52
 --- !u!114 &8892587703643822513
 MonoBehaviour:
   m_ObjectHideFlags: 0

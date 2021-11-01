@@ -89,8 +89,9 @@ public class AbilityExecuter : MonoBehaviour
                     triggerCancel = false;
                     //if bypass is true we dont cancel
                     //if bypass is false  && cancel is true cancel ability
-                    if (!ability.bypassCancel && cancelAbility || ability.singleTrigger)                     //1st aoe =/ trigger cancel= false / cancel ability = false | TRUE > DELEGATE X > FALSE > FALSE / RUNNING
-                    {                                                               //2nd dash =/ trigger cancel = true > DELEGATE FALSE >  / cancel ability = TRUE | TRUE > DELEGATE FALSE > FALSE > FALSE
+                    
+                    if (!ability.bypassCancel && cancelAbility || ability.singleTrigger)    //will make buff work with spin aoe example & will initiate cooldown for singletrigger if completed
+                    {                                                                                                                                                                                             
                         ability.OnBeginCoolDown(player);
                         abilityState = AbilityState.cooldown;
                         cooldownTime = ability.cooldownTime;
@@ -156,7 +157,7 @@ public class AbilityExecuter : MonoBehaviour
     {
         if (!triggerCancel)
         {
-            cancelAbility = true;
+                cancelAbility = true;
         }
     }
 }
