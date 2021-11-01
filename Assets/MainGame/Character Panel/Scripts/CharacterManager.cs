@@ -79,7 +79,6 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
-
         playerMaxHealth = 100;
         playerCurrentHealth = playerMaxHealth;
 
