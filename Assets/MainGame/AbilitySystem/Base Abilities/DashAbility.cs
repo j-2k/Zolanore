@@ -41,6 +41,7 @@ public class DashAbility : Ability
 
     public override void OnBeginCoolDown(GameObject parent)
     {
+        player.GroundedUpdate();
         oneRun = true;
         player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;

@@ -124,12 +124,6 @@ public class PlayerManager : MonoBehaviour
 
     public void MainMovement()
     {
-        if (cc.velocity.magnitude >= movementSpeed * 2)
-        {
-            Debug.LogWarning("Very fast running 1 grounded update normalized");
-            GroundedUpdate();
-        }
-
         if (OnSteepSlope())
         {
             cc.Move(SteepSlopeSlide() + Vector3.down * slopeForce);
