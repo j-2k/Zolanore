@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
+    //https://docs.google.com/spreadsheets/d/19eI5ft2jUsELaEdoNECQKZm7XY9agH4JqVokp11H8Oc/edit#gid=583637899
+    //LEVELING DOCUMENT DO NOT CHANGE ABS ANY VALUES IN HERE UNLESS TOLD TO THIS SCRIPT IS A REFERENCE TO THE DOCUMENT
 
     #region Singleton LevelSystem Instance
     public static LevelSystem instance;
@@ -46,8 +48,8 @@ public class LevelSystem : MonoBehaviour
     {
         levelValueText.text = currentLevel.ToString();
         character = GetComponentInParent<CharacterManager>();
-        currentXP = 0;
-        targetXP = 100;
+        currentXP = 0;//save curr xp
+        targetXP = Mathf.RoundToInt(Mathf.Pow(1 + currentLevel, 2.5f) * (currentLevel + 100)) / 16 + 100;
         skillPointsTotal = currentLevel * skillPointsGainedPerLevel;
         onXPGainedDelegate += XPGainedFunction;
         levelUpAction += LevelUp;
@@ -74,7 +76,7 @@ public class LevelSystem : MonoBehaviour
         float maxIterations = 6;
         //ENEMY LEVEL 5 CURRENT LEVEL 10 //i = 0. 5 = 10 X //i=1. 6 = 10 X // i=2. 7 = 10X// i=3. 8 =10X// i=4. 9=10X//   i = 5. 10 = 10 YES
         for (int i = 0; i < 6; i++)
-        {
+        {     //5                   5 + 0  100% full xp | 5 = 6 + 0 no | 5 = 6 - 1 yes 90% of all | 5 = 7 - 2 yes 80% after j change it will be 90
             if (incEnemyLevel == currentLevel + i || incEnemyLevel == currentLevel - i || i == maxIterations - 1)
             {
                 float newXP = incXP * j;
@@ -90,72 +92,11 @@ public class LevelSystem : MonoBehaviour
                 return;
             }
             //maybe be nicer here & dont penalize for first iterator / if lvl diff is +1/-1
-            j -= 0.1f;
-
-            /*
-            if (incEnemyLevel == currentLevel - i)
+            if (i >= 2)
             {
-                float newXP = incXP * j;
-                newXP = Mathf.RoundToInt(newXP);
-                currentXP += (int)newXP;
-
-                while (currentXP >= targetXP)
-                {
-                    currentXP = currentXP - targetXP;
-                    currentLevel++;
-                    targetXP += targetXP / 20;
-                }
-
-                Debug.Log(" new xp =" + newXP + " enemylvl is = " + incEnemyLevel + " currlevel I is " + (currentLevel - i));
-                return;//< kinda useless
+                j -= 0.15f;
             }
-
-            if (i == 5)
-            {
-                float newXP = incXP * j;
-                newXP = Mathf.RoundToInt(newXP);
-                currentXP += (int)newXP;
-
-                while (currentXP >= targetXP)
-                {
-                    currentXP = currentXP - targetXP;
-                    currentLevel++;
-                    targetXP += targetXP / 20;
-                }
-            }*/
-
         }
-
-        /*
-        if (incEnemyLevel == currentLevel || incEnemyLevel == currentLevel - 1 || incEnemyLevel == currentLevel + 1)
-        {
-            Debug.Log("Ran EQUAL");
-            currentXP += incXP;
-
-            while (currentXP >= targetXP)
-            {
-                currentXP = currentXP - targetXP;
-                currentLevel++;
-                targetXP += targetXP / 20;
-            }
-
-
-        }
-        else if (incEnemyLevel <= currentLevel - 2)
-        {
-            Debug.Log("Ran DOWN");
-            float newXP = incXP * 0.8f;
-            newXP = Mathf.RoundToInt(newXP);
-            currentXP += (int)newXP;
-        } 
-        else if (incEnemyLevel >= currentLevel + 2)
-        {
-            Debug.Log("Ran UP");
-            float newXP = incXP * 0.5f;
-            newXP = Mathf.RoundToInt(newXP);
-            currentXP += (int)newXP;
-        }
-        */
     }
 
     private void LevelUp()
@@ -163,8 +104,8 @@ public class LevelSystem : MonoBehaviour
         currentXP = currentXP - targetXP;
         currentLevel++;
         levelValueText.text = currentLevel.ToString();
-        targetXP += targetXP * 1; //*1 will double target everytime // it was /20 | *1 = 100 , 200, 400, 800 | /2 = 100, 150,300,600,
-    }
+        targetXP = Mathf.RoundToInt((Mathf.Pow(1 + currentLevel,2.5f) * (currentLevel + 100)/16) + 100);
+    } 
 
     void LevelSkillPoint()
     {
