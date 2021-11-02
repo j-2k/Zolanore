@@ -62,8 +62,10 @@ public class AbilityManager : MonoBehaviour
         */
     }
 
+    AbilityExecuter pastExecuter;
     public void Activated(AbilityExecuter executer)
     {
+        //CACHING
         //FIRST SEND ALL ABILITIES ON CD TO BE ON GCD IF THEY ARE LOWER THAN GCD VALUE
         for (int i = 0; i < allAbilities.Length; i++)
         {
@@ -92,5 +94,6 @@ public class AbilityManager : MonoBehaviour
         //BUFF TO AOE WILL CANCEL BUFF
         //AOE TO BUFF WONT CANCEL AOE
         //CHECK IF INCOMING ABILITY IS BUFF?
+        pastExecuter = executer;
     }
 }
