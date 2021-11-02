@@ -7,8 +7,8 @@ public class AbilityExecuter : MonoBehaviour
 {
     [SerializeField] Ability ability;
     GameObject player;
-
-    float cooldownTime;
+    [SerializeField] int IndexOfExecuter;
+    public float cooldownTime;
     public float cooldownTimeMax;
     float activeTime;
     float gcd = 3;
@@ -73,6 +73,8 @@ public class AbilityExecuter : MonoBehaviour
                     ability.OnActivate(player);
                     abilityState = AbilityState.active;
                     activeTime = ability.activeTime;
+                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.active;
+                    abilityManager.Activated(this);
                 }
                 break;
             case AbilityState.active:
@@ -87,6 +89,7 @@ public class AbilityExecuter : MonoBehaviour
                         ability.OnBeginCoolDown(player);
                         abilityState = AbilityState.cooldown;
                         cooldownTime = ability.cooldownTime;
+                        abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.cooldown;
                     }
 
                     activeTime -= Time.deltaTime;
@@ -96,6 +99,7 @@ public class AbilityExecuter : MonoBehaviour
                     ability.OnBeginCoolDown(player);
                     abilityState = AbilityState.cooldown;
                     cooldownTime = ability.cooldownTime;
+                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.cooldown;
                 }
                 break;
             case AbilityState.cooldown:
@@ -107,6 +111,7 @@ public class AbilityExecuter : MonoBehaviour
                 else
                 {
                     abilityState = AbilityState.ready;
+                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.ready;
                     cooldownTime = 0;
                 }
                 break;
@@ -119,6 +124,7 @@ public class AbilityExecuter : MonoBehaviour
                 else
                 {
                     abilityState = AbilityState.ready;
+                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.ready;
                     gcd = 3;
                 }
                 break;

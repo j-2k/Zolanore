@@ -36,8 +36,7 @@ public class AbilityManager : MonoBehaviour
     */
 
     public delegate void AbilityDelegate();
-    public static event AbilityDelegate OnGCD;
-    public static event AbilityDelegate OnCancelAbility;
+    public static event AbilityDelegate OnActivateAbility;
     
 
     private void Start()
@@ -71,13 +70,23 @@ public class AbilityManager : MonoBehaviour
         */
     }
 
-    public void StartGCD()
+    public void Update()
     {
-        OnGCD.Invoke();
+        
     }
 
-    public void CancelAbilites()
+    public void Activated(AbilityExecuter executer)
     {
-        OnCancelAbility.Invoke();
+        //setting other abilities to on gcd if lower than gcd cd
+        for (int i = 0; i < allAbilities.Length; i++)
+        {
+            if (allAbilities[i].abilityState == AbilityExecuter.AbilityState.cooldown && allAbilities[i].cooldownTime <= 3)
+            {
+                allAbilities[i].abilityState = allAbilities[i].abilityState = AbilityExecuter.AbilityState.gcd;
+            }
+        }
+
+        //now handle how to mash up mutliple abilites
+
     }
 }
