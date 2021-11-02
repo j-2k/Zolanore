@@ -49,7 +49,12 @@ public class EnemyAgent : MonoBehaviour
 
     private void Update()
     {
-        if (playerDetected) transform.LookAt(player.transform.position);
+        if (playerDetected)
+        {
+            transform.LookAt(player.transform.position);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        }
+
         navmesh.speed = speed;
         root.Evaluate(this);
     }

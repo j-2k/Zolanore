@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class PlayerEnteredArea : MonoBehaviour
 {
     Transform player;
-    bool enteredArea = false;
-    public Image sprite;
+    public Image image;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -18,8 +17,7 @@ public class PlayerEnteredArea : MonoBehaviour
         float distance = Vector3.Distance(player.position, this.transform.position);
         if(distance< 5)
         {
-            sprite.color = Color.green;
-            enteredArea = true;
+            image.color = Color.white;
         }
     }
 }

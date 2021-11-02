@@ -14,7 +14,7 @@ public class ChaseNode : Node<EnemyAgent>
         else
         {
             owner.speed = owner.chaseSpeed;
-            owner.Move(owner.player.transform.position);
+            owner.Move(owner.player.transform.position + new Vector3(0,0,1.5f));
             return NodeState.RUNNING;
         }        
 
