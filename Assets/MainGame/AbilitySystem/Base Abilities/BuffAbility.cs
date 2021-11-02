@@ -22,12 +22,12 @@ public class BuffAbility : Ability
     public override void OnActivate(GameObject parent)
     {
         scaleIncrease = 1;
-        /*
+        
         cm.Strength.BaseValue += 10f;
         cm.UpdateStatSkillPoint();
-        */
-        this.activeTime = 10;
-        buff.BuffStrength(10, this.activeTime);
+        
+        //this.activeTime = 10;
+        //buff.BuffStrength(10, this.activeTime);
         if (player.isMovingAbility != true)
         {
             player.isMovingAbility = false;
@@ -46,10 +46,10 @@ public class BuffAbility : Ability
 
     public override void OnBeginCoolDown(GameObject parent)
     {
-        /*
+        
         cm.Strength.BaseValue -= 10f;
         cm.UpdateStatSkillPoint();
-        */
+        
         if (player.isMovingAbility != true)
         {
             player.isMovingAbility = false;
