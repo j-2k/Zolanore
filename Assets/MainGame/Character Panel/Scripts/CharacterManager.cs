@@ -94,7 +94,7 @@ public class CharacterManager : MonoBehaviour
 
     public void TakeDamageFromEnemy(int incDmg)
     {
-        incDmg -= Mathf.RoundToInt(Defence.Value);
+        incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 2);
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         playerCurrentHealth -= incDmg;
         if (playerCurrentHealth <= 0)

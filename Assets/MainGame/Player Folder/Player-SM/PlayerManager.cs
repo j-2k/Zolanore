@@ -171,7 +171,7 @@ public class PlayerManager : MonoBehaviour
 
         //out going dmg calc maybe change in the future for better results to scale to higher lvls
         int levelBasedDmg = (int)((levelSystem.currentLevel + 10) * Random.Range(0.7f,1.1f));//help early game be useless lategame
-        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(1.5f, 2.5f) + levelBasedDmg); //help lategame be useless early game
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.8f, 1.5f) + levelBasedDmg); //help lategame be useless early game
 
 
         foreach (Collider hitCollider in hitColliders)
