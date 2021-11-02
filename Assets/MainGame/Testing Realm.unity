@@ -2279,6 +2279,14 @@ PrefabInstance:
       propertyPath: destroyQuestion
       value: 
       objectReference: {fileID: 921928280}
+    - target: {fileID: 8892587703643822513, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+      propertyPath: abilityState.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892587703643822513, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+      propertyPath: allAbilityStates.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8892587703679842709, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: levelValueText
       value: 

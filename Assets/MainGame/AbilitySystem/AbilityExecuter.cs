@@ -13,6 +13,7 @@ public class AbilityExecuter : MonoBehaviour
     float activeTime;
     float gcd = 3;
 
+    AbilityManager abilityManager;
     public CombatType abilityType;
 
     public enum AbilityState
@@ -27,16 +28,12 @@ public class AbilityExecuter : MonoBehaviour
 
     [SerializeField] KeyCode abilityKey;
 
-    bool triggerGCD = false;
-    bool cancelAbility = false;
-    bool triggerCancel = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        AbilityManager.OnGCD += GCDCooldown;
-        AbilityManager.OnCancelAbility += CancelCurrentAbility;
+        abilityManager = AbilityManager.instance;
         player = GameObject.FindGameObjectWithTag("Player");
         cooldownTime = ability.cooldownTime;
         cooldownTimeMax = cooldownTime;
@@ -73,10 +70,6 @@ public class AbilityExecuter : MonoBehaviour
             case AbilityState.ready:
                 if (Input.GetKeyDown(abilityKey))
                 {
-                    triggerGCD = true;
-                    AbilityManager.instance.StartGCD();
-                    triggerCancel = true;
-                    AbilityManager.instance.CancelAbilites();
                     ability.OnActivate(player);
                     abilityState = AbilityState.active;
                     activeTime = ability.activeTime;
@@ -86,11 +79,10 @@ public class AbilityExecuter : MonoBehaviour
                 ability.AbilityUpdateActive(player);
                 if (activeTime > 0)
                 {
-                    triggerCancel = false;
                     //if bypass is true we dont cancel
                     //if bypass is false  && cancel is true cancel ability
                     
-                    if (!ability.bypassCancel && cancelAbility || ability.singleTrigger)    //will make buff work with spin aoe example & will initiate cooldown for singletrigger if completed
+                    if (ability.singleTrigger)//!ability.bypassCancel && cancelTrigger ||    //will make buff work with spin aoe example & will initiate cooldown for singletrigger if completed
                     {                                                                                                                                                                                             
                         ability.OnBeginCoolDown(player);
                         abilityState = AbilityState.cooldown;
@@ -116,8 +108,6 @@ public class AbilityExecuter : MonoBehaviour
                 {
                     abilityState = AbilityState.ready;
                     cooldownTime = 0;
-                    triggerGCD = false;
-                    cancelAbility = false;
                 }
                 break;
             case AbilityState.gcd:
@@ -130,8 +120,6 @@ public class AbilityExecuter : MonoBehaviour
                 {
                     abilityState = AbilityState.ready;
                     gcd = 3;
-                    triggerGCD = false;
-                    cancelAbility = false;
                 }
                 break;
             default:
@@ -139,25 +127,4 @@ public class AbilityExecuter : MonoBehaviour
         }
     }
 
-    public void GCDCooldown()
-    {
-        if (!triggerGCD)
-        {
-            abilityState = AbilityState.gcd;
-            gcd = 3;
-        }
-        if (cooldownTime <= gcd)
-        {
-            cooldownTime = 0;
-            abilityState = AbilityState.gcd;
-        }
-    }
-
-    public void CancelCurrentAbility()
-    {
-        if (!triggerCancel)
-        {
-                cancelAbility = true;
-        }
-    }
 }

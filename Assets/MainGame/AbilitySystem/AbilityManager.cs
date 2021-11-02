@@ -23,6 +23,7 @@ public class AbilityManager : MonoBehaviour
 
     public AbilityExecuter[] allAbilities;
 
+    public List<AbilityExecuter.AbilityState> allAbilityStates;
 
     /*
     public List<AbilityExecuter> meleeAbilityExecs;
@@ -42,6 +43,10 @@ public class AbilityManager : MonoBehaviour
     private void Start()
     {
         allAbilities = GetComponents<AbilityExecuter>();   //universal abilites maybe
+        for (int i = 0; i < allAbilities.Length; i++)
+        {
+            allAbilityStates.Add(allAbilities[i].abilityState);
+        }
 
         /*
         for (int i = 0; i < allAbilities.Length; i++)
