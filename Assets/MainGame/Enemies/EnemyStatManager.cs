@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyStatManager : MonoBehaviour
-{//a very simple enemy stat manager need to expand on this more later on
+{
+    //https://docs.google.com/spreadsheets/d/19eI5ft2jUsELaEdoNECQKZm7XY9agH4JqVokp11H8Oc/edit#gid=583637899
+    //dont change anything here with xp handling more info in the doc
+
+    //a very simple enemy stat manager need to expand on this more later on
     [Header("Assign Level & extra stats")]
     [SerializeField] int enemyLevel;
     [SerializeField] int healthAdd;
@@ -31,8 +35,8 @@ public class EnemyStatManager : MonoBehaviour
         curHealth = maxHealth;
 
         //think of formula here based on level this is placeholder for defence & xp
-        defence = enemyLevel * 2;
-        xp = (enemyLevel * 100) / 5;
+        defence = (enemyLevel * 2) - 1;
+        xp = (enemyLevel * 2) + 50;
 
     }
 
