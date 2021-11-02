@@ -1224,6 +1224,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b01c81f6df831f74a82163205f58d93e, type: 3}
+--- !u!1 &1147822217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 217346399143027721, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+  m_PrefabInstance: {fileID: 8892587704289011593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1147822225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147822217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520a51c8b0c34844da0feb0f8448242b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statManager: {fileID: 1839689258}
 --- !u!114 &1154011195 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1154011195, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -1623,6 +1641,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 217346400217418920, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
   m_PrefabInstance: {fileID: 8892587704289011593}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1839689258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8892587702508662005, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+  m_PrefabInstance: {fileID: 8892587704289011593}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839689257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1106eef1334025b449f0a046c18033c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1846400619 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1846400619, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -2203,6 +2232,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 242533696, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 217346400217418920, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_Name
       value: PlayerSM
@@ -2279,14 +2312,6 @@ PrefabInstance:
       propertyPath: destroyQuestion
       value: 
       objectReference: {fileID: 921928280}
-    - target: {fileID: 8892587703643822513, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: abilityState.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8892587703643822513, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: allAbilityStates.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8892587703679842709, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: levelValueText
       value: 
@@ -2295,5 +2320,6 @@ PrefabInstance:
       propertyPath: skillPointSpend
       value: 
       objectReference: {fileID: 1172585044}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4825877637064226215, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}

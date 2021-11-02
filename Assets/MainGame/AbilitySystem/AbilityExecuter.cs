@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AbilityExecuter : MonoBehaviour
 {
-    [SerializeField] Ability ability;
+    public Ability ability;
     GameObject player;
     [SerializeField] int IndexOfExecuter;
     public float cooldownTime;
@@ -73,7 +73,6 @@ public class AbilityExecuter : MonoBehaviour
                     ability.OnActivate(player);
                     abilityState = AbilityState.active;
                     activeTime = ability.activeTime;
-                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.active;
                     abilityManager.Activated(this);
                 }
                 break;
@@ -85,21 +84,15 @@ public class AbilityExecuter : MonoBehaviour
                     //if bypass is false  && cancel is true cancel ability
                     
                     if (ability.singleTrigger)//!ability.bypassCancel && cancelTrigger ||    //will make buff work with spin aoe example & will initiate cooldown for singletrigger if completed
-                    {                                                                                                                                                                                             
-                        ability.OnBeginCoolDown(player);
-                        abilityState = AbilityState.cooldown;
-                        cooldownTime = ability.cooldownTime;
-                        abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.cooldown;
+                    {
+                        SendToCooldown();
                     }
 
                     activeTime -= Time.deltaTime;
                 }
                 else
                 {
-                    ability.OnBeginCoolDown(player);
-                    abilityState = AbilityState.cooldown;
-                    cooldownTime = ability.cooldownTime;
-                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.cooldown;
+                    SendToCooldown();
                 }
                 break;
             case AbilityState.cooldown:
@@ -111,7 +104,6 @@ public class AbilityExecuter : MonoBehaviour
                 else
                 {
                     abilityState = AbilityState.ready;
-                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.ready;
                     cooldownTime = 0;
                 }
                 break;
@@ -124,13 +116,19 @@ public class AbilityExecuter : MonoBehaviour
                 else
                 {
                     abilityState = AbilityState.ready;
-                    abilityManager.allAbilityStates[IndexOfExecuter] = AbilityState.ready;
                     gcd = 3;
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    public void SendToCooldown()
+    {
+        ability.OnBeginCoolDown(player);
+        abilityState = AbilityState.cooldown;
+        cooldownTime = ability.cooldownTime;
     }
 
 }

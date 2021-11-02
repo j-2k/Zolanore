@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7eab95aa1cb7c4d83e7d9307cb03a1, type: 3}
   m_Name: BuffAbilityTest
   m_EditorClassIdentifier: 
-  name: 
-  cooldownTime: 16
-  activeTime: 6
+  abilityName: 
+  combatType: 0
+  cooldownTime: 8
+  activeTime: 7
   singleTrigger: 0
   bypassCancel: 1
   scaleIncrease: 1

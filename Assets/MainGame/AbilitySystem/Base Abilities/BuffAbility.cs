@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/BuffAbility")]
 public class BuffAbility : Ability
 {
+    BuffManager buff;
     public float scaleIncrease;
     Transform meshTransform;
     CharacterManager cm;
@@ -15,14 +16,22 @@ public class BuffAbility : Ability
         cm = parent.GetComponent<CharacterManager>();
         player = parent.GetComponent<PlayerManager>();
         meshTransform = parent.transform.GetChild(0);
+        buff = parent.GetComponent<BuffManager>();
     }
 
     public override void OnActivate(GameObject parent)
     {
         scaleIncrease = 1;
+        /*
         cm.Strength.BaseValue += 10f;
         cm.UpdateStatSkillPoint();
-        player.isMovingAbility = false;
+        */
+        this.activeTime = 10;
+        buff.BuffStrength(10, this.activeTime);
+        if (player.isMovingAbility != true)
+        {
+            player.isMovingAbility = false;
+        }
     }
 
     public override void AbilityUpdateActive(GameObject parent)
@@ -37,8 +46,14 @@ public class BuffAbility : Ability
 
     public override void OnBeginCoolDown(GameObject parent)
     {
+        /*
         cm.Strength.BaseValue -= 10f;
         cm.UpdateStatSkillPoint();
+        */
+        if (player.isMovingAbility != true)
+        {
+            player.isMovingAbility = false;
+        }
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)

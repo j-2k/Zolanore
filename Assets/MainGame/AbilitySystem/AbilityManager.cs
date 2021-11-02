@@ -23,8 +23,6 @@ public class AbilityManager : MonoBehaviour
 
     public AbilityExecuter[] allAbilities;
 
-    public List<AbilityExecuter.AbilityState> allAbilityStates;
-
     /*
     public List<AbilityExecuter> meleeAbilityExecs;
 
@@ -35,17 +33,11 @@ public class AbilityManager : MonoBehaviour
     public List<AbilityExecuter> familiarAbilityExecs;
     */
 
-    public delegate void AbilityDelegate();
-    public static event AbilityDelegate OnActivateAbility;
     
 
     private void Start()
     {
         allAbilities = GetComponents<AbilityExecuter>();   //universal abilites maybe
-        for (int i = 0; i < allAbilities.Length; i++)
-        {
-            allAbilityStates.Add(allAbilities[i].abilityState);
-        }
 
         /*
         for (int i = 0; i < allAbilities.Length; i++)
@@ -70,14 +62,9 @@ public class AbilityManager : MonoBehaviour
         */
     }
 
-    public void Update()
-    {
-        
-    }
-
     public void Activated(AbilityExecuter executer)
     {
-        //setting other abilities to on gcd if lower than gcd cd
+        //FIRST SEND ALL ABILITIES ON CD TO BE ON GCD IF THEY ARE LOWER THAN GCD VALUE
         for (int i = 0; i < allAbilities.Length; i++)
         {
             if (allAbilities[i].abilityState == AbilityExecuter.AbilityState.cooldown && allAbilities[i].cooldownTime <= 3)
@@ -86,7 +73,24 @@ public class AbilityManager : MonoBehaviour
             }
         }
 
-        //now handle how to mash up mutliple abilites
+        if (!executer.ability.bypassCancel)
+        {
+            for (int i = 0; i < allAbilities.Length; i++)
+            {
+                if (allAbilities[i].abilityState == AbilityExecuter.AbilityState.active && allAbilities[i] != executer)
+                {
+                    allAbilities[i].SendToCooldown();
+                }
+            }
+        }
+        else
+        {
+            //bypass cancel and run ability normally ez
+        }
 
+        //now handle how to mash up mutliple abilites
+        //BUFF TO AOE WILL CANCEL BUFF
+        //AOE TO BUFF WONT CANCEL AOE
+        //CHECK IF INCOMING ABILITY IS BUFF?
     }
 }

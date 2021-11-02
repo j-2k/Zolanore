@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878a01a1489bfc04687a9e2d94005992, type: 3}
   m_Name: AOEAbilityTest
   m_EditorClassIdentifier: 
-  name: 
-  cooldownTime: 4
-  activeTime: 10
+  abilityName: 
+  combatType: 0
+  cooldownTime: 6
+  activeTime: 5
   singleTrigger: 0
   bypassCancel: 0

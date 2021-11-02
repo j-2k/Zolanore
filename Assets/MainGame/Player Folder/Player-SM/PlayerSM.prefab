@@ -40,11 +40,11 @@ GameObject:
   m_Component:
   - component: {fileID: 217346399143027720}
   - component: {fileID: 8892587703679842709}
+  - component: {fileID: 8892587703643822513}
   - component: {fileID: 8892587703643822518}
   - component: {fileID: 8892587703643822519}
   - component: {fileID: 7783218131109182658}
   - component: {fileID: 5945680261308840626}
-  - component: {fileID: 8892587703643822513}
   m_Layer: 9
   m_Name: GameManager
   m_TagString: GameManager
@@ -84,6 +84,19 @@ MonoBehaviour:
   skillPointsToSpend: 0
   skillPointSpend: {fileID: 0}
   levelValueText: {fileID: 0}
+--- !u!114 &8892587703643822513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217346399143027721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d43e13714d6a804a8b6b38527e3b9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allAbilities: []
 --- !u!114 &8892587703643822518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 8005667dc0e75e24994bd6066d637591, type: 2}
+  IndexOfExecuter: 0
+  cooldownTime: 0
   cooldownTimeMax: 0
   abilityType: 0
   abilityState: 0
@@ -114,6 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: a2ca75b9ae1246142b7202e088d00a46, type: 2}
+  IndexOfExecuter: 0
+  cooldownTime: 0
   cooldownTimeMax: 0
   abilityType: 0
   abilityState: 0
@@ -131,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: afaf6151e93c66b41825e3aefe8305cf, type: 2}
+  IndexOfExecuter: 0
+  cooldownTime: 0
   cooldownTimeMax: 0
   abilityType: 0
   abilityState: 0
@@ -148,23 +167,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: c768019e3f172b24e886dffcb3abfaa9, type: 2}
+  IndexOfExecuter: 0
+  cooldownTime: 0
   cooldownTimeMax: 0
   abilityType: 0
   abilityState: 0
   abilityKey: 52
---- !u!114 &8892587703643822513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217346399143027721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d43e13714d6a804a8b6b38527e3b9f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allAbilities: []
 --- !u!1 &217346400217418920
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +186,7 @@ GameObject:
   - component: {fileID: 217346400217418922}
   - component: {fileID: 217346400217418925}
   - component: {fileID: 8892587702508662005}
+  - component: {fileID: 5445424066897739595}
   m_Layer: 9
   m_Name: PlayerSM
   m_TagString: Player
@@ -299,6 +308,19 @@ MonoBehaviour:
   draggableItem: {fileID: 0}
   dropItemArea: {fileID: 0}
   destroyQuestion: {fileID: 0}
+--- !u!114 &5445424066897739595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217346400217418920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520a51c8b0c34844da0feb0f8448242b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statManager: {fileID: 8892587702508662005}
 --- !u!65 &8892587703824008352
 BoxCollider:
   m_ObjectHideFlags: 0
