@@ -186,7 +186,6 @@ GameObject:
   - component: {fileID: 217346400217418922}
   - component: {fileID: 217346400217418925}
   - component: {fileID: 8892587702508662005}
-  - component: {fileID: 5445424066897739595}
   m_Layer: 9
   m_Name: PlayerSM
   m_TagString: Player
@@ -308,19 +307,6 @@ MonoBehaviour:
   draggableItem: {fileID: 0}
   dropItemArea: {fileID: 0}
   destroyQuestion: {fileID: 0}
---- !u!114 &5445424066897739595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217346400217418920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 520a51c8b0c34844da0feb0f8448242b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statManager: {fileID: 8892587702508662005}
 --- !u!65 &8892587703824008352
 BoxCollider:
   m_ObjectHideFlags: 0

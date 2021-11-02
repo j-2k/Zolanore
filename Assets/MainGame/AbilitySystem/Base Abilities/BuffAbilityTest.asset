@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: 
   combatType: 0
   cooldownTime: 8
-  activeTime: 7
+  activeTime: 10
   singleTrigger: 0
   bypassCancel: 1
   scaleIncrease: 1

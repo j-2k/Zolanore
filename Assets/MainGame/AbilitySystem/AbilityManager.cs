@@ -62,44 +62,25 @@ public class AbilityManager : MonoBehaviour
         */
     }
 
-    AbilityExecuter pastExecuter;
     public void Activated(AbilityExecuter executer)
     {
-        if (pastExecuter == null)
-        {
-            pastExecuter = executer;
-        }
-
-        //CACHING
-        //FIRST SEND ALL ABILITIES ON CD TO BE ON GCD IF THEY ARE LOWER THAN GCD VALUE
         for (int i = 0; i < allAbilities.Length; i++)
         {
+            //FIRST SEND ALL ABILITIES ON CD TO BE ON GCD IF THEY ARE LOWER THAN GCD VALUE
             if (allAbilities[i].abilityState == AbilityExecuter.AbilityState.cooldown && allAbilities[i].cooldownTime <= 3)
             {
                 allAbilities[i].abilityState = allAbilities[i].abilityState = AbilityExecuter.AbilityState.gcd;
             }
-        }
 
-        if (!executer.ability.bypassCancel)//if (!executer.ability.bypassCancel && !pastExecuter.ability.bypassCancel)
-        {
-            for (int i = 0; i < allAbilities.Length; i++)
+            //SECONDLY CANCEL ANY ABILITIES THAT DONT HAVE A BYPASS DURING AN ACTIVE ABILITY | EG. IF AOE ON THEN BUFF ON SHOULD NOT CANCEL AOE | EG IF AOE IS ON AND DASH IS TRUE AOE SHOULD TURN OFF & DASH
+            if (allAbilities[i].abilityState == AbilityExecuter.AbilityState.active && allAbilities[i] != executer)
             {
-                if (allAbilities[i].abilityState == AbilityExecuter.AbilityState.active && allAbilities[i] != executer)
+                if (!allAbilities[i].ability.bypassCancel && !executer.ability.bypassCancel)  //finally found solution lmao
                 {
+                    Debug.Log("cooling down");
                     allAbilities[i].SendToCooldown();
                 }
             }
         }
-        else
-        {
-            //bypass cancel and run ability normally ez
-        }
-
-        //now handle how to mash up mutliple abilites
-        //BUFF TO AOE WILL CANCEL BUFF
-        //AOE TO BUFF WONT CANCEL AOE
-        //CHECK IF INCOMING ABILITY IS BUFF?
-
-        //pastExecuter = executer;
     }
 }
