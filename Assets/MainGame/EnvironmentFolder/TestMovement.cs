@@ -78,8 +78,8 @@ public class TestMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttackStart)
             {
-                isAttackStart = true;
-                playerAnimator.SetTrigger("isAttacking");
+                //isAttackStart = true;
+                //playerAnimator.SetTrigger("isAttacking");
             }
 
             float movementDir = Mathf.Clamp01(input.magnitude);

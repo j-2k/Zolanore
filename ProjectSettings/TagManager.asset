@@ -11,6 +11,12 @@ TagManager:
   - CharacterPanel
   - GameManager
   - Familiar
+  - AcceptButton
+  - QuestInformation
+  - QuestTracker
+  - CloseButton
+  - InteractPanel
+  - questContainer
   layers:
   - Default
   - TransparentFX

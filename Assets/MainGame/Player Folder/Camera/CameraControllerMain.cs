@@ -43,8 +43,6 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
