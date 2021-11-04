@@ -49,7 +49,9 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();
+
         hitboxPos = transform.GetChild(1);
         isMovingAbility = false;
         levelSystem = LevelSystem.instance;
