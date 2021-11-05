@@ -23,7 +23,10 @@ public class QuestManager : MonoBehaviour
 
             questObj.GetComponent<Button>().onClick.AddListener(delegate
             {
-                InitializeWindow(quest);
+                if (!questHolder.activeSelf)
+                {
+                    InitializeWindow(quest);
+                }
             });
         }
     }

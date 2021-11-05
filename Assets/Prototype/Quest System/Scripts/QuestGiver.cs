@@ -5,6 +5,7 @@ using UnityEngine;
 public class QuestGiver : MonoBehaviour
 {
     [SerializeField] Quest quest;
+    [SerializeField] GameObject marker;
 
     GameObject player;
     GameObject interact;
@@ -29,6 +30,7 @@ public class QuestGiver : MonoBehaviour
         questManager = FindObjectOfType<QuestManager>();
         questWindow = FindObjectOfType<QuestWindow>();
 
+        marker = transform.GetChild(0).Find("Image").gameObject;
         player       = GameObject.FindGameObjectWithTag("Player");
         acceptButton = GameObject.FindGameObjectWithTag("AcceptButton");
         interact     = GameObject.FindGameObjectWithTag("InteractPanel");
@@ -73,7 +75,6 @@ public class QuestGiver : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.J))
             {
                 ActivateOrDisactivateQuestContainer();
-                DisableCharacterRotation();
             }
         }
 
@@ -91,7 +92,12 @@ public class QuestGiver : MonoBehaviour
             questInformation.SetActive(false);
             questJournal.SetActive(false);
         }
-        else questJournal.SetActive(true);
+        else
+        {
+            DisableCharacterRotation();
+            questJournal.SetActive(true);
+        }
+        
     }
 
     public void DisableCharacterRotation()
@@ -108,6 +114,8 @@ public class QuestGiver : MonoBehaviour
     {
         acceptedQuest = true;
 
+        marker.SetActive(false);
+
         EnableCharacterRotation();
 
         questWindow.CloseWindow();
@@ -119,7 +127,10 @@ public class QuestGiver : MonoBehaviour
 
     public void CloseQuestInfo()
     {
-
+        if (questJournal.activeSelf)
+        {
+            questJournal.SetActive(false);
+        }
         if (!acceptedQuest && isClose)
         {
             questWindow.CloseWindow();
