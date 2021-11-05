@@ -16,7 +16,10 @@ TagManager:
   - QuestTracker
   - CloseButton
   - InteractPanel
-  - questContainer
+  - ClaimButton
+  - QuestContainer
+  - QuestGiver
+  - TrackButton
   layers:
   - Default
   - TransparentFX

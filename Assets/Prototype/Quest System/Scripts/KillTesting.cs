@@ -6,7 +6,7 @@ public class KillTesting : MonoBehaviour
 {
     QuestManager questManager;
 
-    private void Start()
+    private void Awake()
     {
         questManager = FindObjectOfType<QuestManager>();
     }
