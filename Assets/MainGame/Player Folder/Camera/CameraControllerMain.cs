@@ -7,6 +7,8 @@ public class CameraControllerMain : MonoBehaviour
     //keys
     //KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
 
+    [SerializeField] bool lockCamera;
+
     //vars
     [SerializeField] float cameraHeight = 1, cameraDistanceMax = 10;
     //float cameraMaxTilt = 90;
@@ -43,7 +45,11 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
-
+        if (lockCamera)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCam = Camera.main;
@@ -64,6 +70,24 @@ public class CameraControllerMain : MonoBehaviour
     {
         CameraHandler();
         CameraCollisions();
+        CameraInput();
+    }
+
+    void CameraInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (Cursor.visible)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
     }
 
     void CameraHandler()
