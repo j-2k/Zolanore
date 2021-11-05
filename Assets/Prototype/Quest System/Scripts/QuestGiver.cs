@@ -1,135 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestGiver : MonoBehaviour
 {
-    [SerializeField] Quest quest;
+    public Quest quest;
+    public GameObject goalsPrefab;
 
-    GameObject player;
-    GameObject interact;
+    public bool acceptedQuest = false;
+    public bool completedQuest = false;
+    public bool questActive = false;
+    public bool claimedQuest = false;
 
-    GameObject questJournal;
-    GameObject questInformation;
-    GameObject acceptButton;
-
-    CameraControllerMain cameraController;
-
-    TestMovement testMovement;
-    QuestManager questManager;
-    QuestWindow questWindow;
-
-    bool acceptedQuest = false;
-    bool isClose = false;
-
+    Transform questTracker;
+    List<GameObject> goalsOBJ = new List<GameObject>();
+    GameObject marker;
+    
     private void Awake()
     {
-        cameraController = FindObjectOfType<CameraControllerMain>();
-        testMovement = FindObjectOfType<TestMovement>();
-        questManager = FindObjectOfType<QuestManager>();
-        questWindow = FindObjectOfType<QuestWindow>();
-
-        player       = GameObject.FindGameObjectWithTag("Player");
-        acceptButton = GameObject.FindGameObjectWithTag("AcceptButton");
-        interact     = GameObject.FindGameObjectWithTag("InteractPanel");
-        questInformation = GameObject.FindGameObjectWithTag("QuestInformation");
-        questJournal = GameObject.FindGameObjectWithTag("questContainer");
-    }
-
-    private void Start()
-    {
-        CloseQuestInfo();
-        interact.SetActive(false);
-        questJournal.SetActive(false);
-
+        marker = transform.GetChild(0).Find("Marker").gameObject;
+        questTracker = GameObject.FindGameObjectWithTag("QuestTracker").transform;
     }
     private void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-
-        if (distance < 5)
+        if (claimedQuest)
         {
-            isClose = true;
-            if (!acceptedQuest)
-            {
-                interact.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    DisableCharacterRotation();
-                    Cursor.visible = true;
-                    questManager.InitializeWindow(quest);
-                }
-            }
+            marker.SetActive(false);
+            questActive = false;
+            gameObject.tag = "Untagged";
+            GetComponent<QuestGiver>().enabled = false;
         }
         else
         {
-            interact.SetActive(false);
-        }
-
-        if (acceptedQuest)
-        {
-            interact.SetActive(false);
-
-            if (Input.GetKeyDown(KeyCode.J))
+            if (quest.Completed) completedQuest = true;
+            if (completedQuest || !acceptedQuest)
             {
-                ActivateOrDisactivateQuestContainer();
-                DisableCharacterRotation();
+                marker.SetActive(true);
+            }
+            else
+            {
+                marker.SetActive(false);
             }
         }
-
-        if(distance > 5 && !acceptedQuest)
-        {
-            CloseQuestInfo();
-        }
-    }
-
-    void ActivateOrDisactivateQuestContainer()
-    {
-        if (questJournal.activeSelf == true)
-        {
-            EnableCharacterRotation();
-            questInformation.SetActive(false);
-            questJournal.SetActive(false);
-        }
-        else questJournal.SetActive(true);
-    }
-
-    public void DisableCharacterRotation()
-    {
-        cameraController.enabled = false;
-        testMovement.enabled = false;
-    }
-    public void EnableCharacterRotation()
-    {
-        cameraController.enabled = true;
-        testMovement.enabled = true;
-    }
-    public void AcceptQuest()
-    {
-        acceptedQuest = true;
-
-        EnableCharacterRotation();
-
-        questWindow.CloseWindow();
-
-        questInformation.SetActive(false);
-
-        Destroy(acceptButton);
-    }
-
-    public void CloseQuestInfo()
-    {
-
-        if (!acceptedQuest && isClose)
-        {
-            questWindow.CloseWindow();
-            EnableCharacterRotation();
-        }
-        else
-        {
-            questWindow.CloseWindow();
-            EnableCharacterRotation();
-        }
-        
     }
 }

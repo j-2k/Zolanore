@@ -10,6 +10,7 @@ public class Quest : ScriptableObject
     [System.Serializable]
     public struct Info
     {
+        public Sprite Icon;
         public string Name;
         public string Description;
     }
@@ -63,12 +64,6 @@ public class Quest : ScriptableObject
             GoalCompleted.Invoke();
             GoalCompleted.RemoveAllListeners();
         }
-
-        public void Skip()
-        {
-            //charge the player some game currency
-            Complete();
-        }
     }
 
     public List<QuestGoal> Goals;
@@ -90,7 +85,6 @@ public class Quest : ScriptableObject
         Completed = Goals.All(g => g.Completed);
         if (Completed)
         {
-            //give reward
             QuestCompleted.Invoke(this);
             QuestCompleted.RemoveAllListeners();
         }
