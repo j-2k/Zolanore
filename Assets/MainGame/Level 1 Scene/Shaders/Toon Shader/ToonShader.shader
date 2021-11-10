@@ -4,7 +4,8 @@ Shader "Unlit/ToonShader"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,1)
-
+            [HDR]
+        _AmbientColor("Ambient Color", Color) = (0.4,0.4,0.4,1)
     }
     SubShader
     {
@@ -25,6 +26,7 @@ Shader "Unlit/ToonShader"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
 
             struct appdata
             {
@@ -45,6 +47,7 @@ Shader "Unlit/ToonShader"
             float4 _MainTex_ST;
 
             float4 _Color;
+            float4 _AmbientColor;
 
             v2f vert (appdata v)
             {
@@ -70,9 +73,14 @@ Shader "Unlit/ToonShader"
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
                 float3 normal = normalize(i.worldNormal);
-                float NdotL = dot(_WorldSpaceLightPos0, normal);
+                float NdotL = dot(_WorldSpaceLightPos0, normal); //dot 1 to -1 / 1 to 0 lit / 0 to -1 dark
                 
-                return  _Color * NdotL;
+                //float lightIntensity = NdotL > 0 ? 1 : 0; //if NdotL > 0 true = 1 else 0
+                float lightIntensity = smoothstep(0,0.05f, NdotL);
+                float4 light = lightIntensity * _LightColor0;
+
+
+                return  texSample * _Color * (_AmbientColor + light);
             }
             ENDCG
         }
