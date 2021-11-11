@@ -7,7 +7,6 @@ public class QuestSystem : MonoBehaviour
     [SerializeField] GameObject interactUI;
     GameObject questJournal;
 
-    GameObject questTracker;
     GameObject questInformation;
     GameObject claimButton;
     GameObject acceptButton;
@@ -37,7 +36,6 @@ public class QuestSystem : MonoBehaviour
         questJournal.SetActive(false);
         claimButton.SetActive(false);
         questInformation.SetActive(false);
-        questTracker.SetActive(false);
     }
 
     private void Update()
@@ -226,7 +224,6 @@ public class QuestSystem : MonoBehaviour
     private void InitializeQuestUI()
     {
         questInformation = GameObject.FindGameObjectWithTag("QuestInformation");
-        questTracker = GameObject.FindGameObjectWithTag("QuestTracker");
         questJournal = GameObject.FindGameObjectWithTag("QuestContainer");
         acceptButton = GameObject.FindGameObjectWithTag("AcceptButton");
         claimButton = GameObject.FindGameObjectWithTag("ClaimButton");
@@ -247,7 +244,6 @@ public class QuestSystem : MonoBehaviour
         questWindow.CloseWindow();
 
         acceptButton.SetActive(false);
-
     }
 
     public void Claim()

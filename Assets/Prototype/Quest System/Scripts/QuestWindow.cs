@@ -13,6 +13,7 @@ public class QuestWindow : MonoBehaviour
     [SerializeField] private Text coinsText;
 
     GameObject counter;
+
     private Quest _Quest;
     private QuestManager questManager;
 
