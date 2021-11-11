@@ -64,7 +64,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 25.7
+    - _Glossiness: 37.3
     - _GlossyReflections: 1
     - _GrassHeight: 1
     - _GrassWidth: 0.06
@@ -78,8 +78,8 @@ Material:
     - _Rad: 0.6
     - _Radius: 0.3
     - _RandomHeight: 0.25
-    - _RimAmount: 0.577
-    - _RimThreshold: 0.32
+    - _RimAmount: 0.62
+    - _RimThreshold: 0.491
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
