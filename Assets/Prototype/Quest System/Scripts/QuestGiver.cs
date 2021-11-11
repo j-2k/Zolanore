@@ -13,14 +13,11 @@ public class QuestGiver : MonoBehaviour
     public bool questActive = false;
     public bool claimedQuest = false;
 
-    Transform questTracker;
-    List<GameObject> goalsOBJ = new List<GameObject>();
     GameObject marker;
     
     private void Awake()
     {
         marker = transform.GetChild(0).Find("Marker").gameObject;
-        questTracker = GameObject.FindGameObjectWithTag("QuestTracker").transform;
     }
     private void Update()
     {
