@@ -8,7 +8,15 @@ Shader "Custom/WaterShader"
         _DepthMaxDistance("Depth Maximum Distance", Float) = 1
         _SurfaceNoise("Surface Noise", 2D) = "white" {}
         _SurfaceNoiseCutoff("Surface Noise Cutoff", Range(0, 1)) = 0.777
-    _FoamDistance("Foam Distance", Float) = 0.4
+        _FoamDistance("Foam Distance", Float) = 0.4
+        _SurfaceNoiseScroll("Surface Noise Scroll Amount", Vector) = (0.03, 0.03, 0, 0)
+
+
+        _SurfaceDistortion("Surface Distortion", 2D) = "white" {}	
+        _SurfaceDistortionAmount("Surface Distortion Amount", Range(0, 1)) = 0.27
+
+
+        _FoamColor("Foam Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -19,6 +27,7 @@ ZWrite Off
         Pass
         {
             CGPROGRAM
+            #define SMOOTHSTEP_AA 0.01
             #pragma vertex vert
             #pragma fragment frag
 
@@ -33,6 +42,7 @@ ZWrite Off
             struct v2f
             {
                 float2 noiseUV : TEXCOORD0;
+                float2 distortUV : TEXCOORD1;
                 float4 screenPosition : TEXCOORD2;
                 float4 vertex : SV_POSITION;
             };
@@ -49,14 +59,22 @@ sampler2D _SurfaceNoise;
 float4 _SurfaceNoise_ST;
 float _SurfaceNoiseCutoff;
 float _FoamDistance;
+float2 _SurfaceNoiseScroll;
 
+
+sampler2D _SurfaceDistortion;
+float4 _SurfaceDistortion_ST;
+
+float _SurfaceDistortionAmount;
+float4 _FoamColor;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.noiseUV = TRANSFORM_TEX(v.uv, _MainTex);
                 o.screenPosition = ComputeScreenPos(o.vertex);
+                o.distortUV = TRANSFORM_TEX(v.uv, _SurfaceDistortion);
+                o.noiseUV = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
@@ -72,14 +90,23 @@ float _FoamDistance;
                 float waterDepthDifference01 = saturate(depthDifference / _DepthMaxDistance);
 
                 float4 waterColor = lerp(_DepthGradientShallow, _DepthGradientDeep, waterDepthDifference01);
-                float surfaceNoiseSample = tex2D(_SurfaceNoise, i.noiseUV).r;
+
+
+                float2 distortSample = (tex2D(_SurfaceDistortion, i.distortUV).xy * 2 - 1) * _SurfaceDistortionAmount;
+
+                float2 noiseUV = float2((i.noiseUV.x + _Time.y * _SurfaceNoiseScroll.x) + distortSample.x, (i.noiseUV.y + _Time.y * _SurfaceNoiseScroll.y) + distortSample.y);
+
+                float surfaceNoiseSample = tex2D(_SurfaceNoise, noiseUV).r;
                 
                 float foamDepthDifference01 = saturate(depthDifference / _FoamDistance);
-float surfaceNoiseCutoff = foamDepthDifference01 * _SurfaceNoiseCutoff;
+                float surfaceNoiseCutoff = foamDepthDifference01 * _SurfaceNoiseCutoff;
 
-float surfaceNoise = surfaceNoiseSample > surfaceNoiseCutoff ? 1 : 0;
+                //float surfaceNoise = smoothstep(surfaceNoiseCutoff - SMOOTHSTEP_AA, surfaceNoiseCutoff + SMOOTHSTEP_AA, surfaceNoiseSample);
+                float surfaceNoise = surfaceNoiseSample > surfaceNoiseCutoff ? 1 : 0;
 
-return waterColor + surfaceNoise;
+                float4 surfaceNoiseColor = _FoamColor * surfaceNoise;
+
+                return waterColor + surfaceNoiseColor;
 
 
 

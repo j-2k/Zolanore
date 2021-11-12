@@ -23,9 +23,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SurfaceDistortion:
+        m_Texture: {fileID: 2800000, guid: 93e6ddeda5b087845aa9a613bd169634, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceNoise:
+        m_Texture: {fileID: 2800000, guid: 179e9695af4273145b8d4a8e7677ec90, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - SurfaceDistortionAmount: 0.485
     - _DepthMaxDistance: 5
+    - _FoamDistance: 1.49
+    - _SurfaceDistortionAmount: 0.149
+    - _SurfaceNoiseCutoff: 0.766
     m_Colors:
     - _DepthGradientDeep: {r: 0, g: 0.46980256, b: 0.745283, a: 0.749}
     - _DepthGradientShallow: {r: 0, g: 0.843354, b: 0.8773585, a: 0.725}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SurfaceNoiseScroll: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
