@@ -75,7 +75,12 @@ public class CameraControllerMain : MonoBehaviour
 
     void CameraInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Cursor.visible)
+        {
+            lockCamera = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !lockCamera)
         {
             if (Cursor.visible)
             {
