@@ -11,8 +11,12 @@ public class InventoryInput : MonoBehaviour
     [SerializeField] GameObject equipmentPanelGameObject;
 
     [SerializeField] GameObject abilityBarGameObject;
+
+    public bool activePanel;
+
     private void Start()
     {
+        activePanel = false;
         StartCoroutine(InventoryFixEarly());
     }
 
@@ -22,7 +26,6 @@ public class InventoryInput : MonoBehaviour
         if (Input.GetKeyDown(toggleInventoryPanelKey))
         {
             inventoryPanelGameobject.SetActive(!inventoryPanelGameobject.activeSelf);
-
             if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
             {
                 ShowMouseCursor();
@@ -40,13 +43,13 @@ public class InventoryInput : MonoBehaviour
             {
                 abilityBarGameObject.SetActive(false);
             }
+            CheckActivePanels();
         }
 
 
         if (Input.GetKeyDown(toggleEquipmentPanelKey))
         {
             equipmentPanelGameObject.SetActive(!equipmentPanelGameObject.activeSelf);
-
             if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
             {
                 ShowMouseCursor();
@@ -64,6 +67,19 @@ public class InventoryInput : MonoBehaviour
             {
                 abilityBarGameObject.SetActive(false);
             }
+            CheckActivePanels();
+        }
+    }
+
+    public void CheckActivePanels()
+    {
+        if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
+        {
+            activePanel = true;
+        }
+        else
+        {
+            activePanel = false;
         }
     }
 

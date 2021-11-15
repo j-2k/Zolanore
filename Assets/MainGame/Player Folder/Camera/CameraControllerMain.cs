@@ -7,8 +7,6 @@ public class CameraControllerMain : MonoBehaviour
     //keys
     //KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
 
-    [SerializeField] bool lockCamera;
-
     //vars
     [SerializeField] float cameraHeight = 1, cameraDistanceMax = 10;
     //float cameraMaxTilt = 90;
@@ -38,6 +36,7 @@ public class CameraControllerMain : MonoBehaviour
     Ray camRay;
     RaycastHit camRayHit;
 
+    [SerializeField] InventoryInput invenActiveCheck;
     private void Awake()
     {
         transform.SetParent(null);
@@ -45,12 +44,6 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
-        if (lockCamera)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCam = Camera.main;
 
@@ -75,12 +68,7 @@ public class CameraControllerMain : MonoBehaviour
 
     void CameraInput()
     {
-        if (Cursor.visible)
-        {
-            lockCamera = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !lockCamera)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !invenActiveCheck.activePanel)
         {
             if (Cursor.visible)
             {
