@@ -27,6 +27,8 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] DropItemArea dropItemArea;
     [SerializeField] DestoryQuestion destroyQuestion;
 
+
+
     private BaseItemSlot dragItemSlot;
 
     LevelSystem levelSystem;
