@@ -4,41 +4,16 @@ using UnityEngine;
 
 public class EnemyHitBoxPrototype : MonoBehaviour
 {
-    //RootMotionMovement rmPlayer;
-    PlayerManager rmPlayer;
-    PlayerScript smPlayer;
 
-    [SerializeField] bool isPlayerRootMotion;
+    CharacterManager player;
+
     // Start is called before the first frame update
     void Start()
     {   
-        if (rmPlayer == null)
+        if (player == null)
         {
-            //rmPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<RootMotionMovement>();
-            rmPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
-            if (rmPlayer !=null)
-            {
-                isPlayerRootMotion = true;
-            }
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
         }
-
-        if (smPlayer == null)
-        {
-            smPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
-            if (smPlayer != null)
-            {
-                isPlayerRootMotion = false;
-            }
-        }
-        /*
-        if (isPlayerRootMotion)
-        {
-            rmPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<RootMotionMovement>();
-        }
-        else
-        {
-            smPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
-        }*/
     }
 
     // Update is called once per frame
@@ -52,18 +27,9 @@ public class EnemyHitBoxPrototype : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             Debug.Log("Enemy Hit Player Successfully");
-            if (isPlayerRootMotion)
-            {
-                Debug.Log("Making player take 10 dmg");
-                //rmPlayer.TakeDamageFromEnemy(10);
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.Log("Making player take 10 dmg");
-                //smPlayer.TakeDamageFromEnemy(10);
-                gameObject.SetActive(false);
-            }
+            player.TakeDamageFromEnemy(10);
+            Debug.Log("player took 10 dmg");
+            gameObject.SetActive(false);
         }
     }
 }

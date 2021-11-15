@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Juma.CharacterStats;
+using TMPro;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -26,7 +27,9 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] Image draggableItem;
     [SerializeField] DropItemArea dropItemArea;
     [SerializeField] DestoryQuestion destroyQuestion;
+    [SerializeField] Image healthBar;
 
+    TextMeshProUGUI healthText;
 
 
     private BaseItemSlot dragItemSlot;
@@ -77,14 +80,15 @@ public class CharacterManager : MonoBehaviour
         //levelSystem.levelUpAction += OnLevelUp;
 
         playerScript = GetComponent<PlayerManager>();
+        healthText = healthBar.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
     {
         playerMaxHealth = 100;
         playerCurrentHealth = playerMaxHealth;
-
-
+        healthText.text = playerCurrentHealth.ToString();
+        healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
     }
 
     
@@ -99,6 +103,9 @@ public class CharacterManager : MonoBehaviour
         incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 2);
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         playerCurrentHealth -= incDmg;
+        //healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
+        healthBar.fillAmount = ((float)playerCurrentHealth / (float)playerMaxHealth);
+        healthText.text = playerCurrentHealth.ToString();
         if (playerCurrentHealth <= 0)
         {
             //player died

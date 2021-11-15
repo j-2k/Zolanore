@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -39,14 +40,16 @@ public class LevelSystem : MonoBehaviour
     private int skillPointsGainedPerLevel = 2;
 
     [SerializeField] SkillPointSpend skillPointSpend;
-    [SerializeField] Text levelValueText;
+    [SerializeField] Text playerLevelUI;
+    [SerializeField] TextMeshProUGUI playerLevelTL;
 
     CharacterManager character;
 
     // Start is called before the first frame update
     void Start()
     {
-        levelValueText.text = currentLevel.ToString();
+        playerLevelUI.text = currentLevel.ToString();
+        playerLevelTL.text = currentLevel.ToString();
         character = GetComponentInParent<CharacterManager>();
         currentXP = 0;//save curr xp
         targetXP = Mathf.RoundToInt(Mathf.Pow(1 + currentLevel, 2.5f) * (currentLevel + 100)) / 16 + 100;
@@ -103,7 +106,8 @@ public class LevelSystem : MonoBehaviour
     {
         currentXP = currentXP - targetXP;
         currentLevel++;
-        levelValueText.text = currentLevel.ToString();
+        playerLevelUI.text = currentLevel.ToString();
+        playerLevelTL.text = currentLevel.ToString();
         targetXP = Mathf.RoundToInt((Mathf.Pow(1 + currentLevel,2.5f) * (currentLevel + 100)/16) + 100);
     } 
 
