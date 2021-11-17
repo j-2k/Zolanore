@@ -17,11 +17,13 @@ public class Item : ScriptableObject
 
     protected static readonly StringBuilder sbLore = new StringBuilder();
 
-    private void OnValidate()
+    
+    private void OnValidate() //change to awake later
     {
         string path = AssetDatabase.GetAssetPath(this);
         id = AssetDatabase.AssetPathToGUID(path);
     }
+    
 
     public virtual Item GetCopy()
     {
