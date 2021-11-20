@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemSaveManager : MonoBehaviour
 {
+    [SerializeField] ItemDatabase itemDatabase;
+
     private const string InventoryFileName = "Inventory";
     private const string EquipmentFileName = "Equipment";
 
@@ -30,7 +32,7 @@ public class ItemSaveManager : MonoBehaviour
             }
             else
             {
-                //itemSlot.Item = ;
+                itemSlot.Item = itemDatabase.GetItemCopy(savedSlot.ItemID);
                 itemSlot.Amount = savedSlot.itemAmount;
             }
         }
@@ -48,7 +50,7 @@ public class ItemSaveManager : MonoBehaviour
                 continue;
             }
 
-            Item item = null;
+            Item item = itemDatabase.GetItemCopy(savedSlot.ItemID);
             character.inventory.AddItem(item);
             character.Equip((EquippableItem)item);
         }
