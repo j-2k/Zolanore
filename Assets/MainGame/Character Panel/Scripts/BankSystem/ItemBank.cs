@@ -23,9 +23,9 @@ public class ItemBank : ItemContainer
 
 
     // Start is called before the first frame update
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         itemsParent.gameObject.SetActive(false);
         //characterManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CharacterManager>();
     }

@@ -18,7 +18,7 @@ public abstract class ItemContainer : MonoBehaviour, IItemContainer
         itemSlots = GetComponentsInChildren<ItemSlot>(includeInactive: true);
     }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         //listener for the itemslots event
         for (int i = 0; i < itemSlots.Length; i++)

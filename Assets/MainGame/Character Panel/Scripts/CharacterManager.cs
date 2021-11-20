@@ -27,6 +27,8 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] Image draggableItem;
     [SerializeField] DropItemArea dropItemArea;
     [SerializeField] DestoryQuestion destroyQuestion;
+    [SerializeField] ItemSaveManager itemSaveManager;
+
     [SerializeField] Image healthBar;
 
     TextMeshProUGUI healthText;
@@ -75,12 +77,21 @@ public class CharacterManager : MonoBehaviour
         equipmentPanel.OnDropEvent += Drop;
         dropItemArea.OnDropEvent += DropItemOutsideUI;
 
+        itemSaveManager.LoadEquipment(this);
+        itemSaveManager.LoadInventory(this);
+
         levelSystem = LevelSystem.instance;
 
         //levelSystem.levelUpAction += OnLevelUp;
 
         playerScript = GetComponent<PlayerManager>();
         healthText = healthBar.GetComponentInChildren<TextMeshProUGUI>();
+    }
+
+    private void OnDestroy()
+    {
+        itemSaveManager.SaveEquipment(this);
+        itemSaveManager.SaveInventory(this);
     }
 
     private void Start()
