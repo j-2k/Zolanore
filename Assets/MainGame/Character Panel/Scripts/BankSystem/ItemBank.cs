@@ -17,7 +17,7 @@ public class ItemBank : ItemContainer
     {
         if (itemsParent != null)
         {
-            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true); //add objects that are even disabled
+            itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true, result: itemSlots); //add objects that are even disabled
         }
     }
 

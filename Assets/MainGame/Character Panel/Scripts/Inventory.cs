@@ -18,7 +18,7 @@ public class Inventory : ItemContainer
     {
         if (itemsParent != null)
         {
-            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true); //add objects that are even disabled
+            itemsParent.GetComponentsInChildren<ItemSlot>(includeInactive: true, result: itemSlots); //add objects that are even disabled
         }
 
         SetStartingItems();
@@ -27,9 +27,9 @@ public class Inventory : ItemContainer
     void SetStartingItems()
     {
         Clear();
-        for (int i = 0; i < startingItems.Length; i++)
+        foreach (Item item in startingItems)
         {
-            AddItem(startingItems[i].GetCopy());
+            AddItem(item.GetCopy());
         }
     }
 }
