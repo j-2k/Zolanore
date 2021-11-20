@@ -13,7 +13,7 @@ public static class FileReadWrite
         }
     }
 
-    public static T ReadFromBinaryFile<T>(string filePath, T objectToWrite)
+    public static T ReadFromBinaryFile<T>(string filePath)
     {
         using (Stream stream = File.Open(filePath, FileMode.Open))
         {
