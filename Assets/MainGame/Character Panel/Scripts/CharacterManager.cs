@@ -20,8 +20,8 @@ public class CharacterManager : MonoBehaviour
     //
 
     //THISIS THE WHOLE CHARACTER PANEL MANAGER
-    [SerializeField] Inventory inventory;
-    [SerializeField] EquipmentPanel equipmentPanel;
+    public Inventory inventory;
+    public EquipmentPanel equipmentPanel;
     [SerializeField] StatPanel statPanel;
     [SerializeField] ItemTooltip itemTooltip;
     [SerializeField] Image draggableItem;

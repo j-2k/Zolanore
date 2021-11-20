@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class ItemContainer : MonoBehaviour, IItemContainer
 {
-    [SerializeField] protected ItemSlot[] itemSlots;
+    public ItemSlot[] itemSlots;
 
     public event Action<BaseItemSlot> OnPointerEnterEvent;
     public event Action<BaseItemSlot> OnPointerExitEvent;
