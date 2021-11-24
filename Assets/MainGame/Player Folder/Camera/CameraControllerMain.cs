@@ -32,10 +32,11 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] bool camDebugCollision;
     [SerializeField] float camColClipping = 0.3f;
     [SerializeField] LayerMask cameraLayer;
+    [SerializeField] LayerMask chestLayer;
     float adjustedCamDistance;
     Ray camRay;
     RaycastHit camRayHit;
-
+    RaycastHit chestHit;
     [SerializeField] InventoryInput invenActiveCheck;
 
     Transform firstChildRotX;
@@ -70,23 +71,40 @@ public class CameraControllerMain : MonoBehaviour
         CameraChestHit();
     }
 
+    ItemChest itemChestCache;
+
     void CameraChestHit()
     {
-        RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, firstChildRotX.forward, out hit, 3f, cameraLayer))
+        if (Physics.Raycast(transform.position, firstChildRotX.forward, out chestHit, 3f, chestLayer))
         {
-            Debug.DrawRay(transform.position, firstChildRotX.forward * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, firstChildRotX.forward * chestHit.distance, Color.yellow);
             Debug.Log("Did Hit");
-            if (hit.transform.tag == "Chest")
+            if (chestHit.transform.tag == "Chest")
             {
-                hit.collider.gameObject.GetComponent<ItemChest>().isInRange = true;
+                if (itemChestCache == null)
+                {
+                    itemChestCache = chestHit.collider.gameObject.GetComponent<ItemChest>();
+                }
+
+                if (itemChestCache != chestHit.collider.gameObject.GetComponent<ItemChest>())
+                {
+                    itemChestCache.isInRange = false;
+                    itemChestCache = chestHit.collider.gameObject.GetComponent<ItemChest>();
+                }
+
+                itemChestCache.isInRange = true;
             }
         }
         else
         {
             Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.white);
             Debug.Log("Did not Hit");
+            if (itemChestCache != null)
+            {
+                itemChestCache.isInRange = false;
+                itemChestCache = null;
+            }
         }
 
         Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.cyan);

@@ -58,6 +58,7 @@ public class ItemChest : MonoBehaviour
         }
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         InRangeTriggerCheck(other.gameObject, true);
@@ -76,4 +77,5 @@ public class ItemChest : MonoBehaviour
             //text enabeled = state
         }
     }    
+    */
 }
