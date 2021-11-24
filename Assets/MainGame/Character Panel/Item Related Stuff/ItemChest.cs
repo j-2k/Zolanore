@@ -63,7 +63,7 @@ public class ItemChest : MonoBehaviour
         else if (!isForeverChest)
         {
             time += Time.deltaTime;
-            if (time >= 20)
+            if (time >= 180)
             {
                 Destroy(this.gameObject);
             }
