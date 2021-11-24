@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class ChestVFXManager : MonoBehaviour
 {
-    [SerializeField] GameObject chestGlowVFX;
     [SerializeField] GameObject pickupVFX;
+    [SerializeField] GameObject sparkleVFX;
     [SerializeField] Animation openAnim;
-    GameObject glowOnly;
+
     GameObject openChestEffectOnly;
     bool isOpened = false;
     // Start is called before the first frame update
     void Start()
     {
-        glowOnly = Instantiate(chestGlowVFX, transform.position + transform.up * 0.05f, Quaternion.identity);
-        glowOnly.transform.localScale = Vector3.one * 5;
-        glowOnly.transform.parent = this.transform;
+
     }
 
     private void Update()
@@ -27,6 +25,7 @@ public class ChestVFXManager : MonoBehaviour
     {
         if (!isOpened)
         {
+            sparkleVFX.gameObject.SetActive(true);
             openAnim.Play();
         }
         Destroy(openChestEffectOnly);
