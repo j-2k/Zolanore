@@ -327,6 +327,10 @@ PrefabInstance:
       value: GoldSparkle
       objectReference: {fileID: 0}
     - target: {fileID: 2884751627081607446, guid: 0c52d5ee752d73e4a90feb96f9e2ecba, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2884751627081607446, guid: 0c52d5ee752d73e4a90feb96f9e2ecba, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1144,6 +1148,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2043771340}
     m_Modifications:
+    - target: {fileID: 2716322671756893913, guid: bc51a0999ed6bca4bb752db2eb30149d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6672970066802414045, guid: bc51a0999ed6bca4bb752db2eb30149d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1203,6 +1211,14 @@ PrefabInstance:
     - target: {fileID: 6672970066802684815, guid: bc51a0999ed6bca4bb752db2eb30149d, type: 3}
       propertyPath: m_Name
       value: ChestLv1Glow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672970066802684815, guid: bc51a0999ed6bca4bb752db2eb30149d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672970066802693917, guid: bc51a0999ed6bca4bb752db2eb30149d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6672970066821893681, guid: bc51a0999ed6bca4bb752db2eb30149d, type: 3}
       propertyPath: simulationSpeed
@@ -1281,7 +1297,7 @@ GameObject:
   - component: {fileID: 734108859}
   - component: {fileID: 734108858}
   - component: {fileID: 734108853}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2963,7 +2979,7 @@ GameObject:
   - component: {fileID: 1009189148}
   - component: {fileID: 1009189151}
   - component: {fileID: 1009189150}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2979,7 +2995,7 @@ Transform:
   m_GameObject: {fileID: 1009189144}
   m_LocalRotation: {x: 0.00000023841855, y: 0.70710707, z: -0.7071066, w: 0.00000028312203}
   m_LocalPosition: {x: -0.0049409713, y: 0.23789835, z: 0.000019073486}
-  m_LocalScale: {x: 0.46071646, y: 0.34887245, z: 0.026653018}
+  m_LocalScale: {x: 0.46071646, y: 0.34887245, z: 0.0059913322}
   m_Children: []
   m_Father: {fileID: 1629780985}
   m_RootOrder: 2
@@ -3108,7 +3124,7 @@ GameObject:
   - component: {fileID: 1074057603}
   - component: {fileID: 1074057601}
   - component: {fileID: 1074057600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3476,7 +3492,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1405940294 stripped
 MonoBehaviour:
@@ -3532,7 +3548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1629780985}
   - component: {fileID: 1629780986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChestNew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4140,7 +4156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2043771340}
   - component: {fileID: 2043771344}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TreasureChest1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4553,9 +4569,9 @@ GameObject:
   - component: {fileID: 7283751355900805378}
   - component: {fileID: 7283751355900805377}
   - component: {fileID: 7283751355900805379}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ItemChest Testing
-  m_TagString: Untagged
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4613,10 +4629,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 242533696, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 217346399909002612, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: invenActiveCheck
       value: 
@@ -4627,7 +4639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 217346400217418923, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 217346400217418923, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4714,14 +4726,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 42763445}
     - target: {fileID: 8892587703679842709, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: levelValueText
-      value: 
-      objectReference: {fileID: 42763445}
-    - target: {fileID: 8892587703679842709, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: skillPointSpend
       value: 
       objectReference: {fileID: 1172585044}
-    m_RemovedComponents:
-    - {fileID: 4825877637064226215, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-    - {fileID: 5445424066897739595, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}

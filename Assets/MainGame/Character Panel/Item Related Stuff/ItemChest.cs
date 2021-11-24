@@ -8,11 +8,10 @@ public class ItemChest : MonoBehaviour
     [SerializeField] Inventory inventory;
     [SerializeField] KeyCode itemPickup = KeyCode.E;
     [SerializeField] int amount = 1;
-    [SerializeField] bool isInRange = false;
+    public bool isInRange = false;
     [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
-
+    float time;
     ChestVFXManager chestVFX;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +29,6 @@ public class ItemChest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (!isEmpty && isInRange && Input.GetKeyDown(itemPickup))
         {
             Item itemCopy = item.GetCopy();
@@ -50,7 +47,15 @@ public class ItemChest : MonoBehaviour
             }
         }
 
+        if (isEmpty)
+        {
+            time += Time.deltaTime;
 
+            if (time >= 30)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

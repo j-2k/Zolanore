@@ -368,5 +368,4 @@ public class PlayerManager : MonoBehaviour
         ccHit.normal = hit.normal;
     }
 
-
 }

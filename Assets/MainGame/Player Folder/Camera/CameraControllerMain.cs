@@ -37,9 +37,12 @@ public class CameraControllerMain : MonoBehaviour
     RaycastHit camRayHit;
 
     [SerializeField] InventoryInput invenActiveCheck;
+
+    Transform firstChildRotX;
     private void Awake()
     {
         transform.SetParent(null);
+        firstChildRotX = transform.GetChild(0);
     }
 
     void Start()
@@ -64,6 +67,29 @@ public class CameraControllerMain : MonoBehaviour
         CameraHandler();
         CameraCollisions();
         CameraInput();
+        CameraChestHit();
+    }
+
+    void CameraChestHit()
+    {
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, firstChildRotX.forward, out hit, 3f, cameraLayer))
+        {
+            Debug.DrawRay(transform.position, firstChildRotX.forward * hit.distance, Color.yellow);
+            Debug.Log("Did Hit");
+            if (hit.transform.tag == "Chest")
+            {
+                hit.collider.gameObject.GetComponent<ItemChest>().isInRange = true;
+            }
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.white);
+            Debug.Log("Did not Hit");
+        }
+
+        Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.cyan);
     }
 
     void CameraInput()

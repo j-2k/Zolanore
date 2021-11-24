@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Boss
-  - Orb
   - CameraManager
   - CharacterPanel
   - GameManager
@@ -20,6 +19,7 @@ TagManager:
   - QuestContainer
   - QuestGiver
   - TrackButton
+  - Chest
   layers:
   - Default
   - TransparentFX

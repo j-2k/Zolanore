@@ -109,7 +109,8 @@ MonoBehaviour:
   targetXP: 0
   skillPointsToSpend: 0
   skillPointSpend: {fileID: 0}
-  levelValueText: {fileID: 0}
+  playerLevelUI: {fileID: 0}
+  playerLevelTL: {fileID: 0}
 --- !u!114 &8892587703643822513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +335,8 @@ MonoBehaviour:
   draggableItem: {fileID: 0}
   dropItemArea: {fileID: 0}
   destroyQuestion: {fileID: 0}
+  itemSaveManager: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!65 &8892587703824008352
 BoxCollider:
   m_ObjectHideFlags: 0
