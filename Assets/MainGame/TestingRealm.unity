@@ -1084,25 +1084,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &734108852
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734108854}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d9c24082e2e4b194e89190d0e35aba7a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!111 &734108853
 Animation:
   m_ObjectHideFlags: 0
@@ -1112,9 +1093,9 @@ Animation:
   m_GameObject: {fileID: 734108854}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 199fecccda9a4bc458e770b4e6611592, type: 2}
+  m_Animation: {fileID: 7400000, guid: 22ef033ad4a2fa94c92f25916da3ef06, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 199fecccda9a4bc458e770b4e6611592, type: 2}
+  - {fileID: 7400000, guid: 22ef033ad4a2fa94c92f25916da3ef06, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1131,7 +1112,6 @@ GameObject:
   - component: {fileID: 734108859}
   - component: {fileID: 734108858}
   - component: {fileID: 734108853}
-  - component: {fileID: 734108852}
   m_Layer: 0
   m_Name: Lid
   m_TagString: Untagged
@@ -4469,7 +4449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7283751355900805376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56, z: -15.06}
+  m_LocalPosition: {x: 0, y: 0.56, z: -7.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2043771340}

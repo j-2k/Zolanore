@@ -9,6 +9,7 @@ public class ChestVFXManager : MonoBehaviour
     [SerializeField] Animation openAnim;
     GameObject glowOnly;
     GameObject openChestEffectOnly;
+    bool isOpened = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +25,14 @@ public class ChestVFXManager : MonoBehaviour
 
     public void OpenChest()
     {
-        openAnim.Play();
+        if (!isOpened)
+        {
+            openAnim.Play();
+        }
         Destroy(openChestEffectOnly);
         openChestEffectOnly = Instantiate(pickupVFX, transform.position + transform.up * 0.05f, Quaternion.identity);
         openChestEffectOnly.transform.localScale = Vector3.one * 3;
         openChestEffectOnly.transform.parent = this.transform;
+        isOpened = true;
     }
 }
