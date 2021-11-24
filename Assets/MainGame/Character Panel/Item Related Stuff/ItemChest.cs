@@ -10,8 +10,10 @@ public class ItemChest : MonoBehaviour
     [SerializeField] int amount = 1;
     public bool isInRange = false;
     [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
-    float time;
+    float time = 0;
+    [SerializeField] bool isForeverChest = false;
     ChestVFXManager chestVFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,7 @@ public class ItemChest : MonoBehaviour
                 amount--;
                 if (amount <= 0)
                 {
+                    time = 0;
                     isEmpty = true;
                 }
             }
@@ -50,8 +53,17 @@ public class ItemChest : MonoBehaviour
         if (isEmpty)
         {
             time += Time.deltaTime;
+            chestVFX.Invoke(nameof(chestVFX.EmptyChestParticles), 1.5f);
 
             if (time >= 30)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else if (!isForeverChest)
+        {
+            time += Time.deltaTime;
+            if (time >= 20)
             {
                 Destroy(this.gameObject);
             }
