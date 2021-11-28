@@ -7,6 +7,7 @@ public class AbilityExecuter : MonoBehaviour
 {
     public Ability ability;
     GameObject player;
+    GameObject gameManagerObj;
     [SerializeField] int IndexOfExecuter;
     public float cooldownTime;
     public float cooldownTimeMax;
@@ -35,10 +36,11 @@ public class AbilityExecuter : MonoBehaviour
     {
         abilityManager = AbilityManager.instance;
         player = GameObject.FindGameObjectWithTag("Player");
+        gameManagerObj = this.gameObject;
         cooldownTime = ability.cooldownTime;
         cooldownTimeMax = cooldownTime;
 
-        ability.CacheStart(player);
+        ability.CacheStart(player, gameManagerObj);
 
         if (ability.combatType == CombatType.Melee)
         {

@@ -9,21 +9,24 @@ public class BuffAbility : Ability
     Transform meshTransform;
     CharacterManager cm;
     PlayerManager player;
+    ParticleSystem pf;
 
-    public override void CacheStart(GameObject parent)
+    public override void CacheStart(GameObject parent, GameObject gameManagerObj)
     {
         cm = parent.GetComponent<CharacterManager>();
         player = parent.GetComponent<PlayerManager>();
         meshTransform = parent.transform.GetChild(0);
+        pf = Instantiate(abilityVFX, parent.transform.position, Quaternion.identity);
+        pf.Stop();
+        pf.transform.parent = gameManagerObj.transform;
     }
 
     public override void OnActivate(GameObject parent)
     {
         scaleIncrease = 1;
 
-        ParticleSystem pf = Instantiate(abilityVFX, parent.transform.position, Quaternion.identity);
-        pf.transform.parent = parent.transform;
         pf.Play();
+        pf.GetComponent<EGA_EffectSound>().PlaySoundOnce();
 
         cm.Strength.BaseValue += 10f;
         cm.UpdateStatSkillPoint();

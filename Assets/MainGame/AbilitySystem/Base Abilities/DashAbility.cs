@@ -10,7 +10,7 @@ public class DashAbility : Ability
     public float dashSpeed;
     Transform meshTransform;
 
-    public override void CacheStart(GameObject parent)
+    public override void CacheStart(GameObject parent, GameObject gameManagerObj)
     {
         player = parent.GetComponent<PlayerManager>();
         cc = parent.GetComponent<CharacterController>();

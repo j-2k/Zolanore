@@ -10,7 +10,7 @@ public class AOEAbility : Ability
     CharacterController cc;
     float timer = 0;
 
-    public override void CacheStart(GameObject parent)
+    public override void CacheStart(GameObject parent,GameObject gameManagerObj)
     {
         combatType = CombatType.Melee;
         player = parent.GetComponent<PlayerManager>();

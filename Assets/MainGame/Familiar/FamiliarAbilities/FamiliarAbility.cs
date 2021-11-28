@@ -7,7 +7,7 @@ public class FamiliarAbility : Ability
 {
     PlayerFamiliar playerFamiliar;
     StateManager stateManager;
-    public override void CacheStart(GameObject parent)
+    public override void CacheStart(GameObject parent, GameObject gameManagerObj)
     {
         combatType = CombatType.Familiar;
         playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();

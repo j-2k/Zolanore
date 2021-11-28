@@ -27,13 +27,14 @@ public class EGA_EffectSound : MonoBehaviour
         {
             InvokeRepeating("RepeatSound", StartTime, RepeatTime);
         }
-        else
-        {
-            soundComponent.PlayOneShot(clip);
-        }
     }
 
     void RepeatSound()
+    {
+        soundComponent.PlayOneShot(clip);
+    }
+
+    public void PlaySoundOnce()
     {
         soundComponent.PlayOneShot(clip);
     }

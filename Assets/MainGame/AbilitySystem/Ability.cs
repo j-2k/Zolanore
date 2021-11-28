@@ -26,7 +26,7 @@ public class Ability : ScriptableObject
 
     public ParticleSystem abilityVFX;
 
-    public virtual void CacheStart(GameObject parent)
+    public virtual void CacheStart(GameObject parent,GameObject gameManager)
     {
 
     }
