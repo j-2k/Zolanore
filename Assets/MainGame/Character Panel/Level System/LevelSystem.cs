@@ -58,6 +58,7 @@ public class LevelSystem : MonoBehaviour
         levelUpAction += LevelUp;
         levelUpAction += LevelSkillPoint;
         levelUpAction += CheckSkillPoints;
+        levelUpAction += LevelUpVFX;
     }
 
     // Update is called once per frame
@@ -100,6 +101,11 @@ public class LevelSystem : MonoBehaviour
                 j -= 0.15f;
             }
         }
+    }
+
+    void LevelUpVFX()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
     }
 
     private void LevelUp()
