@@ -115,8 +115,7 @@ public class CharacterManager : MonoBehaviour
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         playerCurrentHealth -= incDmg;
         //healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
-        healthBar.fillAmount = ((float)playerCurrentHealth / (float)playerMaxHealth);
-        healthText.text = playerCurrentHealth.ToString();
+        RefreshPlayerUI();
         if (playerCurrentHealth <= 0)
         {
             //player died
@@ -126,7 +125,11 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    
+    public void RefreshPlayerUI()
+    {
+        healthBar.fillAmount = ((float)playerCurrentHealth / (float)playerMaxHealth);
+        healthText.text = playerCurrentHealth.ToString();
+    }
 
     void OnLevelUp()
     {
