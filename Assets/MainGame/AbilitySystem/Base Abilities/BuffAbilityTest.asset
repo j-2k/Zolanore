@@ -18,4 +18,5 @@ MonoBehaviour:
   activeTime: 10
   singleTrigger: 0
   bypassCancel: 1
+  abilityVFX: {fileID: 198665422404971792, guid: 4a902f9e673e935429fab625028c7790, type: 3}
   scaleIncrease: 1

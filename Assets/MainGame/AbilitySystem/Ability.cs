@@ -24,6 +24,8 @@ public class Ability : ScriptableObject
     public bool singleTrigger;
     public bool bypassCancel;
 
+    public ParticleSystem abilityVFX;
+
     public virtual void CacheStart(GameObject parent)
     {
 

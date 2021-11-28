@@ -20,7 +20,11 @@ public class BuffAbility : Ability
     public override void OnActivate(GameObject parent)
     {
         scaleIncrease = 1;
-        
+
+        ParticleSystem pf = Instantiate(abilityVFX, parent.transform.position, Quaternion.identity);
+        pf.transform.parent = parent.transform;
+        pf.Play();
+
         cm.Strength.BaseValue += 10f;
         cm.UpdateStatSkillPoint();
         
