@@ -368,4 +368,9 @@ public class PlayerManager : MonoBehaviour
         ccHit.normal = hit.normal;
     }
 
+    public float GetPlayerSpeed()
+    {
+        return movementSpeed;
+    }
+
 }

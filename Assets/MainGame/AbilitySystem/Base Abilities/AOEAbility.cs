@@ -26,6 +26,7 @@ public class AOEAbility : Ability
 
     public override void AbilityUpdateActive(GameObject parent)
     {
+        player.isMovingAbility = true;
         meshTransform.transform.Rotate(0, 1000 * Time.deltaTime, 0);
         timer += Time.deltaTime;
         if (timer >= 1)
@@ -33,7 +34,6 @@ public class AOEAbility : Ability
             player.AOEAttack();
             timer = 0;
         }
-
         player.GroundedUpdate();
         Debug.Log("<color=red>SPINNING</color>");
     }

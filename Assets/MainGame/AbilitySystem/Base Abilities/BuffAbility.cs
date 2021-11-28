@@ -26,6 +26,7 @@ public class BuffAbility : Ability
         scaleIncrease = 1;
 
         pf.Play();
+        //bad??? VVVV below
         pf.GetComponent<EGA_EffectSound>().PlaySoundOnce();
 
         cm.Strength.BaseValue += 10f;
