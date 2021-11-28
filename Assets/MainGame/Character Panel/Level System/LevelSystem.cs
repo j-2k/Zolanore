@@ -45,6 +45,8 @@ public class LevelSystem : MonoBehaviour
 
     CharacterManager character;
 
+    [SerializeField] ParticleSystem levelUpVFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +60,6 @@ public class LevelSystem : MonoBehaviour
         levelUpAction += LevelUp;
         levelUpAction += LevelSkillPoint;
         levelUpAction += CheckSkillPoints;
-        levelUpAction += LevelUpVFX;
     }
 
     // Update is called once per frame
@@ -103,13 +104,9 @@ public class LevelSystem : MonoBehaviour
         }
     }
 
-    void LevelUpVFX()
-    {
-        GetComponentInChildren<ParticleSystem>().Play();
-    }
-
     private void LevelUp()
     {
+        levelUpVFX.Play();
         currentXP = currentXP - targetXP;
         currentLevel++;
         playerLevelUI.text = currentLevel.ToString();
