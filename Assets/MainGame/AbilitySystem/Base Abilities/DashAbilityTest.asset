@@ -18,4 +18,5 @@ MonoBehaviour:
   activeTime: 1
   singleTrigger: 0
   bypassCancel: 0
+  abilityVFX: {fileID: 0}
   dashSpeed: 20

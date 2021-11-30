@@ -281,7 +281,7 @@ Shader "Custom/Grass Geometry Shader 3" {
 				}
 			ENDCG
 			}
-
+			
 		Pass // shadow pass
 			{
 				Tags
@@ -302,7 +302,7 @@ Shader "Custom/Grass Geometry Shader 3" {
 					}
 					ENDCG
 			}
-
+			
 
 	}    Fallback "VertexLit"
 }
