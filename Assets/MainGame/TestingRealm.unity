@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 239684061}
   - component: {fileID: 239684063}
   - component: {fileID: 239684062}
+  - component: {fileID: 239684064}
   m_Layer: 0
   m_Name: ActiveQuestVFX
   m_TagString: Untagged
@@ -386,7 +387,7 @@ Transform:
   - {fileID: 2020421108}
   - {fileID: 1398544259}
   m_Father: {fileID: 323038771}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &239684062
 ParticleSystem:
@@ -5190,6 +5191,22 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!111 &239684064
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239684060}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 84eb979f456a97146990321adf086000, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 84eb979f456a97146990321adf086000, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &248900273 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 248900273, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -5472,9 +5489,9 @@ Transform:
   - {fileID: 1094475501}
   - {fileID: 168200166}
   - {fileID: 640918528}
+  - {fileID: 645814879}
   - {fileID: 239684061}
   - {fileID: 1624541766}
-  - {fileID: 645814879}
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5490,11 +5507,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53890d97b6d17a49b327c9a1933f60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentQuestState: 0
   headerVFXs:
+  - {fileID: 645549551}
   - {fileID: 239684060}
   - {fileID: 1624252022}
-  - {fileID: 645549551}
+  questTriggerTest: 0
+  questState: 2
 --- !u!114 &329560951 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 329560951, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -6059,6 +6077,7 @@ GameObject:
   - component: {fileID: 645814879}
   - component: {fileID: 660038539}
   - component: {fileID: 660064215}
+  - component: {fileID: 645549552}
   m_Layer: 0
   m_Name: AvailableQuestVFX
   m_TagString: Untagged
@@ -6066,6 +6085,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!111 &645549552
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645549551}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 84eb979f456a97146990321adf086000, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 84eb979f456a97146990321adf086000, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &645582777
 GameObject:
   m_ObjectHideFlags: 0
@@ -6112,7 +6147,7 @@ Transform:
   - {fileID: 645803017}
   - {fileID: 645856227}
   m_Father: {fileID: 323038771}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &645856227
 Transform:
@@ -46081,6 +46116,7 @@ GameObject:
   - component: {fileID: 1624541766}
   - component: {fileID: 1642206670}
   - component: {fileID: 1643948518}
+  - component: {fileID: 1624252023}
   m_Layer: 0
   m_Name: CompletedQuestVFX
   m_TagString: Untagged
@@ -46088,6 +46124,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!111 &1624252023
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624252022}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 84eb979f456a97146990321adf086000, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 84eb979f456a97146990321adf086000, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1624259822
 GameObject:
   m_ObjectHideFlags: 0
@@ -46152,7 +46204,7 @@ Transform:
   - {fileID: 1624619996}
   - {fileID: 1624537432}
   m_Father: {fileID: 323038771}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &1624619996
 Transform:

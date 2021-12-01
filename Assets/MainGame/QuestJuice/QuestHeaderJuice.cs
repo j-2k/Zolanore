@@ -11,25 +11,51 @@ public class QuestHeaderJuice : MonoBehaviour
         Completed
     }
 
-    public QuestState currentQuestState;
+    private QuestState _currentQuestState;//this holds the actual value 
+
+    public QuestState CurrentQuestState//this is public and accessible, and should be used to change "State"
+    {
+        get { return _currentQuestState; }
+        set { 
+            _currentQuestState = value;
+            OnQuestStatusChanged();
+            Debug.Log("Enum just got changed to: " + _currentQuestState);
+        }
+    }
 
     [SerializeField] GameObject[] headerVFXs;
 
     [SerializeField] bool questTriggerTest = false;
+
+    [Range(0,2)] 
+    [SerializeField] int questState = 0;
 
     // Update is called once per frame
     void Update()
     {
         if (questTriggerTest)
         {
-            QuestStatusCheck();
+            if (questState == 0)
+            {
+                CurrentQuestState = QuestState.Available;
+            }
+
+            if (questState == 1)
+            {
+                CurrentQuestState = QuestState.Active;
+            }
+
+            if (questState == 2)
+            {
+                CurrentQuestState = QuestState.Completed;
+            }
             questTriggerTest = false;
         }
     }
 
-    void QuestStatusCheck()
+    void OnQuestStatusChanged()
     {
-        if (currentQuestState == QuestState.Available)
+        if (CurrentQuestState == QuestState.Available)
         {
             foreach (GameObject vfx in headerVFXs)
             {
@@ -41,7 +67,7 @@ public class QuestHeaderJuice : MonoBehaviour
             }
         }
 
-        if (currentQuestState == QuestState.Active)
+        if (CurrentQuestState == QuestState.Active)
         {
             foreach (GameObject vfx in headerVFXs)
             {
@@ -54,7 +80,7 @@ public class QuestHeaderJuice : MonoBehaviour
             }
         }
 
-        if (currentQuestState == QuestState.Completed)
+        if (CurrentQuestState == QuestState.Completed)
         {
             foreach (GameObject vfx in headerVFXs)
             {
