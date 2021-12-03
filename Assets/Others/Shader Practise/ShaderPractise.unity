@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 1848590864}
   - component: {fileID: 1848590865}
   - component: {fileID: 1848590867}
+  - component: {fileID: 1848590868}
   - component: {fileID: 1848590866}
   m_Layer: 0
   m_Name: TransformationGrid
@@ -565,3 +566,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scale: {x: 1, y: 1, z: 1}
+--- !u!114 &1848590868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848590863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d431d96b9c247544bbd2180132dd42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0}
