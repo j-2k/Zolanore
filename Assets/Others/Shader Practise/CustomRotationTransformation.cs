@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomRotationTransformation : MonoBehaviour
+public class CustomRotationTransformation : CustomTransformation
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector3 rotation;
 
-    // Update is called once per frame
-    void Update()
+    public override Vector3 Apply(Vector3 point)
     {
-        
+        return point;
     }
 }
