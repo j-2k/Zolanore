@@ -1,9 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TransformationGrid : MonoBehaviour
 {
-
+	//SCALE COMPONENT FIRST THEN POSITION COMPONENT UNDER THIS COMPONENET
+	
 	public Transform prefab;
 
 	[Range(0,10)]
@@ -16,8 +18,15 @@ public class TransformationGrid : MonoBehaviour
 	[Range(0,0.5f)]
 	public float GeneratorSpeedFloat;
 
+	List<CustomTransformation> transformations;
+
+
 	void Awake()
 	{
+		transformations = new List<CustomTransformation>();
+
+
+
 		grid = new Transform[gridResolution * gridResolution * gridResolution];
 
 		if (SeeGenerator)
@@ -33,6 +42,35 @@ public class TransformationGrid : MonoBehaviour
 		{
 			FastGrid();
 		}
+	}
+
+	void Update()
+	{
+		//get component of the transformations
+		GetComponents<CustomTransformation>(transformations);
+		for (int i = 0, z = 0; z < gridResolution; z++)
+		{
+			for (int y = 0; y < gridResolution; y++)
+			{
+				for (int x = 0; x < gridResolution; x++, i++)
+				{
+					//loop through entire grid and transform point
+					grid[i].position = TransformPoint(x, y, z);
+				}
+			}
+		}
+	}
+
+	Vector3 TransformPoint(int x, int y, int z)
+	{
+		//first get the positions of the objects in the coordinates
+		Vector3 coordinates = GetCoordinates(x, y, z);
+		for (int i = 0; i < transformations.Count; i++)
+		{
+			//applying new transformation provided by custom position transformation in inspector
+			coordinates = transformations[i].Apply(coordinates);
+		}
+		return coordinates;
 	}
 
 	void FastGrid()
