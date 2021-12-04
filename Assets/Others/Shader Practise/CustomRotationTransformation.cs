@@ -22,6 +22,10 @@ public class CustomRotationTransformation : CustomTransformation
     //  |cos θ   −sin θ   0| |x|   |x cos θ − y sin θ|   |x'|
     //  |sin θ    cos θ   0| |y| = |x sin θ + y cos θ| = |y'|
     //  |  0       0      1| |z|   |        z        |   |z'|
+    //ROTATING AROUND Y = (X,Z) X(COS Y, -SIN Y) , Z(SIN Y,COS Y)
+    //  | cos θ    0   sin θ| |x|   | x cos θ + z sin θ|   |x'|
+    //  |   0      1       0| |y| = |         y        | = |y'|
+    //  |−sin θ    0   cos θ| |z|   |−x sin θ + z cos θ|   |z'|
 
     public Vector3 rotation;
 
@@ -31,10 +35,22 @@ public class CustomRotationTransformation : CustomTransformation
         float sinZ = Mathf.Sin(radianZ);
         float cosZ = Mathf.Cos(radianZ);
 
-        return new Vector3(
+        float radianY = rotation.y * Mathf.Deg2Rad;
+        float sinY = Mathf.Sin(radianY);
+        float cosY = Mathf.Cos(radianY);
+
+        Vector3 zAxis = new Vector3(
             point.x * cosZ - point.y * sinZ,
             point.x * sinZ + point.y * cosZ,
             point.z
-        ); ;
+        );
+
+        Vector3 yAxis = new Vector3(
+            point.x * cosY + point.z * sinY,
+            point.y,
+            -point.x * sinY + point.z * cosY
+        );
+
+        return yAxis;//zAxis * point.z + yAxis * point.y;
     }
 }
