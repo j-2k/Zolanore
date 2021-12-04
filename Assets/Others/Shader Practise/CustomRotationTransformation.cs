@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CustomRotationTransformation : CustomTransformation
 {
+    //learn matrix multiplication first
+    //https://www.mathsisfun.com/algebra/matrix-multiplying.html
+    //start transformations
     //https://catlikecoding.com/unity/tutorials/rendering/part-1/
     // left hand coordinate system with thumb = +y index + z middle + x (unity)
     // sitting with default rotation adding to z  should turn thumb and middle counter clock wise
@@ -18,11 +21,11 @@ public class CustomRotationTransformation : CustomTransformation
     // rotating on arbitrary points it would turn out to be (x cos Z - y sin Z) , ( x -sin Z + y cos Z) because of matrix multiplication i think??
     // https://stackoverflow.com/questions/14607640/rotating-a-vector-in-3d-space
     // https://learnopengl.com/Getting-started/Transformations
-    // ROTATING ON THE Z VECTOR AXIS IN A 3D SPACE
+    //  ROTATING ON THE Z VECTOR AXIS IN A 3D SPACE
     //  |cos θ   −sin θ   0| |x|   |x cos θ − y sin θ|   |x'|
     //  |sin θ    cos θ   0| |y| = |x sin θ + y cos θ| = |y'|
     //  |  0       0      1| |z|   |        z        |   |z'|
-    //ROTATING AROUND Y = (X,Z) X(COS Y, -SIN Y) , Z(SIN Y,COS Y)
+    //  ROTATING AROUND Y = (X,Z) X(COS Y, -SIN Y) , Z(SIN Y,COS Y)
     //  | cos θ    0   sin θ| |x|   | x cos θ + z sin θ|   |x'|
     //  |   0      1       0| |y| = |         y        | = |y'|
     //  |−sin θ    0   cos θ| |z|   |−x sin θ + z cos θ|   |z'|
