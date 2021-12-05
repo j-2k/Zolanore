@@ -109,6 +109,7 @@ public class TransformationGrid : MonoBehaviour
 		Transform position = Instantiate<Transform>(prefab);
 		//position.parent = this.transform;
 		//position.position = new Vector3(x, y, z);
+		position.parent = this.transform;
 		position.position = GetCoordinates(x, y, z);
 		position.GetComponent<MeshRenderer>().material.color = new Color(
 			(float)x / gridResolution,
@@ -120,6 +121,18 @@ public class TransformationGrid : MonoBehaviour
 	}
 
 	Vector3 GetCoordinates(int x, int y, int z)
+	{
+		//took a while to understand exactly wahts here but basically
+		// without 0.5 it is the inverse of the grid resolution & with the 0.5 shift whole grid back by half which puts the origin in the middleo fthe grid 
+		// still dont understand the whole - (grid reso - 1) formula exactly is there a way to do this except additive?? prob but too lazy to find out
+		return new Vector3(
+			x - (gridResolution - 1) * 0.5f,
+			y - (gridResolution - 1) * 0.5f,
+			z - (gridResolution - 1) * 0.5f
+		);
+	}
+
+	Vector3 GetCoordinates(float x, float y, float z)
 	{
 		//took a while to understand exactly wahts here but basically
 		// without 0.5 it is the inverse of the grid resolution & with the 0.5 shift whole grid back by half which puts the origin in the middleo fthe grid 
