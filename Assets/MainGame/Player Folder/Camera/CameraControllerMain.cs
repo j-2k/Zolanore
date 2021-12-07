@@ -38,6 +38,7 @@ public class CameraControllerMain : MonoBehaviour
     RaycastHit camRayHit;
     RaycastHit chestHit;
     [SerializeField] InventoryInput invenActiveCheck;
+    bool shouldCameraRotate = true;
 
     Transform firstChildRotX;
     private void Awake()
@@ -65,9 +66,9 @@ public class CameraControllerMain : MonoBehaviour
 
     void LateUpdate()
     {
+        CameraInput();
         CameraHandler();
         CameraCollisions();
-        CameraInput();
         CameraChestHit();
     }
 
@@ -118,11 +119,13 @@ public class CameraControllerMain : MonoBehaviour
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                shouldCameraRotate = true;
             }
             else
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                shouldCameraRotate = false;
             }
         }
     }
@@ -140,8 +143,12 @@ public class CameraControllerMain : MonoBehaviour
         //new col line
         mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
 
-        currentRotY += Input.GetAxisRaw("Mouse X") * (cameraSensitivity);
-        currentTiltX -= Input.GetAxisRaw("Mouse Y") * (cameraSensitivity);
+        if (shouldCameraRotate)
+        {
+            currentRotY += Input.GetAxisRaw("Mouse X") * (cameraSensitivity);
+            currentTiltX -= Input.GetAxisRaw("Mouse Y") * (cameraSensitivity);
+        }
+        
 
         currentTiltX = Mathf.Clamp(currentTiltX, -90, 90);
 
