@@ -99,7 +99,7 @@ public class CameraControllerMain : MonoBehaviour
         else
         {
             Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.white);
-            Debug.Log("Did not Hit");
+            //Debug.Log("Did not Hit");
             if (itemChestCache != null)
             {
                 itemChestCache.isInRange = false;

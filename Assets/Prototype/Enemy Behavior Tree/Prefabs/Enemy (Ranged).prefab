@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 80de1bc7ed9564e458976229e200aae0, type: 2}
+  - {fileID: 2100000, guid: 1aa2c700066f37f429acec49cb625919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,6 +128,8 @@ MonoBehaviour:
   Waypoints: []
   walkSpeed: 0
   chaseSpeed: 0
+  walkRadius: 0
+  wanderSpeed: 0
   distanceToDetect: 10
   proximityDistance: 6
   distanceToAttack: 0
@@ -136,6 +138,7 @@ MonoBehaviour:
   bullet: {fileID: 3421218280500455661, guid: 64f4f16b45958884bbf82f42a73c2d26, type: 3}
   bulletSpeed: 200
   fireRate: 5
+  navmesh: {fileID: 0}
 --- !u!1 &8878721143115333345
 GameObject:
   m_ObjectHideFlags: 0

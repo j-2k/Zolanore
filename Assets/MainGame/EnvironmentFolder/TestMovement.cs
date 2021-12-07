@@ -50,11 +50,11 @@ public class TestMovement : MonoBehaviour
     {
         if (cc.isGrounded)
         {
-            Debug.Log("grounded");
+            //Debug.Log("grounded");
         }
         else
         {
-            Debug.Log("Not Grounded");
+            //Debug.Log("Not Grounded");
         }
 
         if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
