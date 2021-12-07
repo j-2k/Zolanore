@@ -32,6 +32,7 @@ public class CustomRotationTransformation : CustomTransformation
 
     public Vector3 rotation;
 
+
     public override Vector3 Apply(Vector3 point)
     {
         float radianZ = rotation.z * Mathf.Deg2Rad;
@@ -41,6 +42,10 @@ public class CustomRotationTransformation : CustomTransformation
         float radianY = rotation.y * Mathf.Deg2Rad;
         float sinY = Mathf.Sin(radianY);
         float cosY = Mathf.Cos(radianY);
+
+        float radianX = rotation.x * Mathf.Deg2Rad;
+        float sinX = Mathf.Sin(radianX);
+        float cosX = Mathf.Cos(radianX);
 
         Vector3 zAxis = new Vector3(
             point.x * cosZ - point.y * sinZ,
@@ -54,6 +59,62 @@ public class CustomRotationTransformation : CustomTransformation
             -point.x * sinY + point.z * cosY
         );
 
-        return yAxis;//zAxis * point.z + yAxis * point.y;
+        //try to do x axis by self
+
+        Vector3 xAxis = new Vector3(
+        point.x,
+        0,
+        0
+        );
+
+
+        return xAxis;//zAxis * point.z + yAxis * point.y;
     }
+
+
+
+
+
+
+
+
+
+
+    /*
+    public override Vector3 Apply(Vector3 point)
+    {
+        float radX = rotation.x * Mathf.Deg2Rad;
+        float radY = rotation.y * Mathf.Deg2Rad;
+        float radZ = rotation.z * Mathf.Deg2Rad;
+        float sinX = Mathf.Sin(radX);
+        float cosX = Mathf.Cos(radX);
+        float sinY = Mathf.Sin(radY);
+        float cosY = Mathf.Cos(radY);
+        float sinZ = Mathf.Sin(radZ);
+        float cosZ = Mathf.Cos(radZ);
+
+        Vector3 zAxis = new Vector3(
+        sinY,
+        -sinX * cosY,
+        cosX * cosY
+    );
+
+        Vector3 yAxis = new Vector3(
+        -cosY * sinZ,
+        cosX * cosZ - sinX * sinY * sinZ,
+        sinX * cosZ + cosX * sinY * sinZ
+    );
+
+        Vector3 xAxis = new Vector3(
+            cosY * cosZ,
+            cosX * sinZ + sinX * sinY * cosZ,
+            sinX * sinZ - cosX * sinY * cosZ
+        );
+
+
+
+        return xAxis * point.x + yAxis * point.y + zAxis * point.z;
+    }
+    */
+
 }
