@@ -61,10 +61,10 @@ public class CustomRotationTransformation : CustomTransformation
 
         //try to do x axis by self
 
-        Vector3 xAxis = new Vector3(
-        point.x,
-        0,
-        0
+        Vector3 xAxis = new Vector3(            //  X   Y   Z
+        point.x + 0 + 0,                        //  1   0   0
+        0 + point.y * cosX - point.z * sinX,    //  0 cos*Y -sin*Z
+        0 + point.y * sinX + point.z * cosX     //  0 sin*Y cos*Z
         );
 
 
