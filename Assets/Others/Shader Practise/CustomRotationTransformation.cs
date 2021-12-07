@@ -46,7 +46,7 @@ public class CustomRotationTransformation : CustomTransformation
         float radianX = rotation.x * Mathf.Deg2Rad;
         float sinX = Mathf.Sin(radianX);
         float cosX = Mathf.Cos(radianX);
-
+        /*
         Vector3 zAxis = new Vector3(
             point.x * cosZ - point.y * sinZ,
             point.x * sinZ + point.y * cosZ,
@@ -66,55 +66,28 @@ public class CustomRotationTransformation : CustomTransformation
         0 + point.y * cosX - point.z * sinX,    //  0 cos*Y -sin*Z
         0 + point.y * sinX + point.z * cosX     //  0 sin*Y cos*Z
         );
-
-
-        return xAxis;//zAxis * point.z + yAxis * point.y;
-    }
-
-
-
-
-
-
-
-
-
-
-    /*
-    public override Vector3 Apply(Vector3 point)
-    {
-        float radX = rotation.x * Mathf.Deg2Rad;
-        float radY = rotation.y * Mathf.Deg2Rad;
-        float radZ = rotation.z * Mathf.Deg2Rad;
-        float sinX = Mathf.Sin(radX);
-        float cosX = Mathf.Cos(radX);
-        float sinY = Mathf.Sin(radY);
-        float cosY = Mathf.Cos(radY);
-        float sinZ = Mathf.Sin(radZ);
-        float cosZ = Mathf.Cos(radZ);
-
-        Vector3 zAxis = new Vector3(
-        sinY,
-        -sinX * cosY,
-        cosX * cosY
-    );
-
-        Vector3 yAxis = new Vector3(
-        -cosY * sinZ,
-        cosX * cosZ - sinX * sinY * sinZ,
-        sinX * cosZ + cosX * sinY * sinZ
-    );
-
+        */
+        //combining all matricies
+        //rot order is Z THEN Y THEN X => X * (Y * Z) matrix order
+        // after multiplying 
         Vector3 xAxis = new Vector3(
             cosY * cosZ,
             cosX * sinZ + sinX * sinY * cosZ,
             sinX * sinZ - cosX * sinY * cosZ
+            );
+
+        Vector3 yAxis = new Vector3(
+            -cosY * sinZ,
+            cosX * cosZ - sinX * sinY * sinZ,
+            sinX * cosZ + cosX * sinY * sinZ
         );
 
-
+        Vector3 zAxis = new Vector3(
+            sinY,
+            -sinX * cosY,
+            cosX * cosY
+        );
 
         return xAxis * point.x + yAxis * point.y + zAxis * point.z;
     }
-    */
-
 }
