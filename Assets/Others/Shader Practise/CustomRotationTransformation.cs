@@ -33,61 +33,73 @@ public class CustomRotationTransformation : CustomTransformation
     public Vector3 rotation;
 
 
-    public override Vector3 Apply(Vector3 point)
+    public override Matrix4x4 Matrix
     {
-        float radianZ = rotation.z * Mathf.Deg2Rad;
-        float sinZ = Mathf.Sin(radianZ);
-        float cosZ = Mathf.Cos(radianZ);
+        get
+        {
+            float radianZ = rotation.z * Mathf.Deg2Rad;
+            float sinZ = Mathf.Sin(radianZ);
+            float cosZ = Mathf.Cos(radianZ);
 
-        float radianY = rotation.y * Mathf.Deg2Rad;
-        float sinY = Mathf.Sin(radianY);
-        float cosY = Mathf.Cos(radianY);
+            float radianY = rotation.y * Mathf.Deg2Rad;
+            float sinY = Mathf.Sin(radianY);
+            float cosY = Mathf.Cos(radianY);
 
-        float radianX = rotation.x * Mathf.Deg2Rad;
-        float sinX = Mathf.Sin(radianX);
-        float cosX = Mathf.Cos(radianX);
-        /*
-        Vector3 zAxis = new Vector3(
-            point.x * cosZ - point.y * sinZ,
-            point.x * sinZ + point.y * cosZ,
-            point.z
-        );
+            float radianX = rotation.x * Mathf.Deg2Rad;
+            float sinX = Mathf.Sin(radianX);
+            float cosX = Mathf.Cos(radianX);
 
-        Vector3 yAxis = new Vector3(
-            point.x * cosY + point.z * sinY,
-            point.y,
-            -point.x * sinY + point.z * cosY
-        );
-
-        //try to do x axis by self
-
-        Vector3 xAxis = new Vector3(            //  X   Y   Z
-        point.x + 0 + 0,                        //  1   0   0
-        0 + point.y * cosX - point.z * sinX,    //  0 cos*Y -sin*Z
-        0 + point.y * sinX + point.z * cosX     //  0 sin*Y cos*Z
-        );
-        */
-        //combining all matricies
-        //rot order is Z THEN Y THEN X => X * (Y * Z) matrix order
-        // after multiplying 
-        Vector3 xAxis = new Vector3(
-            cosY * cosZ,
-            cosX * sinZ + sinX * sinY * cosZ,
-            sinX * sinZ - cosX * sinY * cosZ
+            /*
+            Vector3 zAxis = new Vector3(
+                point.x * cosZ - point.y * sinZ,
+                point.x * sinZ + point.y * cosZ,
+                point.z
             );
 
-        Vector3 yAxis = new Vector3(
+            Vector3 yAxis = new Vector3(
+                point.x * cosY + point.z * sinY,
+                point.y,
+                -point.x * sinY + point.z * cosY
+            );
+
+            //try to do x axis by self
+
+            Vector3 xAxis = new Vector3(            //  X   Y   Z
+            point.x + 0 + 0,                        //  1   0   0
+            0 + point.y * cosX - point.z * sinX,    //  0 cos*Y -sin*Z
+            0 + point.y * sinX + point.z * cosX     //  0 sin*Y cos*Z
+            );
+            */
+            //combining all matricies
+            //rot order is Z THEN Y THEN X => X * (Y * Z) matrix order
+            // after multiplying 
+
+            Matrix4x4 matrix = new Matrix4x4();
+            matrix.SetColumn(0, new Vector4(
+            cosY * cosZ,
+            cosX * sinZ + sinX * sinY * cosZ,
+            sinX * sinZ - cosX * sinY * cosZ,
+            0));
+
+            matrix.SetColumn(1, new Vector4(
             -cosY * sinZ,
             cosX * cosZ - sinX * sinY * sinZ,
-            sinX * cosZ + cosX * sinY * sinZ
-        );
+            sinX * cosZ + cosX * sinY * sinZ,
+            0));
 
-        Vector3 zAxis = new Vector3(
+            matrix.SetColumn(2, new Vector4(
             sinY,
             -sinX * cosY,
-            cosX * cosY
-        );
+            cosX * cosY,
+            0));
 
-        return xAxis * point.x + yAxis * point.y + zAxis * point.z;
+            matrix.SetColumn(3, new Vector4(
+            0,
+            0,
+            0,
+            1));
+
+            return matrix;
+        }
     }
 }

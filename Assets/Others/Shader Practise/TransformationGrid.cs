@@ -47,7 +47,9 @@ public class TransformationGrid : MonoBehaviour
 	void Update()
 	{
 		//get component of the transformations
-		GetComponents<CustomTransformation>(transformations);
+
+		UpdateTransformationMatrix();
+		//GetComponents<CustomTransformation>(transformations);
 		for (int i = 0, z = 0; z < gridResolution; z++)
 		{
 			for (int y = 0; y < gridResolution; y++)
@@ -61,16 +63,35 @@ public class TransformationGrid : MonoBehaviour
 		}
 	}
 
+	Matrix4x4 transformation;
+
+
+	void UpdateTransformationMatrix()
+	{
+		GetComponents<CustomTransformation>(transformations);
+		if (transformations.Count > 0)
+		{
+			transformation = transformations[0].Matrix;
+			for (int i = 1; i < transformations.Count; i++)
+			{
+				transformation = transformations[i].Matrix * transformation;
+			}
+		}
+	}
+
 	Vector3 TransformPoint(int x, int y, int z)
 	{
 		//first get the positions of the objects in the coordinates
 		Vector3 coordinates = GetCoordinates(x, y, z);
+		return transformation.MultiplyPoint(coordinates);
+		/*
 		for (int i = 0; i < transformations.Count; i++)
 		{
 			//applying new transformation provided by custom position transformation in inspector
 			coordinates = transformations[i].Apply(coordinates);
 		}
 		return coordinates;
+		*/
 	}
 
 	void FastGrid()
