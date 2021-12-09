@@ -282,7 +282,7 @@ Shader "Custom/Grass Geometry Shader 3" {
 			ENDCG
 			}
 			
-		Pass // shadow pass
+			Pass // shadow pass
 			{
 				Tags
 				{
