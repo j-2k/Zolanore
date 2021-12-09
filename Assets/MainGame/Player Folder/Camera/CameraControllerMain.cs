@@ -40,6 +40,10 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] InventoryInput invenActiveCheck;
     bool shouldCameraRotate = true;
 
+    [SerializeField] GameObject chestUIPrompt;
+
+
+
     Transform firstChildRotX;
     private void Awake()
     {
@@ -83,6 +87,8 @@ public class CameraControllerMain : MonoBehaviour
             Debug.Log("Did Hit");
             if (chestHit.transform.tag == "Chest")
             {
+                chestUIPrompt.SetActive(true);
+
                 if (itemChestCache == null)
                 {
                     itemChestCache = chestHit.collider.gameObject.GetComponent<ItemChest>();
@@ -105,6 +111,7 @@ public class CameraControllerMain : MonoBehaviour
             {
                 itemChestCache.isInRange = false;
                 itemChestCache = null;
+                chestUIPrompt.SetActive(false);
             }
         }
 
