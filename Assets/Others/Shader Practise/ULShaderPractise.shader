@@ -3,10 +3,16 @@ Shader "Unlit/ULShaderPractise"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _ClipAmount("Surface Noise Cutoff", Range(0, 1)) = 0.9
+
+        _EmissionMap("Emission Map", 2D) = "black" {}
+        [HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
+        _Color(" Color", Color) = (0,0,0)
+
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
         LOD 100
 
         Pass
@@ -18,6 +24,8 @@ Shader "Unlit/ULShaderPractise"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            #include "AutoLight.cginc"
 
             struct appdata
             {
@@ -37,22 +45,21 @@ Shader "Unlit/ULShaderPractise"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
+            sampler2D _EmissionMap;
+            float4 _EmissionMap_ST;
+
+            float _EmissionColor;
+            float _ClipAmount;
+            float _Color;
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-                o.vertex.y += sin((worldPos.x/5) + _Time.y * 5);
-                o.vertex.xy += sin(_Time.y * 5);
+                o.vertex.y +=  0.1 * sin((worldPos.x) + _Time.y * 1);
+                //o.vertex.xy += sin(_Time.y * 5);
                 o.uv = v.uv;
-
-                half3x3 m = (half3x3)UNITY_MATRIX_M;
-                half3 objectScale = half3(
-                    length(half3(m[0][0], m[1][0], m[2][0])),
-                    length(half3(m[0][1], m[1][1], m[2][1])),
-                    length(half3(m[0][2], m[1][2], m[2][2]))
-                    );
 
                 return o;
             }
@@ -60,12 +67,16 @@ Shader "Unlit/ULShaderPractise"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                //fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
+                clip(col.a - _ClipAmount);
+                float4 output = float4(col.rgb * _LightColor0.rgb, col.a);
 
-                //return col;
-                return float4(i.uv.x, i.uv.y,0, 1);
+                float4 emission = tex2D(_EmissionMap, i.uv) * _EmissionColor;
+                col.rgb += emission.rgb;
+                //return float4(i.uv.x, i.uv.y,0, 1);
+                return col + _Color;
             }
             ENDCG
         }

@@ -1725,6 +1725,10 @@ PrefabInstance:
       propertyPath: itemSaveManager
       value: 
       objectReference: {fileID: 51692055}
+    - target: {fileID: 8892587703447516276, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8892587703679842709, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: playerLevelTL
       value: 

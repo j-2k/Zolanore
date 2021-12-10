@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_ULShaderPractise
-  m_Shader: {fileID: 4800000, guid: 4af15964f20f97b41bbbf0031a5f9aa1, type: 3}
+  m_Name: Unlit_ULShaderPractise 1
+  m_Shader: {fileID: 4800000, guid: ee19bbfe5fc80f44087ee5c1f2bc9947, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
