@@ -7,7 +7,7 @@ public class ItemChest : MonoBehaviour
     [SerializeField] Item item;
     [SerializeField] Inventory inventory;
     [SerializeField] KeyCode itemPickup = KeyCode.E;
-    [SerializeField] int amount = 1;
+    public int amount = 1;
     public bool isInRange = false;
     [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
     float time = 0;

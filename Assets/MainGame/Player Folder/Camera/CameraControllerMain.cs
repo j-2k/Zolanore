@@ -87,7 +87,6 @@ public class CameraControllerMain : MonoBehaviour
             Debug.Log("Did Hit");
             if (chestHit.transform.tag == "Chest")
             {
-                chestUIPrompt.SetActive(true);
 
                 if (itemChestCache == null)
                 {
@@ -100,6 +99,14 @@ public class CameraControllerMain : MonoBehaviour
                     itemChestCache = chestHit.collider.gameObject.GetComponent<ItemChest>();
                 }
 
+                if (itemChestCache.amount >= 1)
+                {
+                    chestUIPrompt.SetActive(true);
+                }
+                else
+                {
+                    chestUIPrompt.SetActive(false);
+                }
                 itemChestCache.isInRange = true;
             }
         }
