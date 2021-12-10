@@ -26,6 +26,8 @@ public class Ability : ScriptableObject
 
     public ParticleSystem abilityVFX;
 
+    public TrailRenderer trailVFX;
+
     public virtual void CacheStart(GameObject parent,GameObject gameManager)
     {
 

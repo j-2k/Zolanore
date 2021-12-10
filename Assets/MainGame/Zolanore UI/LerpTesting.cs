@@ -44,7 +44,7 @@ public class LerpTesting : MonoBehaviour
 
         interpolater += 0.5f * Time.deltaTime;
 
-        if (interpolater >= 1)
+        if (interpolater > 1)
         {
             if (ui)
             {

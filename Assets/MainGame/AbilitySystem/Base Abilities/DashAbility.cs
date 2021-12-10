@@ -9,18 +9,23 @@ public class DashAbility : Ability
     CharacterController cc;
     public float dashSpeed;
     Transform meshTransform;
+    TrailRenderer tr;
 
     public override void CacheStart(GameObject parent, GameObject gameManagerObj)
     {
         player = parent.GetComponent<PlayerManager>();
         cc = parent.GetComponent<CharacterController>();
         meshTransform = parent.transform.GetChild(0);
+        tr = Instantiate(trailVFX, parent.transform.position, Quaternion.identity, gameManagerObj.transform);
+        tr.emitting = false;
+        tr.transform.position = tr.transform.position + Vector3.up;
     }
 
     public override void OnActivate(GameObject parent)
     {
         player.isMovingAbility = true;
         player.DashID();
+        tr.emitting = true;
     }
 
     bool oneRun = true;
@@ -45,6 +50,7 @@ public class DashAbility : Ability
         oneRun = true;
         player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;
+        tr.emitting = false;
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)

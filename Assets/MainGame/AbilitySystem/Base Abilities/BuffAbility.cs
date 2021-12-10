@@ -16,9 +16,8 @@ public class BuffAbility : Ability
         cm = parent.GetComponent<CharacterManager>();
         player = parent.GetComponent<PlayerManager>();
         meshTransform = parent.transform.GetChild(0);
-        pf = Instantiate(abilityVFX, parent.transform.position, Quaternion.identity);
+        pf = Instantiate(abilityVFX, parent.transform.position, Quaternion.identity, gameManagerObj.transform);
         pf.Stop();
-        pf.transform.parent = gameManagerObj.transform;
     }
 
     public override void OnActivate(GameObject parent)
@@ -50,7 +49,7 @@ public class BuffAbility : Ability
 
     public override void OnBeginCoolDown(GameObject parent)
     {
-        
+        pf.Stop();
         cm.Strength.BaseValue -= 10f;
         cm.UpdateStatSkillPoint();
         
