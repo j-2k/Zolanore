@@ -4,9 +4,10 @@ Shader "Unlit/UILootChestPromptShader"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (1,1,1,1)
-            _Color2("Color2", Color) = (1,1,1,1)
-            _EmissionMap("Emission Map", 2D) = "black" {}
-[HDR] _EmissionColor("Emission Color", Color) = (0,0,0)
+        _Color2("Color2", Color) = (1,1,1,1)
+        _EmissionMap("Emission Map", 2D) = "black" {}
+[HDR]   _EmissionColor("Emission Color", Color) = (0,0,0)
+        _ClipAmount("Surface Noise Cutoff", Range(0, 1)) = 0.9
     }
     SubShader
     {
@@ -48,7 +49,7 @@ Shader "Unlit/UILootChestPromptShader"
 
             float4 _Color;
             float4 _Color2;
-
+            float _ClipAmount;
 
             v2f vert (appdata v)
             {
@@ -63,7 +64,7 @@ Shader "Unlit/UILootChestPromptShader"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                float4 col = tex2D(_MainTex, i.uv) + _Color;
+                float4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
 
@@ -76,9 +77,13 @@ Shader "Unlit/UILootChestPromptShader"
                 //output.rgb += emission.rgb;
 
                 //return col.rgba + emission.r + _Color.a;
-                float flash = cos(_Time.y * 4) * 0.3;
-                clip(col.a - 0.9);
-                return float4((col.rgb) + (flash + _Color2), 1);
+                float flash = cos(_Time.y * 3) * 1;
+                clip(col.a - _ClipAmount);
+                //float3 lerpedValue = lerp(col.rgb, (flash + _Color2), flash);
+                float4 lerpedValue = lerp(col * (_Color), col * (_Color2/2), flash);
+                return lerpedValue;
+                //return float4(lerpedValue.rgb,flash.x);
+                //return float4((col.rgb) + (flash + _Color2), 1);
                 //return float4(_Color + flash,1);
             }
             ENDCG
