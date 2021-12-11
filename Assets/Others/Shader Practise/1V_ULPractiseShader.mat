@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 1_ULPractiseShader
-  m_Shader: {fileID: 4800000, guid: 8764780566b29ff40814fb9c2ac4cd80, type: 3}
+  m_Name: 1V_ULPractiseShader
+  m_Shader: {fileID: 4800000, guid: 677229c258524d44ebe0a8d317af0033, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,11 +24,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ColorEND: 0.6
-    - _ColorSTART: 0.4
+    - _ColorEND: 1
+    - _ColorSTART: 0
     - _OffSet: 0
     - _Scale: 1
     m_Colors:
-    - _Color1: {r: 1, g: 0.9292667, b: 0, a: 1}
-    - _Color2: {r: 0, g: 0.47969294, b: 1, a: 1}
+    - _Color1: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

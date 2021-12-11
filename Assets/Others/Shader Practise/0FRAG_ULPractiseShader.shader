@@ -1,4 +1,4 @@
-Shader "Unlit/0_ULPractiseShader"
+Shader "Unlit/0FRAG_ULPractiseShader"
 {
     Properties
     {
@@ -12,11 +12,26 @@ Shader "Unlit/0_ULPractiseShader"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        // TAGS https://docs.unity3d.com/Manual/SL-SubShaderTags.html
+
+        Tags 
+        { 
+            "RenderType" = "Transparent"    //tag for ppfx / renderpipeline
+            "Queue" = "Transparent"         //queue in the render pipeline order check tags on top
+        }
+
         LOD 100
 
         Pass
         {
+            //  BLEND MODES https://docs.unity3d.com/Manual/SL-Blend.html
+
+            //Blend
+            Cull Off //Back default / Off or Front
+            ZWrite Off // Off or On//z depth buffer dont write2db
+            //ZTest GEqual //GEqual very cool (put it front of another obj) // LEqual & Always r other main options and many more 
+            Blend One One //this is very very important remove additive blending and see the difference
+            //adding a black color to something is nothing to it will remove black from the shader see u can see this in the current shader
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -37,6 +52,7 @@ Shader "Unlit/0_ULPractiseShader"
                 float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;          //THIS IS JUST A TYPE OF TEX DATA CALLED UV OR THIS IS THE CHANNEL TO SEND DATA THROUGH eg. texcord1234...
                 float3 normal : TEXCOORD1;      //example is this tex cord is the normal data  or this tex cord is the uv data its the same thing except how u use it in the vertex shader
+                //normal ranges from - 1 to 1
                 //UNITY_FOG_COORDS(1)
 
             };
@@ -50,7 +66,9 @@ Shader "Unlit/0_ULPractiseShader"
             float4 _Color2;
             float _ColorSTART;
             float _ColorEND;
-            
+
+            #define TAU 6.28f
+
             v2f vert (MeshData v)
             {
                 v2f o;
@@ -79,6 +97,14 @@ Shader "Unlit/0_ULPractiseShader"
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
 
+                /*
+                float4 normalColors = float4 (i.normal.x,i.normal.y,i.normal.z,1);
+                //clip(i.normal.y);
+                clip(-i.normal.y);
+                return normalColors;
+                */
+                //clip(-i.normal.y + 0.95);
+                //clip(i.normal.y + 0.95); //LOOK AT SPHERE TO UNDERSTAND BETTER
 
                 //return float4(i.uv.xy,0,1);
                 //return float4(i.uv.yyy,1);
@@ -86,12 +112,27 @@ Shader "Unlit/0_ULPractiseShader"
                 //float t = saturate(InverseLerp(_ColorSTART,_ColorEND,i.uv.y));
                 //float t = (InverseLerp(_ColorSTART,_ColorEND,i.uv.y));
                 //float t = abs(frac(i.uv.y * 5) * 2 -1);
+                
+                
 
-                float t = sin(i.uv.y * 25) * 0.5 + 0.5;
-                return t;
+                float yOffSet =  sin(i.uv.x * TAU * 8) * 0.01;
+                float t = sin((i.uv.y + yOffSet + -_Time.y/10) * TAU * 10) * 0.5 + 0.5;
 
-                float4 colorOut = lerp(_Color1,_Color2,t);
-                return colorOut;
+                t *= 1 - i.uv.y; //alpha from 1 - 0 fron down to up remove 1 - to opposite
+
+                float topBottomRemove = (abs(i.normal.y) < 0.95);
+                
+                float waves = t * topBottomRemove;
+
+                float4 gradient = lerp(_Color1,_Color2,i.uv.y);
+
+                return gradient * waves;
+                return waves; 
+
+                
+                // return t = t.xxxx;
+                //float4 colorOut = lerp(_Color1,_Color2,t);
+                //return colorOut;
             }
             ENDCG
         }

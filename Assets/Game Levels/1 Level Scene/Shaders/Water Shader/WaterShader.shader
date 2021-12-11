@@ -22,8 +22,8 @@ Shader "Custom/WaterShader"
     {
         Tags { "Queue"="Transparent" }
         LOD 100
-Blend SrcAlpha OneMinusSrcAlpha
-ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
         Pass
         {
             CGPROGRAM
