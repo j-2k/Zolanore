@@ -7,8 +7,9 @@ Shader "Unlit/0VERT_ULPractiseShader"
         _Color2("Color2", Color) = (1,1,1,1)
         _ColorSTART("ColorSTART", Range(0,1)) = 0
         _ColorEND("ColorEND", Range(0,1)) = 1
-        _Scale ("Scale1", float) = 1
+        _WaveAmplitude ("WaveAmp", Range(0,0.5)) = 0
         _OffSet ("OffSet1", float) = 0
+
     }
     SubShader
     {
@@ -61,7 +62,7 @@ Shader "Unlit/0VERT_ULPractiseShader"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            float _Scale;
+            float _WaveAmplitude;
             float _OffSet;
             float4 _Color1;
             float4 _Color2;
@@ -73,12 +74,19 @@ Shader "Unlit/0VERT_ULPractiseShader"
             v2f vert (MeshData v)
             {
                 v2f o;
+
+                float wave = sin((v.uvs.y -_Time.y * 0.1) * TAU * 5);
+                float wave2 = sin((v.uvs.x -_Time.y * 0.1) * TAU * 5);
+
+                v.vertex.y = (wave * wave2) * _WaveAmplitude;
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 //o.uvs = TRANSFORM_TEX(v.uvs, _MainTex);
 
                 o.normal = UnityObjectToWorldNormal(v.normals);
-                //o.uv = (v.uvs + _OffSet) * _Scale;
+                //o.uv = (v.uvs + _OffSet) * _WaveAmplitude;
                 o.uv = v.uvs;
+                
                 //UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -88,56 +96,26 @@ Shader "Unlit/0VERT_ULPractiseShader"
                 return (t-a)/(b-a);
             }
 
+            float GetWave(float2 uv)
+            {
+                float2 centerUV = (uv * 2 - 1);
+
+                float radialDistance = length(centerUV);
+                float waves = sin((radialDistance + -_Time.y*0.1) * TAU * 10) * 0.5 + 0.5;
+
+                waves *= 1 - radialDistance;
+                return waves;
+            }
+
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
                 //fixed4 col = tex2D(_MainTex, i.uvs);
-                
-            
-            
+
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
 
-                /*
-                float4 normalColors = float4 (i.normal.x,i.normal.y,i.normal.z,1);
-                //clip(i.normal.y);
-                clip(-i.normal.y);
-                return normalColors;
-                */
-                //clip(-i.normal.y + 0.95);
-                //clip(i.normal.y + 0.95); //LOOK AT SPHERE TO UNDERSTAND BETTER
-
-                //return float4(i.uv.xy,0,1);
-                //return float4(i.uv.yyy,1);
-
-                //float t = saturate(InverseLerp(_ColorSTART,_ColorEND,i.uv.y));
-                //float t = (InverseLerp(_ColorSTART,_ColorEND,i.uv.y));
-                //float t = abs(frac(i.uv.y * 5) * 2 -1);
-                
-                
-                float yOffSet =  sin(i.uv.x * TAU * 8) * 0.01;
-                //float t = sin((i.uv.y + yOffSet + -_Time.y/10) * TAU * 10) * 0.5 + 0.5;
-                float t = sin((i.uv.y + -_Time.y/10) * TAU * 10) * 0.5 + 0.5;
-
-                return t;
-                
-
-
-                t *= 1 - i.uv.y; //alpha from 1 - 0 fron down to up remove 1 - to opposite
-                float topBottomRemove = (abs(i.normal.y) < 0.95);
-                
-                float waves = t * topBottomRemove;
-
-                float4 gradient = lerp(_Color1,_Color2,i.uv.y);
-
-                return gradient * waves;
-                return waves; 
-                
-
-                
-                // return t = t.xxxx;
-                //float4 colorOut = lerp(_Color1,_Color2,t);
-                //return colorOut;
+                return GetWave(i.uv);
             }
             ENDCG
         }

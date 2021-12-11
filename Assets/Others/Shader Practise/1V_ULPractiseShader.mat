@@ -26,8 +26,9 @@ Material:
     m_Floats:
     - _ColorEND: 1
     - _ColorSTART: 0
-    - _OffSet: 0
+    - _OffSet: 1.74
     - _Scale: 1
+    - _WaveAmplitude: 0
     m_Colors:
     - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}
