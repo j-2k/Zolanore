@@ -7,7 +7,7 @@ Shader "Unlit/0VERT_ULPractiseShader"
         _Color2("Color2", Color) = (1,1,1,1)
         _ColorSTART("ColorSTART", Range(0,1)) = 0
         _ColorEND("ColorEND", Range(0,1)) = 1
-        _WaveAmplitude ("WaveAmp", Range(0,0.5)) = 0
+        _WaveAmplitude ("WaveAmp", Range(0,2)) = 0
         _OffSet ("OffSet1", float) = 0
 
     }
@@ -71,21 +71,25 @@ Shader "Unlit/0VERT_ULPractiseShader"
 
             #define TAU 6.28f
 
+            float GetWave(float2 uv)
+            {
+                float2 centerUV = (uv * 2 - 1);
+                float radialDistance = length(centerUV);
+                float waves = sin((radialDistance - _Time.y*0.1) * TAU * 10) * 0.5 + 0.5;
+                waves *= 1 - radialDistance;
+                return waves;
+            }
+
             v2f vert (MeshData v)
             {
                 v2f o;
 
-                float wave = sin((v.uvs.y -_Time.y * 0.1) * TAU * 5);
-                float wave2 = sin((v.uvs.x -_Time.y * 0.1) * TAU * 5);
-
-                v.vertex.y = (wave * wave2) * _WaveAmplitude;
+                v.vertex.y = GetWave(v.uvs) * _WaveAmplitude;
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 //o.uvs = TRANSFORM_TEX(v.uvs, _MainTex);
-
                 o.normal = UnityObjectToWorldNormal(v.normals);
-                //o.uv = (v.uvs + _OffSet) * _WaveAmplitude;
-                o.uv = v.uvs;
+                o.uv = v.uvs;//o.uv = (v.uvs + _OffSet) * _WaveAmplitude;
                 
                 //UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
@@ -96,16 +100,6 @@ Shader "Unlit/0VERT_ULPractiseShader"
                 return (t-a)/(b-a);
             }
 
-            float GetWave(float2 uv)
-            {
-                float2 centerUV = (uv * 2 - 1);
-
-                float radialDistance = length(centerUV);
-                float waves = sin((radialDistance + -_Time.y*0.1) * TAU * 10) * 0.5 + 0.5;
-
-                waves *= 1 - radialDistance;
-                return waves;
-            }
 
             fixed4 frag (v2f i) : SV_Target
             {
