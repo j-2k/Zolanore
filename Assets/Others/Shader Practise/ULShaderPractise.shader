@@ -51,6 +51,7 @@ Shader "Unlit/ULShaderPractise"
             float _EmissionColor;
             float _ClipAmount;
             float _Color;
+
             v2f vert (appdata v)
             {
                 v2f o;

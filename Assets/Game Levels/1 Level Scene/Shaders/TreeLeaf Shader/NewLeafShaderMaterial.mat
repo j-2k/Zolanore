@@ -30,11 +30,11 @@ Material:
     m_Floats:
     - _DisplacementAmount: 0.1
     - _DisplacementSpeed: 0.1
-    - _LightCutoff: 0.122
-    - _RimSize: 0.298
-    - _SSSConcentration: 0.1
+    - _LightCutoff: 0.299
+    - _RimSize: 1
+    - _SSSConcentration: 1.01
     - _ShadowedRim: 0
-    - _TextureCutoff: 0.095
+    - _TextureCutoff: 1
     m_Colors:
     - _Color: {r: 0.2742791, g: 0.7169812, b: 0.08454966, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}

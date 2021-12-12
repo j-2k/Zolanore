@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 1TEXT_ULPractiseShader
-  m_Shader: {fileID: 4800000, guid: 10430d8250dce5d49bc11689e6c7e82c, type: 3}
+  m_Name: Unlit_UVLeafShader
+  m_Shader: {fileID: 4800000, guid: 269593d6a519a9741af1ddc8635dcc24, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,9 +20,17 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: fb6adca2d8460b24eb98c32eab0c72ab, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6920ed701b214a1418dd60371488eba3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 3f1d4fadb37c37e4488860109d7dce4b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ClipAmount: 0.1
+    - _RotationSpeed: 20
+    m_Colors:
+    - _NoiseSpeed: {r: 0.1, g: 0, b: 0, a: 0}
+    - _NoiseVelocity: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
