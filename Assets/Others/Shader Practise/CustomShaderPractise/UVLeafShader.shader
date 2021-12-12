@@ -14,7 +14,7 @@ Shader "Unlit/UVLeafShader"
         Tags { "RenderType"="Opaque" "Queue" = "Geometry"}
         
         ZWrite On
-        //Cull Back
+        Cull Off
         //Blend One One
 
         LOD 100
@@ -77,18 +77,21 @@ Shader "Unlit/UVLeafShader"
                 //v.uv0.xy = mul ( v.uv0.xy, rotationMatrix );
                 o.noiseUV = mul( v.uv1.xy, rotationMatrix );
                 */
-
+                
+                
                 float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 float2 noiseUV = float2(o.noiseUV.x + _Time.y * _NoiseVelocity.x,o.noiseUV.y + _Time.y * _NoiseVelocity.y);
 
                 //float2 noiseUV = float2(o.noiseUV.x,o.noiseUV.y);
                 //float2 offsetUV = 
+                //o.vertex.xz += abs(cos((worldPos + _Time.y * 1)) * _WaveAmp);  //_Time.y * clamp(noiseUV.xy,-2,2)
                 //o.vertex.xz += abs(0.1 * cos((worldPos.x) + _Time.y * 1) * 0.5);
-                //o.vertex.xz += abs(0.1 * cos((worldPos.x) + _Time.y * 1) * 0.5);
+                //o.vertex.y += abs(1 * cos((worldPos.y) + _Time.y * 1));
                 float waveX = cos((v.uv0.x + _Time.y * 0.1) * 6.24 * 5);
                 float waveY = cos((v.uv0.y + _Time.y * 0.1) * 6.24 * 5);
-                o.vertex.y += waveX * waveY * _WaveAmp; //remove1 of waves
+                //o.vertex.y += (waveX * waveY) * (_WaveAmp - 0.05); //remove1 of waves
                 //UNITY_TRANSFER_FOG(o,o.vertex);
+                
                 return o;
             }
 
@@ -97,19 +100,25 @@ Shader "Unlit/UVLeafShader"
                 //return float4(0.5,0.5,0,1);
                 //return float4(i.uv.xy,0,1);
                 
-                //float2 worldSpaceUV = i.worldPos.xz;
+                float2 worldSpaceUV = i.worldPos.xz;
                 //float2 noiseUV = float2(i.noiseUV.x + _Time.y * _NoiseVelocity.x,i.noiseUV.y + _Time.y * _NoiseVelocity.y);
                 //return float4(i.noiseUV.xy,0,1);
 
                 //float2 worldSpaceUV = i.worldPos.xz;
                 //worldSpaceUV += abs(0.1 * cos((worldSpaceUV.xy) + _Time.y * 1) * 0.5);
                 // sample the texture
-                float2 noiseUV = float2(i.noiseUV.x,i.noiseUV.y);
-                fixed4 sampleNoise = tex2D(_NoiseTex, noiseUV);
+                //float2 noiseUV = float2(i.noiseUV.x,i.noiseUV.y);
+                //fixed4 sampleNoise = tex2D(_NoiseTex, noiseUV);
                 //return sampleNoise;
+
+
+                float vertexY = abs(1 * cos((worldSpaceUV.y) + _Time.y * 1));
+                float vertexX = sin((i.uv.y - _Time.y*0.1) * 6.28 * 10) * 0.5 + 0.5;
+                
+
                 fixed4 mainTex = tex2D(_MainTex, i.uv);
                 //clip(mainTex.a - _ClipAmount);
-                return mainTex;
+                return mainTex * vertexX;
 
                 //return mainTex * sampleNoise;
                 

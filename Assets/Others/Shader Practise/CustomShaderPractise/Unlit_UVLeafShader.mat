@@ -30,6 +30,7 @@ Material:
     m_Floats:
     - _ClipAmount: 0.1
     - _RotationSpeed: 20
+    - _WaveAmp: 0.1
     m_Colors:
     - _NoiseSpeed: {r: 0.1, g: 0, b: 0, a: 0}
     - _NoiseVelocity: {r: 0.1, g: 0, b: 0, a: 0}
