@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6920ed701b214a1418dd60371488eba3, type: 3}
+        m_Texture: {fileID: 2800000, guid: eb95ea54cbd449344aef340f6e4e1535, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
@@ -28,10 +28,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ClipAmount: 0.1
+    - _ClipAmount: 0
+    - _DistortionAmount: 2.6
+    - _NoiseValue: 0
     - _RotationSpeed: 20
-    - _WaveAmp: 0.1
+    - _UVValue: 0
+    - _WaveAmp: 0
     m_Colors:
     - _NoiseSpeed: {r: 0.1, g: 0, b: 0, a: 0}
-    - _NoiseVelocity: {r: 0.1, g: 0, b: 0, a: 0}
+    - _NoiseVelocity: {r: 5, g: 5, b: 0, a: 0}
+    - _OffsetWorldPos: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
