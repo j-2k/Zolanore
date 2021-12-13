@@ -2,6 +2,8 @@ Shader "Unlit/UVLeafShader"
 {
     Properties
     {
+        _Color("Color", Color) = (1,1,1,1)
+        _ColorScale("Color Multiplier", float) = 1
         _MainTex ("Texture", 2D) = "white" {}
         _NoiseTex ("Noise Texture", 2D) = "white" {}
         _NoiseVelocity("Noise Velocity", Vector) = (0.03, 0.03, 0, 0)
@@ -9,10 +11,12 @@ Shader "Unlit/UVLeafShader"
         _ClipAmount("Clip Amount", Range(0, 1)) = 0.9
         _RotationSpeed("Rot Speed", Range(-20,20)) = 0
         _WaveAmp("WaveAmp", Range(-1,1)) = 0.05
+        _WaveAmpLeaf("_WaveAmpLeaf", Range(-1,1)) = 0.05
         _NoiseValue("_NoiseValue", Range(-1,1)) = 0
         _UVValue("_UVValue", Range(-1,1)) = 0
         _OffsetWorldPos("_OffsetWorldPos", Vector) = (0.03, 0.03, 0, 0)
         _DistortionAmount("Distortion Reduction",Range(1,50)) = 1
+        _NoiseScale("NoiseScale",float) = 0
     }
     SubShader
     {
@@ -63,12 +67,14 @@ Shader "Unlit/UVLeafShader"
             float _ClipAmount;
 
             float _RotationSpeed;
-
+            float4 _Color;
+            float _ColorScale;
             float _WaveAmp;
-
+            float _WaveAmpLeaf;
             float _NoiseValue;
             float _UVValue;
             float2 _OffsetWorldPos;
+            float _NoiseScale;
             float _DistortionAmount;
             v2f vert (appdata v)
             {
@@ -99,15 +105,17 @@ Shader "Unlit/UVLeafShader"
                 //o.vertex.y += abs(1 * cos((worldPosUV.y) + _Time.y * 1));
                 float waveX = cos((v.uv0.x + _Time.y * 0.1) * 6.24 * 5);
                 float waveY = cos((v.uv0.y + _Time.y * 0.1) * 6.24 * 5);
-                float vertexY = (_WaveAmp * cos((o.uv.y) + _Time.y * 10));
+                float vertexY = (_WaveAmpLeaf * cos((o.uv.y) + _Time.y * 10));
                 //o.noiseUV.xy += noiseUV;//(vertexY);
                 //o.uv = animUV;
                 //o.uv.y += vertexY;
-                o.noiseUV.x = noiseUV.x + _NoiseValue;
+                o.noiseUV.xy = (noiseUV.xy)*_NoiseScale + _NoiseValue;
                 //o.uv.x = _NoiseValue;
-                //o.uv.x += vertexY;
+                o.uv.x += vertexY;
                 //o.uv += (waveX * waveY) * (_WaveAmp - 0.05);
                 //o.vertex.y += (waveX * waveY) * (_WaveAmp - 0.05); //remove1 of waves
+                o.vertex.y += waveX* _WaveAmp; //remove1 of waves
+                //o.vertex.xy += (vertexY); //remove1 of waves
                 //UNITY_TRANSFER_FOG(o,o.vertex);
                 
                 //world pos stuff
@@ -161,7 +169,7 @@ Shader "Unlit/UVLeafShader"
                 clip(mainTex.a - _ClipAmount);
                 //return sampleNoiseRONLY;
                 //return float4(uv,0,1);
-                return mainTex;// * vertexY;
+                return mainTex * (_Color * _ColorScale);// * vertexY;
 
                 //return mainTex * sampleNoise;
                 
