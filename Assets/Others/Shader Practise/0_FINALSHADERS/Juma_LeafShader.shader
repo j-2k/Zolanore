@@ -2,17 +2,17 @@ Shader "Unlit/Juma_LeafShader"
 {
     Properties
     {
-        _LeafTexture ("Leaf Texture", 2D) = "white" {}
+        _LeafTexture("Leaf Texture", 2D) = "white" {}
         _NoiseTexture("Noise Texture", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,1)
         _ColorScale("Color Multiplier", float) = 1
-        _NoiseVelocity("Noise Velocity", Vector) = (0.03, 0.03, 0, 0)
-        _NoiseVelocity2("Noise Velocity2", Vector) = (0.03, 0.03, 0, 0)
-        _ClipAmount("Clip Amount", Range(0, 1)) = 0.9
-        _WaveAmp("WaveAmp", Range(-1,1)) = 0.05
-        _WaveAmpLeaf("_WaveAmpLeaf", Range(-1,1)) = 0.05
-        _DistortionAmount("Distortion Reduction",Range(1,50)) = 1
-        _NoiseScale("NoiseScale",float) = 0
+        _NoiseVelocity("Noise Velocity", Vector) = (0.5, 0.5, 0, 0)
+        _UV_Leaf_Speed("Leaf Wiggle Speed", Vector) = (10, 10, 0, 0)
+        _ClipAmount("Clip Amount", Range(0, 1)) = 0.01
+        _WaveAmp("Wave Amp Vertex", Range(-1,1)) = 0.05
+        _WaveAmpLeaf("Wave Amp Leaf", Range(-1,1)) = 0.01
+        _DistortionAmount("Distortion Reduction",Range(1,100)) = 1
+        _NoiseScale("NoiseScale",Range(0.1,5)) = 1
     }
     SubShader
     {
