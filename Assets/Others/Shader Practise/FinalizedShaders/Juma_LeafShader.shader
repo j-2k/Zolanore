@@ -84,14 +84,11 @@ Shader "Unlit/Juma_LeafShader"
                 float2 uv = i.uv;
                 fixed sampleNoiseRONLY = tex2D(_NoiseTexture, i.noiseUV).r;
                 uv = uv + sampleNoiseRONLY * sin(_Time.y * _UV_Leaf_Speed) / _DistortionAmount;
-                return float4(i.noiseUV,0,1);
-                /*
                 fixed4 sampledLeafTexture = tex2D(_LeafTexture, uv);
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
                 clip(sampledLeafTexture.a - _ClipAmount);
                 return sampledLeafTexture * (_Color * _ColorScale);
-                */
             }
             ENDCG
         }
