@@ -5,6 +5,7 @@ Shader "Unlit/UVLeafShader"
         _MainTex ("Texture", 2D) = "white" {}
         _NoiseTex ("Noise Texture", 2D) = "white" {}
         _NoiseVelocity("Noise Velocity", Vector) = (0.03, 0.03, 0, 0)
+        _NoiseVelocity2("Noise Velocity2", Vector) = (0.03, 0.03, 0, 0)
         _ClipAmount("Clip Amount", Range(0, 1)) = 0.9
         _RotationSpeed("Rot Speed", Range(-20,20)) = 0
         _WaveAmp("WaveAmp", Range(-1,1)) = 0.05
@@ -58,7 +59,7 @@ Shader "Unlit/UVLeafShader"
             float4 _NoiseTex_ST;
 
             float2 _NoiseVelocity;
-
+            float2 _NoiseVelocity2;
             float _ClipAmount;
 
             float _RotationSpeed;
@@ -102,7 +103,7 @@ Shader "Unlit/UVLeafShader"
                 //o.noiseUV.xy += noiseUV;//(vertexY);
                 //o.uv = animUV;
                 //o.uv.y += vertexY;
-                //o.noiseUV.x = noiseUV.x + _NoiseValue;
+                o.noiseUV.x = noiseUV.x + _NoiseValue;
                 //o.uv.x = _NoiseValue;
                 //o.uv.x += vertexY;
                 //o.uv += (waveX * waveY) * (_WaveAmp - 0.05);
@@ -110,7 +111,7 @@ Shader "Unlit/UVLeafShader"
                 //UNITY_TRANSFER_FOG(o,o.vertex);
                 
                 //world pos stuff
-                o.worldPosUV.xz += _OffsetWorldPos;//+ _Time.y* _NoiseVelocity;
+                //o.worldPosUV.xz += _OffsetWorldPos;//+ _Time.y* _NoiseVelocity;
 
                 //o.vertex = UnityObjectToClipPos(worldPosUV);
 
@@ -122,6 +123,8 @@ Shader "Unlit/UVLeafShader"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                float2 uv = i.uv;
+
                 //return float4(0.5,0.5,0,1);
                 float2 worldSpaceUV = i.worldPosUV.xz;
                 //float2 noiseUV = float2(i.noiseUV.x + _Time.y * _NoiseVelocity.x,i.noiseUV.y + _Time.y * _NoiseVelocity.y);
@@ -133,11 +136,15 @@ Shader "Unlit/UVLeafShader"
                 //float2 noiseUV = float2(i.noiseUV.x,i.noiseUV.y);
                 
                 fixed4 sampleNoise = tex2D(_NoiseTex, i.noiseUV);
+                fixed sampleNoiseRONLY = tex2D(_NoiseTex, i.noiseUV).r;
+                uv = uv + sampleNoiseRONLY * sin(_Time.y * _NoiseVelocity2) / _DistortionAmount;
+
                 fixed4 sampleNoiseWithWORLDUV = tex2D(_NoiseTex, worldSpaceUV/5);
-                float sampleNoiseWithWORLDUVREDONLY = tex2D(_NoiseTex, worldSpaceUV/5).r;
+                //float sampleNoiseWithWORLDUVREDONLY = tex2D(_NoiseTex, worldSpaceUV/5).r;
                 //alering wold space uv with noise
-                worldSpaceUV = worldSpaceUV + sampleNoiseWithWORLDUVREDONLY * sin(_Time.y * _NoiseVelocity) / _DistortionAmount;
-                return float4(worldSpaceUV,0,1);
+                //worldSpaceUV = worldSpaceUV + sampleNoiseWithWORLDUVREDONLY * sin(_Time.y * _NoiseVelocity) / _DistortionAmount;
+                
+                //return float4(worldSpaceUV,0,1); //show worldspace uv
                 //worldSpaceUV
                 //return float4(worldSpaceUV,0,1);
                 //return sampleNoiseWithWORLDUV;
@@ -148,12 +155,13 @@ Shader "Unlit/UVLeafShader"
 
                 float vertexY = abs(1 * cos((worldSpaceUV.y) + _Time.y * 1));
                 float vertexX = sin((i.uv.y - _Time.y*0.1) * 6.28 * 10) * 0.5 + 0.5;
-                fixed4 mainTex = tex2D(_MainTex, i.uv);
-                fixed4 mainTexFedNoiseWorldUVRED = tex2D(_MainTex, worldSpaceUV);
+                fixed4 mainTex = tex2D(_MainTex, uv);
+                //fixed4 mainTexFedNoiseWorldUVRED = tex2D(_MainTex, worldSpaceUV);
 
                 clip(mainTex.a - _ClipAmount);
-
-                return mainTexFedNoiseWorldUVRED;// * vertexY;
+                //return sampleNoiseRONLY;
+                //return float4(uv,0,1);
+                return mainTex;// * vertexY;
 
                 //return mainTex * sampleNoise;
                 
