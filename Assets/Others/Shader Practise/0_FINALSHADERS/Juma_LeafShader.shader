@@ -22,7 +22,9 @@ Shader "Unlit/Juma_LeafShader"
     {
         Tags
         { 
-            "Queue" = "Transparent"   //??how does this fix
+            //"RenderType" = "TransparentCutout"
+            //"RenderType" = "Opaque"
+            "Queue" = "Transparent"   //??how does this fix idk
         }
         LOD 100
 
@@ -33,7 +35,7 @@ Shader "Unlit/Juma_LeafShader"
             { 
                 //"RenderType" = "TransparentCutout"
                 //"RenderType" = "Opaque"
-                "Queue" = "Geometry"
+                //"Queue" = "Geometry"
                 "LightMode" = "ForwardBase"
                 "PassFlags" = "OnlyDirectional"
             }
