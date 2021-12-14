@@ -7,6 +7,10 @@ Shader "Unlit/LitShaderWithShadowPractise"
 
         SubShader
     {
+
+        Tags{
+            "Queue" = "Transparent"
+}
         Pass
         {
             Tags {"LightMode" = "ForwardBase"}
