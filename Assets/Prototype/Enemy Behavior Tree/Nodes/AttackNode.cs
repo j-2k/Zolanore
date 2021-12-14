@@ -9,8 +9,8 @@ public class AttackNode : Node<EnemyAgent>
         var distance = Vector3.Distance(owner.transform.position, owner.player.transform.position);
         if (distance < owner.distanceToAttack)
         {
-            Debug.Log("Attacking");
-            return NodeState.RUNNING;
+            owner.anim.SetInteger("state", 2);
+            return NodeState.SUCCESS;
         }
         else 
         {

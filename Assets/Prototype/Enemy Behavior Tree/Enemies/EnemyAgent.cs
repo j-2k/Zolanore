@@ -11,6 +11,8 @@ public class EnemyAgent : MonoBehaviour
     [HideInInspector] public bool playerDetected = false;
     [HideInInspector] public bool isShooting = false;
     [HideInInspector] public Vector3 initialPos;
+    [HideInInspector] public Quaternion initialRot;
+    [HideInInspector] public Animator anim;
 
     [Header("Movement")]
     public List<Transform> Waypoints;
@@ -39,11 +41,13 @@ public class EnemyAgent : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         navmesh = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
     {
         initialPos = transform.position;
+        initialRot = transform.rotation;
         BuildBehaviorTree();
     }
 
