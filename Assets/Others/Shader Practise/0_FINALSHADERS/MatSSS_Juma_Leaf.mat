@@ -37,12 +37,12 @@ Material:
     - _DistortionAmount: 50
     - _Glossiness: 0.453
     - _Metallic: 0
-    - _NoiseScale: 0.5
+    - _NoiseScale: 0.7
     - _WaveAmp: 1
     - _WaveAmpLeaf: 0.01
-    - _WaveAmpVertex: 0.05
+    - _WaveAmpVertex: 0.01
     m_Colors:
-    - _Color: {r: 0.6320754, g: 0.373166, b: 0.32498217, a: 1}
+    - _Color: {r: 1, g: 0.6666667, b: 0.61960787, a: 1}
     - _NoiseVelocity: {r: 1, g: 1, b: 0, a: 0}
     - _UV_Leaf_Speed: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

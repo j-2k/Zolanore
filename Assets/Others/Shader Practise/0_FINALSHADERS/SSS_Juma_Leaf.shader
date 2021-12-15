@@ -13,7 +13,7 @@ Shader "Custom/SSS_Juma_Leaf"
         _NoiseVelocity("Noise Velocity", Vector) = (0.5, 0.5, 0, 0)
         _NoiseScale("NoiseScale",Range(0.01,5)) = 1
 
-        _WaveAmpVertex("Wave Amp Vertex", Range(-1,1)) = 0.05
+        _WaveAmpVertex("Wave Amp Vertex", Range(-1,1)) = 0.01
 
         _DistortionAmount("Distortion Reduction",Range(1,100)) = 1
     }
