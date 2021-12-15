@@ -32,16 +32,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ClipAmount: 0.05
+    - _ClipAmount: 0.1
     - _ColorScale: 3
-    - _DistortionAmount: 1
+    - _DistortionAmount: 50
     - _Glossiness: 0.453
     - _Metallic: 0
     - _NoiseScale: 0.5
-    - _WaveAmp: 0.05
+    - _WaveAmp: 1
     - _WaveAmpLeaf: 0.01
+    - _WaveAmpVertex: 0.05
     m_Colors:
-    - _Color: {r: 1, g: 0.6666667, b: 0.61960787, a: 1}
-    - _NoiseVelocity: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Color: {r: 0.6320754, g: 0.373166, b: 0.32498217, a: 1}
+    - _NoiseVelocity: {r: 1, g: 1, b: 0, a: 0}
     - _UV_Leaf_Speed: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

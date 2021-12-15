@@ -13,13 +13,13 @@ Shader "Custom/SSS_Juma_Leaf"
         _NoiseVelocity("Noise Velocity", Vector) = (0.5, 0.5, 0, 0)
         _NoiseScale("NoiseScale",Range(0.01,5)) = 1
 
-        _WaveAmp("Wave Amp Vertex", Range(-1,1)) = 0.05
+        _WaveAmpVertex("Wave Amp Vertex", Range(-1,1)) = 0.05
 
         _DistortionAmount("Distortion Reduction",Range(1,100)) = 1
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="TransparentCutout"}
         LOD 200
 
         CGPROGRAM
@@ -33,10 +33,9 @@ Shader "Custom/SSS_Juma_Leaf"
 
         struct Input
         {
-            float2 uv_MainTex;
-            float2 uv_NoiseTex;
-            float3 worldPos;
-            float2 worldPosUV;
+            float2 uv_MainTex : TEXCOORD0;
+            float2 worldPosUV : TEXCOORD1;
+            float3 worldPos : POSITION;
             
         };
 
@@ -48,7 +47,7 @@ Shader "Custom/SSS_Juma_Leaf"
         float _NoiseScale;
         float2 _UV_Leaf_Speed;
 
-        float _WaveAmp;
+        float _WaveAmpVertex;
         float _WaveAmpLeaf;
         float _DistortionAmount;
 
@@ -65,25 +64,23 @@ Shader "Custom/SSS_Juma_Leaf"
             o.worldPos = mul(unity_ObjectToWorld, v.vertex);
             float2 worldUVScrollXZ = float2(o.worldPos.x + _Time.y * _NoiseVelocity.x,o.worldPos.z + _Time.y * _NoiseVelocity.y);//normalize(_NoiseVelocity.x) * windspeed
             o.worldPosUV = worldUVScrollXZ * _NoiseScale;
+
+            float vertexY = (_WaveAmpLeaf * cos((o.uv_MainTex.y) + _Time.y * 10));
+            float waveX = cos((v.texcoord.x + _Time.y * 0.1) * 6.24 * 5);
+            v.texcoord.x += vertexY;
+            v.vertex.y += waveX * _WaveAmpVertex;
         }
 
 
         void surfaceFunction (Input IN, inout SurfaceOutput o)
         {
-
-            // Albedo comes from a texture tinted by color
-            //fixed4 sampleLeaf = tex2D (_MainTex, IN.uv_MainTex) * (_Color * _ColorScale);
-            fixed4 sampleNoise = tex2D (_NoiseTex, IN.worldPosUV);
-
-            //o.Alpha = sampleLeaf.a;
-            //clip(sampleLeaf.a - _ClipAmount);
-            //o.Albedo = sampleLeaf.rgb;
-
-
-            o.Albedo = sampleNoise.rgb;
-            o.Alpha = sampleNoise.a;
-
-
+            fixed sampleNoiseWorldUV = tex2D (_NoiseTex, IN.worldPosUV).r;
+            float2 leafuv = IN.uv_MainTex;
+            leafuv = leafuv + sampleNoiseWorldUV * sin(_Time.y * _UV_Leaf_Speed) / _DistortionAmount;
+            fixed4 sampleLeaf = tex2D (_MainTex, leafuv) * (_Color * _ColorScale);
+            clip(sampleLeaf.a - _ClipAmount);
+            o.Albedo = sampleLeaf.rgb;
+            o.Alpha = sampleLeaf.a;
         }
         //SURFACE OUTPUT STRUCT
         /*
