@@ -1,6 +1,6 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Unlit/Juma_LeafShader"
+Shader "Unlit/UL_Juma_LeafShader"
 {
     Properties
     {
@@ -33,9 +33,9 @@ Shader "Unlit/Juma_LeafShader"
             
             Tags
             { 
-                //"RenderType" = "TransparentCutout"
+                "RenderType" = "TransparentCutout"
                 //"RenderType" = "Opaque"
-                //"Queue" = "Geometry"
+                "Queue" = "Geometry"
                 "LightMode" = "ForwardBase"
                 "PassFlags" = "OnlyDirectional"
             }
@@ -55,6 +55,7 @@ Shader "Unlit/Juma_LeafShader"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
                 //float4 _ShadowCoord : TEXCOORD1;
             };
 
@@ -64,6 +65,7 @@ Shader "Unlit/Juma_LeafShader"
                 float2 uv : TEXCOORD0;
                 float2 noiseUV : TEXCOORD1;
                 float3 worldUV : TEXCOORD2;
+                float4 difference : COLOR;
                 //float3 viewDir : TEXCOORD3;
                 //UNITY_FOG_COORDS(1)
                 //SHADOW_COORDS(2)
@@ -97,6 +99,11 @@ Shader "Unlit/Juma_LeafShader"
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.noiseUV = TRANSFORM_TEX(v.uv, _NoiseTexture);
 
+                //Lighting
+                float3 worldNormal = UnityObjectToWorldNormal(v.normal);
+                float NL = max(0,dot(worldNormal, _WorldSpaceLightPos0.xyz));
+                o.difference = NL * _LightColor0;
+
                 //WORLD SPACE LEAF
                 o.worldUV = mul(unity_ObjectToWorld, v.vertex);
                 float2 worldUVScroll = float2(o.worldUV.x + _Time.y * _NoiseVelocity.x,o.worldUV.z + _Time.y * _NoiseVelocity.y);//normalize(_NoiseVelocity.x) * windspeed
@@ -126,6 +133,7 @@ Shader "Unlit/Juma_LeafShader"
                 uv = uv + sampleWorldNoiseR * sin(_Time.y * _UV_Leaf_Speed) / _DistortionAmount;
                 fixed4 sampLeaf = tex2D(_MainTex, uv);
                 clip(sampLeaf.a - _ClipAmount);
+                //sampLeaf *= i.difference;
                 return sampLeaf *(_Color * _ColorScale);
                 
                 // apply fog

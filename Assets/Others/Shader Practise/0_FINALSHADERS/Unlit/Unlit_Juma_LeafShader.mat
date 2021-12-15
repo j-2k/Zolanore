@@ -39,7 +39,7 @@ Material:
     - _WaveAmp: 0.05
     - _WaveAmpLeaf: 0.01
     m_Colors:
-    - _Color: {r: 1, g: 0.23113209, b: 0.43431556, a: 1}
+    - _Color: {r: 1, g: 0.6662866, b: 0.6179246, a: 1}
     - _NoiseVelocity: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseVelocity2: {r: 10, g: 10, b: 0, a: 0}
     - _UV_Leaf_Speed: {r: 10, g: 10, b: 0, a: 0}
