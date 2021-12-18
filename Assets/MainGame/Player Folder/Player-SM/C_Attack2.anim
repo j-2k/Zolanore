@@ -54861,8 +54861,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: StartingCombo
+  - time: 0.56666666
+    functionName: ComboCheck
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -54870,6 +54870,20 @@ AnimationClip:
     messageOptions: 0
   - time: 0.6666667
     functionName: PeakOfAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: ComboAttacking
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0666667
+    functionName: ComboReset
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -201,13 +201,17 @@ public class PlayerManager : MonoBehaviour
 
         if (comboStep == 2)
         {
+            playerAnimator.ResetTrigger("isAttacking");
             playerAnimator.SetTrigger("isAttacking1");
         }
-        
+        /*
         if (comboStep == 3)
         {
+            playerAnimator.ResetTrigger("isAttacking1");
             playerAnimator.SetTrigger("isAttacking2");
         }
+        */
+        
         
 
     }
@@ -216,6 +220,7 @@ public class PlayerManager : MonoBehaviour
     
     public void ComboReset()
     {
+        /*
         if (!comboPossible)
         {
             isComboing = true;
@@ -224,6 +229,8 @@ public class PlayerManager : MonoBehaviour
         {
             isComboing = false;
         }
+        */
+        isComboing = false;
     }
 
     public void EndOfAttack()
@@ -233,10 +240,11 @@ public class PlayerManager : MonoBehaviour
             isAttackStart = false;
             comboPossible = false;
             comboStep = 0;
+            playerAnimator.ResetTrigger("isAttacking");
             playerAnimator.ResetTrigger("isAttacking1");
+            playerAnimator.ResetTrigger("isAttacking2");
             return;
         }
-
     }
 
 
