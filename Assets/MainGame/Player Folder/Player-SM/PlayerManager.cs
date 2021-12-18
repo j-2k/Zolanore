@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     //anims
     [SerializeField] Animator playerAnimator;
     bool comboPossible;
-    int comboStep;
+    int comboStep = 0;
 
     Vector2 input;
     [SerializeField] float accell; //4
@@ -198,10 +198,38 @@ public class PlayerManager : MonoBehaviour
             playerAnimator.SetTrigger("isAttacking1");
             //playerAnimator.Play("COMBO2");
         }
+        /*
         if (comboStep == 3)
         {
-            //playerAnimator.SetTrigger("isAttacking2");
-            playerAnimator.Play("COMBO3");
+            playerAnimator.SetTrigger("isAttacking2");
+            //playerAnimator.Play("COMBO3");
+        }
+        */
+
+    }
+
+    bool isComboing = false;
+    public void StartingCombo()
+    {
+        isComboing = true;
+    }
+
+    
+
+    void EndOfAttack()
+    {
+        if (comboStep == 1)
+        {
+            isAttackStart = false;
+            comboPossible = false;
+            comboStep = 0;
+        }
+
+        if (!comboPossible)
+        {
+            isAttackStart = false;
+            comboPossible = false;
+            comboStep = 0;
         }
     }
 
@@ -289,13 +317,6 @@ public class PlayerManager : MonoBehaviour
                 hitCollider.GetComponent<EnemyStatManager>().TakeDamageFromPlayer(outgoingDamage);
             }
         }
-    }
-
-    void EndOfAttack()
-    {
-        isAttackStart = false;
-        comboPossible = false;
-        comboStep = 0;
     }
     #endregion Player Attack Related Funcs
 
