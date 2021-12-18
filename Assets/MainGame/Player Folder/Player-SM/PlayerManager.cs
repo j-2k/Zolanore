@@ -22,6 +22,9 @@ public class PlayerManager : MonoBehaviour
 
     //anims
     [SerializeField] Animator playerAnimator;
+    bool comboPossible;
+    int comboStep;
+
     Vector2 input;
     [SerializeField] float accell; //4
     [SerializeField] float decell; //3
@@ -46,6 +49,8 @@ public class PlayerManager : MonoBehaviour
     Transform hitboxPos;
 
     PlayerFamiliar playerFamiliar;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +68,7 @@ public class PlayerManager : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(comboStep);
         if (cc.isGrounded)
         {
             Debug.Log("grounded");
@@ -96,10 +102,9 @@ public class PlayerManager : MonoBehaviour
                 PlayerJump();
             }
 
-            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttackStart)
+            if (Input.GetKey(KeyCode.Mouse0) && !isJumping)// && !isAttackStart)
             {
-                isAttackStart = true;
-                playerAnimator.SetTrigger("isAttacking");
+                Attacking();
             }
 
             //movementDir = Mathf.Clamp01(input.magnitude);
@@ -158,13 +163,56 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    #region Player Attack Related Funcs
+
+    public void Attacking()
+    {
+        isAttackStart = true;
+        if (comboStep == 0)
+        {
+            playerAnimator.SetTrigger("isAttacking");
+            //playerAnimator.Play("COMBO1");
+            comboStep = 1;
+            return;
+        }
+
+        if (comboStep != 0)
+        {
+            if (comboPossible)
+            {
+                comboPossible = false;
+                comboStep += 1;
+            }
+        }
+    }
+
+    public void ComboCheck()
+    {
+        comboPossible = true;
+    }
+
+    public void ComboAttacking()
+    {
+        if (comboStep == 2)
+        {
+            playerAnimator.SetTrigger("isAttacking1");
+            //playerAnimator.Play("COMBO2");
+        }
+        if (comboStep == 3)
+        {
+            //playerAnimator.SetTrigger("isAttacking2");
+            playerAnimator.Play("COMBO3");
+        }
+    }
+
+
+
     /// <summary>
     /// REVIST THIS DETECTION FOR ENEMIES HIT MAYBE USE A DIFF IN THE FUTURE THIS WAS ORIGINALLY PALCEHODLER
     /// </summary>
-    #region Player Attack Related Funcs
     Collider[] hitColliders;
     bool oneRunFamiliar = true;
-    void PeakofAttack()
+    void PeakOfAttack()
     {
         Debug.Log("Peak of Attack");
         //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
@@ -246,6 +294,8 @@ public class PlayerManager : MonoBehaviour
     void EndOfAttack()
     {
         isAttackStart = false;
+        comboPossible = false;
+        comboStep = 0;
     }
     #endregion Player Attack Related Funcs
 
