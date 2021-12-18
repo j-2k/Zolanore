@@ -22,8 +22,8 @@ public class PlayerManager : MonoBehaviour
 
     //anims
     [SerializeField] Animator playerAnimator;
-    bool comboPossible;
-    int comboStep = 0;
+    [SerializeField] bool comboPossible;
+    [SerializeField] int comboStep = 0;
 
     Vector2 input;
     [SerializeField] float accell; //4
@@ -168,11 +168,12 @@ public class PlayerManager : MonoBehaviour
     public void Attacking()
     {
         isAttackStart = true;
+        //atrocious combo system
         if (comboStep == 0)
         {
             playerAnimator.SetTrigger("isAttacking");
-            //playerAnimator.Play("COMBO1");
             comboStep = 1;
+            isComboing = false;
             return;
         }
 
@@ -181,7 +182,9 @@ public class PlayerManager : MonoBehaviour
             if (comboPossible)
             {
                 comboPossible = false;
+                isComboing = true;
                 comboStep += 1;
+                //comboStep = Mathf.Clamp(comboStep, 0, 3);
             }
         }
     }
@@ -191,46 +194,49 @@ public class PlayerManager : MonoBehaviour
         comboPossible = true;
     }
 
+
+
     public void ComboAttacking()
     {
+
         if (comboStep == 2)
         {
             playerAnimator.SetTrigger("isAttacking1");
-            //playerAnimator.Play("COMBO2");
         }
-        /*
+        
         if (comboStep == 3)
         {
             playerAnimator.SetTrigger("isAttacking2");
-            //playerAnimator.Play("COMBO3");
         }
-        */
+        
 
     }
 
     bool isComboing = false;
-    public void StartingCombo()
-    {
-        isComboing = true;
-    }
-
     
-
-    void EndOfAttack()
+    public void ComboReset()
     {
-        if (comboStep == 1)
-        {
-            isAttackStart = false;
-            comboPossible = false;
-            comboStep = 0;
-        }
-
         if (!comboPossible)
         {
+            isComboing = true;
+        }
+        else
+        {
+            isComboing = false;
+        }
+    }
+
+    public void EndOfAttack()
+    {
+        if (!isComboing)
+        {
             isAttackStart = false;
             comboPossible = false;
             comboStep = 0;
+            playerAnimator.ResetTrigger("isAttacking1");
+            return;
         }
+
     }
 
 
