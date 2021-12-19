@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] bool isJumping;
     Vector3 velocity;
 
-    [SerializeField] bool isAttackStart;
+    [SerializeField] bool isAttacking;
     [SerializeField] float attackColliderRadius;
 
     //anims
@@ -68,10 +68,8 @@ public class PlayerManager : MonoBehaviour
     }
     void Update()
     {
-        CheckAnimationOver();
-        ClickCheck();
-        //Debug.Log(comboStep);
-        CCGroundCheckFunc();
+        Debug.Log(comboStep);
+        //CCGroundCheckFunc();
         RawMovementFunc();
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -81,7 +79,7 @@ public class PlayerManager : MonoBehaviour
         if (!isMovingAbility)
         {
 
-            if (Input.GetKeyDown(KeyCode.Space) && !isAttackStart)
+            if (Input.GetKeyDown(KeyCode.Space) && !isAttacking)
             {
                 PlayerJump();
             }
@@ -146,7 +144,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!isMovingAbility)
         {
-            if (!isAttackStart)
+            if (!isAttacking)
             {
                 MainMovement();
             }
@@ -172,9 +170,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void Attacking()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            playerAnimator.SetTrigger("isAttacking");
+        }
+    }
+
+    public void EndOfAttack()
+    {
+        isAttacking = false;
+    }
 
     #region Player Attack Related Funcs
-
+    /*
     public void Attacking()
     {
         isAttackStart = true;
@@ -199,19 +210,25 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void ComboCheck()
+    public void ComboPossible()
     {
         comboPossible = true;
     }
 
-
+    public void ComboNotPossible()
+    {
+        if (comboPossible == true)
+        {
+            isComboing = false;
+        }
+        comboPossible = false;
+    }
 
     public void ComboAttacking()
     {
 
         if (comboStep == 2)
         {
-            playerAnimator.ResetTrigger("isAttacking");
             playerAnimator.SetTrigger("isAttacking1");
         }
         /*
@@ -220,26 +237,13 @@ public class PlayerManager : MonoBehaviour
             playerAnimator.ResetTrigger("isAttacking1");
             playerAnimator.SetTrigger("isAttacking2");
         }
-        */
         
-        
-
     }
 
     bool isComboing = false;
     
     public void ComboReset()
     {
-        /*
-        if (!comboPossible)
-        {
-            isComboing = true;
-        }
-        else
-        {
-            isComboing = false;
-        }
-        */
         isComboing = false;
     }
 
@@ -256,7 +260,7 @@ public class PlayerManager : MonoBehaviour
             return;
         }
     }
-
+    */
 
 
     /// <summary>
@@ -421,7 +425,7 @@ public class PlayerManager : MonoBehaviour
 
     void RotationTransformCamera()
     {
-        if (!isAttackStart)
+        if (!isAttacking)
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector2 inputDir = input.normalized;
