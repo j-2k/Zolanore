@@ -68,28 +68,12 @@ public class PlayerManager : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(comboStep);
-        if (cc.isGrounded)
-        {
-            Debug.Log("grounded");
-        }
-        else
-        {
-            Debug.Log("Not Grounded");
-        }
-
-        if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
-        {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            input.x = Input.GetAxis("Horizontal");
-            input.y = Input.GetAxis("Vertical");
-        }
-
-        if(Input.GetKeyDown(KeyCode.R))
+        CheckAnimationOver();
+        ClickCheck();
+        //Debug.Log(comboStep);
+        CCGroundCheckFunc();
+        RawMovementFunc();
+        if (Input.GetKeyDown(KeyCode.R))
         {
             playerFamiliar.callFamiliarBack = true;
         }
@@ -130,6 +114,32 @@ public class PlayerManager : MonoBehaviour
             playerAnimator.SetFloat("rmVelocity", 0);
         }
         
+    }
+
+    void CCGroundCheckFunc()
+    {
+        if (cc.isGrounded)
+        {
+            Debug.Log("grounded");
+        }
+        else
+        {
+            Debug.Log("Not Grounded");
+        }
+    }
+
+    void RawMovementFunc()
+    {
+        if (rawMovement)    //!!!DISABLE SNAP IN INPUT PROJ SETTINGS FOR BETTER TURNING WHEN IT COMES TO RM OR ***USE SNAP & DONT USE RAW FOR BETTER RESULTS***
+        {
+            input.x = Input.GetAxisRaw("Horizontal");
+            input.y = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            input.x = Input.GetAxis("Horizontal");
+            input.y = Input.GetAxis("Vertical");
+        }
     }
 
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
