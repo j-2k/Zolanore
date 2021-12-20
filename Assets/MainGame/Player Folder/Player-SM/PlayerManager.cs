@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
                 PlayerJump();
             }
 
-            if (Input.GetKey(KeyCode.Mouse0) && !isJumping)// && !isAttackStart)
+            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttacking)
             {
                 Attacking();
             }
@@ -170,44 +170,29 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void Attacking()
-    {
-        if (!isAttacking)
-        {
-            isAttacking = true;
-            playerAnimator.SetTrigger("isAttacking");
-        }
-    }
-
-    public void EndOfAttack()
-    {
-        isAttacking = false;
-    }
 
     #region Player Attack Related Funcs
-    /*
+
     public void Attacking()
     {
-        isAttackStart = true;
-        //atrocious combo system
+        //isAttacking = true;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         if (comboStep == 0)
         {
-            playerAnimator.SetTrigger("isAttacking");
+            playerAnimator.SetTrigger("Attack1");// + comboStep);
             comboStep = 1;
-            isComboing = false;
             return;
         }
-
-        if (comboStep != 0)
+        
+        if(comboStep != 0)
         {
             if (comboPossible)
             {
                 comboPossible = false;
-                isComboing = true;
                 comboStep += 1;
-                //comboStep = Mathf.Clamp(comboStep, 0, 3);
             }
         }
+        
+        //playerAnimator.SetTrigger("isAttacking");
     }
 
     public void ComboPossible()
@@ -215,52 +200,29 @@ public class PlayerManager : MonoBehaviour
         comboPossible = true;
     }
 
-    public void ComboNotPossible()
+    public void Combo()
     {
-        if (comboPossible == true)
-        {
-            isComboing = false;
-        }
-        comboPossible = false;
-    }
-
-    public void ComboAttacking()
-    {
-
+        
         if (comboStep == 2)
         {
-            playerAnimator.SetTrigger("isAttacking1");
+            playerAnimator.SetTrigger("Attack2");// + comboStep);
         }
-        /*
+
         if (comboStep == 3)
         {
-            playerAnimator.ResetTrigger("isAttacking1");
-            playerAnimator.SetTrigger("isAttacking2");
+            playerAnimator.SetTrigger("Attack3");// + comboStep);
         }
-        
-    }
-
-    bool isComboing = false;
-    
-    public void ComboReset()
-    {
-        isComboing = false;
     }
 
     public void EndOfAttack()
     {
-        if (!isComboing)
-        {
-            isAttackStart = false;
-            comboPossible = false;
-            comboStep = 0;
-            playerAnimator.ResetTrigger("isAttacking");
-            playerAnimator.ResetTrigger("isAttacking1");
-            playerAnimator.ResetTrigger("isAttacking2");
-            return;
-        }
+        isAttacking = false;
+        comboPossible = false;
+        playerAnimator.ResetTrigger("Attack1");
+        playerAnimator.ResetTrigger("Attack2");
+        playerAnimator.ResetTrigger("Attack3");
+        comboStep = 0;
     }
-    */
 
 
     /// <summary>
