@@ -54861,7 +54861,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6
+  - time: 0.6666667
     functionName: ComboPossible
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -54875,7 +54875,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2666667
+  - time: 1
     functionName: Combo
     data: 
     objectReferenceParameter: {fileID: 0}
