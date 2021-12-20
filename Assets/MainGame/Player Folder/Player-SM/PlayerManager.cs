@@ -186,10 +186,9 @@ public class PlayerManager : MonoBehaviour
         
         if(comboStep != 0)
         {
-            if (comboPossible && comboStep < 3)
+            if (comboPossible)// && comboStep < 4)
             {
                 comboPossible = false;
-                midCombo = true;
                 comboStep += 1;
             }
         }
@@ -197,12 +196,7 @@ public class PlayerManager : MonoBehaviour
         //playerAnimator.SetTrigger("isAttacking");
     }
 
-    bool midCombo = false;
-
-    public void MidCombo()
-    {
-        midCombo = true;
-    }    
+    bool endCombo = false;
 
     public void ComboPossible()
     {
@@ -211,6 +205,13 @@ public class PlayerManager : MonoBehaviour
 
     public void Combo()
     {
+        if (comboPossible)
+        {
+            comboPossible = false;
+            endCombo = true;
+            return;
+        }
+
         if (comboStep == 2)
         {
             playerAnimator.SetTrigger("Attack2");// + comboStep);
@@ -220,20 +221,17 @@ public class PlayerManager : MonoBehaviour
         {
             playerAnimator.SetTrigger("Attack3");// + comboStep);
         }
+
+        if (comboStep >= 4)
+        {
+            comboStep = 0;
+            playerAnimator.SetTrigger("AttackLoop");
+        }
     }
 
     public void EndOfAttack()
     {
-        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack3"))
-        {
-            isAttacking = false;
-            comboPossible = false;
-            midCombo = false;
-            comboStep = 0;
-            return;
-        }
-
-        if (midCombo)
+        if (!endCombo)
         {
             return;
         }
@@ -241,16 +239,21 @@ public class PlayerManager : MonoBehaviour
         {
             isAttacking = false;
             comboPossible = false;
-            midCombo = false;
+            endCombo = false;
+            comboStep = 0;
+            return;
             /*
             playerAnimator.ResetTrigger("Attack1");
             playerAnimator.ResetTrigger("Attack2");
             playerAnimator.ResetTrigger("Attack3");
             */
-            comboStep = 0;
         }
     }
 
+    void ResetAttackLoop()
+    {
+        playerAnimator.ResetTrigger("AttackLoop");
+    }
 
     /// <summary>
     /// REVIST THIS DETECTION FOR ENEMIES HIT MAYBE USE A DIFF IN THE FUTURE THIS WAS ORIGINALLY PALCEHODLER
