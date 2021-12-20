@@ -180,20 +180,29 @@ public class PlayerManager : MonoBehaviour
         {
             playerAnimator.SetTrigger("Attack1");// + comboStep);
             comboStep = 1;
+            comboPossible = false;
             return;
         }
         
         if(comboStep != 0)
         {
-            if (comboPossible)
+            if (comboPossible && comboStep < 3)
             {
                 comboPossible = false;
+                midCombo = true;
                 comboStep += 1;
             }
         }
         
         //playerAnimator.SetTrigger("isAttacking");
     }
+
+    bool midCombo = false;
+
+    public void MidCombo()
+    {
+        midCombo = true;
+    }    
 
     public void ComboPossible()
     {
@@ -202,7 +211,6 @@ public class PlayerManager : MonoBehaviour
 
     public void Combo()
     {
-        
         if (comboStep == 2)
         {
             playerAnimator.SetTrigger("Attack2");// + comboStep);
@@ -216,12 +224,31 @@ public class PlayerManager : MonoBehaviour
 
     public void EndOfAttack()
     {
-        isAttacking = false;
-        comboPossible = false;
-        playerAnimator.ResetTrigger("Attack1");
-        playerAnimator.ResetTrigger("Attack2");
-        playerAnimator.ResetTrigger("Attack3");
-        comboStep = 0;
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack3"))
+        {
+            isAttacking = false;
+            comboPossible = false;
+            midCombo = false;
+            comboStep = 0;
+            return;
+        }
+
+        if (midCombo)
+        {
+            return;
+        }
+        else
+        {
+            isAttacking = false;
+            comboPossible = false;
+            midCombo = false;
+            /*
+            playerAnimator.ResetTrigger("Attack1");
+            playerAnimator.ResetTrigger("Attack2");
+            playerAnimator.ResetTrigger("Attack3");
+            */
+            comboStep = 0;
+        }
     }
 
 
