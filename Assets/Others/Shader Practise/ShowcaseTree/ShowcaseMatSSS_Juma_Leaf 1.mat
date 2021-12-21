@@ -42,7 +42,7 @@ Material:
     - _WaveAmpLeaf: 0.01
     - _WaveAmpVertex: 0.01
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.037499666, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseVelocity: {r: 1, g: 1, b: 0, a: 0}
     - _UV_Leaf_Speed: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []
