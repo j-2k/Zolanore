@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: LeafMaterial
-    second: {fileID: 2100000, guid: 4483b02730b11864fbe2e48371d16b0c, type: 2}
+    second: {fileID: 2100000, guid: a29fb073540906c46ac1b5af4cd1e2a9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

@@ -22,6 +22,8 @@ Shader "Custom/SSS_Juma_Leaf"
         Tags { "RenderType"="TransparentCutout"}
         LOD 200
 
+        Cull Off
+
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surfaceFunction Lambert addshadow vertex:v2f

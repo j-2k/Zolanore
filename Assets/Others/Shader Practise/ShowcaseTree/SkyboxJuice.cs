@@ -11,6 +11,10 @@ public class SkyboxJuice : MonoBehaviour
     void Start()
     {
         s = GetComponent<Skybox>();
+        if (speed == 0)
+        {
+            speed = 0.5f;
+        }
     }
 
     // Update is called once per frame

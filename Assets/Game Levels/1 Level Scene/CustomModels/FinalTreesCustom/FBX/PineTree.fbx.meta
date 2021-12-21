@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pinetreeleaf
-    second: {fileID: 2100000, guid: 596a351ec491faf4fb7bf211cee39437, type: 2}
+    second: {fileID: 2100000, guid: b25f6489e8b533c44b6a30ff1869bc0b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

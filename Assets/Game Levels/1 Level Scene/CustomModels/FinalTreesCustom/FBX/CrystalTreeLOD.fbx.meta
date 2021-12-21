@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: IceLeafMat.001
-    second: {fileID: 2100000, guid: f2aa2ee19a4e6a044bc43eb72f8ebc8e, type: 2}
+    second: {fileID: 2100000, guid: b49734f40ef3cda42a101feaf8a4e8c5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: IceLeafMat.003
-    second: {fileID: 2100000, guid: f2aa2ee19a4e6a044bc43eb72f8ebc8e, type: 2}
+    second: {fileID: 2100000, guid: b49734f40ef3cda42a101feaf8a4e8c5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
