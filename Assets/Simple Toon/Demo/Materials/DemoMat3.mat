@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ToonDemonMat
-  m_Shader: {fileID: 4800000, guid: ed91d2bdf220cd941a3a018cd52e6d8c, type: 3}
-  m_ShaderKeywords: 
+  m_Name: DemoMat3
+  m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
+  m_ShaderKeywords: _RIMLIMIT_ON _RIMOVERLAP_ON _SEGMENTED_ON _SPCOVERLAP_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 962b68f50a18d8b4d9c9b3dfde1deb20, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -56,46 +56,57 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientStrength: 0.5
-    - _BladeCurve: 2
-    - _BladeForward: 0.38
+    - _AmbientCol: 0
     - _BumpScale: 1
+    - _Clipped: 0
+    - _ColBright: 0
+    - _ColIntense: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 30
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GrassHeight: 1
-    - _GrassWidth: 0.06
-    - _MaxDist: 60
+    - _Lumin: 0
+    - _MaxAtten: 0.342
+    - _MaxLight: 0.798
     - _Metallic: 0
-    - _MinDist: 40
+    - _MinLight: 0.491
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Octaves: 8
-    - _OtlWidth: 2
+    - _Offset: 0.23
+    - _OtlWidth: 4.74
     - _Parallax: 0.02
-    - _Rad: 0.6
-    - _Radius: 0.3
-    - _RandomHeight: 0.25
-    - _RimAmount: 0.88
-    - _RimThreshold: 0
+    - _PostAtten: 0
+    - _RimIntense: 0.552
+    - _RimLimit: 1
+    - _RimOverlap: 1
+    - _RimSmooth: 1
+    - _RimTolerc: 1
+    - _Segmented: 1
+    - _ShnIntense: 0.244
+    - _ShnOverlap: 0
+    - _ShnRange: 0.258
+    - _ShnSmooth: 1
     - _SmoothnessTextureChannel: 0
+    - _SpcIntence: 0
+    - _SpcLimit: 0
+    - _SpcOverlap: 1
+    - _SpcSmooth: 0
+    - _SpcTolerc: 0.015
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Strength: 5
+    - _Steps: 2.7
+    - _StpSmooth: 0.205
     - _UVSec: 0
-    - _WindSpeed: 100
-    - _WindStrength: 0.05
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
-    - _BottomColor: {r: 0, g: 1, b: 0, a: 1}
-    - _Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0}
+    - _Color: {r: 0.2216981, g: 0.8853903, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OtlColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 1, g: 1, b: 0, a: 1}
+    - _MaxColor: {r: 0, g: 0.76902664, b: 0.8113208, a: 1}
+    - _MinColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OtlColor: {r: 0.1882353, g: 0.1781615, b: 0.078431375, a: 1}
+    - _RimColor: {r: 1, g: 0.9904847, b: 0.8160377, a: 1}
+    - _ShnColor: {r: 0.9406834, g: 1, b: 0.7294118, a: 1}
+    - _SpcColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

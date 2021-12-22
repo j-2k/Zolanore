@@ -46,22 +46,22 @@ Shader "Custom/SSS_WaterTest"
 
         void vert (inout appdata_full data)
         {
-            /*
+            
             float4 modifiedPos = data.vertex;
             modifiedPos.y += sin(data.vertex.x * _Frequency + _Time.y * _AnimationSpeed) * _Amplitude;
             data.vertex = modifiedPos;
-            */
-
             
+
+            /*
             float4 modifiedPos = data.vertex;
             modifiedPos.y += sin((data.vertex.x/_SlopeLength) * _Frequency + _Time.y * _AnimationSpeed) * _Amplitude;// * sin(10/_SlopeLength);
 
             float3 posPlusTangent = data.vertex + data.tangent * 0.01;
-            posPlusTangent.y += sin(posPlusTangent.x * _Frequency + _Time.y * _AnimationSpeed) * _Amplitude;
+            posPlusTangent.y += sin((posPlusTangent.x/_SlopeLength) * _Frequency + _Time.y * _AnimationSpeed) * _Amplitude;
 
             float3 bitangent = cross(data.normal, data.tangent);
             float3 posPlusBitangent = data.vertex + bitangent * 0.01;
-            posPlusBitangent.y += sin(posPlusBitangent.x * _Frequency + _Time.y * _AnimationSpeed) * _Amplitude;
+            posPlusBitangent.y += sin((posPlusBitangent.x/_SlopeLength) * _Frequency + _Time.y * _AnimationSpeed) * _Amplitude;
 
             float3 modifiedTangent = posPlusTangent - modifiedPos;
             float3 modifiedBitangent = posPlusBitangent - modifiedPos;
@@ -69,6 +69,7 @@ Shader "Custom/SSS_WaterTest"
             float3 modifiedNormal = cross(modifiedTangent,modifiedBitangent);
             data.normal = normalize(modifiedNormal);
             data.vertex = modifiedPos;
+            */
             
         }
 
