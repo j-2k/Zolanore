@@ -23,8 +23,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: e1c3221c846555648a5ce277179b7309, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e1c3221c846555648a5ce277179b7309, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SurfaceNoise:
@@ -33,15 +37,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Amplitude: 0
-    - _DepthMaxDistance: 3
+    - _BumpScale: 1.39
+    - _DepthMaxDistance: 5
     - _ShoreWidth: 1
     - _SlopeLength: 1
-    - _Smoothness: 1
+    - _Smoothness: 10
+    - _SpecularAlpha: 0
     - _SurfaceNoiseCutoff: 1
     m_Colors:
     - _DepthGradientDeep: {r: 0, g: 0, b: 1, a: 0.7490196}
-    - _DepthGradientShallow: {r: 0, g: 1, b: 0.8290973, a: 0.7490196}
+    - _DepthGradientShallow: {r: 1, g: 1, b: 1, a: 0.7490196}
     - _ShoreColor: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecularColor: {r: 0.8349056, g: 0.9191752, b: 1, a: 1}
+    - _SpecularColor: {r: 1, g: 0.9862055, b: 0, a: 1}
     - _SurfaceNoiseScroll: {r: 0, g: -0.05, b: 0, a: 0}
   m_BuildTextureStacks: []

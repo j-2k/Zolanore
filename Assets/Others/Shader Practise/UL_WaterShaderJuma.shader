@@ -22,19 +22,21 @@ Shader "Unlit/UL_WaterShaderJuma"
         _SlopeLength("SlopeLength", Float) = 1
 
 
-        _Smoothness("Specular Smoothness", Range(0,1)) = 1
+        _Smoothness("Specular Smoothness", Range(0,10)) = 1
         _SpecularColor("Specular Color", Color) = (1,1,1,1)
+
+       _SpecularAlpha("_SpecularAlpha", Float) = 1
     }
     SubShader
     {
         Tags 
         { 
-            //"Queue"="Transparent"
-            "Queue" = "Geometry"
+            "Queue"="Transparent"
+            //"Queue" = "Geometry"
 			"LightMode" = "ForwardBase"
 		}
-        //ZWrite Off
-        //Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
 
         Pass
@@ -63,6 +65,8 @@ Shader "Unlit/UL_WaterShaderJuma"
                 float4 screenPosition : TEXCOORD2;
                 float3 normal : TEXCOORD3;
                 float3 worldPos : TEXCOORD4;
+                float2 normalUV : TEXCOORD5;
+
                 //UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
@@ -93,6 +97,7 @@ Shader "Unlit/UL_WaterShaderJuma"
             float _SlopeLength;
             float _Smoothness;
             float4 _SpecularColor;
+            float _SpecularAlpha;
 
             v2f vert (appdata v)
             {
@@ -100,6 +105,7 @@ Shader "Unlit/UL_WaterShaderJuma"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.noiseUV = TRANSFORM_TEX(v.uv, _SurfaceNoise);
+                o.normalUV = TRANSFORM_TEX(v.uv, _NormalMap);
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 o.screenPosition = ComputeScreenPos(o.vertex);
@@ -117,36 +123,41 @@ Shader "Unlit/UL_WaterShaderJuma"
 
             void InitializeFragmentNormals(inout v2f i)
             {
-                i.normal = UnpackScaleNormal(tex2D(_NormalMap, i.uv), _BumpScale);
-                i.normal = i.normal.xzy;
+                //i.normal = UnpackScaleNormal(tex2D(_NormalMap, i.uv), _BumpScale);
+                //i.normal = i.normal.xzy;
+
+                i.normal = i.normal.xyz;
                 i.normal = normalize(i.normal);
+            }
+
+            float3 calculateSpecularLightBP(float3 normal, float smoothness, float3 worldPos)
+            {
+                float3 lightDir = _WorldSpaceLightPos0.xyz;
+                float3 viewDir = normalize(_WorldSpaceCameraPos - worldPos);
+                float3 halfVector = normalize(lightDir + viewDir);
+
+				
+                float3 lightColor = _LightColor0.rgb;
+                float3 diffuse = lightColor * DotClamped(lightDir, normal);
+
+				float3 specular = _SpecularColor.rgb * pow(
+					DotClamped(halfVector, normal),
+					smoothness * 100
+				);
+                
+                return specular;
+                //float specularIntensitySS = smoothstep(0.1,0.5, specular);
+                //return specularIntensitySS;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
                 InitializeFragmentNormals(i);
-                //remove for optimization
-                //i.normal = normalize(i.normal);
-                
-                return float4(i.normal,1);
 
-                float3 lightDir = _WorldSpaceLightPos0.xyz;
-                float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
-                float3 halfVector = normalize(lightDir + viewDir);
 
-				
-                float3 lightColor = _LightColor0.rgb;
-                float3 diffuse = lightColor * DotClamped(lightDir, i.normal);
-
-				float3 specular = _SpecularColor.rgb * pow(
-					DotClamped(halfVector, i.normal),
-					_Smoothness * 100
-				);
-                
-                float3 specularIntensitySS = smoothstep(0.1,0.5, specular);
- 
-                //return float4(specular,1);
-                return float4(specularIntensitySS,1);
+                //Specular
+                float4 specular = float4(calculateSpecularLightBP(i.normal, _Smoothness, i.worldPos),_SpecularAlpha);
+                //SpecularSteps
                 /*
                 float specHighlight = 0;
 
@@ -185,8 +196,11 @@ Shader "Unlit/UL_WaterShaderJuma"
 
                 //col += shoreLine * _ShoreColor;
                 
+                //return float4(specular,_SpecularAlpha);
 
-                return waterColor + (surfaceNoise);// * shoreLine;
+                //waterColor += float4(specularIntensitySS,1);
+                waterColor += specular;
+                return waterColor + surfaceNoise;// * shoreLine;
             }
             ENDCG
         }
