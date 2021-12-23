@@ -4,7 +4,7 @@ Shader "Custom/ToonShader"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,1)
-            [HDR]
+        [HDR]
         _AmbientColor("Ambient Color", Color) = (0.4,0.4,0.4,1)
         [HDR]
         _SpecularColor("Specular Color", Color) = (0.9,0.9,0.9,1)
