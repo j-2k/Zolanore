@@ -175,6 +175,11 @@ public class PlayerManager : MonoBehaviour
 
     public void Attacking()
     {
+        if (cc.velocity.magnitude <= 1)
+        {
+
+        }
+
         //isAttacking = true;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         if (comboStep == 0)
         {
