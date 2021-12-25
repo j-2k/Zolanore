@@ -151,7 +151,7 @@ public class PlayerManager : MonoBehaviour
             {
                 MainMovement();
             }
-            RotationTransformCamera();
+            //RotationTransformCamera();
         }
     }
     
@@ -358,23 +358,41 @@ public class PlayerManager : MonoBehaviour
         Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
         */
         
-        Vector3 movement = new Vector3(input.x, 0f, input.y);
+
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
+        Vector3 movement = new Vector3(x, 0f, y).normalized;
+
         Vector3 finalVelo = movement + downSlopeFix;
+
+        float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + cameraRig.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        float veloZ;
+        float veloX;
 
         if (movement.magnitude > 0)
         {
-            movement *= movementSpeed * Time.deltaTime;
-            cc.Move(movement + downSlopeFix);
+            //transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            transform.rotation = cameraRig.rotation;
+
+            cc.Move((moveDir + downSlopeFix) * movementSpeed * Time.deltaTime);
+             veloZ = Vector3.Dot(moveDir, cameraRig.transform.forward);
+             veloX = Vector3.Dot(moveDir, cameraRig.transform.right);
+        }
+        else
+        {
+             veloZ = 0;
+             veloX = 0;
         }
 
         //cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
 
-        float veloZ = Vector3.Dot(movement.normalized, transform.forward);
-        float veloX = Vector3.Dot(movement.normalized, transform.right);
 
         playerAnimator.SetFloat("VelocityZ", veloZ, 0.1f, Time.deltaTime);
         playerAnimator.SetFloat("VelocityX", veloX, 0.1f, Time.deltaTime);
-        
+
         if (!cc.isGrounded)
         {
             SetInAir(0);
@@ -389,6 +407,7 @@ public class PlayerManager : MonoBehaviour
         cc.Move(displacement);
         isJumping = !cc.isGrounded;
         playerAnimator.SetBool("isJumping", isJumping);
+        RotationTransformCamera();
     }
 
     void PlayerJump()
@@ -444,6 +463,14 @@ public class PlayerManager : MonoBehaviour
 
     void RotationTransformCamera()
     {
+        /*
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cameraRig.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        //Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        */
+        
         if (!isAttacking)
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -466,6 +493,7 @@ public class PlayerManager : MonoBehaviour
                 oneRun = true;
             }
         }
+        
     }
 
     private void OnDrawGizmos()

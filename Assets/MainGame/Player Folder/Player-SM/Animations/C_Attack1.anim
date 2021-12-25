@@ -45256,15 +45256,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
-    functionName: ComboPossible
+  - time: 0.43333334
+    functionName: PeakOfAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.43333334
-    functionName: PeakOfAttack
+  - time: 0.5
+    functionName: ComboPossible
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
