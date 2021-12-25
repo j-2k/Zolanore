@@ -93,6 +93,7 @@ public class PlayerManager : MonoBehaviour
             //movementDir = Mathf.Clamp(movementDir, 0, 1);
             //playerAnimator.SetFloat("rmVelocity", movementDir);
 
+            /*
             if (input.x != 0 || input.y != 0)
             {
                 //moving
@@ -105,12 +106,14 @@ public class PlayerManager : MonoBehaviour
 
             movementDir = Mathf.Clamp(movementDir, 0, 1);
             playerAnimator.SetFloat("rmVelocity", movementDir);
+            */
 
         }
         else
         {
-            playerAnimator.SetFloat("rmVelocity", 0);
+            //playerAnimator.SetFloat("rmVelocity", 0);
         }
+
         
     }
 
@@ -347,12 +350,31 @@ public class PlayerManager : MonoBehaviour
 
     public void GroundedUpdate()
     {
-        Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed;
-        Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
-        Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
 
-        cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
+        /*
+        Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed; 
+        Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
+        Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
+        */
+        
+        Vector3 movement = new Vector3(input.x, 0f, input.y);
+        Vector3 finalVelo = movement + downSlopeFix;
+
+        if (movement.magnitude > 0)
+        {
+            movement *= movementSpeed * Time.deltaTime;
+            cc.Move(movement + downSlopeFix);
+        }
+
+        //cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
+
+        float veloZ = Vector3.Dot(movement.normalized, transform.forward);
+        float veloX = Vector3.Dot(movement.normalized, transform.right);
+
+        playerAnimator.SetFloat("VelocityZ", veloZ, 0.1f, Time.deltaTime);
+        playerAnimator.SetFloat("VelocityX", veloX, 0.1f, Time.deltaTime);
+        
         if (!cc.isGrounded)
         {
             SetInAir(0);
