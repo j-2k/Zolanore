@@ -198,7 +198,7 @@ public class PlayerManager : MonoBehaviour
         
         if(comboStep != 0)
         {
-            if (comboPossible)// && comboStep < 4)
+            if (comboPossible && comboStep < 4)
             {
                 comboPossible = false;
                 comboStep += 1;
@@ -233,12 +233,11 @@ public class PlayerManager : MonoBehaviour
         {
             playerAnimator.SetTrigger("Attack3");// + comboStep);
         }
+    }
 
-        if (comboStep >= 4)
-        {
-            comboStep = 0;
-            playerAnimator.SetTrigger("AttackLoop");
-        }
+    public void EndCombo()
+    {
+        endCombo = false;
     }
 
     public void EndOfAttack()
