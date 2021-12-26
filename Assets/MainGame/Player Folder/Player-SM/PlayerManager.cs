@@ -204,8 +204,6 @@ public class PlayerManager : MonoBehaviour
                 comboStep += 1;
             }
         }
-        
-        //playerAnimator.SetTrigger("isAttacking");
     }
 
     bool endCombo = false;
@@ -233,11 +231,12 @@ public class PlayerManager : MonoBehaviour
         {
             playerAnimator.SetTrigger("Attack3");// + comboStep);
         }
-    }
 
-    public void EndCombo()
-    {
-        endCombo = false;
+        if (comboStep == 4)
+        {
+            playerAnimator.SetTrigger("AttackLoop");
+            comboStep = 1;
+        }
     }
 
     public void EndOfAttack()
@@ -253,17 +252,7 @@ public class PlayerManager : MonoBehaviour
             endCombo = false;
             comboStep = 0;
             return;
-            /*
-            playerAnimator.ResetTrigger("Attack1");
-            playerAnimator.ResetTrigger("Attack2");
-            playerAnimator.ResetTrigger("Attack3");
-            */
         }
-    }
-
-    void ResetAttackLoop()
-    {
-        playerAnimator.ResetTrigger("AttackLoop");
     }
 
     /// <summary>
