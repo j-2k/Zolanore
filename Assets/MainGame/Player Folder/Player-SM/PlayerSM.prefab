@@ -291,19 +291,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawMovement: 1
-  movementSpeed: 9
-  movementAir: 6
+  movementSpeed: 6
+  movementAir: 5
   jumpSpeed: 2
   jumpCurve: 0.1
   gravity: 25
   outgoingDamage: 0
   isJumping: 0
-  isAttackStart: 0
+  isAttacking: 0
   attackColliderRadius: 1.75
   playerAnimator: {fileID: 217346400217418922}
+  comboPossible: 0
+  comboStep: 0
   accell: 4
   decell: 3
-  slopeForce: 12
+  slopeForce: 2
   slopeForceRayLength: 3
   slideDownSpeed: 8
   turnSmoothTime: 0.1
@@ -938,6 +940,10 @@ PrefabInstance:
     - target: {fileID: 4888783251622185864, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: m_Name
       value: LevelUpVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888783251622185864, guid: dd89aa88f125315439c2594beb020062, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4888783251622185866, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: playOnAwake

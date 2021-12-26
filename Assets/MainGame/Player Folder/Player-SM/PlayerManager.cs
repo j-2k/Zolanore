@@ -71,6 +71,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log(comboStep);
         //CCGroundCheckFunc();
         RawMovementFunc();
+        isAttackCheck();
         if (Input.GetKeyDown(KeyCode.R))
         {
             playerFamiliar.callFamiliarBack = true;
@@ -84,16 +85,12 @@ public class PlayerManager : MonoBehaviour
                 PlayerJump();
             }
 
-            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isAttacking)
+            if (Input.GetKey(KeyCode.Mouse0) && !isJumping)// && !isAttacking)
             {
                 Attacking();
             }
 
-            //movementDir = Mathf.Clamp01(input.magnitude);
-            //movementDir = Mathf.Clamp(movementDir, 0, 1);
-            //playerAnimator.SetFloat("rmVelocity", movementDir);
-
-            /*
+            
             if (input.x != 0 || input.y != 0)
             {
                 //moving
@@ -106,12 +103,12 @@ public class PlayerManager : MonoBehaviour
 
             movementDir = Mathf.Clamp(movementDir, 0, 1);
             playerAnimator.SetFloat("rmVelocity", movementDir);
-            */
+            
 
         }
         else
         {
-            //playerAnimator.SetFloat("rmVelocity", 0);
+            playerAnimator.SetFloat("rmVelocity", 0);
         }
 
         
@@ -143,6 +140,18 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    void isAttackCheck()
+    {
+        if (comboStep >= 1)
+        {
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+    }
+
     void LateUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (!isMovingAbility)
@@ -151,7 +160,7 @@ public class PlayerManager : MonoBehaviour
             {
                 MainMovement();
             }
-            //RotationTransformCamera();
+            RotationTransformCamera();
         }
     }
     
@@ -178,12 +187,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Attacking()
     {
-        if (cc.velocity.magnitude <= 1)
-        {
 
-        }
-
-        //isAttacking = true;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         if (comboStep == 0)
         {
             playerAnimator.SetTrigger("Attack1");// + comboStep);
@@ -352,46 +356,16 @@ public class PlayerManager : MonoBehaviour
     {
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
 
-        /*
-        Vector3 forwardMovement = (cameraRig.transform.forward * input.y) * movementSpeed; 
-        Vector3 rightMovement = (cameraRig.transform.right * input.x) * movementSpeed;
-        Vector3 finalVelo = rightMovement + forwardMovement + downSlopeFix;
-        */
-        
+        Vector3 forwardRightMovement = (cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x); 
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        Vector3 finalVelo = forwardRightMovement + downSlopeFix;
 
-        Vector3 movement = new Vector3(x, 0f, y).normalized;
-
-        Vector3 finalVelo = movement + downSlopeFix;
-
-        float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + cameraRig.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        float veloZ;
-        float veloX;
-
-        if (movement.magnitude > 0)
+        if (forwardRightMovement.magnitude > 0)
         {
-            //transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            transform.rotation = cameraRig.rotation;
-
-            cc.Move((moveDir + downSlopeFix) * movementSpeed * Time.deltaTime);
-             veloZ = Vector3.Dot(moveDir, cameraRig.transform.forward);
-             veloX = Vector3.Dot(moveDir, cameraRig.transform.right);
+            forwardRightMovement.Normalize();
+            forwardRightMovement *= movementSpeed * Time.deltaTime;
+            cc.Move(forwardRightMovement + downSlopeFix);
         }
-        else
-        {
-             veloZ = 0;
-             veloX = 0;
-        }
-
-        //cc.Move(Vector3.ClampMagnitude(finalVelo, 1) * movementSpeed * Time.deltaTime);
-
-
-        playerAnimator.SetFloat("VelocityZ", veloZ, 0.1f, Time.deltaTime);
-        playerAnimator.SetFloat("VelocityX", veloX, 0.1f, Time.deltaTime);
 
         if (!cc.isGrounded)
         {
@@ -407,7 +381,6 @@ public class PlayerManager : MonoBehaviour
         cc.Move(displacement);
         isJumping = !cc.isGrounded;
         playerAnimator.SetBool("isJumping", isJumping);
-        RotationTransformCamera();
     }
 
     void PlayerJump()
