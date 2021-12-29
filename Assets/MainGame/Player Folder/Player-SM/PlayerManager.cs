@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
 
     PlayerFamiliar playerFamiliar;
 
+    public bool isRolling = false;
 
     // Start is called before the first frame update
     void Start()
@@ -79,10 +80,14 @@ public class PlayerManager : MonoBehaviour
 
         if (!isMovingAbility)
         {
-
-            if (Input.GetKeyDown(KeyCode.Space) && !isAttacking)
+            if (Input.GetKeyDown(KeyCode.Space) && !isAttacking && !isRolling)
             {
                 PlayerJump();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !isAttacking && !isJumping && !isRolling)
+            {
+                playerAnimator.SetTrigger("RollTrigger");
             }
 
             if (Input.GetKey(KeyCode.Mouse0) && !isJumping)// && !isAttacking)
@@ -90,21 +95,7 @@ public class PlayerManager : MonoBehaviour
                 Attacking();
             }
 
-            
-            if (input.x != 0 || input.y != 0)
-            {
-                //moving
-                movementDir += accell * Time.deltaTime;
-            }
-            else if (input.x == 0 && input.y == 0)
-            {
-                movementDir -= decell * Time.deltaTime;
-            }
-
-            movementDir = Mathf.Clamp(movementDir, 0, 1);
-            playerAnimator.SetFloat("rmVelocity", movementDir);
-            
-
+            BlendTreeAnimations();
         }
         else
         {
@@ -112,6 +103,22 @@ public class PlayerManager : MonoBehaviour
         }
 
         
+    }
+
+    void BlendTreeAnimations()
+    {
+        if (input.x != 0 || input.y != 0)
+        {
+            //moving
+            movementDir += accell * Time.deltaTime;
+        }
+        else if (input.x == 0 && input.y == 0)
+        {
+            movementDir -= decell * Time.deltaTime;
+        }
+
+        movementDir = Mathf.Clamp(movementDir, 0, 1);
+        playerAnimator.SetFloat("rmVelocity", movementDir);
     }
 
     void CCGroundCheckFunc()
