@@ -105,6 +105,18 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    void LateUpdate()//fixed update results in jerkiness for some reason with RMs
+    {
+        if (!isMovingAbility)
+        {
+            if (!isAttacking)
+            {
+                MainMovement();
+            }
+            RotationTransformCamera();
+        }
+    }
+
     void BlendTreeAnimations()
     {
         if (input.x != 0 || input.y != 0)
@@ -159,17 +171,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void LateUpdate()//fixed update results in jerkiness for some reason with RMs
-    {
-        if (!isMovingAbility)
-        {
-            if (!isAttacking)
-            {
-                MainMovement();
-            }
-            RotationTransformCamera();
-        }
-    }
     
 
     public void MainMovement()
@@ -185,7 +186,10 @@ public class PlayerManager : MonoBehaviour
         }
         else //isgrounded
         {
-            GroundedUpdate();
+            if (!isRolling)
+            {
+                GroundedUpdate();
+            }
         }
     }
 
@@ -349,6 +353,12 @@ public class PlayerManager : MonoBehaviour
 
     public void GroundedUpdate()
     {
+        if (!cc.isGrounded)
+        {
+            SetInAir(0);
+            return;
+        }
+
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
 
         Vector3 forwardRightMovement = (cameraRig.transform.forward * input.y) + (cameraRig.transform.right * input.x); 
@@ -362,10 +372,6 @@ public class PlayerManager : MonoBehaviour
             cc.Move(forwardRightMovement + downSlopeFix);
         }
 
-        if (!cc.isGrounded)
-        {
-            SetInAir(0);
-        }
     }
 
     private void AirUpdate()
