@@ -51,6 +51,7 @@ public class PlayerManager : MonoBehaviour
     PlayerFamiliar playerFamiliar;
 
     public bool isRolling = false;
+    bool lockForward;
 
     // Start is called before the first frame update
     void Start()
@@ -105,7 +106,7 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-    void LateUpdate()//fixed update results in jerkiness for some reason with RMs
+    void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (!isMovingAbility)
         {
@@ -113,6 +114,14 @@ public class PlayerManager : MonoBehaviour
             {
                 MainMovement();
             }
+            //RotationTransformCamera();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!isMovingAbility)
+        {
             RotationTransformCamera();
         }
     }
@@ -353,11 +362,6 @@ public class PlayerManager : MonoBehaviour
 
     public void GroundedUpdate()
     {
-        if (!cc.isGrounded)
-        {
-            SetInAir(0);
-            return;
-        }
 
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
 
@@ -372,6 +376,12 @@ public class PlayerManager : MonoBehaviour
             cc.Move(forwardRightMovement + downSlopeFix);
         }
 
+        if (!cc.isGrounded)
+        {
+            cc.Move(-downSlopeFix * Time.deltaTime);
+            SetInAir(0);
+            return;
+        }
     }
 
     private void AirUpdate()
@@ -394,6 +404,7 @@ public class PlayerManager : MonoBehaviour
 
     void SetInAir(float jumpVelo)
     {
+
         isJumping = true;
         velocity = cc.velocity.normalized * (movementSpeed * jumpCurve);
         playerAnimator.SetBool("isJumping", true);
@@ -444,8 +455,17 @@ public class PlayerManager : MonoBehaviour
         //Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
         */
-        
-        if (!isAttacking)
+
+        if (isAttacking || isRolling)
+        {
+            lockForward = true;
+        }
+        else
+        {
+            lockForward = false;
+        }
+
+        if (!lockForward)
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector2 inputDir = input.normalized;

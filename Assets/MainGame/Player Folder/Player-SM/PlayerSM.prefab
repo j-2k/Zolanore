@@ -305,12 +305,13 @@ MonoBehaviour:
   comboStep: 0
   accell: 4
   decell: 3
-  slopeForce: 2
+  slopeForce: 0.3
   slopeForceRayLength: 3
   slideDownSpeed: 8
   turnSmoothTime: 0.1
   cameraRig: {fileID: 0}
   isMovingAbility: 0
+  isRolling: 0
 --- !u!114 &8892587702508662005
 MonoBehaviour:
   m_ObjectHideFlags: 0
