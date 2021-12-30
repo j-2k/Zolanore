@@ -163,7 +163,6 @@ public class CameraControllerMain : MonoBehaviour
             currentTiltX -= Input.GetAxisRaw("Mouse Y") * (cameraSensitivity);
         }
         
-
         currentTiltX = Mathf.Clamp(currentTiltX, -90, 90);
 
         if (Input.mouseScrollDelta.y == 1)

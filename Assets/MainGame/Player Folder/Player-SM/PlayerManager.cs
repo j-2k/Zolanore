@@ -91,7 +91,7 @@ public class PlayerManager : MonoBehaviour
                 playerAnimator.SetTrigger("RollTrigger");
             }
 
-            if (Input.GetKey(KeyCode.Mouse0) && !isJumping)// && !isAttacking)
+            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling)// && !isAttacking)
             {
                 Attacking();
             }
@@ -106,6 +106,7 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    /*
     void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
     {
         if (!isMovingAbility)
@@ -116,12 +117,18 @@ public class PlayerManager : MonoBehaviour
             }
             //RotationTransformCamera();
         }
+        
     }
+    */
 
     private void LateUpdate()
     {
         if (!isMovingAbility)
         {
+            if (!isAttacking)
+            {
+                MainMovement();
+            }
             RotationTransformCamera();
         }
     }
