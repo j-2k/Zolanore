@@ -8,7 +8,7 @@ public class CameraControllerMain : MonoBehaviour
     //KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
 
     //vars
-    [SerializeField] float cameraHeight = 1, cameraDistanceMax = 10;
+    [SerializeField] float cameraVertical = 1, cameraHorizontal = 0, cameraDistanceMax = 10;
     //float cameraMaxTilt = 90;
     [Range(0,4)]
     //[SerializeField] float cameraSpeed = 2;
@@ -56,7 +56,7 @@ public class CameraControllerMain : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCam = Camera.main;
 
-        transform.position = player.transform.position + (Vector3.up * cameraHeight);
+        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
         transform.rotation = player.transform.rotation;
 
         tiltX.eulerAngles = new Vector3(currentTiltX, transform.eulerAngles.y, transform.eulerAngles.z);
@@ -148,7 +148,7 @@ public class CameraControllerMain : MonoBehaviour
     {
         //currentRotY = player.transform.eulerAngles.y;
 
-        transform.position = player.transform.position + (Vector3.up * cameraHeight);
+        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentRotY, transform.eulerAngles.z);
 
         tiltX.eulerAngles = new Vector3(currentTiltX, tiltX.eulerAngles.y, tiltX.eulerAngles.z);

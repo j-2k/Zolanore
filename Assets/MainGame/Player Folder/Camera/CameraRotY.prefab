@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9653d162e8d3c4493051e13c36eaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraHeight: 1.5
+  cameraVertical: 2
+  cameraHorizontal: 0
   cameraDistanceMax: 10
   cameraSensitivity: 3
   tiltX: {fileID: 5316645481269370955}
