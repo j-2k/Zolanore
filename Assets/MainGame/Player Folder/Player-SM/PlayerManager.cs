@@ -53,9 +53,14 @@ public class PlayerManager : MonoBehaviour
     public bool isRolling = false;
     bool lockForward;
 
+    [SerializeField] float curStamina;
+    [SerializeField] float maxStamina;
+    [SerializeField] float staminaRegenMulti;
+
     // Start is called before the first frame update
     void Start()
     {
+        curStamina = maxStamina;
 
         playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();
 
@@ -86,10 +91,17 @@ public class PlayerManager : MonoBehaviour
                 PlayerJump();
             }
 
+
             if (Input.GetKeyDown(KeyCode.LeftShift) && !isAttacking && !isJumping && !isRolling)
             {
-                playerAnimator.SetTrigger("RollTrigger");
+                if (curStamina >= 20)
+                {
+                    curStamina -= 20;
+                    lastTimeRolled = Time.time;
+                    playerAnimator.SetTrigger("RollTrigger");
+                }
             }
+            Regeneration();
 
             if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling)// && !isAttacking)
             {
@@ -130,6 +142,20 @@ public class PlayerManager : MonoBehaviour
                 MainMovement();
             }
             RotationTransformCamera();
+        }
+    }
+
+
+
+    float lastTimeRolled;
+    void Regeneration()
+    {
+        if (curStamina <= maxStamina)
+        {   //5 is the seconds of offset to start regenerating
+            if (lastTimeRolled + 5 <= Time.time)
+            {
+                curStamina += staminaRegenMulti * Time.deltaTime;
+            }
         }
     }
 
