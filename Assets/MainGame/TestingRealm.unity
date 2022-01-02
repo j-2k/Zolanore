@@ -65224,14 +65224,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 897537507}
     - target: {fileID: 217346399909002612, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: cameraVertical
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 217346399909002612, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: cameraHorizontal
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 217346399909002612, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: invenActiveCheck
       value: 
       objectReference: {fileID: 1818475512}
@@ -65282,14 +65274,6 @@ PrefabInstance:
     - target: {fileID: 217346400217418923, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 217346400217418925, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: maxStamina
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 217346400217418925, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: staminaRegenMulti
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8892587702508662005, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: healthBar

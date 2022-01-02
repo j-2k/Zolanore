@@ -94,12 +94,7 @@ public class PlayerManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && !isAttacking && !isJumping && !isRolling)
             {
-                if (curStamina >= 20)
-                {
-                    curStamina -= 20;
-                    lastTimeRolled = Time.time;
-                    playerAnimator.SetTrigger("RollTrigger");
-                }
+                CombatRoll();
             }
             Regeneration();
 
@@ -145,7 +140,15 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
+    void CombatRoll()
+    {
+        if (curStamina >= 20)
+        {
+            curStamina -= 20;
+            lastTimeRolled = Time.time;
+            playerAnimator.SetTrigger("RollTrigger");
+        }
+    }
 
     float lastTimeRolled;
     void Regeneration()

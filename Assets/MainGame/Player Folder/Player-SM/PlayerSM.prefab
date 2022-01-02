@@ -312,6 +312,9 @@ MonoBehaviour:
   cameraRig: {fileID: 0}
   isMovingAbility: 0
   isRolling: 0
+  curStamina: 0
+  maxStamina: 100
+  staminaRegenMulti: 2
 --- !u!114 &8892587702508662005
 MonoBehaviour:
   m_ObjectHideFlags: 0
