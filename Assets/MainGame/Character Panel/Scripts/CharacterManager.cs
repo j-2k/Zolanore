@@ -39,6 +39,7 @@ public class CharacterManager : MonoBehaviour
     LevelSystem levelSystem;
     PlayerManager playerScript;
 
+    float timeOfHit;
 
     private void OnValidate()
     {
@@ -100,23 +101,73 @@ public class CharacterManager : MonoBehaviour
         playerCurrentHealth = playerMaxHealth;
         healthText.text = playerCurrentHealth.ToString();
         healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
+        maxStamina = 100;
+        curStamina = maxStamina;
     }
 
     
     //trying out level skill system where when u level up u gain 2 points to spend fre ein each skill slot seems to work
     private void Update()
     {
+        HealthRegeneration();
+    }
 
+    float lastTimeRolled;
+    float lastTimeDamageTaken;
+    float cringeAdder = 0;
+    [SerializeField] float healthRegenMulti = 2;
+    [SerializeField] float staminaRegenMulti = 1;
+
+    public float curStamina;
+    public float maxStamina;
+
+    void HealthRegeneration()
+    {
+        if (playerCurrentHealth < playerMaxHealth)
+        {   //5 is the seconds of offset to start regenerating
+            if (lastTimeDamageTaken + 10 <= Time.time)
+            {
+                cringeAdder += (healthRegenMulti * Time.deltaTime);
+                if (cringeAdder >= 1)
+                {
+                    cringeAdder = 0;
+                    playerCurrentHealth += 1;
+                    RefreshPlayerUI();
+                }
+            }
+        }
+    }
+
+    public void CombatRoll()
+    {
+        if (curStamina >= 20)
+        {
+            curStamina -= 20;
+            lastTimeRolled = Time.time;
+            playerScript.playerAnimator.SetTrigger("RollTrigger");
+        }
+    }
+
+    public void StaminaRegeneration()
+    {
+        if (curStamina <= maxStamina)
+        {   //5 is the seconds of offset to start regenerating
+            if (lastTimeRolled + 5 <= Time.time)
+            {
+                curStamina += staminaRegenMulti * Time.deltaTime;
+            }
+        }
     }
 
     public void TakeDamageFromEnemy(int incDmg)
     {
+        lastTimeDamageTaken = Time.time;
         incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 2);
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         playerCurrentHealth -= incDmg;
         //healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
         RefreshPlayerUI();
-        if (playerCurrentHealth <= 0)
+        if (playerCurrentHealth < 1)
         {
             //player died
             //respawn in some location

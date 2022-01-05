@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float attackColliderRadius;
 
     //anims
-    [SerializeField] Animator playerAnimator;
+    public Animator playerAnimator;
     [SerializeField] bool comboPossible;
     [SerializeField] int comboStep = 0;
 
@@ -53,15 +53,9 @@ public class PlayerManager : MonoBehaviour
     public bool isRolling = false;
     bool lockForward;
 
-    [SerializeField] float curStamina;
-    [SerializeField] float maxStamina;
-    [SerializeField] float staminaRegenMulti;
-
     // Start is called before the first frame update
     void Start()
     {
-        curStamina = maxStamina;
-
         playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();
 
         hitboxPos = transform.GetChild(1);
@@ -73,6 +67,7 @@ public class PlayerManager : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         finalJumpCalc = Mathf.Sqrt(2 * gravity * jumpSpeed);
     }
+
     void Update()
     {
         Debug.Log(comboStep);
@@ -94,9 +89,9 @@ public class PlayerManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && !isAttacking && !isJumping && !isRolling)
             {
-                CombatRoll();
+                characterManager.CombatRoll();
             }
-            Regeneration();
+            characterManager.StaminaRegeneration();
 
             if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling)// && !isAttacking)
             {
@@ -140,27 +135,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void CombatRoll()
-    {
-        if (curStamina >= 20)
-        {
-            curStamina -= 20;
-            lastTimeRolled = Time.time;
-            playerAnimator.SetTrigger("RollTrigger");
-        }
-    }
-
-    float lastTimeRolled;
-    void Regeneration()
-    {
-        if (curStamina <= maxStamina)
-        {   //5 is the seconds of offset to start regenerating
-            if (lastTimeRolled + 5 <= Time.time)
-            {
-                curStamina += staminaRegenMulti * Time.deltaTime;
-            }
-        }
-    }
 
     void BlendTreeAnimations()
     {
