@@ -30,9 +30,10 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] ItemSaveManager itemSaveManager;
 
     [SerializeField] Image healthBar;
+    [SerializeField] Image staminaBar;
 
     TextMeshProUGUI healthText;
-
+    TextMeshProUGUI staminaText;
 
     private BaseItemSlot dragItemSlot;
 
@@ -87,6 +88,7 @@ public class CharacterManager : MonoBehaviour
 
         playerScript = GetComponent<PlayerManager>();
         healthText = healthBar.GetComponentInChildren<TextMeshProUGUI>();
+        staminaText = staminaBar.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void OnDestroy()
@@ -177,6 +179,12 @@ public class CharacterManager : MonoBehaviour
     }
 
     public void RefreshPlayerUI()
+    {
+        healthBar.fillAmount = ((float)playerCurrentHealth / (float)playerMaxHealth);
+        healthText.text = playerCurrentHealth.ToString();
+    }
+
+    public void RefreshStaminaUI(int cur, int max)
     {
         healthBar.fillAmount = ((float)playerCurrentHealth / (float)playerMaxHealth);
         healthText.text = playerCurrentHealth.ToString();
