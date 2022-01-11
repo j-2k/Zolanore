@@ -13080,7 +13080,7 @@ GameObject:
   - component: {fileID: 3630716442675041019}
   - component: {fileID: 7445443405129562662}
   m_Layer: 5
-  m_Name: Stamina
+  m_Name: PLAYERSTAMDRAG&DROP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21211,7 +21211,7 @@ GameObject:
   - component: {fileID: 9108468997694168906}
   - component: {fileID: 1939044864533723161}
   m_Layer: 5
-  m_Name: Bar_1Gray (1)
+  m_Name: StaminaBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21234,8 +21234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 85, y: -83.1}
-  m_SizeDelta: {x: 301, y: 68.399994}
+  m_AnchoredPosition: {x: 84.99995, y: -82.65603}
+  m_SizeDelta: {x: 301.463, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9108468997694168906
 CanvasRenderer:

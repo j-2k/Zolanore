@@ -147,6 +147,7 @@ public class CharacterManager : MonoBehaviour
             curStamina -= 20;
             lastTimeRolled = Time.time;
             playerScript.playerAnimator.SetTrigger("RollTrigger");
+            RefreshStaminaUI(curStamina, maxStamina);
         }
     }
 
@@ -157,6 +158,7 @@ public class CharacterManager : MonoBehaviour
             if (lastTimeRolled + 5 <= Time.time)
             {
                 curStamina += staminaRegenMulti * Time.deltaTime;
+                RefreshStaminaUI(curStamina, maxStamina);
             }
         }
     }
@@ -186,8 +188,17 @@ public class CharacterManager : MonoBehaviour
 
     public void RefreshStaminaUI(int cur, int max)
     {
-        healthBar.fillAmount = ((float)playerCurrentHealth / (float)playerMaxHealth);
-        healthText.text = playerCurrentHealth.ToString();
+        staminaBar.fillAmount = ((float)cur / (float)max);
+        stamString = (int)curStamina;
+        staminaText.text = stamString.ToString();
+    }
+
+    int stamString;
+    public void RefreshStaminaUI(float cur, float max)
+    {
+        staminaBar.fillAmount = (cur / max);
+        stamString = (int)curStamina;
+        staminaText.text = stamString.ToString();
     }
 
     void OnLevelUp()
