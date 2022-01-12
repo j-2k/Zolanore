@@ -75,7 +75,7 @@ public class AbilityExecuter : MonoBehaviour
                     ability.OnActivate(player);
                     abilityState = AbilityState.active;
                     activeTime = ability.activeTime;
-                    abilityManager.Activated(this);
+                    abilityManager.Activated(this, abilityType);
                 }
                 break;
             case AbilityState.active:

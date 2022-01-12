@@ -9,7 +9,8 @@ public class FamiliarAbility : Ability
     StateManager stateManager;
     public override void CacheStart(GameObject parent, GameObject gameManagerObj)
     {
-        combatType = CombatType.Familiar;
+        //combatType = CombatType.Familiar;
+        combatType = CombatType.Melee;
         playerFamiliar = GameObject.FindGameObjectWithTag("Familiar").GetComponent<PlayerFamiliar>();
         stateManager = playerFamiliar.gameObject.GetComponent<StateManager>();
     }

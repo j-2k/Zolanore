@@ -77,6 +77,7 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             playerFamiliar.callFamiliarBack = true;
+            Debug.Log("Calling back Familiar");
         }
 
         if (!isMovingAbility)

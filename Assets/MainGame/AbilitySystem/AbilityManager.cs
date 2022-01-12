@@ -33,10 +33,16 @@ public class AbilityManager : MonoBehaviour
     public List<AbilityExecuter> familiarAbilityExecs;
     */
 
-    
+    public CombatType currentCombatStyle;
 
     private void Start()
     {
+        currentCombatStyle = CombatType.Melee;
+        for (int i = 0; i < length; i++)
+        {
+
+        }
+
         allAbilities = GetComponents<AbilityExecuter>();   //universal abilites maybe
 
         /*
@@ -62,8 +68,53 @@ public class AbilityManager : MonoBehaviour
         */
     }
 
-    public void Activated(AbilityExecuter executer)
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            currentCombatStyle++;
+
+            if((int)currentCombatStyle > 3)
+            {
+                currentCombatStyle = 0;
+            }
+
+            
+            for (int i = 0; i < allAbilities.Length; i++)
+            {
+                if (allAbilities[i].abilityType == currentCombatStyle)
+                {
+                    allAbilities[i].enabled = true;
+                }
+                else
+                {
+                    allAbilities[i].enabled = false;
+                }
+            }
+        }
+    }
+
+    public void Activated(AbilityExecuter executer, CombatType type)
+    {
+        /*
+        if (currentCombatStyle == CombatType.Melee)
+        {
+            CombatStyleHandler(executer, meleeAbilityExecs);
+        }
+        else if (currentCombatStyle == CombatType.Ranged)
+        {
+            CombatStyleHandler(executer, rangedAbilityExecs);
+        }
+        else if (currentCombatStyle == CombatType.Magic)
+        {
+            CombatStyleHandler(executer, magicAbilityExecs);
+        }
+        else if (currentCombatStyle == CombatType.Familiar)
+        {
+            CombatStyleHandler(executer, familiarAbilityExecs);
+        }
+        */
+        
         for (int i = 0; i < allAbilities.Length; i++)
         {
             //FIRST SEND ALL ABILITIES ON CD TO BE ON GCD IF THEY ARE LOWER THAN GCD VALUE
@@ -82,5 +133,30 @@ public class AbilityManager : MonoBehaviour
                 }
             }
         }
+        
     }
+
+    /*
+    void CombatStyleHandler(AbilityExecuter executer, List<AbilityExecuter> currentCombatStyle)
+    {
+        for (int i = 0; i < currentCombatStyle.Count; i++)
+        {
+            //FIRST SEND ALL ABILITIES ON CD TO BE ON GCD IF THEY ARE LOWER THAN GCD VALUE
+            if (currentCombatStyle[i].abilityState == AbilityExecuter.AbilityState.cooldown && currentCombatStyle[i].cooldownTime <= 3)
+            {
+                currentCombatStyle[i].abilityState = currentCombatStyle[i].abilityState = AbilityExecuter.AbilityState.gcd;
+            }
+
+            //SECONDLY CANCEL ANY ABILITIES THAT DONT HAVE A BYPASS DURING AN ACTIVE ABILITY | EG. IF AOE ON THEN BUFF ON SHOULD NOT CANCEL AOE | EG IF AOE IS ON AND DASH IS TRUE AOE SHOULD TURN OFF & DASH
+            if (currentCombatStyle[i].abilityState == AbilityExecuter.AbilityState.active && currentCombatStyle[i] != executer)
+            {
+                if (!currentCombatStyle[i].ability.bypassCancel && !executer.ability.bypassCancel)  //finally found solution lmao
+                {
+                    Debug.Log("cooling down");
+                    currentCombatStyle[i].SendToCooldown();
+                }
+            }
+        }
+    }
+    */
 }
