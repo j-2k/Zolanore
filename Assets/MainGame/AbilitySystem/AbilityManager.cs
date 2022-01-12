@@ -38,9 +38,12 @@ public class AbilityManager : MonoBehaviour
     private void Start()
     {
         currentCombatStyle = CombatType.Melee;
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < allAbilities.Length; i++)
         {
-
+            if (allAbilities[i].abilityType != currentCombatStyle)
+            {
+                allAbilities[i].enabled = false;
+            }
         }
 
         allAbilities = GetComponents<AbilityExecuter>();   //universal abilites maybe
