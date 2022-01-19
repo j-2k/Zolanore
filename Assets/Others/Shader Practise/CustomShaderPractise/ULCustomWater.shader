@@ -6,8 +6,14 @@ Shader "Unlit/ULCustomWater"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags 
+        { 
+            "Queue"="Transparent"
+			"LightMode" = "ForwardBase"
+		}
         LOD 100
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -15,9 +21,11 @@ Shader "Unlit/ULCustomWater"
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
-            #pragma multi_compile_fog
+            //#pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+            #include "UnityStandardBRDF.cginc"
+            #include "UnityStandardUtils.cginc"
 
             struct appdata
             {
@@ -45,7 +53,7 @@ Shader "Unlit/ULCustomWater"
                 float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 float wave1 = sin((v.uv.x + _Time.y * 0.1) * 6.24 * 5);// *_Time.y * 1;
                 float wave2 = sin((v.uv.y + _Time.y * 0.1) * 6.24 * 5);// *_Time.y * 1;
-                float combinedWaves = wave1 * wave2 * 0.1;
+                float combinedWaves = wave1 * wave2 * 1;
                 o.vertex.y += combinedWaves;
                 
 
@@ -59,7 +67,9 @@ Shader "Unlit/ULCustomWater"
                 fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+
+                
+                return float4(0.1,0.6,0.9,0.5);
             }
             ENDCG
         }
