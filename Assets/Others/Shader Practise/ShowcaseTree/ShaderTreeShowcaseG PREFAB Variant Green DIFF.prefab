@@ -79,7 +79,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
       propertyPath: m_Name
-      value: ShaderTreeShowcaseG PREFAB Variant Green
+      value: ShaderTreeShowcaseG PREFAB Variant Green DIFF
       objectReference: {fileID: 0}
     - target: {fileID: 1471542974022632420, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
       propertyPath: m_Materials.Array.data[0]

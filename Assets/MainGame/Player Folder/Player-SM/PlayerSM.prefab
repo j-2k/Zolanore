@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allAbilities: []
+  currentCombatStyle: 0
 --- !u!114 &8892587703643822518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217346399143027721}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6cc906838754944f8a1996891bd3edb, type: 3}
   m_Name: 
@@ -1034,6 +1035,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217346400217418923}
     m_Modifications:
+    - target: {fileID: 408960834199770294, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
+      propertyPath: isGlobal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902278, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -37,8 +37,8 @@ Material:
     - _SurfaceDistortionAmount: 0.44
     - _SurfaceNoiseCutoff: 0.72
     m_Colors:
-    - _DepthGradientDeep: {r: 0.054901965, g: 0.41960788, b: 0.7960785, a: 0.749}
-    - _DepthGradientShallow: {r: 0, g: 0.20704818, b: 0.49056602, a: 0.725}
+    - _DepthGradientDeep: {r: 0, g: 0.454, b: 0.842, a: 0.54509807}
+    - _DepthGradientShallow: {r: 0, g: 0.26799986, b: 0.6320754, a: 0.725}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _SurfaceNoiseScroll: {r: 0.03, g: 0.03, b: 0, a: 0}
   m_BuildTextureStacks: []

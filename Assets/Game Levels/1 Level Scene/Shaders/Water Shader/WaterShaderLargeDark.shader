@@ -1,4 +1,4 @@
-Shader "Custom/WaterShader"
+Shader "Custom/WaterShaderLargeDark"
 {
     Properties
     {
@@ -29,7 +29,8 @@ Shader "Custom/WaterShader"
             #define SMOOTHSTEP_AA 0.01
             #pragma vertex vert
             #pragma fragment frag
-
+            // make fog work
+            #pragma multi_compile_fog
             #include "UnityCG.cginc"
 
             struct appdata
@@ -44,6 +45,7 @@ Shader "Custom/WaterShader"
                 float2 distortUV : TEXCOORD1;
                 float4 screenPosition : TEXCOORD2;
                 float4 vertex : SV_POSITION;
+                UNITY_FOG_COORDS(3)
             };
 
             sampler2D _MainTex;
@@ -74,6 +76,7 @@ float4 _FoamColor;
                 o.screenPosition = ComputeScreenPos(o.vertex);
                 o.distortUV = TRANSFORM_TEX(v.uv, _SurfaceDistortion);
                 o.noiseUV = TRANSFORM_TEX(v.uv, _MainTex);
+                UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
@@ -104,7 +107,7 @@ float4 _FoamColor;
                 float surfaceNoise = surfaceNoiseSample > surfaceNoiseCutoff ? 1 : 0;
 
                 float4 surfaceNoiseColor = _FoamColor * surfaceNoise;
-
+                UNITY_APPLY_FOG(i.fogCoord, waterColor);
                 return waterColor + surfaceNoiseColor;
 
 
