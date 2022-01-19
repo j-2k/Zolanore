@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_ULCustomWater
+  m_Name: UL_CustomWater
   m_Shader: {fileID: 4800000, guid: e25f449636af2d24a9043355dcfc923b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

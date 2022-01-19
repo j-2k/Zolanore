@@ -17,6 +17,8 @@ Shader "Unlit/UL_WaterShaderJuma"
         _ShoreWidth("Shore Width", Float) = 1
         _ShoreColor("Shore Color", Color) = (1,1,1,1)
         
+        _WaveNoise("_WaveNoise", 2D) = "white" {}
+        _WaveNoiseScroll("Wave Noise Scroll Amount", Vector) = (0.05,0.05,0,0)
 
         _Amplitude("Amplitude", Float) = 1
         _SlopeLength("SlopeLength", Float) = 1
@@ -66,6 +68,7 @@ Shader "Unlit/UL_WaterShaderJuma"
                 float3 normal : TEXCOORD3;
                 float3 worldPos : TEXCOORD4;
                 float2 normalUV : TEXCOORD5;
+                float2 noiseWaveUV : TEXCOORD6;
 
                 //UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
@@ -84,6 +87,10 @@ Shader "Unlit/UL_WaterShaderJuma"
             sampler2D _SurfaceNoise;
             float4 _SurfaceNoise_ST;
 
+            sampler2D _WaveNoise;
+            float4 _WaveNoise_ST;
+            float2 _WaveNoiseScroll;
+
             float4 _DepthGradientShallow;
             float4 _DepthGradientDeep;
             float _DepthMaxDistance;
@@ -99,6 +106,8 @@ Shader "Unlit/UL_WaterShaderJuma"
             float4 _SpecularColor;
             float _SpecularAlpha;
 
+
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -109,17 +118,30 @@ Shader "Unlit/UL_WaterShaderJuma"
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 o.screenPosition = ComputeScreenPos(o.vertex);
+                o.noiseWaveUV = TRANSFORM_TEX(v.uv, _WaveNoise);
 
                 //UNITY_TRANSFER_FOG(o,o.vertex);
 
-                float wave1 = _Amplitude * sin((v.uv.x + _Time.y * 0.1) * 6.24 * 5);// *_Time.y * 1;
-                float wave2 = _Amplitude * sin((v.uv.y + _Time.y * 0.1) * 6.24 * 5);// *_Time.y * 1;
-                float combinedWaves = wave1 * wave2 * 0.1;
+                float2 worldnoiseWaveUVScroll = float2(o.worldPos.x + _Time.y * _WaveNoiseScroll.x,o.worldPos.z + _Time.y * _WaveNoiseScroll.y);//normalize(_NoiseVelocity.x) * windspeed
+                //worldnoiseWaveUVScroll *= scale;
+
+                float sampleNoiseRONLY = tex2Dlod(_WaveNoise, float4(worldnoiseWaveUVScroll,0,0)).r;
+
+                float wave1 = sampleNoiseRONLY * sin(((v.uv.x + _Time.y * 0.1) * 6.24 * 5)/_SlopeLength);// *_Time.y * 1;
+                float wave2 = sampleNoiseRONLY * sin(((v.uv.y + _Time.y * 0.1) * 6.24 * 5)/_SlopeLength);// *_Time.y * 1;
+                float combinedWaves = wave1 * wave2 * _Amplitude;
                 o.vertex.y += combinedWaves;
+
+
+                //float waveOffset = 
+
+                //uv = uv + sampleNoiseRONLY * sin(_Time.y * _NoiseVelocity2) / _DistortionAmount;
 
                 //o.vertex.y += _Amplitude * sin(2 * _Time.y/_SlopeLength);
                 return o;
             }
+
+
 
             void InitializeFragmentNormals(inout v2f i)
             {
@@ -200,7 +222,8 @@ Shader "Unlit/UL_WaterShaderJuma"
 
                 //waterColor += float4(specularIntensitySS,1);
                 waterColor += specular;
-                return waterColor + surfaceNoise;// * shoreLine;
+                float4 final = ((waterColor + surfaceNoise) + col);
+                return final;// * shoreLine;
             }
             ENDCG
         }
