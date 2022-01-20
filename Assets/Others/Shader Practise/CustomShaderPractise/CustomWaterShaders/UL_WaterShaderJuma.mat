@@ -36,23 +36,23 @@ Material:
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _WaveNoise:
-        m_Texture: {fileID: 2800000, guid: 3f1d4fadb37c37e4488860109d7dce4b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1eae6143ce30e2849b37136524e197f0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 2
+    - _Amplitude: 1
     - _BumpScale: 0
     - _DepthMaxDistance: 5
     - _ShoreWidth: 1
-    - _SlopeLength: 2
+    - _SlopeLength: 1
     - _Smoothness: 10
     - _SpecularAlpha: 0
     - _SurfaceNoiseCutoff: 1
     m_Colors:
-    - _DepthGradientDeep: {r: 0, g: 0, b: 1, a: 0.7490196}
+    - _DepthGradientDeep: {r: 0, g: 0.11830664, b: 1, a: 0.7490196}
     - _DepthGradientShallow: {r: 1, g: 1, b: 1, a: 0.7490196}
     - _ShoreColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 0.9862055, b: 0, a: 1}
-    - _SurfaceNoiseScroll: {r: 0, g: -0.05, b: 0, a: 0}
-    - _WaveNoiseScroll: {r: 0, g: 0.1, b: 0, a: 0}
+    - _SurfaceNoiseScroll: {r: 0, g: -0.1, b: 0, a: 0}
+    - _WaveNoiseScroll: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

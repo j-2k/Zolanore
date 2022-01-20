@@ -23,6 +23,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - _Amplitude: 1
+    - _DepthMaxDistance: 5
+    - _SlopeLength: 3
+    m_Colors:
+    - _Color: {r: 0, g: 0.4460817, b: 0.5660378, a: 0.80784315}
+    - _DepthGradientDeep: {r: 0.086, g: 0.407, b: 1, a: 0.9098039}
+    - _DepthGradientShallow: {r: 0.325, g: 0.807, b: 0.971, a: 1}
   m_BuildTextureStacks: []
