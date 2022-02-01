@@ -33,8 +33,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - SurfaceDistortionAmount: 0.485
+    - _Amplitude: 1
     - _DepthMaxDistance: 0.12
     - _FoamDistance: 1.49
+    - _SlopeLength: 3
     - _SurfaceDistortionAmount: 0.312
     - _SurfaceNoiseCutoff: 0.704
     m_Colors:

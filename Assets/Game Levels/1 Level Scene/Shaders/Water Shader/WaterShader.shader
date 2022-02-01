@@ -15,7 +15,8 @@ Shader "Custom/WaterShader"
         _SurfaceDistortion("Surface Distortion", 2D) = "white" {}	
         _SurfaceDistortionAmount("Surface Distortion Amount", Range(0, 1)) = 0.27
 
-
+        _SlopeLength("_SlopeLength", Float) = 1
+        _Amplitude("_Amplitude", Float) = 1
         _FoamColor("Foam Color", Color) = (1,1,1,1)
     }
     SubShader
@@ -69,6 +70,9 @@ float4 _SurfaceDistortion_ST;
 
 float _SurfaceDistortionAmount;
 float4 _FoamColor;
+float _SlopeLength;
+float _Amplitude;
+
 
             v2f vert (appdata v)
             {
@@ -77,6 +81,12 @@ float4 _FoamColor;
                 o.screenPosition = ComputeScreenPos(o.vertex);
                 o.distortUV = TRANSFORM_TEX(v.uv, _SurfaceDistortion);
                 o.noiseUV = TRANSFORM_TEX(v.uv, _MainTex);
+
+                float wave1 = sin(((v.uv.x + _Time.y * 0.1) * 6.24 * 5)/_SlopeLength);// *_Time.y * 1;
+                float wave2 = sin(((v.uv.y + _Time.y * 0.1) * 6.24 * 5)/_SlopeLength);// *_Time.y * 1;
+                float combinedWaves = wave1 * wave2 * _Amplitude;
+                o.vertex.y += combinedWaves;
+
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
