@@ -28,10 +28,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _FlowOffset: -0.5
+    - _FlowStrength: 0.25
     - _Glossiness: 0.5
     - _Metallic: 0
-    - _UJump: 0.25
-    - _VJump: 0.25
+    - _Speed: 0.5
+    - _Tiling: 1
+    - _UJump: 0.21
+    - _VJump: 0.23
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

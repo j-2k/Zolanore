@@ -7,6 +7,10 @@ Shader "Custom/SS_DistortionWater"
         [NoScaleOffset] _FlowMap ("Flow (RG, A noise)", 2D) = "black" {}
         _UJump ("U jump per phase", Range(-0.25, 0.25)) = 0.25
 		_VJump ("V jump per phase", Range(-0.25, 0.25)) = 0.25
+        _Tiling("Tiling Texture", Float) = 1
+        _Speed("Speed Texture", Float) = 1
+        _FlowStrength ("Flow Strength", Float) = 1
+        _FlowOffset ("Flow Offset", Float) = 0
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
     }
@@ -25,7 +29,7 @@ Shader "Custom/SS_DistortionWater"
         #include "Flow.cginc"
 
         sampler2D _MainTex, _FlowMap;
-        float _UJump, _VJump;
+        float _UJump, _VJump, _Tiling, _Speed, _FlowStrength, _FlowOffset;
 
         struct Input
         {
@@ -46,13 +50,14 @@ Shader "Custom/SS_DistortionWater"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-            float2 flowmapVector = tex2D(_FlowMap,IN.uv_MainTex).rg;
+            float2 flowmapVector = tex2D(_FlowMap,IN.uv_MainTex).rg * 2 - 1;
+            flowmapVector *= _FlowStrength;
             float noise = tex2D(_FlowMap, IN.uv_MainTex).a;
-            float time = _Time.y + noise;
+            float time = _Time.y * _Speed + noise;
             float2 jump = float2(_UJump, _VJump);
 
-            float3 uvwA = FlowUVW(IN.uv_MainTex, 0, jump, time, false);
-            float3 uvwB = FlowUVW(IN.uv_MainTex, 0, jump, time, true);
+            float3 uvwA = FlowUVW(IN.uv_MainTex, flowmapVector, jump,_FlowOffset, _Tiling, time, false);
+            float3 uvwB = FlowUVW(IN.uv_MainTex, flowmapVector, jump,_FlowOffset, _Tiling, time, true);
 
             float4 texA = tex2D(_MainTex, uvwA.xy) * uvwA.z;
             float4 texB = tex2D(_MainTex, uvwB.xy) * uvwB.z;
