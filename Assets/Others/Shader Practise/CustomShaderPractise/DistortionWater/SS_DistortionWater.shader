@@ -4,6 +4,9 @@ Shader "Custom/SS_DistortionWater"
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        [NoScaleOffset] _FlowMap ("Flow (RG, A noise)", 2D) = "black" {}
+        _UJump ("U jump per phase", Range(-0.25, 0.25)) = 0.25
+		_VJump ("V jump per phase", Range(-0.25, 0.25)) = 0.25
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
     }
@@ -21,7 +24,8 @@ Shader "Custom/SS_DistortionWater"
         
         #include "Flow.cginc"
 
-        sampler2D _MainTex;
+        sampler2D _MainTex, _FlowMap;
+        float _UJump, _VJump;
 
         struct Input
         {
@@ -42,9 +46,21 @@ Shader "Custom/SS_DistortionWater"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-            float2 uv = FlowUV(IN.uv_MainTex, _Time.y);
-			fixed4 c = tex2D(_MainTex, uv) * _Color;
+            float2 flowmapVector = tex2D(_FlowMap,IN.uv_MainTex).rg;
+            float noise = tex2D(_FlowMap, IN.uv_MainTex).a;
+            float time = _Time.y + noise;
+            float2 jump = float2(_UJump, _VJump);
+
+            float3 uvwA = FlowUVW(IN.uv_MainTex, 0, jump, time, false);
+            float3 uvwB = FlowUVW(IN.uv_MainTex, 0, jump, time, true);
+
+            float4 texA = tex2D(_MainTex, uvwA.xy) * uvwA.z;
+            float4 texB = tex2D(_MainTex, uvwB.xy) * uvwB.z;
+
+			fixed4 c = (texA + texB) * _Color;
+
             o.Albedo = c.rgb;
+            //o.Albedo = float3(flowmapVector, 0);
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
