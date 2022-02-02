@@ -38,7 +38,7 @@ Material:
     - _FoamDistance: 1.49
     - _SlopeLength: 3
     - _SurfaceDistortionAmount: 0.312
-    - _SurfaceNoiseCutoff: 0.704
+    - _SurfaceNoiseCutoff: 0.715
     m_Colors:
     - _DepthGradientDeep: {r: 0, g: 0.7570095, b: 1, a: 0.749}
     - _DepthGradientShallow: {r: 0, g: 0.9598217, b: 1, a: 0.725}
