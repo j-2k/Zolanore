@@ -8553,7 +8553,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 00035b5aa4a547e4db09b21c47584977, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7b48d5f2373cf354aa33a2634409f173, type: 2}
+      objectReference: {fileID: 2100000, guid: afc6f778e26c5124fa5d55d5f997364e, type: 2}
     - target: {fileID: 919132149155446097, guid: 00035b5aa4a547e4db09b21c47584977, type: 3}
       propertyPath: m_Name
       value: Plane50x50 (3)
@@ -30989,7 +30989,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7b48d5f2373cf354aa33a2634409f173, type: 2}
+  - {fileID: 2100000, guid: afc6f778e26c5124fa5d55d5f997364e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
