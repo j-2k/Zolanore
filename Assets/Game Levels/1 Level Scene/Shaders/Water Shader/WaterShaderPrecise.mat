@@ -34,14 +34,14 @@ Material:
     m_Floats:
     - SurfaceDistortionAmount: 0.485
     - _Amplitude: 1
-    - _DepthMaxDistance: 0.12
+    - _DepthMaxDistance: 8.24
     - _FoamDistance: 1.49
     - _SlopeLength: 3
     - _SurfaceDistortionAmount: 0.312
     - _SurfaceNoiseCutoff: 0.715
     m_Colors:
-    - _DepthGradientDeep: {r: 0, g: 0.7570095, b: 1, a: 0.749}
-    - _DepthGradientShallow: {r: 0, g: 0.9598217, b: 1, a: 0.725}
+    - _DepthGradientDeep: {r: 0, g: 0.12834296, b: 0.4811321, a: 0.749}
+    - _DepthGradientShallow: {r: 0, g: 0.96078444, b: 1, a: 0.725}
     - _FoamColor: {r: 0.8349056, g: 0.9977384, b: 1, a: 1}
     - _SurfaceNoiseScroll: {r: 0.1, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
