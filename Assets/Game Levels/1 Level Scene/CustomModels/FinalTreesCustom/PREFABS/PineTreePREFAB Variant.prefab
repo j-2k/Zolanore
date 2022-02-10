@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!136 &2774605514683418496
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332534558974254957}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.472986
+  m_Height: 39.63602
+  m_Direction: 1
+  m_Center: {x: 0, y: 19.630735, z: 0}
 --- !u!1001 &5098530234906092092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,7 +79,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8f89fdae1c42f6b4db74b8fec29674a4, type: 3}
       propertyPath: m_Name
-      value: PineTreePREFAB
+      value: PineTreePREFAB Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 8f89fdae1c42f6b4db74b8fec29674a4, type: 3}
       propertyPath: m_Size
@@ -141,6 +155,11 @@ PrefabInstance:
       objectReference: {fileID: 6950930246111947034}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f89fdae1c42f6b4db74b8fec29674a4, type: 3}
+--- !u!1 &5332534558974254957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8f89fdae1c42f6b4db74b8fec29674a4, type: 3}
+  m_PrefabInstance: {fileID: 5098530234906092092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &5836677888602554040 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 8f89fdae1c42f6b4db74b8fec29674a4, type: 3}
