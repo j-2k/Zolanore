@@ -43,7 +43,7 @@ Transform:
   m_Father: {fileID: 217346400217418923}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &756983829
+--- !u!114 &297531720966929506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 217346400217418922}
   - component: {fileID: 217346400217418925}
   - component: {fileID: 8892587702508662005}
+  - component: {fileID: 756983829}
   m_Layer: 9
   m_Name: PlayerSM
   m_TagString: Player
@@ -345,9 +346,21 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
   healthRegenMulti: 2
-  staminaRegenMulti: 1
+  staminaRegenMulti: 4
   curStamina: 0
   maxStamina: 0
+--- !u!114 &756983829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217346400217418920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bea260adecaad245bc9def75fb3eca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &8892587703824008352
 BoxCollider:
   m_ObjectHideFlags: 0
