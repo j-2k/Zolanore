@@ -34,7 +34,7 @@ Material:
     m_Floats:
     - SurfaceDistortionAmount: 0.485
     - _Amplitude: 1
-    - _DepthMaxDistance: 8.24
+    - _DepthMaxDistance: 5
     - _FoamDistance: 1.49
     - _SlopeLength: 3
     - _SurfaceDistortionAmount: 0.312
