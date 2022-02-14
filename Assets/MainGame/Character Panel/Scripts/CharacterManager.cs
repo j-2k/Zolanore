@@ -8,7 +8,7 @@ using TMPro;
 public class CharacterManager : MonoBehaviour
 {
     //Player Stats
-    int playerMaxHealth = 100;
+    public int playerMaxHealth = 100;
     public int playerCurrentHealth = 100;
 
 

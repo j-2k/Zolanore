@@ -11,6 +11,12 @@ public class HealItemEffect : UsableItemEffect
     public override void ExecuteEffect(UsableItem parentItem, CharacterManager characterPanelManager)
     {
         characterPanelManager.playerCurrentHealth += healthAmount;
+
+        if (characterPanelManager.playerCurrentHealth >= characterPanelManager.playerMaxHealth)
+        {
+            characterPanelManager.playerCurrentHealth = characterPanelManager.playerMaxHealth;
+        }
+
         characterPanelManager.RefreshPlayerUI();
     }
 

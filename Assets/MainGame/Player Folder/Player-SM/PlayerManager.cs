@@ -50,6 +50,8 @@ public class PlayerManager : MonoBehaviour
 
     PlayerFamiliar playerFamiliar;
 
+    [SerializeField] InventoryInput inventoryCheck;
+
     public bool isRolling = false;
     bool lockForward;
 
@@ -94,7 +96,7 @@ public class PlayerManager : MonoBehaviour
             }
             characterManager.StaminaRegeneration();
 
-            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling)// && !isAttacking)
+            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling && !inventoryCheck.activePanel)// && !isAttacking)
             {
                 Attacking();
             }
