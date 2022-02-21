@@ -5479,7 +5479,7 @@ MonoBehaviour:
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
   m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 0
+  m_SettingsGUIToggle: 1
 --- !u!4 &294759746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362979772321929776, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
@@ -6053,7 +6053,7 @@ MonoBehaviour:
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
   m_SourceObjectsGUIToggle: 1
-  m_SettingsGUIToggle: 0
+  m_SettingsGUIToggle: 1
 --- !u!4 &610794995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7000138945753359761, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}

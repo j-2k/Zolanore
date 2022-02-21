@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: 
   combatType: 0
-  cooldownTime: 6
+  cooldownTime: 1
   activeTime: 5
   singleTrigger: 0
   bypassCancel: 0
+  abilityVFX: {fileID: 0}
+  trailVFX: {fileID: 0}
