@@ -59568,30 +59568,6 @@ MonoBehaviour:
   ui: 0
   maxUp: 3
   maxDown: -3
---- !u!1 &1756192721 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132147814788125, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-  m_PrefabInstance: {fileID: 8892587704289011593}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1756192725
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756192721}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1792105052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1792105052, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -65310,10 +65286,6 @@ PrefabInstance:
       propertyPath: inventoryCheck
       value: 
       objectReference: {fileID: 1818475512}
-    - target: {fileID: 5945680261308840626, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8892587702508662005, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: healthBar
       value: 
