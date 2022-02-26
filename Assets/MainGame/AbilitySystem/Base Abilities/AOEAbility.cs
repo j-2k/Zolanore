@@ -26,6 +26,7 @@ public class AOEAbility : Ability
     {
         timer = 0;
         player.isMovingAbility = true;
+        anim.SetBool("Spin",true);
     }
 
     public override void AbilityUpdateActive(GameObject parent)
@@ -44,6 +45,7 @@ public class AOEAbility : Ability
 
     public override void OnBeginCoolDown(GameObject parent)
     {
+        anim.SetBool("Spin", false);
         player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;
     }
