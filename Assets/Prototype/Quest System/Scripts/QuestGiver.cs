@@ -14,13 +14,20 @@ public class QuestGiver : MonoBehaviour
     public bool claimedQuest = false;
 
     GameObject marker;
+
+    QuestSystem questSystem;
     
     private void Awake()
     {
+        questSystem = FindObjectOfType<QuestSystem>();
         marker = transform.GetChild(0).Find("Marker").gameObject;
     }
     private void Update()
     {
+        if(questSystem.closestQuestGiver == this.gameObject)
+        {
+
+        }
         if (claimedQuest)
         {
             marker.SetActive(false);

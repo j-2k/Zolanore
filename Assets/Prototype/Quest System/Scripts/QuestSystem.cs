@@ -60,6 +60,7 @@ public class QuestSystem : MonoBehaviour
                     }
                     else if (questGiver.completedQuest)
                     {
+                        closestQuestGiver.GetComponent<Animator>().SetTrigger("Finish");
                         claimButton.SetActive(true);
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
@@ -68,6 +69,7 @@ public class QuestSystem : MonoBehaviour
                     }
                     else if (!questGiver.acceptedQuest)
                     {
+                        closestQuestGiver.GetComponent<Animator>().SetTrigger("Talk");
                         acceptButton.SetActive(true);
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
