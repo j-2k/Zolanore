@@ -29,6 +29,7 @@ public class DashAbility : Ability
         player.DashID();
         tr.emitting = true;
         anim.SetBool("Dash", true);
+        player.comboStep = 0;
     }
 
     bool oneRun = true;

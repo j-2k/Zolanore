@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     //anims
     public Animator playerAnimator;
     [SerializeField] bool comboPossible;
-    [SerializeField] int comboStep = 0;
+    public int comboStep = 0;
 
     Vector2 input;
     [SerializeField] float accell; //4

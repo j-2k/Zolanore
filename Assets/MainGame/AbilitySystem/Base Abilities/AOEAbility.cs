@@ -28,18 +28,26 @@ public class AOEAbility : Ability
         player.isMovingAbility = true;
         anim.SetTrigger("SpinTrigger");
         anim.SetBool("Spin",true);
+        startSpin = false;
+        player.comboStep = 0;
     }
+
+    bool startSpin = false;
 
     public override void AbilityUpdateActive(GameObject parent)
     {
         player.isMovingAbility = true;
 
-        if (isPlaying(anim, "Freeze Spin"))
+        if (!startSpin && isPlaying(anim, "Freeze Spin"))
         {
-            Debug.Log("TRUE");
+            startSpin = true;
+        }
+        
+        if (startSpin)
+        {
+            meshTransform.transform.Rotate(0, 1000 * Time.deltaTime, 0);
         }
 
-        meshTransform.transform.Rotate(0, 1000 * Time.deltaTime, 0);
         timer += Time.deltaTime;
         if (timer >= 1)
         {
@@ -53,7 +61,7 @@ public class AOEAbility : Ability
     bool isPlaying(Animator anim, string stateName)
     {
         if (anim.GetCurrentAnimatorStateInfo(1).IsName(stateName) &&
-                anim.GetCurrentAnimatorStateInfo(1).normalizedTime <= 1.0f)
+                anim.GetCurrentAnimatorStateInfo(1).normalizedTime < 1.0f)
             return true;
         else
             return false;
@@ -64,6 +72,7 @@ public class AOEAbility : Ability
         anim.SetBool("Spin", false);
         player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;
+        startSpin = false;
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)
