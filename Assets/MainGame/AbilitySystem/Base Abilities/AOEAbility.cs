@@ -26,12 +26,19 @@ public class AOEAbility : Ability
     {
         timer = 0;
         player.isMovingAbility = true;
+        anim.SetTrigger("SpinTrigger");
         anim.SetBool("Spin",true);
     }
 
     public override void AbilityUpdateActive(GameObject parent)
     {
         player.isMovingAbility = true;
+
+        if (isPlaying(anim, "Freeze Spin"))
+        {
+            Debug.Log("TRUE");
+        }
+
         meshTransform.transform.Rotate(0, 1000 * Time.deltaTime, 0);
         timer += Time.deltaTime;
         if (timer >= 1)
@@ -41,6 +48,15 @@ public class AOEAbility : Ability
         }
         player.GroundedUpdate();
         Debug.Log("<color=red>SPINNING</color>");
+    }
+  
+    bool isPlaying(Animator anim, string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(1).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(1).normalizedTime <= 1.0f)
+            return true;
+        else
+            return false;
     }
 
     public override void OnBeginCoolDown(GameObject parent)
