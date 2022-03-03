@@ -48,7 +48,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 28
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -76,7 +76,7 @@ ModelImporter:
       name: Freeze Spin
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 28
+      firstFrame: 31
       lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0

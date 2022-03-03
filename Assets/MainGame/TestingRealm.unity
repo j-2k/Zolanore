@@ -64849,6 +64849,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6717137231984142624, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: TrailModule.worldSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717137231984142624, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717137231984142624, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.26524788
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717137231984142624, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717137231984142624, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 6717235920086737174, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: VelocityModule.radial.scalar
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917235997879116438, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fb5a178389b06b4388b6a6a7e01b93b, type: 3}
 --- !u!1001 &1856850602135682214
