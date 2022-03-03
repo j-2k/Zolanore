@@ -11,6 +11,7 @@ public class AOEAbility : Ability
     CharacterController cc;
     float timer = 0;
     Animator anim;
+    ParticleSystem ps;
 
     public override void CacheStart(GameObject parent,GameObject gameManagerObj)
     {
@@ -20,6 +21,8 @@ public class AOEAbility : Ability
         Transform last =  meshTransform.GetChild(meshTransform.childCount-1);
         anim = parent.GetComponent<Animator>();
         cc = parent.GetComponent<CharacterController>();
+        ps = Instantiate(abilityVFX, parent.transform.position, Quaternion.identity, gameManagerObj.transform);
+        ps.Stop();
     }
 
     public override void OnActivate(GameObject parent)
@@ -30,6 +33,7 @@ public class AOEAbility : Ability
         anim.SetBool("Spin",true);
         startSpin = false;
         player.comboStep = 0;
+        ps.Play();
     }
 
     bool startSpin = false;
@@ -73,6 +77,7 @@ public class AOEAbility : Ability
         player.isMovingAbility = false;
         meshTransform.transform.localRotation = Quaternion.identity;
         startSpin = false;
+        ps.Stop();
     }
 
     public override void AbilityUpdateCooldown(GameObject parent)

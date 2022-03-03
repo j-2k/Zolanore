@@ -18,5 +18,5 @@ MonoBehaviour:
   activeTime: 5
   singleTrigger: 0
   bypassCancel: 0
-  abilityVFX: {fileID: 0}
+  abilityVFX: {fileID: 198665422404971792, guid: 927dc6e18bced4d4a83c0580ec6b6197, type: 3}
   trailVFX: {fileID: 0}
