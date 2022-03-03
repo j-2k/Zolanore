@@ -70,8 +70,8 @@ ModelImporter:
       name: Freeze Dash Frame
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 33
-      lastFrame: 35
+      firstFrame: 30
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
