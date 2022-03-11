@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(comboStep);
+        //Debug.Log(comboStep);
         //CCGroundCheckFunc();
         RawMovementFunc();
         isAttackCheck();
