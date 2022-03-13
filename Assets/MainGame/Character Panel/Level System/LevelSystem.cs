@@ -40,7 +40,7 @@ public class LevelSystem : MonoBehaviour
     private int skillPointsGainedPerLevel = 2;
 
     [SerializeField] SkillPointSpend skillPointSpend;
-    [SerializeField] Text playerLevelUI;
+    [SerializeField] TextMeshProUGUI playerLevelUI;
     [SerializeField] TextMeshProUGUI playerLevelTL;
 
     CharacterManager character;

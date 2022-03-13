@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Juma.CharacterStats;
+using TMPro;
 
 public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -43,15 +44,15 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
 
-    [SerializeField] Text nameText;
-    [SerializeField] Text valueText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI valueText;
     [SerializeField] StatTooltip tooltip;
 
     bool isPointerOver = true;
 
     private void OnValidate()
     {
-        Text[] texts = GetComponentsInChildren<Text>();
+        TextMeshProUGUI[] texts = GetComponentsInChildren<TextMeshProUGUI>();
         nameText = texts[0];
         valueText = texts[1];
 
