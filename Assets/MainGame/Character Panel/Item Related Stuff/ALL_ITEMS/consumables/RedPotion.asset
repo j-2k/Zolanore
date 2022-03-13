@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3515c48645643f54c8ff357cce5107c6
   ItemName: 
-  Icon: {fileID: 21300000, guid: e857970929102804f85700be7b3a1fea, type: 3}
+  Icon: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
   MaxStack: 3
   IsConsumable: 1
   Effects:

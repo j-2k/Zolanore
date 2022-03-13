@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: fab17c77841f7af4691051fb93368732
   ItemName: Gold Coin
-  Icon: {fileID: 21300000, guid: d7500f49d65843644b5f8c00b86760d6, type: 3}
+  Icon: {fileID: 21300000, guid: 3676a0b185daeb54fb257f700ba7ead4, type: 3}
   MaxStack: 5
