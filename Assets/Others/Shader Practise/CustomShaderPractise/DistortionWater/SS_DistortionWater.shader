@@ -20,12 +20,12 @@ Shader "Custom/SS_DistortionWater"
     }
     SubShader
     {
-        ZWrite Off
+        ZWrite On
         Blend SrcAlpha OneMinusSrcAlpha
         Tags 
         { 
             "RenderType"="Transparent"
-            "Queue"="Transparent"
+            "Queue"="Geometry"
         }
         LOD 200
 
