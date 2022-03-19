@@ -5,14 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyProtoVersion : MonoBehaviour
 {
-    [SerializeField] int health;
+    [Header("Dummy attack script")]
+    //[SerializeField] int health;
     NavMeshAgent agent;
     Transform player;
     [SerializeField] GameObject childTrigger;
     bool isAttacking;
     float timer;
-    int xp;
-    int enemyLevel;
+    //int xp;
+    //int enemyLevel;
 
     public uint hitID;
 
@@ -20,10 +21,10 @@ public class EnemyProtoVersion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xp = 100;
-        enemyLevel = 1;
+        //xp = 100;
+        //enemyLevel = 1;
+        //health = 20;
         levelSystem = LevelSystem.instance;
-        health = 20;
         timer = 0;
         //childTrigger = GetComponentInChildren<GameObject>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -64,6 +65,7 @@ public class EnemyProtoVersion : MonoBehaviour
         }
     }
 
+    /*
     public void TakeDamageFromPlayer(int incDmg)
     {
         health -= incDmg;

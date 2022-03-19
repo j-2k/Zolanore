@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyHitBoxPrototype : MonoBehaviour
 {
-
+    EnemyStatManager dmg;
     CharacterManager player;
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        dmg = GetComponentInParent<EnemyStatManager>();
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
@@ -27,8 +28,7 @@ public class EnemyHitBoxPrototype : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             Debug.Log("Enemy Hit Player Successfully");
-            player.TakeDamageFromEnemy(10);
-            Debug.Log("player took 10 dmg");
+            player.TakeDamageFromEnemy(dmg.DamagePlayer());
             gameObject.SetActive(false);
         }
     }

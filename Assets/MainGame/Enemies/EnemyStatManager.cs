@@ -10,8 +10,10 @@ public class EnemyStatManager : MonoBehaviour
 
     //a very simple enemy stat manager need to expand on this more later on
     [Header("Assign Level & extra stats")]
+    [Header("ENEMY LEVEL IS PRE-DEF TO PLAYER LVL CHECK CODE")]
     [SerializeField] int enemyLevel;
     [SerializeField] int bonusHealth;
+    [SerializeField] int damage;
     [SerializeField] int defence;
 
     [Header("Dont touch these")]
@@ -35,10 +37,22 @@ public class EnemyStatManager : MonoBehaviour
         maxHealth += bonusHealth;
         curHealth = maxHealth;
 
+        //current enemy level is set to players level
+        enemyLevel = levelSystem.currentLevel;
+
         //think of formula here based on level this is placeholder for defence & xp
         defence = (enemyLevel * 2) - 1;
         xp = (enemyLevel * 2) + 50;
         xp += bonusXP;
+    }
+
+    public int DamagePlayer()
+    {
+        damage = (int)((enemyLevel + Random.Range(6f, 10f)) * Random.Range(0.8f, 1.2f));
+
+        Debug.Log("Damaging Player for " + damage + "Dmg");
+
+        return damage;
     }
 
     public void TakeDamageFromPlayer(int incDmg)

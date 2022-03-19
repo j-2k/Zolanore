@@ -169,6 +169,7 @@ public class CharacterManager : MonoBehaviour
         incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 2);
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         playerCurrentHealth -= incDmg;
+        Debug.Log("Final Dmg Taken is " + incDmg);
         //healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
         RefreshPlayerUI();
         if (playerCurrentHealth < 1)

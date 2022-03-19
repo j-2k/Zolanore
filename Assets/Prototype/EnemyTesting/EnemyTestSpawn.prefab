@@ -304,7 +304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67a7a41a83d4e344897bedc996f7fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   childTrigger: {fileID: 6214103110484471110}
   hitID: 0
 --- !u!114 &8190507893500132858
@@ -320,11 +319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLevel: 1
-  healthAdd: 0
+  bonusHealth: 0
+  damage: 0
   defence: 0
   maxHealth: 0
   curHealth: 0
   xp: 0
+  bonusXP: 0
   hitID: 0
 --- !u!195 &1687610636990150973
 NavMeshAgent:
@@ -409,7 +410,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 80de1bc7ed9564e458976229e200aae0, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -456,4 +457,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f1a546d21da5441a5364dace68ca77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerRootMotion: 0
