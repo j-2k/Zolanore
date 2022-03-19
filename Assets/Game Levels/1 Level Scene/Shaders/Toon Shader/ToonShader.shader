@@ -2,7 +2,8 @@ Shader "Custom/ToonShader"
 {
     Properties
     {
-        
+        _EmissionMap ("Emission Map", 2D) = "black" {}
+        [HDR] _EmissionColor ("Emission Color", Color) = (0,0,0)
 
         _MainTex ("Texture", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,1)
@@ -54,6 +55,9 @@ Shader "Custom/ToonShader"
                 //UNITY_FOG_COORDS(1)
                 SHADOW_COORDS(2)
             };
+
+            sampler2D _EmissionMap;
+            float4 _EmissionColor;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -120,7 +124,9 @@ Shader "Custom/ToonShader"
                 // sample the texture
                 fixed4 texSample = tex2D(_MainTex, i.uv);
 
-                return  texSample * _Color * (_AmbientColor + light + specular + rim);
+                half4 emission = tex2D(_EmissionMap, i.uv) * _EmissionColor;
+
+                return  (texSample + emission) * _Color * (_AmbientColor + light + specular + rim);
             }
             ENDCG
         }
