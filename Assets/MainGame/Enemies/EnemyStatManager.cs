@@ -31,14 +31,17 @@ public class EnemyStatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         levelSystem = LevelSystem.instance;
+
+        //current enemy level is set to players level
+        enemyLevel = levelSystem.currentLevel;
+
+        //
+        agent = GetComponent<NavMeshAgent>();
         maxHealth = enemyLevel * (int)(100 * Random.Range(0.75f,1.25f));
         maxHealth += bonusHealth;
         curHealth = maxHealth;
 
-        //current enemy level is set to players level
-        enemyLevel = levelSystem.currentLevel;
 
         //think of formula here based on level this is placeholder for defence & xp
         defence = (enemyLevel * 2) - 1;
@@ -46,7 +49,7 @@ public class EnemyStatManager : MonoBehaviour
         xp += bonusXP;
     }
 
-    public int DamagePlayer()
+    public int DamageCalculation()
     {
         damage = (int)((enemyLevel + Random.Range(6f, 10f)) * Random.Range(0.8f, 1.2f));
 

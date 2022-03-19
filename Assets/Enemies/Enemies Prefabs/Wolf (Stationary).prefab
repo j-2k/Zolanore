@@ -540,13 +540,14 @@ GameObject:
   - component: {fileID: 2546088183554332905}
   - component: {fileID: 2546088183554332904}
   - component: {fileID: 2546088183554332909}
+  - component: {fileID: 909889794}
   m_Layer: 0
   m_Name: Wolf (Stationary)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2546088184911681899
 Transform:
   m_ObjectHideFlags: 0
@@ -556,7 +557,7 @@ Transform:
   m_GameObject: {fileID: 2546088184911840587}
   m_LocalRotation: {x: 0, y: -0.8736109, z: 0, w: 0.48662505}
   m_LocalPosition: {x: 7.37, y: 0.11, z: 5.53}
-  m_LocalScale: {x: 2.5250142, y: 2.5250142, z: 2.5250142}
+  m_LocalScale: {x: 2.525014, y: 2.5250142, z: 2.525014}
   m_Children:
   - {fileID: 2546088184911681897}
   - {fileID: 2546088184911681901}
@@ -634,18 +635,19 @@ MonoBehaviour:
   speed: 0
   playerDetected: 0
   isShooting: 0
+  Shot: 0
   initialPos: {x: 0, y: 0, z: 0}
   initialRot: {x: 0, y: 0, z: 0, w: 0}
   anim: {fileID: 0}
   Waypoints: []
-  walkSpeed: 3
+  walkSpeed: 4
   chaseSpeed: 5
   stoppingDistance: 4
   walkRadius: 0
   wanderSpeed: 0
   distanceToDetect: 20
   proximityDistance: 12
-  distanceToAttack: 3
+  distanceToAttack: 4
   visionRange: 0
   shootPos: {fileID: 0}
   bullet: {fileID: 0}
@@ -664,6 +666,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb6e8fdfb6ecb54c94e22589949f7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  esm: {fileID: 909889794}
+--- !u!114 &909889794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546088184911840587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442d6c9d9976e914aa10a1c18d305e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLevel: 0
+  bonusHealth: 0
+  damage: 0
+  defence: 0
+  maxHealth: 0
+  curHealth: 0
+  xp: 0
+  bonusXP: 0
+  hitID: 0
 --- !u!1 &2546088184911840589
 GameObject:
   m_ObjectHideFlags: 0

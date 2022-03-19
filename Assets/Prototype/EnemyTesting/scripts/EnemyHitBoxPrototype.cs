@@ -28,7 +28,7 @@ public class EnemyHitBoxPrototype : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             Debug.Log("Enemy Hit Player Successfully");
-            player.TakeDamageFromEnemy(dmg.DamagePlayer());
+            player.TakeDamageFromEnemy(dmg.DamageCalculation());
             gameObject.SetActive(false);
         }
     }
