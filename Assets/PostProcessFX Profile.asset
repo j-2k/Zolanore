@@ -18,7 +18,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 2
+    value: 1
   threshold:
     overrideState: 1
     value: 1
@@ -64,6 +64,56 @@ MonoBehaviour:
   - {fileID: 8011163239931976161}
   - {fileID: 5742438622803665853}
   - {fileID: 4028533809796727661}
+  - {fileID: 807665087962575344}
+--- !u!114 &807665087962575344
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1cb7e9e120078f43bce4f0b1be547a7, type: 3}
+  m_Name: AmbientOcclusion
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  mode:
+    overrideState: 1
+    value: 1
+  intensity:
+    overrideState: 1
+    value: 1
+  color:
+    overrideState: 1
+    value: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+  ambientOnly:
+    overrideState: 0
+    value: 1
+  noiseFilterTolerance:
+    overrideState: 0
+    value: 0
+  blurTolerance:
+    overrideState: 0
+    value: -4.6
+  upsampleTolerance:
+    overrideState: 0
+    value: -12
+  thicknessModifier:
+    overrideState: 1
+    value: 1
+  directLightingStrength:
+    overrideState: 0
+    value: 0
+  radius:
+    overrideState: 0
+    value: 0.25
+  quality:
+    overrideState: 0
+    value: 2
 --- !u!114 &4028533809796727661
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -110,7 +160,7 @@ MonoBehaviour:
     value: 5
   focalLength:
     overrideState: 1
-    value: 50
+    value: 20
   kernelSize:
     overrideState: 1
     value: 1
@@ -139,24 +189,24 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 2
+    value: 3
   toneCurveToeStrength:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 0.395
   toneCurveToeLength:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
   toneCurveShoulderStrength:
-    overrideState: 0
+    overrideState: 1
     value: 0
   toneCurveShoulderLength:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
   toneCurveShoulderAngle:
-    overrideState: 0
+    overrideState: 1
     value: 0
   toneCurveGamma:
-    overrideState: 0
+    overrideState: 1
     value: 1
   ldrLut:
     overrideState: 0
@@ -179,7 +229,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 10
+    value: 5
   brightness:
     overrideState: 0
     value: 0

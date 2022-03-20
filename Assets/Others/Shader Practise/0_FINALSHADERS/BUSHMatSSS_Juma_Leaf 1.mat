@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _ClipAmount: 0.1
-    - _ColorScale: 1
+    - _ColorScale: 1.5
     - _DistortionAmount: 50
     - _Glossiness: 0.453
     - _Metallic: 0

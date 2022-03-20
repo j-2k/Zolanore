@@ -123,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 369c285d12128aa4f8060aded19bad47, type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.2986963
+      value: 0.4984444
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 369c285d12128aa4f8060aded19bad47, type: 3}
       propertyPath: m_LODs.Array.data[1].renderers.Array.size
@@ -131,7 +131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 369c285d12128aa4f8060aded19bad47, type: 3}
       propertyPath: m_LODs.Array.data[1].screenRelativeHeight
-      value: 0.17210458
+      value: 0.30873355
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 369c285d12128aa4f8060aded19bad47, type: 3}
       propertyPath: m_LODs.Array.data[2].renderers.Array.size
@@ -139,7 +139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 369c285d12128aa4f8060aded19bad47, type: 3}
       propertyPath: m_LODs.Array.data[2].screenRelativeHeight
-      value: 0.07095708
+      value: 0.1514585
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 369c285d12128aa4f8060aded19bad47, type: 3}
       propertyPath: m_LODs.Array.data[0].renderers.Array.data[1].renderer
