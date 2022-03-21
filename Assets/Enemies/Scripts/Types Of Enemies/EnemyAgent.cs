@@ -98,7 +98,7 @@ public class EnemyAgent : MonoBehaviour
             GameObject tempBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
             Rigidbody bulletRB = tempBullet.GetComponent<Rigidbody>();
             Vector3 targetDir = (player.transform.position - transform.position).normalized;
-            bulletRB.AddForce(targetDir * bulletSpeed);
+            bulletRB.AddForce(targetDir * bulletSpeed, ForceMode.Impulse);
             Shot = true;
         }
         yield return new WaitForSeconds(1f);
