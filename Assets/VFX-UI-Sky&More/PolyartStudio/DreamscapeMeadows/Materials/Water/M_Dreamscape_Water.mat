@@ -110,7 +110,7 @@ Material:
     - _RefractionDepthStrength1: 0
     - _RefractionStrength: 1
     - _RefractionStrength1: 0.33
-    - _Smoothness: 0
+    - _Smoothness: 0.522
     - _TurbulenceDistortionIntensity: 1.84
     - _TurbulenceDistortionIntensity1: 0.8
     - _TurbulenceScale: 12.7
@@ -128,8 +128,8 @@ Material:
     - _WorldtoObjectPosition: 0
     - __dirty: 0
     m_Colors:
-    - _ColorDeep: {r: 0, g: 0.29965094, b: 0.4056603, a: 1}
-    - _ColorShallow: {r: 0, g: 0.47493523, b: 0.6132076, a: 0}
+    - _ColorDeep: {r: 0, g: 0.44550282, b: 0.6037736, a: 1}
+    - _ColorShallow: {r: 0, g: 0.64392835, b: 0.8301887, a: 0}
     - _Deep: {r: 0, g: 0.29965103, b: 0.40566036, a: 1}
     - _Deep1: {r: 0.12130647, g: 0.34791896, b: 0.5471698, a: 0}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 0.14509805}
