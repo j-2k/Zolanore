@@ -45,18 +45,24 @@ public class FamiliarFollowState : State
         }
         else
         {
-            familiarAgent.SetDestination(player.transform.position);
+            if (familiarAgent.enabled)
+            {
+                familiarAgent.SetDestination(player.transform.position);
+            }
+
             if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)//5+3
             {
                 teleTimer += Time.deltaTime;
                 if (teleTimer >= timeToTeleport)
                 {
+                    familiarAgent.enabled = false;
                     familiarAgent.transform.position = player.transform.position;
                     teleTimer = 0;
                 }
             }
             else
             {
+                familiarAgent.enabled = true;
                 teleTimer = 0;
             }
             return this;
