@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -34,5 +35,10 @@ public class IngameMenu : MonoBehaviour
     public void ApplyVolume()
     {
         bgm.volume = volumeSlider.value;
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
