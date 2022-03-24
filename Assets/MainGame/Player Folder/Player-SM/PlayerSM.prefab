@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 217346400217418920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 543450651818210983}
   - {fileID: 825807516}
@@ -293,9 +293,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawMovement: 1
-  movementSpeed: 6
-  movementAir: 5
-  jumpSpeed: 2
+  movementSpeed: 9
+  movementAir: 7
+  jumpSpeed: 3
   jumpCurve: 0.1
   gravity: 25
   outgoingDamage: 0
@@ -1127,8 +1127,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
+      propertyPath: cameraVertical
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraDistanceMax
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraSensitivity
