@@ -20,4 +20,4 @@ MonoBehaviour:
   bypassCancel: 0
   abilityVFX: {fileID: 354593828375866212, guid: e07d7a458d174bc48a31fc5a99837301, type: 3}
   trailVFX: {fileID: 1388376931884286696, guid: 9eecb3162dcbb064399321a841a99e2a, type: 3}
-  dashSpeed: 20
+  dashSpeed: 30
