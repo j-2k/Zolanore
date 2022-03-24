@@ -356,7 +356,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AOEAttack()
     {
-        hitColliders = Physics.OverlapSphere(transform.position, 5);
+        hitColliders = Physics.OverlapSphere(transform.position, 7);
 
         int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 1.5f));
 
@@ -505,14 +505,14 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
+        //Gizmos.color = Color.black;
+        //Gizmos.DrawWireSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 5);
+        Gizmos.DrawWireSphere(transform.position, 7);
         if (hitboxPos != null)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(hitboxPos.transform.position, 1.75f);
+            Gizmos.DrawWireSphere(hitboxPos.transform.position, attackColliderRadius);
         }
     }
 
