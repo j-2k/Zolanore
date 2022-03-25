@@ -183,14 +183,12 @@ public class QuestSystem : MonoBehaviour
     
     private void DisableCharacterRotation()
     {
-        cameraController.enabled = false;
-        testMovement.enabled = false;
+        // Disable Rotation
     }
 
     public void EnableCharacterRotation()
     {
-        cameraController.enabled = true;
-        testMovement.enabled = true;
+        // Enable Rotation
     }
 
     private void InitializeQuestGiversList()

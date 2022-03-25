@@ -23,14 +23,19 @@ public class EnemyStatManager : MonoBehaviour
     [SerializeField] int bonusXP;
 
     NavMeshAgent agent;
-    
+
     LevelSystem levelSystem;
+
+    QuestManager questManager;
 
     public uint hitID;
 
+    public HealthBar hpBar;
     // Start is called before the first frame update
     void Start()
     {
+        questManager = FindObjectOfType<QuestManager>();
+
         levelSystem = LevelSystem.instance;
 
         //current enemy level is set to players level
@@ -38,10 +43,10 @@ public class EnemyStatManager : MonoBehaviour
 
         //
         agent = GetComponent<NavMeshAgent>();
-        maxHealth = enemyLevel * (int)(100 * Random.Range(0.75f,1.25f));
+        maxHealth = enemyLevel * (int)(100 * Random.Range(0.75f, 1.25f));
         maxHealth += bonusHealth;
         curHealth = maxHealth;
-
+        hpBar.SetMaxHealth(maxHealth);
 
         //think of formula here based on level this is placeholder for defence & xp
         defence = (enemyLevel * 2) - 1;
@@ -63,9 +68,11 @@ public class EnemyStatManager : MonoBehaviour
         incDmg -= defence;
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         curHealth -= incDmg;
+        hpBar.SetHealth(curHealth);
         if (curHealth <= 0)
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+            questManager.Kill("Wolf");
             Destroy(gameObject);
         }
     }
