@@ -6,7 +6,7 @@ public class B_Awoken : Boss_State
 {
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void StartState(Boss_StateMachine bsm)
@@ -16,6 +16,6 @@ public class B_Awoken : Boss_State
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
-        
+        Debug.Log("Awoken State");
     }
 }

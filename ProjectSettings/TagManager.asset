@@ -20,6 +20,7 @@ TagManager:
   - QuestGiver
   - TrackButton
   - Chest
+  - Interactable
   layers:
   - Default
   - TransparentFX

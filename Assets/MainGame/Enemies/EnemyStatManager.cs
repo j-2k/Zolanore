@@ -46,7 +46,11 @@ public class EnemyStatManager : MonoBehaviour
         maxHealth = enemyLevel * (int)(100 * Random.Range(0.75f, 1.25f));
         maxHealth += bonusHealth;
         curHealth = maxHealth;
-        hpBar.SetMaxHealth(maxHealth);
+
+        if (hpBar != null)
+        {
+            hpBar.SetMaxHealth(maxHealth);
+        }
 
         //think of formula here based on level this is placeholder for defence & xp
         defence = (enemyLevel * 2) - 1;
@@ -82,9 +86,11 @@ public class EnemyStatManager : MonoBehaviour
         incDmg -= defence;
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         curHealth -= incDmg;
+        hpBar.SetHealth(curHealth);
         if (curHealth <= 0)
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+            questManager.Kill("Wolf");
             Destroy(gameObject);
         }
     }

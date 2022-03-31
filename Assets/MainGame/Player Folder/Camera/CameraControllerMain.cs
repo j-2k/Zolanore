@@ -41,6 +41,7 @@ public class CameraControllerMain : MonoBehaviour
     bool shouldCameraRotate = true;
 
     [SerializeField] GameObject chestUIPrompt;
+    [SerializeField] GameObject interactUIPrompt;//could just change txt to be interact instead...
 
 
 
@@ -62,6 +63,7 @@ public class CameraControllerMain : MonoBehaviour
         tiltX.eulerAngles = new Vector3(currentTiltX, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCam.transform.position += tiltX.forward * -currentCameraDistance;
 
+        currentCameraDistance = cameraDistanceMax/2;
 
         //cam cols
         camDir = mainCam.transform.localPosition.normalized;
@@ -77,11 +79,13 @@ public class CameraControllerMain : MonoBehaviour
     }
 
     ItemChest itemChestCache;
+    PlayerInteractables interactable;
+
 
     void CameraChestHit()
     {
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, firstChildRotX.forward, out chestHit, 3f, chestLayer))
+        if (Physics.Raycast(transform.position, firstChildRotX.forward, out chestHit, 5f, chestLayer))
         {
             Debug.DrawRay(transform.position, firstChildRotX.forward * chestHit.distance, Color.yellow);
             Debug.Log("Did Hit");
@@ -109,10 +113,22 @@ public class CameraControllerMain : MonoBehaviour
                 }
                 itemChestCache.isInRange = true;
             }
+
+            if (chestHit.transform.tag == "Interactable")
+            {
+                if (interactable == null)
+                {
+                    interactable = chestHit.collider.gameObject.GetComponent<PlayerInteractables>();
+                }
+
+                interactable.isFocused = true;
+
+                interactUIPrompt.SetActive(true);
+            }
         }
         else
         {
-            Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.white);
+            Debug.DrawRay(transform.position, firstChildRotX.forward * 5, Color.black);
             //Debug.Log("Did not Hit");
             if (itemChestCache != null)
             {
@@ -120,9 +136,14 @@ public class CameraControllerMain : MonoBehaviour
                 itemChestCache = null;
                 chestUIPrompt.SetActive(false);
             }
-        }
 
-        Debug.DrawRay(transform.position, firstChildRotX.forward * 3, Color.cyan);
+            if (interactable != null)
+            {
+                interactable.isFocused = false;
+                interactable = null;
+                interactUIPrompt.SetActive(false);
+            }
+        }
     }
 
     void CameraInput()
