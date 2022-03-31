@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss_StateMachine : MonoBehaviour
 {
+    public CharacterManager player;
 
     Boss_State currentState;
     public B_Awoken awokenState;// = new B_Awoken();
@@ -15,6 +16,8 @@ public class Boss_StateMachine : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
+
         currentState = awokenState;
 
         currentState.StartState(this);
