@@ -16,6 +16,6 @@ public class B_Chase : Boss_State
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
-        throw new System.NotImplementedException();
+        Debug.Log(" chasing state");
     }
 }

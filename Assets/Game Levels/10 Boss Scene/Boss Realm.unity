@@ -1857,6 +1857,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: environmentLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 732602873}
@@ -1882,7 +1886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6421998260467441475, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6815419693359954093, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_RootOrder
@@ -1953,7 +1957,7 @@ GameObject:
   - component: {fileID: 1702890635}
   - component: {fileID: 1702890634}
   - component: {fileID: 1702890633}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2407,7 +2411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 217346400217418920, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 217346400217418923, guid: 9f973b28554f8d94fb1a9d955992b6e5, type: 3}
       propertyPath: m_RootOrder

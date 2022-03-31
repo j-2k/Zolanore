@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Boss_StateMachine : MonoBehaviour
 {
     public CharacterManager player;
+    public NavMeshAgent agent;
 
     Boss_State currentState;
     public B_Awoken awokenState;// = new B_Awoken();
@@ -17,6 +19,7 @@ public class Boss_StateMachine : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
+        agent = GetComponent<NavMeshAgent>();
 
         currentState = awokenState;
 
