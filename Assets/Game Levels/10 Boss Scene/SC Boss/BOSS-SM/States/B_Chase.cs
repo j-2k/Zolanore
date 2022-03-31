@@ -11,7 +11,7 @@ public class B_Chase : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("start chase");
     }
 
     public override void UpdateState(Boss_StateMachine bsm)
