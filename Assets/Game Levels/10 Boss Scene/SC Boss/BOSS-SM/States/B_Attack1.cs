@@ -11,11 +11,11 @@ public class B_Attack1 : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("started Attack1");
     }
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("state Attack1");
     }
 }

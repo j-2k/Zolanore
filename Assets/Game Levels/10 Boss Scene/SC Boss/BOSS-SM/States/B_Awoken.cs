@@ -61,12 +61,12 @@ public class B_Awoken : Boss_State
             {
                 movementVec = center.transform.position - bsm.transform.position;
                 movementVec.y = 0;
-                bsm.transform.position += movementVec.normalized * (speed / 2) * Time.deltaTime;
+                bsm.transform.position += movementVec.normalized * (speed / 4) * Time.deltaTime;
             }
         }
         else
         {
-            bsm.transform.position += Vector3.down * (speed / 2) * Time.deltaTime;
+            bsm.transform.position += Vector3.down * (speed / 4) * Time.deltaTime;
             isGrounded = Physics.CheckSphere(bsm.transform.position, radius, environmentLayer);
             if (isGrounded)
             {

@@ -16,6 +16,9 @@ public class Boss_StateMachine : MonoBehaviour
     public B_Summon summonState;// = new B_Summon();
     public B_Death deathState;// = new B_Death();
 
+
+    public Vector3 playerDirection;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
@@ -28,6 +31,7 @@ public class Boss_StateMachine : MonoBehaviour
 
     private void Update()
     {
+        playerDirection = player.transform.position - transform.position;
         currentState.UpdateState(this);
     }
 
