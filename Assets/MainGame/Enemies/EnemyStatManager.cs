@@ -11,6 +11,7 @@ public class EnemyStatManager : MonoBehaviour
     //a very simple enemy stat manager need to expand on this more later on
     [Header("Assign Level & extra stats")]
     [Header("ENEMY LEVEL IS PRE-DEF TO PLAYER LVL CHECK CODE")]
+    [SerializeField] string questEnemyName;
     [SerializeField] int enemyLevel;
     [SerializeField] int bonusHealth;
     [SerializeField] int damage;
@@ -72,25 +73,11 @@ public class EnemyStatManager : MonoBehaviour
         incDmg -= defence;
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         curHealth -= incDmg;
-        hpBar.SetHealth(curHealth);
+        //hpBar.SetHealth(curHealth);
         if (curHealth <= 0)
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
-            questManager.Kill("Wolf");
-            Destroy(gameObject);
-        }
-    }
-
-    public void TakeDamageFromFamiliar(int incDmg)
-    {
-        incDmg -= defence;
-        incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
-        curHealth -= incDmg;
-        hpBar.SetHealth(curHealth);
-        if (curHealth <= 0)
-        {
-            levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
-            questManager.Kill("Wolf");
+            //questManager.Kill(questEnemyName); //changed to smart string please check if the player is on a quest or not before sending this kill event
             Destroy(gameObject);
         }
     }

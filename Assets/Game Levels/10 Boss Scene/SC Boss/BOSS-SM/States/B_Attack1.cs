@@ -24,11 +24,11 @@ public class B_Attack1 : Boss_State
         Debug.Log("state Attack1 > Attack Type =" + attackType);
         if (attackType == 1)
         {
-
+            //laser dodge pattern
         }
         else
         {
-
+            //meteor fall dodge pattern
         }
 
         lookAtPlayer = bsm.playerDirection.normalized;

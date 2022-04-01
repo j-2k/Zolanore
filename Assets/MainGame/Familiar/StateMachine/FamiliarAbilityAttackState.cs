@@ -62,7 +62,7 @@ public class FamiliarAbilityAttackState : State
     {
         if (playerFamiliar.enemyAbilityFocus != null)
         {
-            playerFamiliar.enemyAbilityFocus.TakeDamageFromFamiliar(AbilityCalculationFamiliar());
+            playerFamiliar.enemyAbilityFocus.TakeDamageFromPlayer(AbilityCalculationFamiliar());
         }
     }
 

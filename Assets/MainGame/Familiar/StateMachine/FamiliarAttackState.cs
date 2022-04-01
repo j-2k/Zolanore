@@ -106,7 +106,7 @@ public class FamiliarAttackState : State
     {
         if (enemyCache != null)
         {
-            enemyCache.TakeDamageFromFamiliar(DamageCalculationFamiliar());
+            enemyCache.TakeDamageFromPlayer(DamageCalculationFamiliar());
         }
     }
 
