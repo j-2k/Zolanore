@@ -13,6 +13,8 @@ public class EnemyStatManager : MonoBehaviour
     [Header("ENEMY LEVEL IS PRE-DEF TO PLAYER LVL CHECK CODE")]
     [SerializeField] string questEnemyName;
     [SerializeField] int enemyLevel;
+    [SerializeField] int bonusLevel;
+    [SerializeField] int bonusDamage;
     [SerializeField] int bonusHealth;
     [SerializeField] int damage;
     [SerializeField] int defence;
@@ -32,6 +34,7 @@ public class EnemyStatManager : MonoBehaviour
     public uint hitID;
 
     public HealthBar hpBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +43,7 @@ public class EnemyStatManager : MonoBehaviour
         levelSystem = LevelSystem.instance;
 
         //current enemy level is set to players level
-        enemyLevel = levelSystem.currentLevel;
+        enemyLevel = levelSystem.currentLevel + bonusLevel;
 
         //
         agent = GetComponent<NavMeshAgent>();
@@ -65,7 +68,7 @@ public class EnemyStatManager : MonoBehaviour
 
         Debug.Log("Damaging Player for " + damage + "Dmg");
 
-        return damage;
+        return damage + bonusDamage;
     }
 
     public void TakeDamageFromPlayer(int incDmg)
@@ -77,7 +80,7 @@ public class EnemyStatManager : MonoBehaviour
         if (curHealth <= 0)
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
-            //questManager.Kill(questEnemyName); //changed to smart string please check if the player is on a quest or not before sending this kill event
+            //questManager.Kill(questEnemyName);
             Destroy(gameObject);
         }
     }

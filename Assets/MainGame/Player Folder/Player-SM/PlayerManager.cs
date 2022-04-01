@@ -307,7 +307,7 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.tag == "Enemy")
+            if (hitCollider.tag == "Enemy" || hitCollider.tag == "Boss")
             {
                 Debug.Log("I just hit an enemey");
                 //hitCollider.GetComponent<SimpleEnemy>().TakeDamageFromPlayer(outgoingDamage);
@@ -341,7 +341,7 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.tag == "Enemy")
+            if (hitCollider.tag == "Enemy" || hitCollider.tag == "Boss")
             {
                 Debug.Log("I just hit an enemey");
                 if (hitCollider.GetComponent<EnemyStatManager>().hitID != attackID)
@@ -364,7 +364,7 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.tag == "Enemy")
+            if (hitCollider.tag == "Enemy" || hitCollider.tag == "Boss")
             {
                 Debug.Log("I just hit an enemey");
                 hitCollider.GetComponent<EnemyStatManager>().TakeDamageFromPlayer(outgoingDamage);
