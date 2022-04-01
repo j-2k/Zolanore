@@ -5,9 +5,8 @@ using UnityEngine;
 public class B_Chase : Boss_State
 {
     //PHASE 1 (AWOKEN / CHASE / ATTACK1 ONLY)
-    int chasePhase = 1;
-    float randChaseTimer;
-    float startOfChaseTime;
+    [SerializeField] int chasePhase = 1;
+    [SerializeField] float randChaseTimer;
     Vector3 lookAtPlayer;
 
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
@@ -18,9 +17,8 @@ public class B_Chase : Boss_State
     public override void StartState(Boss_StateMachine bsm)
     {
         Debug.Log("start chase");
-        //randChaseTimer = Random.Range(3, 5);
-        randChaseTimer = 100;
-        startOfChaseTime = Time.time;
+        randChaseTimer = Random.Range(3, 5);
+        //randChaseTimer = 100;
         /*
         if (boss health is less than 50%)
             chasePhase = 2;
@@ -34,7 +32,6 @@ public class B_Chase : Boss_State
         Debug.Log(" chasing state");
         if (chasePhase == 1)
         {
-            startOfChaseTime += Time.deltaTime * 1;
             randChaseTimer -= Time.deltaTime * 1;
             if (randChaseTimer <= 0)
             {
@@ -42,10 +39,6 @@ public class B_Chase : Boss_State
                 bsm.BossSwitchState(bsm.attack1State);
                 //stop do attack ... then event into timer set to higher number.
                 Debug.Log("going into attack1 state");
-            }
-            else
-            {
-                bsm.agent.isStopped = false;
             }
 
         }

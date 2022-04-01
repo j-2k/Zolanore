@@ -45,6 +45,9 @@ public class B_Awoken : Boss_State
         {
             AwokenActive(bsm);
         }
+
+        player = new Vector3(bsm.player.transform.position.x, bsm.transform.position.y, bsm.player.transform.position.z);
+        bsm.transform.LookAt(player);
     }
 
     bool isGrounded;
@@ -78,8 +81,6 @@ public class B_Awoken : Boss_State
 
     void AwokenActive(Boss_StateMachine bsm)
     {
-        player = new Vector3(bsm.player.transform.position.x, bsm.transform.position.y, bsm.player.transform.position.z);
-        bsm.transform.LookAt(player);
         WaypointDistanceCheck(bsm.transform);
         bsm.transform.position += movementVec.normalized * speed * Time.deltaTime;
         Debug.DrawRay(bsm.transform.position, movementVec);
