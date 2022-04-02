@@ -31,6 +31,7 @@ public class EnemyStatManager : MonoBehaviour
 
     QuestManager questManager;
 
+    [SerializeField] GameObject drop;
     public uint hitID;
 
     public HealthBar hpBar;
@@ -38,6 +39,7 @@ public class EnemyStatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        drop = GameObject.Find("ItemDrop");
         questManager = FindObjectOfType<QuestManager>();
 
         levelSystem = LevelSystem.instance;
@@ -81,6 +83,13 @@ public class EnemyStatManager : MonoBehaviour
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
             questManager.Kill(questEnemyName);
+
+            int dropPerc = Random.Range(1, 100);
+            Debug.Log(dropPerc);
+            if (dropPerc <= 20)
+            {
+                Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }
