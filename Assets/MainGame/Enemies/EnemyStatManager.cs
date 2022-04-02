@@ -80,7 +80,7 @@ public class EnemyStatManager : MonoBehaviour
         if (curHealth <= 0)
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
-            //questManager.Kill(questEnemyName);
+            questManager.Kill(questEnemyName);
             Destroy(gameObject);
         }
     }
