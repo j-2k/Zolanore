@@ -76,7 +76,7 @@ public class EnemyStatManager : MonoBehaviour
         incDmg -= defence;
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         curHealth -= incDmg;
-        //hpBar.SetHealth(curHealth);
+        hpBar.SetHealth(curHealth);
         if (curHealth <= 0)
         {
             levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
