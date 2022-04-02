@@ -23,7 +23,9 @@ public class QuestSystem : MonoBehaviour
     List<GameObject> questGivers;
 
     bool isClose = false;
+    bool isNear = false;
     bool questsActive = false;
+    bool openedQuest = false;
 
     private void Awake()
     {
@@ -41,15 +43,16 @@ public class QuestSystem : MonoBehaviour
     private void Update()
     {
         GetClosestQuestGiver();
-        if(questGivers.Count >0)
+        if (questGivers.Count > 0)
         {
             CheckIfCloseToQuestGiver();
             IfCloseActivateUI();
 
-            if (interactUI.activeSelf)
+            if (isNear)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    openedQuest = true;
                     if (!questGiver.completedQuest)
                     {
                         claimButton.SetActive(false);
@@ -80,6 +83,8 @@ public class QuestSystem : MonoBehaviour
                         EnableCharacterRotation();
                     }
                 }
+                if (openedQuest) interactUI.SetActive(false);
+                else interactUI.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
@@ -132,11 +137,11 @@ public class QuestSystem : MonoBehaviour
     {
         if (isClose && !questGiver.acceptedQuest || isClose && questGiver.completedQuest)
         {
-            interactUI.SetActive(true);
+            isNear = true;
         }
         else
         {
-            interactUI.SetActive(false);
+            isNear = false;
         }
     }
 
@@ -164,6 +169,7 @@ public class QuestSystem : MonoBehaviour
 
     public void CloseQuestInfo()
     {
+        openedQuest = false;
         Cursor.visible = false;
         if (questJournal.activeSelf)
         {
@@ -180,7 +186,7 @@ public class QuestSystem : MonoBehaviour
             EnableCharacterRotation();
         }
     }
-    
+
     private void DisableCharacterRotation()
     {
         // Disable Rotation
@@ -234,7 +240,7 @@ public class QuestSystem : MonoBehaviour
         Cursor.visible = false;
 
         questManager.InstantiateQuestButton(questGiver.quest);
-        
+
         questGiver.acceptedQuest = true;
 
         questGiver.questActive = true;
