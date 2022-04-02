@@ -171,14 +171,15 @@ public class CharacterManager : MonoBehaviour
         playerCurrentHealth -= incDmg;
         Debug.Log("Final Dmg Taken is " + incDmg);
         //healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
-        RefreshPlayerUI();
         if (playerCurrentHealth < 1)
         {
+            playerCurrentHealth = 0;
             //player died
             //respawn in some location
             //play death animation then at the end of death animation trigger anim event to send the player to respawn location
-            
+
         }
+        RefreshPlayerUI();
     }
 
     public void RefreshPlayerUI()

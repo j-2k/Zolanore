@@ -217,6 +217,8 @@ GameObject:
   - component: {fileID: 217346400217418925}
   - component: {fileID: 8892587702508662005}
   - component: {fileID: 756983829}
+  - component: {fileID: 751315598}
+  - component: {fileID: 751315604}
   m_Layer: 9
   m_Name: PlayerSM
   m_TagString: Player
@@ -233,7 +235,7 @@ Transform:
   m_GameObject: {fileID: 217346400217418920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
   - {fileID: 543450651818210983}
   - {fileID: 825807516}
@@ -363,6 +365,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bea260adecaad245bc9def75fb3eca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &751315598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217346400217418920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca84d83724a67e46907c8df1686da96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactUI: {fileID: 0}
+  closestQuestGiver: {fileID: 0}
+--- !u!114 &751315604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217346400217418920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de296dcb59b297140a514fd32edc04e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LimitQueueProcesing: 0
+  QueueProcessTime: 0
 --- !u!95 &1756192725
 Animator:
   serializedVersion: 3
@@ -1128,7 +1158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraVertical
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraDistanceMax
