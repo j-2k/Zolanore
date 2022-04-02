@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EGA_EffectSound : MonoBehaviour
 {
+    [SerializeField] bool oneShotOnly = false;
+    [SerializeField] float invokeDelay = 0;
     public bool Repeating = true;
     public float RepeatTime = 2.0f;
     public float StartTime = 0.0f;
@@ -26,6 +28,10 @@ public class EGA_EffectSound : MonoBehaviour
         if (Repeating == true)
         {
             InvokeRepeating("RepeatSound", StartTime, RepeatTime);
+        }
+        if (oneShotOnly)
+        {
+            Invoke(nameof(RepeatSound), invokeDelay);
         }
     }
 
