@@ -22,7 +22,6 @@ public class Boss_StateMachine : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
-        agent = GetComponent<NavMeshAgent>();
 
         currentState = awokenState;
 

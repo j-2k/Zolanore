@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   randWP: 0
-  speed: 30
+  speed: 20
   timer: 0
   end: 0
   radius: 0
@@ -88,7 +88,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19aa615234ba744f847d3142fc7bfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cycleInitialization: 0
   attackType: 0
+  meteorVFX: {fileID: 3753221089127876111, guid: 907c93d45f63c3f4693ae53920e1619f, type: 3}
+  playerFootPos: {fileID: 0}
+  timer: 0
+  cycles: 0
 --- !u!114 &1331210817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,13 +1653,14 @@ GameObject:
   - component: {fileID: 6421998260467441476}
   - component: {fileID: 6421998260467441475}
   - component: {fileID: 1499823364}
+  - component: {fileID: 4191390245395155378}
   m_Layer: 0
   m_Name: Nightshade (BOSS)
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6815419693359954093
 Transform:
   m_ObjectHideFlags: 0
@@ -1685,7 +1691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  agent: {fileID: 0}
+  agent: {fileID: 6421998260467441475}
   awokenState: {fileID: 1331210814}
   chaseState: {fileID: 1331210813}
   attack1State: {fileID: 1331210812}
@@ -1729,6 +1735,31 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &4191390245395155378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187643201853825559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442d6c9d9976e914aa10a1c18d305e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questEnemyName: Nightshade
+  enemyLevel: 0
+  bonusLevel: 2
+  bonusDamage: 10
+  bonusHealth: 300
+  damage: 0
+  defence: 0
+  maxHealth: 0
+  curHealth: 0
+  xp: 0
+  bonusXP: 0
+  hitID: 0
+  hpBar: {fileID: 0}
 --- !u!1 &6199011762327670500
 GameObject:
   m_ObjectHideFlags: 0
