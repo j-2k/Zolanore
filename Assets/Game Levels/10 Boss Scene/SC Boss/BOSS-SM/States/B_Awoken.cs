@@ -133,7 +133,7 @@ public class B_Awoken : Boss_State
         }
         else
         {
-            bsm.transform.position += movementVec.normalized * (speed/2) * Time.deltaTime;
+            bsm.transform.position += movementVec.normalized * (speed/3) * Time.deltaTime;
         }
     }
 }

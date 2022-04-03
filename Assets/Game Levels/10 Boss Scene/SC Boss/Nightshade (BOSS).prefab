@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce36581c01a4024aaf895f02d96bb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startThunderPassive: {fileID: 1785263005}
   center: {fileID: 0}
   waypoints:
   - {fileID: 0}
@@ -151,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1785263004
 Transform:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ MonoBehaviour:
   thunderChase: {fileID: 198106892638850428}
   thunderSound: {fileID: 114635776840887956}
   bsm: {fileID: 6421998260467441476}
-  thunderSpeed: 2
+  thunderSpeed: 1
 --- !u!1 &26175828317319021
 GameObject:
   m_ObjectHideFlags: 0

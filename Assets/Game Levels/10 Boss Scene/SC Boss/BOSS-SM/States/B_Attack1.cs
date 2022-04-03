@@ -25,7 +25,6 @@ public class B_Attack1 : Boss_State
         Debug.Log("started Attack1");
         attackType = Random.Range(1, 3);
         bsm.agent.isStopped = true;
-        //playerGroundPosition = bsm.player.transform.GetChild(bsm.player.transform.childCount-1);
         playerGroundPosition = bsm.player.transform.GetChild(bsm.player.transform.childCount - 1);
         playerGroundPosition = playerGroundPosition.GetChild(0);
         if (cycleInitialization == 0)

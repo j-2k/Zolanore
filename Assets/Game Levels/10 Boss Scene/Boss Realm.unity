@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021977592, g: 0.011675807, b: 0.019599672, a: 1}
+  m_IndirectSpecularColor: {r: 0.02199562, g: 0.011689768, b: 0.019628104, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1321,7 +1321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089616973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: 25}
+  m_LocalPosition: {x: 0, y: 10, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 732602873}
@@ -1642,10 +1642,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1089616974}
     - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
-      propertyPath: startThunderPassive
-      value: 
-      objectReference: {fileID: 1785263005}
-    - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 732602873}
@@ -1661,21 +1657,13 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1448946184}
-    - target: {fileID: 1785263003, guid: 687f982660b113b42b962f9262159d33, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785263005, guid: 687f982660b113b42b962f9262159d33, type: 3}
-      propertyPath: thunderSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1604971102084482, guid: 687f982660b113b42b962f9262159d33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_Name
       value: Nightshade (BOSS)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6815419693359954093, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_RootOrder
@@ -1864,17 +1852,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1785263005 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1785263005, guid: 687f982660b113b42b962f9262159d33, type: 3}
-  m_PrefabInstance: {fileID: 1632074343}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6ddf22a240ba6409dfe371e329fec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1818475512 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6148840244141291438, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
