@@ -7,7 +7,6 @@ public class EnemyStatManager : MonoBehaviour
 {
     //https://docs.google.com/spreadsheets/d/19eI5ft2jUsELaEdoNECQKZm7XY9agH4JqVokp11H8Oc/edit#gid=583637899
     //dont change anything here with xp handling more info in the doc
-
     //a very simple enemy stat manager need to expand on this more later on
     [Header("Assign Level & extra stats")]
     [Header("ENEMY LEVEL IS PRE-DEF TO PLAYER LVL CHECK CODE")]
@@ -20,6 +19,8 @@ public class EnemyStatManager : MonoBehaviour
     [SerializeField] int defence;
 
     [Header("Dont touch these")]
+    [SerializeField] bool isBoss;
+    [SerializeField] Boss_StateMachine boss;
     [SerializeField] int maxHealth;
     [SerializeField] int curHealth;
     [SerializeField] int xp;
@@ -73,24 +74,45 @@ public class EnemyStatManager : MonoBehaviour
         return damage + bonusDamage;
     }
 
+    bool bossTrigger = false;
+
     public void TakeDamageFromPlayer(int incDmg)
     {
         incDmg -= defence;
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         curHealth -= incDmg;
-        hpBar.SetHealth(curHealth);
-        if (curHealth <= 0)
-        {
-            levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
-            questManager.Kill(questEnemyName);
+        //disabled for testing
+        //hpBar.SetHealth(curHealth);
 
-            int dropPerc = Random.Range(1, 100);
-            Debug.Log(dropPerc);
-            if (dropPerc <= 20)
+        if(isBoss)
+        {
+            if (curHealth <= maxHealth/2 && !bossTrigger)
             {
-                Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
+                bossTrigger = true;
+                boss.bossPhase = 2;
+                boss.BossSwitchState(boss.awokenState);
             }
-            Destroy(gameObject);
+            else if(curHealth <= 0)
+            {
+                boss.BossSwitchState(boss.deathState);
+            }
+        }
+        else
+        {
+            if (curHealth <= 0)
+            {
+                levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+                /*
+                questManager.Kill(questEnemyName);
+                int dropPerc = Random.Range(1, 100);
+                Debug.Log(dropPerc);
+                if (dropPerc <= 20)
+                {
+                    Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
+                }
+                */
+                Destroy(gameObject);
+            }
         }
     }
 }

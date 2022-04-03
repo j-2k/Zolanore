@@ -7,6 +7,7 @@ public class Boss_StateMachine : MonoBehaviour
 {
     public CharacterManager player;
     public NavMeshAgent agent;
+    public int bossPhase;
 
     Boss_State currentState;
     public B_Awoken awokenState;// = new B_Awoken();
@@ -21,6 +22,7 @@ public class Boss_StateMachine : MonoBehaviour
 
     private void Start()
     {
+        bossPhase = 1;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
 
         currentState = awokenState;

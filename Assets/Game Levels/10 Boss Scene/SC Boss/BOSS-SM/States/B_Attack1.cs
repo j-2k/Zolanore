@@ -42,12 +42,12 @@ public class B_Attack1 : Boss_State
         if (attackType == 1)
         {
             //laser dodge pattern (easy - stay on ground)
-            AttackCycle( bsm);
+            AttackCycle(bsm);
         }
         else
         {
             //meteor fall dodge pattern (easy - stay on ground)
-            AttackCycle( bsm);
+            AttackCycle(bsm);
         }
 
         lookAtPlayer = bsm.playerDirection.normalized;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class B_Chase : Boss_State
 {
     //PHASE 1 (AWOKEN / CHASE / ATTACK1 ONLY)
-    [SerializeField] int chasePhase = 1;
     [SerializeField] float randChaseTimer;
     Vector3 lookAtPlayer;
 
@@ -30,21 +29,13 @@ public class B_Chase : Boss_State
     public override void UpdateState(Boss_StateMachine bsm)
     {
         Debug.Log(" chasing state");
-        if (chasePhase == 1)
-        {
-            randChaseTimer -= Time.deltaTime * 1;
-            if (randChaseTimer <= 0)
-            {
-                bsm.agent.isStopped = true;
-                bsm.BossSwitchState(bsm.attack1State);
-                //stop do attack ... then event into timer set to higher number.
-                Debug.Log("going into attack1 state");
-            }
-
+        if (bsm.bossPhase == 1)
+        {//phase1
+            EndChase(bsm,bsm.attack1State);
         }
         else
-        {
-
+        {//phase2
+            EndChase(bsm,bsm.attack2State);
         }
 
         if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= bsm.agent.stoppingDistance)
@@ -60,15 +51,18 @@ public class B_Chase : Boss_State
             bsm.agent.isStopped = false;
             bsm.agent.SetDestination(bsm.player.transform.position);
         }
-
-        /*
-        //check health here and change to chasephase 2
-        if (bsm.agent.isStopped = false && Time.time >= startOfChaseTime + 30)
-        {
-            bsm.BossSwitchState(bsm.attack1State);
-            //chasePhase = 2;
-        }
-        */
-
     }
+
+    void EndChase(Boss_StateMachine bsm, Boss_State attackState)
+    {
+        randChaseTimer -= Time.deltaTime * 1;
+        if (randChaseTimer <= 0)
+        {
+            bsm.agent.isStopped = true;
+            bsm.BossSwitchState(attackState);
+        }
+    }
+
+
+
 }

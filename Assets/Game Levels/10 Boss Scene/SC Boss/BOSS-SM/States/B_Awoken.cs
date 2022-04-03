@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class B_Awoken : Boss_State
 {
+    [SerializeField] Phase2Passive startThunderPassive;
     [SerializeField] Transform center;
     [SerializeField] Transform[] waypoints;
     [SerializeField] int randWP;
@@ -26,24 +27,45 @@ public class B_Awoken : Boss_State
     public override void StartState(Boss_StateMachine bsm)
     {
         bsm.agent.enabled = false;
-        bsm.transform.position = center.transform.position;
-        randWP = Random.Range(0, waypoints.Length);
-        movementVec = new Vector3(waypoints[randWP].position.x, 0, waypoints[randWP].position.z);
         timer = 0;
-        end = Random.Range(20, 30);
         radius = bsm.agent.radius * 0.9f;
+        end = Random.Range(20, 30);
+        if (bsm.bossPhase == 1)
+        {
+            bsm.transform.position = center.transform.position;
+            randWP = Random.Range(0, waypoints.Length);
+            movementVec = new Vector3(waypoints[randWP].position.x, 0, waypoints[randWP].position.z);
+        }
+        else
+        {
+            movementVec = center.transform.position - bsm.transform.position;
+        }
     }
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
-        timer += Time.deltaTime * 1;
-        if (timer >= end)
+        if (bsm.bossPhase == 1)
         {
-            MiddlePhaseChange(bsm);
+            timer += Time.deltaTime * 1;
+            if (timer > end)
+            {
+                MiddlePhaseChange(bsm);
+            }
+            else
+            {
+                AwokenActive(bsm);
+            }
         }
         else
         {
-            AwokenActive(bsm);
+            if (timer < end)
+            {
+                WakePhase2(bsm);
+            }
+            else
+            {
+                MiddlePhaseChange(bsm);
+            }
         }
 
         player = new Vector3(bsm.player.transform.position.x, bsm.transform.position.y, bsm.player.transform.position.z);
@@ -97,6 +119,21 @@ public class B_Awoken : Boss_State
         {
             movementVec = waypoints[randWP].position - bsm.transform.position;
             movementVec.y = 0;
+        }
+    }
+
+    void WakePhase2(Boss_StateMachine bsm)
+    {
+        if (Vector3.Distance(bsm.transform.position, center.transform.position) <= 1)
+        {
+            timer += Time.deltaTime * 1;
+            //survival during phase 2 start thunder & tornados
+            startThunderPassive.gameObject.SetActive(true);
+            //DO TORNADOS HERE
+        }
+        else
+        {
+            bsm.transform.position += movementVec.normalized * (speed/2) * Time.deltaTime;
         }
     }
 }
