@@ -11,6 +11,11 @@ public class Phase2Passive : MonoBehaviour
     Vector3 chaseVector;
     float timer = 8;
 
+    private void Start()
+    {
+        transform.parent = null;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {

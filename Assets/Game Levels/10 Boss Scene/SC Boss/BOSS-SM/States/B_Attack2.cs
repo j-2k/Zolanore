@@ -41,12 +41,12 @@ public class B_Attack2 : Boss_State
         if (attackType == 1)
         {
             //laser dodge pattern (easy - stay on ground)
-            //AttackCycle(bsm);
+            AttackCycleMeteor(bsm);
         }
         else
         {
             //meteor fall dodge pattern (easy - stay on ground)
-            //AttackCycle(bsm);
+            AttackCycleMeteor(bsm);
         }
 
         lookAtPlayer = bsm.playerDirection.normalized;
@@ -54,31 +54,41 @@ public class B_Attack2 : Boss_State
         bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), 120 * Time.deltaTime);
     }
 
-    int rand = 0;
-    int randMeteorRange = 0;
-    void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...
+    void AttackCycleMeteor(Boss_StateMachine bsm)//should be using object pool in here...
     {
         if (timer >= 1f)
         {
             timer = 0;
             cycles++;
-            rand = Random.Range(1, 3);
-            randMeteorRange = Random.Range(7, 15);
             Instantiate(meteorVFX, playerGroundPosition.position + (Vector3.up * 0.1f), Quaternion.identity);
-            if (rand == 1)
-            {
-                Instantiate(meteorVFX, (playerGroundPosition.position + (Vector3.up * 0.1f)) + (playerGroundPosition.forward * randMeteorRange), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(meteorVFX, (playerGroundPosition.position + (Vector3.up * 0.1f)) + (playerGroundPosition.forward * randMeteorRange), Quaternion.identity);
-            }
-
+            Invoke(nameof(MeteorTimed), 0.33f);
+            Invoke(nameof(MeteorTimed), 0.66f);
             if (cycles > cycleInitialization - 1)
             {
                 cycles = 0;
                 bsm.BossSwitchState(bsm.chaseState);
             }
+        }
+    }
+    Vector3 aroundPlayerVec;
+    void MeteorTimed()
+    {
+        aroundPlayerVec =
+            (playerGroundPosition.position + (Vector3.up * 0.1f))
+            + (playerGroundPosition.forward * IntWithNegativeRNG(4,8))
+            + (playerGroundPosition.right * IntWithNegativeRNG(4, 8));
+        Instantiate(meteorVFX, aroundPlayerVec, Quaternion.identity);
+    }
+
+    int IntWithNegativeRNG(int start, int end)
+    {
+        if (Random.Range(1, 3) > 1)
+        {
+            return Random.Range(start, end + 1);
+        }
+        else
+        {
+            return Random.Range(-end, -start - 1);
         }
     }
 }

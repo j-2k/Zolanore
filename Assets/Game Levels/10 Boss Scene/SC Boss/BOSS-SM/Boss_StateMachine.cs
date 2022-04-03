@@ -14,7 +14,6 @@ public class Boss_StateMachine : MonoBehaviour
     public B_Chase chaseState;// = new B_Chase();
     public B_Attack1 attack1State;// = new B_Attack1();
     public B_Attack2 attack2State;// = new B_Attack2();
-    public B_Summon summonState;// = new B_Summon();
     public B_Death deathState;// = new B_Death();
 
 
