@@ -79,7 +79,7 @@ Material:
     - _Depthpower: 0.2
     - _DetailNormalMapScale: 1
     - _DstBlend: 1
-    - _Emission: 10
+    - _Emission: 15
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

@@ -40,11 +40,13 @@ public class B_Attack2 : Boss_State
 
         if (attackType == 1)
         {
+            //check for invuls
             //laser dodge pattern (easy - stay on ground)
             AttackCycleMeteor(bsm);
         }
         else
         {
+            //check for invuls
             //meteor fall dodge pattern (easy - stay on ground)
             AttackCycleMeteor(bsm);
         }
@@ -53,6 +55,8 @@ public class B_Attack2 : Boss_State
         lookAtPlayer.y = 0;
         bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), 120 * Time.deltaTime);
     }
+
+
 
     void AttackCycleMeteor(Boss_StateMachine bsm)//should be using object pool in here...
     {
@@ -70,6 +74,7 @@ public class B_Attack2 : Boss_State
             }
         }
     }
+
     Vector3 aroundPlayerVec;
     void MeteorTimed()
     {
