@@ -10,6 +10,8 @@ public class B_Attack1 : Boss_State
     Vector3 lookAtPlayer;
 
     [SerializeField] ParticleSystem meteorVFX;
+    [SerializeField] ParticleSystem laserCharge;
+    [SerializeField] ParticleSystem laserVFX;
     [SerializeField] Transform playerGroundPosition;
 
     [SerializeField] float timer = 0;

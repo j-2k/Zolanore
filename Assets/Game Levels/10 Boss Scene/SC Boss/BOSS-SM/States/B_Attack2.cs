@@ -10,10 +10,15 @@ public class B_Attack2 : Boss_State
     Vector3 lookAtPlayer;
 
     [SerializeField] ParticleSystem meteorVFX;
+    [SerializeField] ParticleSystem fireCharge;
+    [SerializeField] ParticleSystem fireLineVFX;
     [SerializeField] Transform playerGroundPosition;
 
     [SerializeField] float timer = 0;
     [SerializeField] int cycles = 0;
+
+    int bossTurningSpeed;
+    Vector3 playerYOnly;
 
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
     {
@@ -24,6 +29,8 @@ public class B_Attack2 : Boss_State
     {
         Debug.Log("started attack phase 2");
         attackType = Random.Range(1, 3);
+        timer = 0;
+        bossTurningSpeed = 120;
         bsm.agent.isStopped = true;
         playerGroundPosition = bsm.player.transform.GetChild(bsm.player.transform.childCount - 1);
         playerGroundPosition = playerGroundPosition.GetChild(0);
@@ -31,6 +38,17 @@ public class B_Attack2 : Boss_State
         {
             cycleInitialization = 5;
         }
+
+        if (attackType == 1)
+        {
+            fireCharge.Play();
+            Invoke(nameof(StartParticleLate), 1);
+        }
+    }
+
+    void StartParticleLate()
+    {
+        fireLineVFX.Play();
     }
 
     public override void UpdateState(Boss_StateMachine bsm)
@@ -42,7 +60,7 @@ public class B_Attack2 : Boss_State
         {
             //check for invuls
             //laser dodge pattern (easy - stay on ground)
-            AttackCycleMeteor(bsm);
+            AttackFireLine(bsm);
         }
         else
         {
@@ -53,10 +71,24 @@ public class B_Attack2 : Boss_State
 
         lookAtPlayer = bsm.playerDirection.normalized;
         lookAtPlayer.y = 0;
-        bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), 120 * Time.deltaTime);
+        bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), bossTurningSpeed * Time.deltaTime);
     }
 
-
+    void AttackFireLine(Boss_StateMachine bsm)
+    {
+        if (timer >=1f)
+        {
+            bossTurningSpeed = 60;
+            playerYOnly = new Vector3(fireLineVFX.transform.position.x, bsm.player.transform.position.y, fireLineVFX.transform.position.z);
+            fireLineVFX.transform.LookAt(playerYOnly);
+            if (timer >= 7f)
+            {
+                fireCharge.Stop();
+                fireLineVFX.Stop();
+                bsm.BossSwitchState(bsm.chaseState);
+            }
+        }
+    }
 
     void AttackCycleMeteor(Boss_StateMachine bsm)//should be using object pool in here...
     {
