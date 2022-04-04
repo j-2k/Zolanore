@@ -44,6 +44,11 @@ public class B_Attack2 : Boss_State
             fireCharge.Play();
             Invoke(nameof(StartParticleLate), 1);
         }
+        else
+        {
+            fireCharge.Play();
+            Invoke(nameof(StartParticleLate), 1);
+        }
     }
 
     void StartParticleLate()
@@ -66,21 +71,23 @@ public class B_Attack2 : Boss_State
         {
             //check for invuls
             //meteor fall dodge pattern (easy - stay on ground)
-            AttackCycleMeteor(bsm);
+            AttackFireLine(bsm);
         }
 
         lookAtPlayer = bsm.playerDirection.normalized;
         lookAtPlayer.y = 0;
         bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), bossTurningSpeed * Time.deltaTime);
+
     }
 
+    Vector3 newDir;
     void AttackFireLine(Boss_StateMachine bsm)
     {
         if (timer >=1f)
         {
             bossTurningSpeed = 60;
-            playerYOnly = new Vector3(fireLineVFX.transform.position.x, bsm.player.transform.position.y, fireLineVFX.transform.position.z);
-            fireLineVFX.transform.LookAt(playerYOnly);
+            //shit vector issue just guna use look at for now.
+            fireLineVFX.transform.LookAt(bsm.player.transform.position + (Vector3.up * 2));
             if (timer >= 7f)
             {
                 fireCharge.Stop();
