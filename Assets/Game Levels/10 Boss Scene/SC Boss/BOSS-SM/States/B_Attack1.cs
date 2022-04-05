@@ -10,8 +10,8 @@ public class B_Attack1 : Boss_State
     Vector3 lookAtPlayer;
 
     [SerializeField] ParticleSystem meteorVFX;
-    [SerializeField] ParticleSystem laserCharge;
-    [SerializeField] ParticleSystem laserVFX;
+    [SerializeField] ParticleSystem blastCharge;
+    [SerializeField] ParticleSystem blastVFX;
     [SerializeField] Transform playerGroundPosition;
 
     [SerializeField] float timer = 0;
@@ -24,6 +24,7 @@ public class B_Attack1 : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        oneBlast = false;
         Debug.Log("started Attack1");
         attackType = Random.Range(1, 3);
         bsm.agent.isStopped = true;
@@ -42,8 +43,8 @@ public class B_Attack1 : Boss_State
 
         if (attackType == 1)
         {
-            //laser dodge pattern (easy - stay on ground)
-            AttackCycle(bsm);
+            //blast attack
+            BlastAttack(bsm);
         }
         else
         {
@@ -56,26 +57,44 @@ public class B_Attack1 : Boss_State
         bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), 120 * Time.deltaTime);
     }
 
-    int rand = 0;
-    int randMeteorRange = 0;
+    bool oneBlast;
+
+    void BlastAttack(Boss_StateMachine bsm)
+    {
+        if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= 3 && !oneBlast)
+        {
+            oneBlast = true;
+            blastCharge.Play();
+            Invoke(nameof(DelayBlast), 1.25f);
+        }
+
+        if (timer >= 2f)
+        {
+            oneBlast = false;
+            timer = 0;
+            cycles++;
+            Instantiate(meteorVFX, playerGroundPosition.position + (Vector3.up * 0.1f), Quaternion.identity);
+            if (cycles > (cycleInitialization - 1)/2)
+            {
+                cycles = 0;
+                bsm.BossSwitchState(bsm.chaseState);
+            }
+        }
+    }
+
+    void DelayBlast()
+    {
+        blastVFX.Play();
+    }
+
     void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...
     {
         if (timer >= 1f)
         {
             timer = 0;
             cycles++;
-            rand = Random.Range(1, 3);
-            randMeteorRange = Random.Range(7, 15);
             Instantiate(meteorVFX, playerGroundPosition.position + (Vector3.up * 0.1f), Quaternion.identity);
-            if (rand == 1)
-            {
-                Instantiate(meteorVFX, (playerGroundPosition.position + (Vector3.up * 0.1f)) + (playerGroundPosition.forward * randMeteorRange), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(meteorVFX, (playerGroundPosition.position + (Vector3.up * 0.1f)) + (playerGroundPosition.forward * randMeteorRange), Quaternion.identity);
-            }
-
+            Instantiate(meteorVFX, (playerGroundPosition.position + (Vector3.up * 0.1f)) + (playerGroundPosition.forward * Random.Range(7, 15)), Quaternion.identity);
             if (cycles > cycleInitialization - 1)
             {
                 cycles = 0;
