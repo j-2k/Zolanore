@@ -67,7 +67,7 @@ public class B_Attack1 : Boss_State
             blastCharge.Play();
             Invoke(nameof(DelayBlast), 1.25f);
         }
-
+        
         if (timer >= 2f)
         {
             oneBlast = false;
