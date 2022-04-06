@@ -44,11 +44,6 @@ public class B_Attack2 : Boss_State
             fireCharge.Play();
             Invoke(nameof(StartParticleLate), 1);
         }
-        else
-        {
-            fireCharge.Play();
-            Invoke(nameof(StartParticleLate), 1);
-        }
     }
 
     void StartParticleLate()

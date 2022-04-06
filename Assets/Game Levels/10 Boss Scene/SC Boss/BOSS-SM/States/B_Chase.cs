@@ -16,7 +16,7 @@ public class B_Chase : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
-        matScript.SetMaterialValue(0f);
+        matScript.SetMaterialValue(0);
         Debug.Log("start chase");
         randChaseTimer = Random.Range(3, 5);
         //randChaseTimer = 100;
@@ -33,19 +33,11 @@ public class B_Chase : Boss_State
         Debug.Log(" chasing state");
         if (bsm.bossPhase == 1)
         {//phase1
-            if (Random.Range(1, 11) < 2)
-            {
-                matScript.SetMaterialValue(1f);
-            }
-            EndChase(bsm,bsm.attack1State);
+            EndChase(bsm,bsm.attack1State,1,11);
         }
         else
         {//phase2
-            if (Random.Range(1, 6) < 2)
-            {
-                matScript.SetMaterialValue(1f);
-            }
-            EndChase(bsm,bsm.attack2State);
+            EndChase(bsm,bsm.attack2State,1,6);
         }
 
         if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= bsm.agent.stoppingDistance)
@@ -63,11 +55,15 @@ public class B_Chase : Boss_State
         }
     }
 
-    void EndChase(Boss_StateMachine bsm, Boss_State attackState)
+    void EndChase(Boss_StateMachine bsm, Boss_State attackState,int min, int max)
     {
         randChaseTimer -= Time.deltaTime * 1;
         if (randChaseTimer <= 0)
         {
+            if (Random.Range(min, max) < 2)
+            {
+                matScript.SetMaterialValue(1);
+            }
             bsm.agent.isStopped = true;
             bsm.BossSwitchState(attackState);
         }

@@ -1093,13 +1093,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217346399143027720}
     m_Modifications:
+    - target: {fileID: 2126535186397505276, guid: dd89aa88f125315439c2594beb020062, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4888783251622185864, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: m_Name
       value: LevelUpVFX
       objectReference: {fileID: 0}
     - target: {fileID: 4888783251622185864, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4888783251622185866, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: playOnAwake
@@ -1108,6 +1112,18 @@ PrefabInstance:
     - target: {fileID: 4888783251622186101, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888783251622186101, guid: dd89aa88f125315439c2594beb020062, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888783251622186101, guid: dd89aa88f125315439c2594beb020062, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888783251622186101, guid: dd89aa88f125315439c2594beb020062, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4888783251622186101, guid: dd89aa88f125315439c2594beb020062, type: 3}
       propertyPath: m_LocalPosition.x

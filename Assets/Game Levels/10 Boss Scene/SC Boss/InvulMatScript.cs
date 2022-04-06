@@ -6,16 +6,16 @@ public class InvulMatScript : MonoBehaviour
 {
     [SerializeField] Material mat;
     EnemyStatManager esm;
-    [SerializeField] float b;
+
     private void Start()
     {
         esm = GetComponentInParent<EnemyStatManager>();
         SetMaterialValue(0);
     }
 
-    public void SetMaterialValue(float a)
+    public void SetMaterialValue(int a)
     {
-        if (a > 0.1f)
+        if (a == 1)
         {
             esm.invulnerable = true;
         }
