@@ -24,11 +24,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ColorEND: 1
+    - _ColorEND: 0
     - _ColorSTART: 0
-    - _OffSet: 0
-    - _Scale: 1
+    - _ControlMaterial: 0
+    - _OffSet: 10
+    - _Scale: 10
     m_Colors:
-    - _Color1: {r: 1, g: 1, b: 1, a: 1}
-    - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.21960784, g: 0, b: 1.4980392, a: 1}
+    - _Color2: {r: 0, g: 0.61770535, b: 1.4980392, a: 1}
   m_BuildTextureStacks: []

@@ -7,6 +7,7 @@ public class B_Chase : Boss_State
     //PHASE 1 (AWOKEN / CHASE / ATTACK1 ONLY)
     [SerializeField] float randChaseTimer;
     Vector3 lookAtPlayer;
+    [SerializeField] InvulMatScript matScript;
 
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
     {
@@ -15,6 +16,7 @@ public class B_Chase : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        matScript.SetMaterialValue(0f);
         Debug.Log("start chase");
         randChaseTimer = Random.Range(3, 5);
         //randChaseTimer = 100;
@@ -31,10 +33,18 @@ public class B_Chase : Boss_State
         Debug.Log(" chasing state");
         if (bsm.bossPhase == 1)
         {//phase1
+            if (Random.Range(1, 11) < 2)
+            {
+                matScript.SetMaterialValue(1f);
+            }
             EndChase(bsm,bsm.attack1State);
         }
         else
         {//phase2
+            if (Random.Range(1, 6) < 2)
+            {
+                matScript.SetMaterialValue(1f);
+            }
             EndChase(bsm,bsm.attack2State);
         }
 

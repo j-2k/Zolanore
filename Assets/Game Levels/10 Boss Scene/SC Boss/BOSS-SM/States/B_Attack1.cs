@@ -12,6 +12,7 @@ public class B_Attack1 : Boss_State
     [SerializeField] ParticleSystem meteorVFX;
     [SerializeField] ParticleSystem blastCharge;
     [SerializeField] ParticleSystem blastVFX;
+    [SerializeField] EGA_EffectSound blastSFX;
     [SerializeField] Transform playerGroundPosition;
 
     [SerializeField] float timer = 0;
@@ -85,6 +86,7 @@ public class B_Attack1 : Boss_State
     void DelayBlast()
     {
         blastVFX.Play();
+        blastSFX.PlaySoundOnce();
     }
 
     void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...

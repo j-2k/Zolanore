@@ -17,6 +17,7 @@ public class EnemyStatManager : MonoBehaviour
     [SerializeField] int bonusHealth;
     [SerializeField] int damage;
     [SerializeField] int defence;
+    public bool invulnerable = false;
 
     [Header("Dont touch these")]
     [SerializeField] bool isBoss;
@@ -78,41 +79,48 @@ public class EnemyStatManager : MonoBehaviour
 
     public void TakeDamageFromPlayer(int incDmg)
     {
-        incDmg -= defence;
-        incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
-        curHealth -= incDmg;
-        //disabled for testing
-        //hpBar.SetHealth(curHealth);
-
-        if(isBoss)
+        if (!invulnerable)
         {
-            if (curHealth <= maxHealth/2 && !bossTrigger)
+            incDmg -= defence;
+            incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
+            curHealth -= incDmg;
+            //disabled for testing
+            hpBar.SetHealth(curHealth);
+
+            if (isBoss)
             {
-                bossTrigger = true;
-                boss.bossPhase = 2;
-                boss.BossSwitchState(boss.awokenState);
+                if (curHealth <= maxHealth / 2 && !bossTrigger)
+                {
+                    bossTrigger = true;
+                    boss.bossPhase = 2;
+                    boss.BossSwitchState(boss.awokenState);
+                }
+                else if (curHealth <= 0)
+                {
+                    boss.BossSwitchState(boss.deathState);
+                }
             }
-            else if(curHealth <= 0)
+            else
             {
-                boss.BossSwitchState(boss.deathState);
+                if (curHealth <= 0)
+                {
+                    levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+                    /*
+                    questManager.Kill(questEnemyName);
+                    int dropPerc = Random.Range(1, 100);
+                    Debug.Log(dropPerc);
+                    if (dropPerc <= 20)
+                    {
+                        Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
+                    }
+                    */
+                    Destroy(gameObject);
+                }
             }
         }
         else
         {
-            if (curHealth <= 0)
-            {
-                levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
-                /*
-                questManager.Kill(questEnemyName);
-                int dropPerc = Random.Range(1, 100);
-                Debug.Log(dropPerc);
-                if (dropPerc <= 20)
-                {
-                    Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
-                }
-                */
-                Destroy(gameObject);
-            }
+            return;
         }
     }
 }

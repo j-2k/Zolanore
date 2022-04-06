@@ -26,6 +26,7 @@ Material:
     m_Floats:
     - _ColorEND: 0.6
     - _ColorSTART: 0.4
+    - _ControlMaterial: 1
     - _OffSet: 0
     - _Scale: 1
     m_Colors:

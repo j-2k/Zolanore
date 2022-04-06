@@ -71,7 +71,7 @@ public class B_Attack2 : Boss_State
         {
             //check for invuls
             //meteor fall dodge pattern (easy - stay on ground)
-            AttackFireLine(bsm);
+            AttackCycleMeteor(bsm);
         }
 
         lookAtPlayer = bsm.playerDirection.normalized;
