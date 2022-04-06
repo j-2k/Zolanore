@@ -2,8 +2,11 @@ Shader "Unlit/0FRAG_ULPractiseShader"
 {
     Properties
     {
+        _ControlMaterial("_ControlMaterial", Range(0,1)) = 1
         _MainTex ("Texture", 2D) = "white" {}
+        [HDR]
         _Color1("Color1", Color) = (1,1,1,1)
+        [HDR]
         _Color2("Color2", Color) = (1,1,1,1)
         _ColorSTART("ColorSTART", Range(0,1)) = 0
         _ColorEND("ColorEND", Range(0,1)) = 1
@@ -59,6 +62,7 @@ Shader "Unlit/0FRAG_ULPractiseShader"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _ControlMaterial;
 
             float _Scale;
             float _OffSet;
@@ -72,9 +76,9 @@ Shader "Unlit/0FRAG_ULPractiseShader"
             v2f vert (MeshData v)
             {
                 v2f o;
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 //o.uvs = TRANSFORM_TEX(v.uvs, _MainTex);
-
                 o.normal = UnityObjectToWorldNormal(v.normals);
                 //o.uv = (v.uvs + _OffSet) * _Scale;
                 o.uv = v.uvs;
@@ -115,19 +119,19 @@ Shader "Unlit/0FRAG_ULPractiseShader"
                 
                 
 
-                float yOffSet =  sin(i.uv.x * TAU * 8) * 0.01;
-                float t = sin((i.uv.y + yOffSet + -_Time.y/10) * TAU * 10) * 0.5 + 0.5;
+                float yOffSet =  sin(i.uv.x * TAU * _OffSet) * 0.01;
+                float t = sin((i.uv.y + yOffSet + -_Time.y/10) * TAU * _Scale) * 0.5 + 0.5;
 
-                t *= 1 - i.uv.y; //alpha from 1 - 0 fron down to up remove 1 - to opposite
+                //t *= 1 - i.uv.y; //alpha from 1 - 0 fron down to up remove 1 - to opposite
 
-                float topBottomRemove = (abs(i.normal.y) < 0.95);
+                //float topBottomRemove = (abs(i.normal.y) < 0.95);
                 
-                float waves = t * topBottomRemove;
+                float waves = t;// * topBottomRemove;
 
                 float4 gradient = lerp(_Color1,_Color2,i.uv.y);
 
-                return gradient * waves;
-                return waves; 
+                return gradient * waves * (_ControlMaterial);
+                //return waves; 
 
                 
                 // return t = t.xxxx;
