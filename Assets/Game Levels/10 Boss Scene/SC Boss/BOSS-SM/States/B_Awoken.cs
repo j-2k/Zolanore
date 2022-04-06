@@ -29,7 +29,7 @@ public class B_Awoken : Boss_State
         bsm.agent.enabled = false;
         timer = 0;
         radius = bsm.agent.radius * 0.9f;
-        end = Random.Range(20, 30);
+        end = Random.Range(10, 15);
         if (bsm.bossPhase == 1)
         {
             bsm.transform.position = center.transform.position;
