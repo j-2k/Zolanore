@@ -21,6 +21,7 @@ TagManager:
   - TrackButton
   - Chest
   - Interactable
+  - MenuData
   layers:
   - Default
   - TransparentFX
