@@ -13,8 +13,11 @@ public class SliderNumScript : MonoBehaviour
     private void Awake()
     {
         sliderSetting = GetComponentInChildren<Slider>();
-        sliderText = GetComponentInChildren<TextMeshProUGUI>();
-        sliderText.text = sliderSetting.value.ToString();
+        if (GetComponentInChildren<TextMeshProUGUI>() != null)
+        {
+            sliderText = GetComponentInChildren<TextMeshProUGUI>();
+            sliderText.text = sliderSetting.value.ToString();
+        }
     }
 
     public void ChangeTextValue()
@@ -22,8 +25,21 @@ public class SliderNumScript : MonoBehaviour
         sliderText.text = sliderSetting.value.ToString();
     }
 
+    public void ChangeTextValueSensitivity(TMP_InputField input)
+    {
+        input.text = (Mathf.Round(sliderSetting.value * 100f) / 100f).ToString();
+    }
+
+    public void ChangeSliderValue(TMP_InputField input)
+    {
+        sliderSetting.value = Mathf.Abs(float.Parse(input.text));
+    }
+
     private void OnEnable()
     {
-        sliderText.text = sliderSetting.value.ToString();
+        if (GetComponentInChildren<TextMeshProUGUI>() != null)
+        {
+            sliderText.text = sliderSetting.value.ToString();
+        }
     }
 }

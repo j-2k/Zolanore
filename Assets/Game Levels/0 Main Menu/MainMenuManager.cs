@@ -67,6 +67,11 @@ public class MainMenuManager : MonoBehaviour
         mouseSensitivity = Mathf.Abs(float.Parse(mouseInputField.text));
     }
 
+    public void SetMouseSensitivity(Slider mouseInputField)
+    {
+        mouseSensitivity = (mouseInputField.value);
+    }
+
     public void SetMusicVolume(Slider sliderValue)
     {
         musicVolume = sliderValue.value/sliderValue.maxValue;
