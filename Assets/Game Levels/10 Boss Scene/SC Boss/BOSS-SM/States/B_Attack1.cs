@@ -13,6 +13,7 @@ public class B_Attack1 : Boss_State
     [SerializeField] ParticleSystem blastCharge;
     [SerializeField] ParticleSystem blastVFX;
     [SerializeField] EGA_EffectSound blastSFX;
+    [SerializeField] OneshotDMGPFX oneshotDMG;
     [SerializeField] Transform playerGroundPosition;
 
     [SerializeField] float timer = 0;
@@ -62,7 +63,7 @@ public class B_Attack1 : Boss_State
 
     void BlastAttack(Boss_StateMachine bsm)
     {
-        if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= 3 && !oneBlast)
+        if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= 5 && !oneBlast)
         {
             oneBlast = true;
             blastCharge.Play();
@@ -87,6 +88,12 @@ public class B_Attack1 : Boss_State
     {
         blastVFX.Play();
         blastSFX.PlaySoundOnce();
+        Invoke(nameof(DelayOneShotDamage), 1);
+    }
+
+    void DelayOneShotDamage()
+    {
+        oneshotDMG.ApexOfVFX();
     }
 
     void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...

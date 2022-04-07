@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.022012148, g: 0.011660737, b: 0.019597799, a: 1}
+  m_IndirectSpecularColor: {r: 0.021994418, g: 0.0116924085, b: 0.019644761, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1617,6 +1617,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
   m_PrefabInstance: {fileID: 1632074343}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1499823364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4191390245395155378, guid: 687f982660b113b42b962f9262159d33, type: 3}
+  m_PrefabInstance: {fileID: 1632074343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499823363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442d6c9d9976e914aa10a1c18d305e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1500795869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1500795869, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -1654,6 +1665,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1331210812, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: oneshotDMG
+      value: 
+      objectReference: {fileID: 1632074345}
     - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: center
       value: 
@@ -1674,6 +1689,54 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1448946184}
+    - target: {fileID: 114298890440734004, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114298890440734004, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: bonusDamage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114298890440734004, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: damagingParticle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 908844967416281413, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 1664
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: bonusDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: DestoyMainEffect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: damagingParticle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: UseFirePointRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: UseWorldSpacePosition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138141147918471339, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: useOnlyRotationOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_Name
       value: Nightshade (BOSS)
@@ -1724,6 +1787,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 687f982660b113b42b962f9262159d33, type: 3}
+--- !u!1 &1632074344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1535640662441148, guid: 687f982660b113b42b962f9262159d33, type: 3}
+  m_PrefabInstance: {fileID: 1632074343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1632074345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632074344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bdb0527ca2627c45acc6394968ae2e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusDamage: 10
+  esm: {fileID: 1499823364}
+  sphereRadius: 5
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &1676477539 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6148840244478372102, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}

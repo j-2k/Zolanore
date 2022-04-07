@@ -17,10 +17,18 @@ public class ParticleCollisionInstance : MonoBehaviour
     private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
     private ParticleSystem ps;
 
+    [SerializeField] bool damagingParticle;
+    CharacterManager playerStats;
+    [SerializeField] int bonusDamage;
+    EnemyStatManager esm;
+
     void Start()
     {
         part = GetComponent<ParticleSystem>();
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
+        esm = GetComponentInParent<EnemyStatManager>();
     }
+
     void OnParticleCollision(GameObject other)
     {      
         int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);     
@@ -38,6 +46,10 @@ public class ParticleCollisionInstance : MonoBehaviour
                     instance.transform.rotation *= Quaternion.Euler(rotationOffset);
                 }
                 Destroy(instance, DestroyTimeDelay);
+            }
+            if (damagingParticle && other.gameObject.tag == "Player")
+            {
+                playerStats.TakeDamageFromEnemy(esm.DamageCalculation() + bonusDamage);
             }
         }
         if (DestoyMainEffect == true)

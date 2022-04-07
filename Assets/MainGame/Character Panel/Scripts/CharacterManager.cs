@@ -167,7 +167,7 @@ public class CharacterManager : MonoBehaviour
     {
         if (playerScript.isRolling){return;}
         lastTimeDamageTaken = Time.time;
-        incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 2);
+        incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 1.5f);
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
         playerCurrentHealth -= incDmg;
         Debug.Log("Final Dmg Taken is " + incDmg);

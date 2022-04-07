@@ -82,7 +82,7 @@ public class B_Attack2 : Boss_State
         {
             bossTurningSpeed = 300;
             //shit vector issue just guna use look at for now.
-            fireLineVFX.transform.LookAt(bsm.player.transform.position + (Vector3.up * 2));
+            fireLineVFX.transform.LookAt(bsm.player.transform.position + (Vector3.up * 3));
             if (timer >= 7f)
             {
                 bossTurningSpeed = 120;
