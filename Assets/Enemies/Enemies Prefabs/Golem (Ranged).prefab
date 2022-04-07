@@ -687,7 +687,7 @@ Transform:
   m_GameObject: {fileID: 1557426616913078769}
   m_LocalRotation: {x: 0, y: -0.9557469, z: 0, w: 0.29419047}
   m_LocalPosition: {x: 15.91, y: 10.78, z: 59.54}
-  m_LocalScale: {x: 1.5390005, y: 1.539, z: 1.5390005}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1553336544837483021}
   - {fileID: 1554148999288809939}
@@ -805,10 +805,14 @@ MonoBehaviour:
   bonusHealth: 0
   damage: 0
   defence: 0
+  invulnerable: 0
+  isBoss: 0
+  boss: {fileID: 0}
   maxHealth: 0
   curHealth: 0
   xp: 0
   bonusXP: 0
+  drop: {fileID: 0}
   hitID: 0
   hpBar: {fileID: 3205308596221179550}
 --- !u!1 &1557439343983684467
