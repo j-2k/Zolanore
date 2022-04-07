@@ -14,12 +14,7 @@ public class SliderNumScript : MonoBehaviour
     {
         sliderSetting = GetComponentInChildren<Slider>();
         sliderText = GetComponentInChildren<TextMeshProUGUI>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        sliderText.text = sliderSetting.value.ToString();
     }
 
     public void ChangeTextValue()

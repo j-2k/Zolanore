@@ -9,6 +9,9 @@ using TMPro;
 public class MainMenuManager : MonoBehaviour
 {
     public float mouseSensitivity;
+    public float musicVolume;
+    public float SFXVolume;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +64,16 @@ public class MainMenuManager : MonoBehaviour
 
     public void SetMouseSensitivity(TMP_InputField mouseInputField)
     {
-        mouseSensitivity = float.Parse(mouseInputField.text);
+        mouseSensitivity = Mathf.Abs(float.Parse(mouseInputField.text));
     }
 
+    public void SetMusicVolume(Slider sliderValue)
+    {
+        musicVolume = sliderValue.value/sliderValue.maxValue;
+    }
+
+    public void SetSFXVolume(Slider sliderValue)
+    {
+        SFXVolume = sliderValue.value/sliderValue.maxValue;
+    }
 }

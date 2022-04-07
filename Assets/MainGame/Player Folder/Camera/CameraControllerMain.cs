@@ -14,7 +14,7 @@ public class CameraControllerMain : MonoBehaviour
     //[SerializeField] float cameraSpeed = 2;
     float currentRotY, currentTiltX = 20, currentCameraDistance = 5;
     [Range(0, 25)]
-    [SerializeField] float cameraSensitivity = 2;
+    [SerializeField] float cameraSensitivity = 3;
 
     //ref
     Transform player;
@@ -54,6 +54,12 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
+        cameraSensitivity = GameObject.FindGameObjectWithTag("MenuData").GetComponent<MainMenuManager>().mouseSensitivity;
+        if (cameraSensitivity <= 0)
+        {
+            cameraSensitivity = 3;
+        }
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         mainCam = Camera.main;
 
