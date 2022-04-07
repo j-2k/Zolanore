@@ -22,11 +22,8 @@ public class OneshotDMGPFX : MonoBehaviour
     {
         Debug.Log("CALLING APEX OF VFX");
         playerColl = Physics.OverlapSphere(transform.position, sphereRadius, playerMask);
-        int i = 0;
         foreach (Collider coll in playerColl)
         {
-            Debug.Log(coll.name + i);
-            i++;
             if (coll.tag == "Player")
             {
                 cm.TakeDamageFromEnemy(esm.DamageCalculation() + bonusDamage);

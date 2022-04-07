@@ -77,14 +77,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2185469965348692912, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
       propertyPath: m_Name
-      value: ShaderTreeShowcaseG PREFAB Variant (1)
+      value: ShaderTreeShowcaseG PREFAB Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301455734887755667, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2452733844956577852, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ab0fde8966f158a418acea45520efaf2, type: 2}
+    - target: {fileID: 3308151994885915391, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 9ccfc6aeb38e15541a3f31de1307219e, type: 3}
       propertyPath: m_Size
       value: 9.278985

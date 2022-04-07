@@ -19,24 +19,14 @@ public class OneshotMeteor : MonoBehaviour
 
     public void ApexOfVFX()
     {
-        Debug.Log("CALLING APEX OF VFX");
         playerColl = Physics.OverlapSphere(transform.position, 4, 1 << 9);
-        int i = 0;
         foreach (Collider coll in playerColl)
         {
-            Debug.Log(coll.name + i);
-            i++;
             if (coll.tag == "Player")
             {
                 cm = coll.GetComponent<CharacterManager>();
                 cm.TakeDamageFromEnemy(esm.DamageCalculation() + bonusDamage);
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 4);
     }
 }
