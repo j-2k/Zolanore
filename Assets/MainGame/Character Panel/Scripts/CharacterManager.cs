@@ -44,6 +44,8 @@ public class CharacterManager : MonoBehaviour
 
     float timeOfHit;
 
+    [SerializeField] ScreenDarken deathScreen;
+
     private void OnValidate()
     {
         if (itemTooltip == null)
@@ -178,8 +180,9 @@ public class CharacterManager : MonoBehaviour
         {
             playerCurrentHealth = 0;
             isDead = true;
-            playerAnimator.SetTrigger("DeadTrigger");
-            
+            playerAnimator.SetBool("DeadBool",true);
+            deathScreen.gameObject.SetActive(true);
+
             //player died
             //respawn in some location
             //play death animation then at the end of death animation trigger anim event to send the player to respawn location
@@ -190,6 +193,15 @@ public class CharacterManager : MonoBehaviour
             isDead = false;
         }
         RefreshPlayerUI();
+    }
+
+    public void RespawnPlayer()
+    {
+        playerAnimator.SetBool("DeadBool", false);
+        playerCurrentHealth = playerMaxHealth;
+        curStamina = maxStamina;
+        RefreshPlayerUI();
+        isDead = false;
     }
 
     public void RefreshPlayerUI()
