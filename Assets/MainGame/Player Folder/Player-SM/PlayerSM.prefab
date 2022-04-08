@@ -1257,6 +1257,10 @@ PrefabInstance:
       value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
+      propertyPath: getSensitivity
+      value: 
+      objectReference: {fileID: 11400000, guid: 2403b3734a228ef459d69099a7b2f4b6, type: 2}
+    - target: {fileID: 5316645480464902279, guid: 276b4e70a9d1d2f4c8ebac6528771503, type: 3}
       propertyPath: cameraDistanceMax
       value: 20
       objectReference: {fileID: 0}

@@ -72,42 +72,44 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(comboStep);
-        //CCGroundCheckFunc();
-        RawMovementFunc();
-        isAttackCheck();
-        if (Input.GetKeyDown(KeyCode.R))
+        if (!IngameMenu.gameIsPaused)
         {
-            playerFamiliar.callFamiliarBack = true;
-            Debug.Log("Calling back Familiar");
-        }
-
-        if (!isMovingAbility)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && !isAttacking && !isRolling)
+            //Debug.Log(comboStep);
+            //CCGroundCheckFunc();
+            RawMovementFunc();
+            isAttackCheck();
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                PlayerJump();
+                playerFamiliar.callFamiliarBack = true;
+                Debug.Log("Calling back Familiar");
             }
 
-
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !isAttacking && !isJumping && !isRolling)
+            if (!isMovingAbility)
             {
-                characterManager.CombatRoll();
-            }
-            characterManager.StaminaRegeneration();
+                if (Input.GetKeyDown(KeyCode.Space) && !isAttacking && !isRolling)
+                {
+                    PlayerJump();
+                }
 
-            if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling && !inventoryCheck.activePanel)// && !isAttacking)
+
+                if (Input.GetKeyDown(KeyCode.LeftShift) && !isAttacking && !isJumping && !isRolling)
+                {
+                    characterManager.CombatRoll();
+                }
+                characterManager.StaminaRegeneration();
+
+                if (Input.GetKey(KeyCode.Mouse0) && !isJumping && !isRolling && !inventoryCheck.activePanel)// && !isAttacking)
+                {
+                    Attacking();
+                }
+
+                BlendTreeAnimations();
+            }
+            else
             {
-                Attacking();
+                playerAnimator.SetFloat("rmVelocity", 0);
             }
-
-            BlendTreeAnimations();
         }
-        else
-        {
-            playerAnimator.SetFloat("rmVelocity", 0);
-        }
-
         
     }
 
@@ -128,6 +130,7 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()
     {
+
         if (!isMovingAbility)
         {
             if (!isAttacking)

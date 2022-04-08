@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-
-public class MainMenuManager : MonoBehaviour
+[CreateAssetMenu(menuName = "Menu SO/MenuDataScriptableObject")]
+public class MainMenuManager : ScriptableObject
 {
     public float mouseSensitivity;
     public float musicVolume;
@@ -14,9 +14,12 @@ public class MainMenuManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this);
+        mouseSensitivity = 2;
+        musicVolume = 20;
+        SFXVolume = 20;
     }
 
     // Update is called once per frame

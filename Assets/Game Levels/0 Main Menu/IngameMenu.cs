@@ -9,11 +9,16 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] GameObject menu;
     [SerializeField] AudioSource bgm;
     [SerializeField] Slider volumeSlider;
+    [SerializeField] MainMenuManager mmm;
+    CameraControllerMain cam;
+
+    public static bool gameIsPaused;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam = GameObject.FindGameObjectWithTag("CameraManager").GetComponent<CameraControllerMain>();
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -21,15 +26,31 @@ public class IngameMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (menu.activeSelf)
-            {
-                menu.SetActive(false);
-            }
-            else
-            {
-                menu.SetActive(true);
-            }
+            gameIsPaused = !gameIsPaused;
+            PauseGame();
         }
+    }
+
+    void PauseGame()
+    {
+        if (gameIsPaused)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            menu.SetActive(true);
+            AudioListener.pause = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            ApplyAllChanges();
+            menu.SetActive(false);
+            AudioListener.pause = false;
+            Time.timeScale = 1;
+        }
+
     }
 
     public void ApplyVolume()
@@ -40,5 +61,17 @@ public class IngameMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void CloseMenu()
+    {
+        ApplyAllChanges();
+        menu.SetActive(false);
+    }
+
+    public void ApplyAllChanges()
+    {
+        cam.SetSens(mmm.mouseSensitivity);
+        bgm.volume = mmm.musicVolume;
     }
 }

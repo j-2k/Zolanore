@@ -42,7 +42,7 @@ public class CameraControllerMain : MonoBehaviour
 
     [SerializeField] GameObject chestUIPrompt;
     [SerializeField] GameObject interactUIPrompt;//could just change txt to be interact instead...
-
+    [SerializeField] MainMenuManager getSensitivity;
 
 
     Transform firstChildRotX;
@@ -52,9 +52,14 @@ public class CameraControllerMain : MonoBehaviour
         firstChildRotX = transform.GetChild(0);
     }
 
+    public void SetSens(float newSens)
+    {
+        cameraSensitivity = newSens;
+    }
+
     void Start()
     {
-        cameraSensitivity = GameObject.FindGameObjectWithTag("MenuData").GetComponent<MainMenuManager>().mouseSensitivity;
+        cameraSensitivity = getSensitivity.mouseSensitivity;
         if (cameraSensitivity <= 0)
         {
             cameraSensitivity = 3;
@@ -154,7 +159,7 @@ public class CameraControllerMain : MonoBehaviour
 
     void CameraInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !invenActiveCheck.activePanel)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !invenActiveCheck.activePanel && !IngameMenu.gameIsPaused)
         {
             if (Cursor.visible)
             {
@@ -169,6 +174,25 @@ public class CameraControllerMain : MonoBehaviour
                 shouldCameraRotate = false;
             }
         }
+
+        /*
+        if (Input.GetKey(KeyCode.Mouse1) && !IngameMenu.gameIsPaused)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            shouldCameraRotate = false;
+        }
+        else
+        {
+            if (!invenActiveCheck.activePanel)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                shouldCameraRotate = true;
+            }
+        }
+        */
+
     }
 
     void CameraHandler()
@@ -184,7 +208,7 @@ public class CameraControllerMain : MonoBehaviour
         //new col line
         mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
 
-        if (shouldCameraRotate)
+        if (shouldCameraRotate && !IngameMenu.gameIsPaused)
         {
             currentRotY += Input.GetAxisRaw("Mouse X") * (cameraSensitivity);
             currentTiltX -= Input.GetAxisRaw("Mouse Y") * (cameraSensitivity);

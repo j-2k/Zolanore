@@ -23,51 +23,54 @@ public class InventoryInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(toggleInventoryPanelKey))
+        if (!IngameMenu.gameIsPaused)
         {
-            inventoryPanelGameobject.SetActive(!inventoryPanelGameobject.activeSelf);
-            if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
+            if (Input.GetKeyDown(toggleInventoryPanelKey))
             {
-                ShowMouseCursor();
-            }
-            else
-            {
-                HideMouseCursor();
+                inventoryPanelGameobject.SetActive(!inventoryPanelGameobject.activeSelf);
+                if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
+                {
+                    ShowMouseCursor();
+                }
+                else
+                {
+                    HideMouseCursor();
+                }
+
+                if (!inventoryPanelGameobject.activeSelf && !equipmentPanelGameObject.activeSelf)
+                {
+                    abilityBarGameObject.SetActive(true);
+                }
+                else
+                {
+                    abilityBarGameObject.SetActive(false);
+                }
+                CheckActivePanels();
             }
 
-            if (!inventoryPanelGameobject.activeSelf && !equipmentPanelGameObject.activeSelf)
-            {
-                abilityBarGameObject.SetActive(true);
-            }
-            else
-            {
-                abilityBarGameObject.SetActive(false);
-            }
-            CheckActivePanels();
-        }
 
+            if (Input.GetKeyDown(toggleEquipmentPanelKey))
+            {
+                equipmentPanelGameObject.SetActive(!equipmentPanelGameObject.activeSelf);
+                if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
+                {
+                    ShowMouseCursor();
+                }
+                else
+                {
+                    HideMouseCursor();
+                }
 
-        if (Input.GetKeyDown(toggleEquipmentPanelKey))
-        {
-            equipmentPanelGameObject.SetActive(!equipmentPanelGameObject.activeSelf);
-            if (inventoryPanelGameobject.activeSelf || equipmentPanelGameObject.activeSelf)
-            {
-                ShowMouseCursor();
+                if (!inventoryPanelGameobject.activeSelf && !equipmentPanelGameObject.activeSelf)
+                {
+                    abilityBarGameObject.SetActive(true);
+                }
+                else
+                {
+                    abilityBarGameObject.SetActive(false);
+                }
+                CheckActivePanels();
             }
-            else
-            {
-                HideMouseCursor();
-            }
-
-            if (!inventoryPanelGameobject.activeSelf && !equipmentPanelGameObject.activeSelf)
-            {
-                abilityBarGameObject.SetActive(true);
-            }
-            else
-            {
-                abilityBarGameObject.SetActive(false);
-            }
-            CheckActivePanels();
         }
     }
 

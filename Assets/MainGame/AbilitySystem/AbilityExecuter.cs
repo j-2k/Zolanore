@@ -67,62 +67,65 @@ public class AbilityExecuter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (abilityState)
+        if (!IngameMenu.gameIsPaused)
         {
-            case AbilityState.ready:
-                if (Input.GetKeyDown(abilityKey))
-                {
-                    ability.OnActivate(player);
-                    abilityState = AbilityState.active;
-                    activeTime = ability.activeTime;
-                    abilityManager.Activated(this, abilityType);
-                }
-                break;
-            case AbilityState.active:
-                ability.AbilityUpdateActive(player);
-                if (activeTime > 0)
-                {
-                    //if bypass is true we dont cancel
-                    //if bypass is false  && cancel is true cancel ability
-                    
-                    if (ability.singleTrigger)//!ability.bypassCancel && cancelTrigger ||    //will make buff work with spin aoe example & will initiate cooldown for singletrigger if completed
+            switch (abilityState)
+            {
+                case AbilityState.ready:
+                    if (Input.GetKeyDown(abilityKey))
+                    {
+                        ability.OnActivate(player);
+                        abilityState = AbilityState.active;
+                        activeTime = ability.activeTime;
+                        abilityManager.Activated(this, abilityType);
+                    }
+                    break;
+                case AbilityState.active:
+                    ability.AbilityUpdateActive(player);
+                    if (activeTime > 0)
+                    {
+                        //if bypass is true we dont cancel
+                        //if bypass is false  && cancel is true cancel ability
+
+                        if (ability.singleTrigger)//!ability.bypassCancel && cancelTrigger ||    //will make buff work with spin aoe example & will initiate cooldown for singletrigger if completed
+                        {
+                            SendToCooldown();
+                        }
+
+                        activeTime -= Time.deltaTime;
+                    }
+                    else
                     {
                         SendToCooldown();
                     }
-
-                    activeTime -= Time.deltaTime;
-                }
-                else
-                {
-                    SendToCooldown();
-                }
-                break;
-            case AbilityState.cooldown:
-                ability.AbilityUpdateCooldown(player);
-                if (cooldownTime > 0)
-                {
-                    cooldownTime -= Time.deltaTime;
-                }
-                else
-                {
-                    abilityState = AbilityState.ready;
-                    cooldownTime = 0;
-                }
-                break;
-            case AbilityState.gcd:
-                ability.AbilityUpdateCooldown(player);
-                if (gcd > 0)
-                {
-                    gcd -= Time.deltaTime;
-                }
-                else
-                {
-                    abilityState = AbilityState.ready;
-                    gcd = 3;
-                }
-                break;
-            default:
-                break;
+                    break;
+                case AbilityState.cooldown:
+                    ability.AbilityUpdateCooldown(player);
+                    if (cooldownTime > 0)
+                    {
+                        cooldownTime -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        abilityState = AbilityState.ready;
+                        cooldownTime = 0;
+                    }
+                    break;
+                case AbilityState.gcd:
+                    ability.AbilityUpdateCooldown(player);
+                    if (gcd > 0)
+                    {
+                        gcd -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        abilityState = AbilityState.ready;
+                        gcd = 3;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
