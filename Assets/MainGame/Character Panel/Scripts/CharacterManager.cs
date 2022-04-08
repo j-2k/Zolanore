@@ -11,6 +11,7 @@ public class CharacterManager : MonoBehaviour
     public int playerMaxHealth = 100;
     public int playerCurrentHealth = 100;
 
+    public static bool isDead;
 
     //ADD NEW STATS HERE
     public CharacterStat Strength;
@@ -39,6 +40,7 @@ public class CharacterManager : MonoBehaviour
 
     LevelSystem levelSystem;
     PlayerManager playerScript;
+    [SerializeField] Animator playerAnimator;
 
     float timeOfHit;
 
@@ -125,7 +127,7 @@ public class CharacterManager : MonoBehaviour
 
     void HealthRegeneration()
     {
-        if (playerCurrentHealth < playerMaxHealth)
+        if (playerCurrentHealth < playerMaxHealth && !isDead)
         {   //5 is the seconds of offset to start regenerating
             if (lastTimeDamageTaken + 10 <= Time.time)
             {
@@ -153,7 +155,7 @@ public class CharacterManager : MonoBehaviour
 
     public void StaminaRegeneration()
     {
-        if (curStamina <= maxStamina)
+        if (curStamina <= maxStamina && !isDead)
         {   //5 is the seconds of offset to start regenerating
             if (lastTimeRolled + 5 <= Time.time)
             {
@@ -175,10 +177,17 @@ public class CharacterManager : MonoBehaviour
         if (playerCurrentHealth < 1)
         {
             playerCurrentHealth = 0;
+            isDead = true;
+            playerAnimator.SetTrigger("DeadTrigger");
+            
             //player died
             //respawn in some location
             //play death animation then at the end of death animation trigger anim event to send the player to respawn location
 
+        }
+        else
+        {
+            isDead = false;
         }
         RefreshPlayerUI();
     }

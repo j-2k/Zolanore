@@ -67,7 +67,7 @@ public class AbilityExecuter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IngameMenu.gameIsPaused)
+        if (!IngameMenu.gameIsPaused && !CharacterManager.isDead)
         {
             switch (abilityState)
             {

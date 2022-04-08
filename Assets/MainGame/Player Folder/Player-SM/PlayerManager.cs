@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (!IngameMenu.gameIsPaused)
+        if (!IngameMenu.gameIsPaused && !CharacterManager.isDead)
         {
             //Debug.Log(comboStep);
             //CCGroundCheckFunc();
@@ -130,8 +130,7 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()
     {
-
-        if (!isMovingAbility)
+        if (!isMovingAbility && !CharacterManager.isDead)
         {
             if (!isAttacking)
             {
