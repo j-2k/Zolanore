@@ -27,8 +27,8 @@ Material:
     - _ColorEND: 0.6
     - _ColorSTART: 0.4
     - _ControlMaterial: 1
-    - _OffSet: 0
-    - _Scale: 1
+    - _OffSet: 10
+    - _Scale: 10
     m_Colors:
     - _Color1: {r: 0, g: 0.3333335, b: 1, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}

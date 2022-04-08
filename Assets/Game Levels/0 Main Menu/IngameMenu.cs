@@ -8,7 +8,6 @@ public class IngameMenu : MonoBehaviour
 {
     [SerializeField] GameObject menu;
     [SerializeField] AudioSource bgm;
-    [SerializeField] Slider volumeSlider;
     [SerializeField] MainMenuManager mmm;
     CameraControllerMain cam;
 
@@ -51,11 +50,6 @@ public class IngameMenu : MonoBehaviour
             Time.timeScale = 1;
         }
 
-    }
-
-    public void ApplyVolume()
-    {
-        bgm.volume = volumeSlider.value;
     }
 
     public void BackToMainMenu()
