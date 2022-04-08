@@ -12736,6 +12736,10 @@ MonoBehaviour:
   menu: {fileID: 1692190711}
   bgm: {fileID: 0}
   mmm: {fileID: 11400000, guid: 2403b3734a228ef459d69099a7b2f4b6, type: 2}
+  mouseInputField: {fileID: 0}
+  mouseSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  SFXSlider: {fileID: 0}
 --- !u!1 &1655416471
 GameObject:
   m_ObjectHideFlags: 0

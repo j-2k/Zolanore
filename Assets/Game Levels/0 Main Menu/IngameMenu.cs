@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class IngameMenu : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class IngameMenu : MonoBehaviour
     [SerializeField] AudioSource bgm;
     [SerializeField] MainMenuManager mmm;
     CameraControllerMain cam;
+
+    [SerializeField] TMP_InputField mouseInputField;
+    [SerializeField] Slider mouseSlider;
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider SFXSlider;
 
     public static bool gameIsPaused;
 
@@ -44,6 +50,10 @@ public class IngameMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             menu.SetActive(true);
             AudioListener.pause = true;
+            mouseInputField.text = mmm.mouseSensitivity.ToString();
+            mouseSlider.value = mmm.mouseSensitivity;
+            musicSlider.value = (mmm.musicVolume * 100);
+            SFXSlider.value = (mmm.SFXVolume * 100);
             Time.timeScale = 0;
         }
         else

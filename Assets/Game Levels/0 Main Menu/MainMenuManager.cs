@@ -17,9 +17,9 @@ public class MainMenuManager : ScriptableObject
     void Awake()
     {
         DontDestroyOnLoad(this);
-        mouseSensitivity = 2;
-        musicVolume = 20;
-        SFXVolume = 20;
+        mouseSensitivity = 3;
+        musicVolume = 25;
+        SFXVolume = 25;
     }
 
     // Update is called once per frame
@@ -83,5 +83,10 @@ public class MainMenuManager : ScriptableObject
     public void SetSFXVolume(Slider sliderValue)
     {
         SFXVolume = sliderValue.value/sliderValue.maxValue;
+    }
+
+    public void SaveSettings()
+    {
+        
     }
 }
