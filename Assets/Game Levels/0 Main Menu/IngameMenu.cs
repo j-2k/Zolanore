@@ -30,6 +30,12 @@ public class IngameMenu : MonoBehaviour
         }
     }
 
+    public void PauseGameButton()
+    {
+        gameIsPaused = !gameIsPaused;
+        PauseGame();
+    }
+
     void PauseGame()
     {
         if (gameIsPaused)
@@ -55,6 +61,7 @@ public class IngameMenu : MonoBehaviour
     {
         ApplyAllChanges();
         Time.timeScale = 1;
+        AudioListener.pause = false;
         SceneManager.LoadScene(0);
     }
 
