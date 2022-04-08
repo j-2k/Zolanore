@@ -42,8 +42,7 @@ public class IngameMenu : MonoBehaviour
         }
         else
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            StartCoroutine(HideCursorDelay());
             ApplyAllChanges();
             menu.SetActive(false);
             AudioListener.pause = false;
@@ -54,6 +53,8 @@ public class IngameMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        ApplyAllChanges();
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 
@@ -67,5 +68,14 @@ public class IngameMenu : MonoBehaviour
     {
         cam.SetSens(mmm.mouseSensitivity);
         bgm.volume = mmm.musicVolume;
+    }
+
+    IEnumerator HideCursorDelay()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        yield return new WaitForEndOfFrame();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
