@@ -11,10 +11,10 @@ public enum EquipmentType
     Chestplate,
     Platelegs,
     Boots,
-    Accessory1,
-    Accessory2,
-    Accessory3,
-    Accessory4,
+    Necklace,
+    Book,
+    Gem,
+    Ring,
 }
 
 

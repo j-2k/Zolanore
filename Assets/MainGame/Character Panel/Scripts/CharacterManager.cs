@@ -169,7 +169,7 @@ public class CharacterManager : MonoBehaviour
 
     public void TakeDamageFromEnemy(int incDmg)
     {
-        if (playerScript.isRolling){return;}
+        if (playerScript.isRolling || PlayerCodes.godMode){return;}
         lastTimeDamageTaken = Time.time;
         incDmg -= (Mathf.RoundToInt(Defence.Value)) + Mathf.RoundToInt(Defence.BaseValue * 1.5f);
         incDmg = Mathf.Clamp(incDmg, 0, int.MaxValue);
