@@ -26,6 +26,8 @@ public class B_Awoken : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        speed = 0;
+        bsm.anim.SetBool("Awoken", true);
         bsm.agent.enabled = false;
         timer = 0;
         radius = bsm.agent.radius * 0.9f;
@@ -96,6 +98,7 @@ public class B_Awoken : Boss_State
             if (isGrounded)
             {
                 bsm.agent.enabled = true;
+                bsm.anim.SetBool("Awoken", false);
                 bsm.BossSwitchState(bsm.chaseState);
             }
         }

@@ -776,10 +776,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2399,8 +2399,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6187643201853825559}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: bb19f6f7c2ced1d4aa9cdf3606679d5d, type: 3}
+  m_Controller: {fileID: 9100000, guid: ad0644e2d0bb15a4c8242cef48490c45, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2429,6 +2429,7 @@ MonoBehaviour:
   attack1State: {fileID: 1331210812}
   attack2State: {fileID: 1331210817}
   deathState: {fileID: 1331210815}
+  anim: {fileID: 8404235612817113622}
   playerDirection: {x: 0, y: 0, z: 0}
 --- !u!195 &6421998260467441475
 NavMeshAgent:
@@ -2441,7 +2442,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
-  m_Acceleration: 16
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 15

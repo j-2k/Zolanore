@@ -16,6 +16,7 @@ public class Boss_StateMachine : MonoBehaviour
     public B_Attack2 attack2State;// = new B_Attack2();
     public B_Death deathState;// = new B_Death();
 
+    public Animator anim;
 
     public Vector3 playerDirection;
 
@@ -37,6 +38,9 @@ public class Boss_StateMachine : MonoBehaviour
 
     public void BossSwitchState(Boss_State newState)
     {
+        anim.SetBool("Awoken", false);
+        anim.SetBool("Chase", false);
+        anim.SetBool("LoopMeteor", false);
         currentState = newState;
         newState.StartState(this);
     }

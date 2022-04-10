@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.022003243, g: 0.011714156, b: 0.019612025, a: 1}
+  m_IndirectSpecularColor: {r: 0.022000713, g: 0.011676406, b: 0.019601738, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2868,6 +2868,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
   m_PrefabInstance: {fileID: 1632074343}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1499823368 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8404235612817113622, guid: 687f982660b113b42b962f9262159d33, type: 3}
+  m_PrefabInstance: {fileID: 1632074343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1500795869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1500795869, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -2961,6 +2966,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nightshade (BOSS)
       objectReference: {fileID: 0}
+    - target: {fileID: 6421998260467441475, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: m_Acceleration
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421998260467441476, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1499823368}
     - target: {fileID: 6815419693359954093, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_RootOrder
       value: 8
