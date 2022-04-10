@@ -79,13 +79,13 @@ public class B_Attack1 : Boss_State
         
         if (timer >= 2f)
         {
-            oneBlast = false;
             timer = 0;
             cycles++;
             Instantiate(meteorVFX, playerGroundPosition.position + (Vector3.up * 0.1f), Quaternion.identity);
             if (cycles > (cycleInitialization - 1)/2)
             {
                 cycles = 0;
+                bsm.anim.ResetTrigger("StartBlast");
                 bsm.BossSwitchState(bsm.chaseState);
             }
         }
@@ -96,6 +96,7 @@ public class B_Attack1 : Boss_State
         yield return new WaitForSeconds(1.25f);
         blastVFX.Play();
         blastSFX.PlaySoundOnce();
+        yield return new WaitForSeconds(0.7f);
         bsm.anim.SetBool("LoopBlast", false);
     }
 
@@ -109,6 +110,7 @@ public class B_Attack1 : Boss_State
     public void DelayOneShotDamage()
     {
         oneshotDMG.ApexOfVFX();
+        oneBlast = false;
     }
 
     void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...

@@ -68020,9 +68020,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.33333334
-    functionName: DelayOneShotDamage
+    functionName: DamageParticles
     data: 
-    objectReferenceParameter: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

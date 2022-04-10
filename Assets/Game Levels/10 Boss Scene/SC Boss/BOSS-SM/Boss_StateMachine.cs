@@ -44,4 +44,9 @@ public class Boss_StateMachine : MonoBehaviour
         currentState = newState;
         newState.StartState(this);
     }
+    
+    public void DamageParticles()
+    {
+        attack1State.DelayOneShotDamage();
+    }
 }
