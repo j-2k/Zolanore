@@ -1492,6 +1492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questEnemyName: Wolf
+  questTracker: {fileID: 0}
   enemyLevel: 0
   bonusLevel: 0
   bonusDamage: 0

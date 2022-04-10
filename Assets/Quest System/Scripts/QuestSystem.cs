@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestSystem : MonoBehaviour
 {
-    [SerializeField] GameObject interactUI;
-    GameObject questJournal;
+    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton,acceptButton;
 
     GameObject questInformation;
-    GameObject claimButton;
-    GameObject acceptButton;
 
     public GameObject closestQuestGiver;
 
@@ -250,6 +248,18 @@ public class QuestSystem : MonoBehaviour
 
         questManager.InstantiateQuestButton(questGiver.quest);
 
+        questTracker.SetActive(true);
+        questTrackerName.SetActive(true);
+        questTrackerName.GetComponent<Text>().text = closestQuestGiver.GetComponent<QuestGiver>().quest.name;
+        for (int i = 0; i < closestQuestGiver.GetComponent<QuestGiver>().quest.Goals.Count; i++)
+        {
+            GameObject goalPrefab = Instantiate(questTrackerGoalPrefab, questTracker.transform);
+            goalPrefab.transform.parent = questTracker.transform;
+            goalPrefab.name = closestQuestGiver.GetComponent<QuestGiver>().quest.Goals[i].GetDescription();
+            goalPrefab.transform.Find("Goal Name").GetComponent<Text>().text = closestQuestGiver.GetComponent<QuestGiver>().quest.Goals[i].GetDescription();
+            goalPrefab.transform.Find("Counter").GetComponent<Text>().text = "0 / " + closestQuestGiver.GetComponent<QuestGiver>().quest.Goals[i].RequiredAmount;
+        }
+
         questGiver.acceptedQuest = true;
 
         questGiver.questActive = true;
@@ -263,9 +273,14 @@ public class QuestSystem : MonoBehaviour
 
     public void Claim()
     {
+        for (int i = 0; i < questTracker.transform.childCount; i++)
+        {
+            Destroy(questTracker.transform.GetChild(i));
+        }
+        questTracker.SetActive(false);
         interactUI.SetActive(false);
-        Debug.LogWarning("Congrats !" + questGiver.quest.Reward.XP);
-        Debug.LogWarning("Congrats !" + questGiver.quest.Reward.Currency);
+        Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
+        Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
         Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);
         questManager.CurrentQuests.Remove(questGiver.quest);
         questWindow.CloseWindow();
