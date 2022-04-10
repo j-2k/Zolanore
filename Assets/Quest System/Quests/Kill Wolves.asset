@@ -15,8 +15,9 @@ MonoBehaviour:
   Information:
     Icon: {fileID: 21300000, guid: f507f03eb80bcbf49bb458bd6a54bd9a, type: 3}
     Name: Kill Wolves
-    Description: Due to a sever wound in your chest you need to go and kill goblins,
-      they murdered your family, go kill them asshole
+    Description: Hello stranger ! Welcome to Zolanor, to start off, I would like
+      to warn you about the dangers of this island, there are a lot of dangerous
+      creatures! How about you start off by wiping out some of them ?
   Reward:
     Currency: 200
     XP: 50
@@ -34,7 +35,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbb8692f7fa07c46b8b1659984d1298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RequiredAmount: 5
+  RequiredAmount: 3
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []

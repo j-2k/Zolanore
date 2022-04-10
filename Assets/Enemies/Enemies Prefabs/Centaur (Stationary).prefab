@@ -1930,7 +1930,7 @@ GameObject:
   - component: {fileID: -1868222538584832079}
   m_Layer: 0
   m_Name: Centaur (Stationary)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2058,16 +2058,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questEnemyName: Centaur
+  questTracker: {fileID: 0}
   enemyLevel: 0
   bonusLevel: 0
   bonusDamage: 0
   bonusHealth: 0
   damage: 0
   defence: 0
+  invulnerable: 0
+  isBoss: 0
+  boss: {fileID: 0}
   maxHealth: 0
   curHealth: 0
   xp: 0
   bonusXP: 0
+  drop: {fileID: 0}
   hitID: 0
   hpBar: {fileID: 5583687565840631657}
 --- !u!1 &8166254079092297900

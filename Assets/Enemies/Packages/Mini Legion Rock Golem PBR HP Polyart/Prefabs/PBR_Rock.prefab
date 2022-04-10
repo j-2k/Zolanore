@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 95073031519216586}
   - component: {fileID: -8500678665324001973}
   - component: {fileID: 3003799170315708840}
+  - component: {fileID: 5604901330698742263}
   m_Layer: 0
   m_Name: PBR_Rock
   m_TagString: Untagged
@@ -132,3 +133,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 103.48565
   m_Center: {x: 0, y: -15.839397, z: 0}
+--- !u!114 &5604901330698742263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375754531036840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c626101465fe04e99d45dd0f3f70ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

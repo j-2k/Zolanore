@@ -11,6 +11,7 @@ public class EnemyStatManager : MonoBehaviour
     [Header("Assign Level & extra stats")]
     [Header("ENEMY LEVEL IS PRE-DEF TO PLAYER LVL CHECK CODE")]
     [SerializeField] string questEnemyName;
+    [SerializeField] GameObject questTracker;
     [SerializeField] int enemyLevel;
     [SerializeField] int bonusLevel;
     [SerializeField] int bonusDamage;
@@ -38,9 +39,14 @@ public class EnemyStatManager : MonoBehaviour
 
     public HealthBar hpBar;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        questTracker = GameObject.Find("QuestTracker");
+
+    }
     void Start()
     {
+        questTracker.SetActive(false);
         drop = GameObject.Find("ItemDrop");
         questManager = FindObjectOfType<QuestManager>();
 
@@ -105,6 +111,17 @@ public class EnemyStatManager : MonoBehaviour
                 if (curHealth <= 0)
                 {
                     levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+                    if (questTracker.transform.childCount != 0)
+                    {
+                        for (int i = 0; i < questTracker.transform.childCount; i++)
+                        {
+                            string tempString = "Kill " + questEnemyName;
+                            if (tempString == questTracker.transform.GetChild(i).name)
+                            {
+                                questTracker.GetComponent<QuestTracker>().IncrementCount(i);
+                            }
+                        }
+                    }
                     /*
                     questManager.Kill(questEnemyName);
                     int dropPerc = Random.Range(1, 100);
