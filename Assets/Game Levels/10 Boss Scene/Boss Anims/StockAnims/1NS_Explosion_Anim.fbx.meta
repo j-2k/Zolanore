@@ -5,13 +5,13 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Standing 2H Magic Area Attack 02
+    second: Start_Blast
   - first:
       74: 6011614786416911802
-    second: Standing 2H Magic Area Attack 02 (1)
+    second: Charging_Blast
   - first:
       74: -7378142112331215046
-    second: Standing 2H Magic Area Attack 02 (2)
+    second: Blast
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -41,7 +41,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Standing 2H Magic Area Attack 02
+      name: Start_Blast
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
@@ -70,7 +70,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Standing 2H Magic Area Attack 02 (1)
+      name: Charging_Blast
       takeName: mixamo.com
       internalID: 0
       firstFrame: 32
@@ -99,7 +99,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Standing 2H Magic Area Attack 02 (2)
+      name: Blast
       takeName: mixamo.com
       internalID: 0
       firstFrame: 46

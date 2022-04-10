@@ -47,11 +47,13 @@ public class B_Chase : Boss_State
             lookAtPlayer.y = 0;
 
             bsm.transform.rotation = Quaternion.RotateTowards(bsm.transform.rotation, Quaternion.LookRotation(lookAtPlayer), 120 * Time.deltaTime);
+            bsm.anim.SetBool("Chase", false);
         }
         else
         {
             bsm.agent.isStopped = false;
             bsm.agent.SetDestination(bsm.player.transform.position);
+            bsm.anim.SetBool("Chase", true);
         }
     }
 
@@ -65,6 +67,7 @@ public class B_Chase : Boss_State
                 matScript.SetMaterialValue(1);
             }
             bsm.agent.isStopped = true;
+            bsm.anim.SetBool("Chase", false);
             bsm.BossSwitchState(attackState);
         }
     }

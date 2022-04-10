@@ -36,10 +36,15 @@ public class B_Attack1 : Boss_State
         {
             cycleInitialization = 5;
         }
+        if(attackType == 2)
+        {
+            bsm.anim.SetTrigger("StartMeteor");
+        }
     }
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
+        bsm.anim.SetBool("Chase", false);
         Debug.Log("Phase Attack 1 > The Attack Type is 1or2 =" + attackType);
         timer += Time.deltaTime * 1;
 
@@ -60,44 +65,57 @@ public class B_Attack1 : Boss_State
     }
 
     bool oneBlast;
-
     void BlastAttack(Boss_StateMachine bsm)
     {
         if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= 5 && !oneBlast)
         {
             oneBlast = true;
+            bsm.anim.SetTrigger("StartBlast");
+            bsm.anim.SetBool("LoopBlast", true);
             blastCharge.Play();
-            Invoke(nameof(DelayBlast), 1.25f);
+            //Invoke(nameof(DelayBlast), 1.25f);
+            StartCoroutine(DelayBlastRoutine(bsm));
         }
         
         if (timer >= 2f)
         {
-            oneBlast = false;
             timer = 0;
             cycles++;
             Instantiate(meteorVFX, playerGroundPosition.position + (Vector3.up * 0.1f), Quaternion.identity);
             if (cycles > (cycleInitialization - 1)/2)
             {
                 cycles = 0;
+                bsm.anim.ResetTrigger("StartBlast");
                 bsm.BossSwitchState(bsm.chaseState);
             }
         }
+    }
+
+    IEnumerator DelayBlastRoutine(Boss_StateMachine bsm)
+    {
+        yield return new WaitForSeconds(1.25f);
+        blastVFX.Play();
+        blastSFX.PlaySoundOnce();
+        yield return new WaitForSeconds(0.7f);
+        bsm.anim.SetBool("LoopBlast", false);
     }
 
     void DelayBlast()
     {
         blastVFX.Play();
         blastSFX.PlaySoundOnce();
-        Invoke(nameof(DelayOneShotDamage), 1);
+        //Invoke(nameof(DelayOneShotDamage), 1);
     }
 
-    void DelayOneShotDamage()
+    public void DelayOneShotDamage()
     {
         oneshotDMG.ApexOfVFX();
+        oneBlast = false;
     }
 
     void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...
     {
+        bsm.anim.SetBool("LoopMeteor", true);
         if (timer >= 1f)
         {
             timer = 0;
@@ -107,6 +125,7 @@ public class B_Attack1 : Boss_State
             if (cycles > cycleInitialization - 1)
             {
                 cycles = 0;
+                bsm.anim.SetBool("LoopMeteor", false);
                 bsm.BossSwitchState(bsm.chaseState);
             }
         }
