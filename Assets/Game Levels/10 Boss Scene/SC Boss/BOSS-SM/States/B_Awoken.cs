@@ -26,7 +26,7 @@ public class B_Awoken : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
-        speed = 0;
+        speed = 30;
         bsm.anim.SetBool("Awoken", true);
         bsm.agent.enabled = false;
         timer = 0;

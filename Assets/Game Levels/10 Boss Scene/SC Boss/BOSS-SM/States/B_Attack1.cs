@@ -26,6 +26,7 @@ public class B_Attack1 : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        timerMultiplier = 1;
         oneBlast = false;
         Debug.Log("started Attack1");
         attackType = Random.Range(1, 3);
@@ -46,7 +47,7 @@ public class B_Attack1 : Boss_State
     {
         bsm.anim.SetBool("Chase", false);
         Debug.Log("Phase Attack 1 > The Attack Type is 1or2 =" + attackType);
-        timer += Time.deltaTime * 1;
+        timer += Time.deltaTime * timerMultiplier;
 
         if (attackType == 1)
         {
@@ -65,10 +66,17 @@ public class B_Attack1 : Boss_State
     }
 
     bool oneBlast;
+    int timerMultiplier = 1;
     void BlastAttack(Boss_StateMachine bsm)
     {
+        if (timerMultiplier == 0 && !oneBlast)
+        {
+            bsm.BossSwitchState(bsm.chaseState);
+        }
+
         if (Vector3.Distance(bsm.transform.position, bsm.player.transform.position) <= 5 && !oneBlast)
         {
+            //timerMultiplier = 0;
             oneBlast = true;
             bsm.anim.SetTrigger("StartBlast");
             bsm.anim.SetBool("LoopBlast", true);
@@ -76,17 +84,16 @@ public class B_Attack1 : Boss_State
             //Invoke(nameof(DelayBlast), 1.25f);
             StartCoroutine(DelayBlastRoutine(bsm));
         }
-        
+
         if (timer >= 2f)
         {
             timer = 0;
             cycles++;
             Instantiate(meteorVFX, playerGroundPosition.position + (Vector3.up * 0.1f), Quaternion.identity);
-            if (cycles > (cycleInitialization - 1)/2)
+            if (cycles > (cycleInitialization - 1) / 2)
             {
                 cycles = 0;
-                bsm.anim.ResetTrigger("StartBlast");
-                bsm.BossSwitchState(bsm.chaseState);
+                timerMultiplier = 0;
             }
         }
     }
@@ -94,23 +101,23 @@ public class B_Attack1 : Boss_State
     IEnumerator DelayBlastRoutine(Boss_StateMachine bsm)
     {
         yield return new WaitForSeconds(1.25f);
+        Debug.Log("BETWEEN 1.25 & 0.7");
         blastVFX.Play();
         blastSFX.PlaySoundOnce();
         yield return new WaitForSeconds(0.7f);
         bsm.anim.SetBool("LoopBlast", false);
+        bsm.anim.ResetTrigger("StartBlast");
     }
 
-    void DelayBlast()
+    void ResetBlast()
     {
-        blastVFX.Play();
-        blastSFX.PlaySoundOnce();
-        //Invoke(nameof(DelayOneShotDamage), 1);
+        oneBlast = false;
     }
 
     public void DelayOneShotDamage()
     {
         oneshotDMG.ApexOfVFX();
-        oneBlast = false;
+        Invoke(nameof(ResetBlast), 2f);
     }
 
     void AttackCycle(Boss_StateMachine bsm)//should be using object pool in here...
