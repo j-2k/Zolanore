@@ -409,6 +409,17 @@ public class PlayerManager : MonoBehaviour
         playerAnimator.SetBool("isJumping", isJumping);
     }
 
+    public void DeadAirUpdate()
+    {
+        velocity.y -= gravity * Time.deltaTime;
+        Vector3 displacement = velocity * Time.deltaTime;
+        displacement += AirMovement();
+        if (!cc.isGrounded)
+        {
+            cc.Move(displacement);
+        }
+    }
+
     void PlayerJump()
     {
         if (!isJumping)

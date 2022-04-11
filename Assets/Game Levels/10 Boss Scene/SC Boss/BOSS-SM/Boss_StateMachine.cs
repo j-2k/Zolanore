@@ -38,9 +38,10 @@ public class Boss_StateMachine : MonoBehaviour
 
     public void BossSwitchState(Boss_State newState)
     {
-        anim.SetBool("Awoken", false);
-        anim.SetBool("Chase", false);
-        anim.SetBool("LoopMeteor", false);
+        foreach (AnimatorControllerParameter parameter in anim.parameters)
+        {
+            anim.SetBool(parameter.name, false);
+        }
         currentState = newState;
         newState.StartState(this);
     }

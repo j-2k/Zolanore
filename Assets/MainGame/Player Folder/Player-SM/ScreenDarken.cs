@@ -11,18 +11,23 @@ public class ScreenDarken : MonoBehaviour
     public float alpha;
 
     [SerializeField] CharacterManager cm;
+    PlayerManager pm;
+
+    private void Start()
+    {
+        pm = cm.gameObject.GetComponent<PlayerManager>();
+    }
 
     void Update()
     {
         if (CharacterManager.isDead)
         {
+            StartCoroutine(Respawn());
             colToChange = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, alpha);
             fadeImage.color = colToChange;
             if (alpha > 1)
             {
                 alpha = 1;
-                cm.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-                StartCoroutine(Respawn());
             }
             else
             {
@@ -47,7 +52,12 @@ public class ScreenDarken : MonoBehaviour
 
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(1);
-        cm.RespawnPlayer();
+        pm.DeadAirUpdate();
+        if (alpha>1)
+        {
+            yield return new WaitForSeconds(1);
+            cm.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+            cm.RespawnPlayer();
+        }
     }
 }

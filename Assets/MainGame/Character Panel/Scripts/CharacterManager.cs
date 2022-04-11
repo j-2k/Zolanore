@@ -180,6 +180,10 @@ public class CharacterManager : MonoBehaviour
         {
             playerCurrentHealth = 0;
             isDead = true;
+            foreach (AnimatorControllerParameter parameter in playerAnimator.parameters)
+            {
+                playerAnimator.SetBool(parameter.name, false);
+            }
             playerAnimator.SetBool("DeadBool",true);
             deathScreen.gameObject.SetActive(true);
 
