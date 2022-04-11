@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.022000117, g: 0.0116754435, b: 0.019612141, a: 1}
+  m_IndirectSpecularColor: {r: 0.021987373, g: 0.01166936, b: 0.019603103, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3056,6 +3056,10 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1448946184}
+    - target: {fileID: 4191390245395155378, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: bonusDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_Name
       value: Nightshade (BOSS)

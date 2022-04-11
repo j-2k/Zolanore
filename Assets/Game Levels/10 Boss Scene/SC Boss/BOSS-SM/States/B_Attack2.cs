@@ -41,8 +41,13 @@ public class B_Attack2 : Boss_State
 
         if (attackType == 1)
         {
+            bsm.anim.SetTrigger("StartFireline");
             fireCharge.Play();
             Invoke(nameof(StartParticleLate), 1);
+        }
+        else
+        {
+            bsm.anim.SetTrigger("StartMeteor");
         }
     }
 
@@ -53,6 +58,7 @@ public class B_Attack2 : Boss_State
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
+        bsm.anim.SetBool("Chase", false);
         Debug.Log("Phase Attack 2 > The Attack Type is 1or2 =" + attackType);
         timer += Time.deltaTime * 1;
 
@@ -78,6 +84,7 @@ public class B_Attack2 : Boss_State
     Vector3 newDir;
     void AttackFireLine(Boss_StateMachine bsm)
     {
+        bsm.anim.SetBool("LoopFireline", true);
         if (timer >=1f)
         {
             bossTurningSpeed = 300;
@@ -90,11 +97,16 @@ public class B_Attack2 : Boss_State
                 fireLineVFX.Stop();
                 bsm.BossSwitchState(bsm.chaseState);
             }
+            if(timer>6f)
+            {
+                bsm.anim.SetBool("LoopFireline", false);
+            }
         }
     }
 
     void AttackCycleMeteor(Boss_StateMachine bsm)//should be using object pool in here...
     {
+        bsm.anim.SetBool("LoopMeteor", true);
         if (timer >= 1f)
         {
             timer = 0;

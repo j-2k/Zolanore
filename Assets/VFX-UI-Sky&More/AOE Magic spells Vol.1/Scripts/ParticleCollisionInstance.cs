@@ -20,13 +20,17 @@ public class ParticleCollisionInstance : MonoBehaviour
     [SerializeField] bool damagingParticle;
     CharacterManager playerStats;
     [SerializeField] int bonusDamage;
-    EnemyStatManager esm;
+    [SerializeField] EnemyStatManager esm;
+
+    private void Awake()
+    {
+        esm = GetComponentInParent<EnemyStatManager>();
+    }
 
     void Start()
     {
         part = GetComponent<ParticleSystem>();
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
-        esm = GetComponentInParent<EnemyStatManager>();
     }
 
     void OnParticleCollision(GameObject other)

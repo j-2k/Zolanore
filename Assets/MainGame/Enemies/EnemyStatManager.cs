@@ -41,12 +41,12 @@ public class EnemyStatManager : MonoBehaviour
 
     private void Awake()
     {
-        questTracker = GameObject.Find("QuestTracker");
-
+        //commented quest objects for testing
+        //questTracker = GameObject.Find("QuestTracker");
     }
     void Start()
     {
-        questTracker.SetActive(false);
+        //questTracker.SetActive(false);
         drop = GameObject.Find("ItemDrop");
         questManager = FindObjectOfType<QuestManager>();
 
