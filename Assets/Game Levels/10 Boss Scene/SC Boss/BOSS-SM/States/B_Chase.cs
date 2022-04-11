@@ -68,6 +68,7 @@ public class B_Chase : Boss_State
             }
             bsm.agent.isStopped = true;
             bsm.anim.SetBool("Chase", false);
+            bsm.agent.SetDestination(bsm.transform.position);
             bsm.BossSwitchState(attackState);
         }
     }
