@@ -15,6 +15,7 @@ public class ScreenDarken : MonoBehaviour
 
     private void Start()
     {
+        alpha = 0;
         pm = cm.gameObject.GetComponent<PlayerManager>();
     }
 

@@ -14,6 +14,9 @@ public class B_Awoken : Boss_State
     [SerializeField] float timer;
     [SerializeField] int end;
 
+    [SerializeField] ParticleSystem awokenTornado;
+    [SerializeField] ParticleSystem selfTornado;
+
     //>>>CHASE VARS>>>
 
     [SerializeField] float radius;
@@ -26,7 +29,9 @@ public class B_Awoken : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        selfTornado.Play();
         speed = 30;
+        increment = 0;
         bsm.anim.SetBool("Awoken", true);
         bsm.agent.enabled = false;
         timer = 0;
@@ -74,6 +79,16 @@ public class B_Awoken : Boss_State
         bsm.transform.LookAt(player);
     }
 
+    float increment = 0;
+    void ShootTornados(Boss_StateMachine bsm)
+    {
+        if (timer >= 2 + increment)
+        {
+            increment += 2;
+            Instantiate(awokenTornado, bsm.transform.position - (Vector3.up * 17), Quaternion.identity);
+        }
+    }
+
     bool isGrounded;
     int state = 0;
     void MiddlePhaseChange(Boss_StateMachine bsm)
@@ -93,6 +108,7 @@ public class B_Awoken : Boss_State
         }
         else
         {
+            selfTornado.Stop();
             bsm.transform.position += Vector3.down * (speed / 4) * Time.deltaTime;
             isGrounded = Physics.CheckSphere(bsm.transform.position, radius, environmentLayer);
             if (isGrounded)
@@ -110,6 +126,7 @@ public class B_Awoken : Boss_State
         bsm.transform.position += movementVec.normalized * speed * Time.deltaTime;
         Debug.DrawRay(bsm.transform.position, movementVec);
         Debug.Log("Awoken State");
+        ShootTornados(bsm);
     }
 
     void WaypointDistanceCheck(Transform bsm)
@@ -133,6 +150,7 @@ public class B_Awoken : Boss_State
             //survival during phase 2 start thunder & tornados
             startThunderPassive.gameObject.SetActive(true);
             //DO TORNADOS HERE
+            ShootTornados(bsm);
         }
         else
         {

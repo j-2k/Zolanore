@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game Levels/1 Level Scene/Zolanore Realm.unity
     guid: 560f09964f315d44690eab830ac5c120
+  - enabled: 1
+    path: Assets/Game Levels/10 Boss Scene/Boss Realm.unity
+    guid: eb4cdcb9c05f9b1429cc1974fa3096f4
   m_configObjects: {}

@@ -178,14 +178,7 @@ public class CharacterManager : MonoBehaviour
         //healthBar.fillAmount -= healthBar.fillAmount - ((float)playerCurrentHealth / (float)playerMaxHealth);
         if (playerCurrentHealth < 1)
         {
-            playerCurrentHealth = 0;
-            isDead = true;
-            foreach (AnimatorControllerParameter parameter in playerAnimator.parameters)
-            {
-                playerAnimator.SetBool(parameter.name, false);
-            }
-            playerAnimator.SetBool("DeadBool",true);
-            deathScreen.gameObject.SetActive(true);
+            KillPlayer();
 
             //player died
             //respawn in some location
@@ -197,6 +190,19 @@ public class CharacterManager : MonoBehaviour
             isDead = false;
         }
         RefreshPlayerUI();
+    }
+
+    public void KillPlayer()
+    {
+        playerCurrentHealth = 0;
+        RefreshPlayerUI();
+        isDead = true;
+        foreach (AnimatorControllerParameter parameter in playerAnimator.parameters)
+        {
+            playerAnimator.SetBool(parameter.name, false);
+        }
+        playerAnimator.SetBool("DeadBool", true);
+        deathScreen.gameObject.SetActive(true);
     }
 
     public void RespawnPlayer()
