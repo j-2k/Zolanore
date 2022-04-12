@@ -66,7 +66,7 @@ public class QuestSystem : MonoBehaviour
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
                         Cursor.visible = true;
-
+                        Cursor.lockState = CursorLockMode.None;
                     }
                     else if (!questGiver.acceptedQuest)
                     {
@@ -75,6 +75,7 @@ public class QuestSystem : MonoBehaviour
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
                         Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                     }
                     else
                     {
@@ -188,6 +189,7 @@ public class QuestSystem : MonoBehaviour
     private void DisableCharacterRotation()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         FindObjectOfType<CameraControllerMain>().enabled = false;
         GetComponent<CharacterManager>().enabled = false;
         GetComponent<PlayerManager>().enabled = false;
