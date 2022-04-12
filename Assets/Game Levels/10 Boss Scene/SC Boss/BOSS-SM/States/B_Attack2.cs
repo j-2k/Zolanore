@@ -31,7 +31,6 @@ public class B_Attack2 : Boss_State
         attackType = Random.Range(1, 3);
         timer = 0;
         bossTurningSpeed = 120;
-        bsm.agent.isStopped = true;
         playerGroundPosition = bsm.player.transform.GetChild(bsm.player.transform.childCount - 1);
         playerGroundPosition = playerGroundPosition.GetChild(0);
         if (cycleInitialization == 0)
@@ -58,6 +57,7 @@ public class B_Attack2 : Boss_State
 
     public override void UpdateState(Boss_StateMachine bsm)
     {
+        bsm.agent.enabled = false;
         bsm.anim.SetBool("Chase", false);
         Debug.Log("Phase Attack 2 > The Attack Type is 1or2 =" + attackType);
         timer += Time.deltaTime * 1;

@@ -14,6 +14,7 @@ public class B_Death : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        bsm.gameObject.GetComponent<CapsuleCollider>().enabled = false;
         foreach (ParticleSystem vfx in vfxs)
         {
             vfx.Stop();
