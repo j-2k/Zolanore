@@ -5,6 +5,7 @@ using UnityEngine;
 public class B_Death : Boss_State
 {
     [SerializeField] ParticleSystem[] vfxs;
+    [SerializeField] ParticleSystem thunderChaseVFX;
 
 
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
@@ -14,6 +15,8 @@ public class B_Death : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        thunderChaseVFX.Stop();
+        Destroy(thunderChaseVFX.transform.parent.gameObject,4);
         bsm.gameObject.GetComponent<CapsuleCollider>().enabled = false;
         foreach (ParticleSystem vfx in vfxs)
         {

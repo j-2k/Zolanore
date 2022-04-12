@@ -56,8 +56,8 @@ public class ScreenDarken : MonoBehaviour
         pm.DeadAirUpdate();
         if (alpha>1)
         {
-            yield return new WaitForSeconds(1);
             cm.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+            yield return new WaitForSeconds(1);
             cm.RespawnPlayer();
         }
     }
