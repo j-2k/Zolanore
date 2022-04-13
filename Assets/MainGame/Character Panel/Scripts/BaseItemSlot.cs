@@ -8,6 +8,7 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 {
 	[SerializeField] protected Image image;
 	[SerializeField] protected TextMeshProUGUI amountText;
+	[SerializeField] protected Image hoverImage;
 
 	public event Action<BaseItemSlot> OnPointerEnterEvent;
 	public event Action<BaseItemSlot> OnPointerExitEvent;
@@ -85,6 +86,12 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 		if (amountText == null)
 			amountText = GetComponentInChildren<TextMeshProUGUI>();
 
+		if (hoverImage == null)
+		{
+			hoverImage = transform.GetChild(0).GetComponent<Image>();
+			hoverImage.enabled = false;
+		}
+
 		Item = _item;
 		Amount = _amount;
 	}
@@ -110,7 +117,7 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 	{
 		isPointerOver = true;
 
-		Debug.Log("Entered / DO FEEDBACK HERE?");
+		hoverImage.enabled = true;
 
 		if (OnPointerEnterEvent != null)
 			OnPointerEnterEvent(this);
@@ -119,6 +126,8 @@ public class BaseItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		isPointerOver = false;
+
+		hoverImage.enabled = false;
 
 		if (OnPointerExitEvent != null)
 			OnPointerExitEvent(this);
