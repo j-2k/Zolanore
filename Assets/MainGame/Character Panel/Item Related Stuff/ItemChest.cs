@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class ItemChest : MonoBehaviour
 {
+    [Header("Change these ONLY if should roll is true ignore rolltype")]
+    [SerializeField] bool shouldRoll = false;
+    [SerializeField] AllItemTypesDB itemRollType;
+    [SerializeField] bool neverDestoryChest = false;
+    [SerializeField] KeyCode itemPickup = KeyCode.E;
+    public int amount = 1;
+
+    [Header("Leave everything under here")]
     [SerializeField] Item item;
     [SerializeField] Inventory inventory;
     [SerializeField] ItemDatabase itemDB;
-    [SerializeField] KeyCode itemPickup = KeyCode.E;
-    [SerializeField] bool shouldRoll = false;
-    public int amount = 1;
     public bool isInRange = false;
     [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
     float time = 0;
-    [SerializeField] bool isForeverChest = false;
     ChestVFXManager chestVFX;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {//Random.Range(1, 5) is hardcoded for now
         chestVFX = GetComponentInChildren<ChestVFXManager>();
-        int randItem = Random.Range(0, 3);
-        item = itemDB.GetRandomItem((AllItemTypesDB)randItem, Random.Range(1,5));
-        if (randItem == (int)AllItemTypesDB.Coin)
+        if (shouldRoll)
         {
-            amount = Random.Range(1, 10);
+            int randItem = Random.Range(0, 3);
+            item = itemDB.GetRandomItem((AllItemTypesDB)randItem, Random.Range(1, 5));
+            if (randItem == (int)AllItemTypesDB.Coin)
+            {
+                amount = Random.Range(1, 10);
+            }
+            else
+            {
+                amount = 1;
+            }
         }
         else
         {
-            amount = 1;
+            item = itemDB.GetRandomItem(itemRollType, Random.Range(1, 5));
         }
         StartCoroutine(InitInven());
     }
@@ -88,7 +99,7 @@ public class ItemChest : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        else if (!isForeverChest)
+        else if (!neverDestoryChest)
         {
             time += Time.deltaTime;
             if (time >= 180)
