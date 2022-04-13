@@ -133,11 +133,11 @@ public class EnemyStatManager : MonoBehaviour
                     }
 
                     questManager.Kill(questEnemyName);
-                    int dropPerc = Random.Range(0, 100);
+                    int dropPerc = Random.Range(1, 101);
                     Debug.Log(dropPerc);
-                    if (dropPerc <= 100)
+                    if (dropPerc <= 20)
                     {
-                        Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
+                        Instantiate(drop, transform.position, Quaternion.identity);
                     }
                     Destroy(gameObject);
                 }
