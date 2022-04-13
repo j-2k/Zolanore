@@ -405,13 +405,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bba961e26bff042aff6a07ec029c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 8de85d6d8e954384f983929f6195eb7c, type: 2}
+  item: {fileID: 0}
   inventory: {fileID: 0}
+  itemDB: {fileID: 11400000, guid: 1d6cb064b8160284387af661e55bffef, type: 2}
   itemPickup: 101
   amount: 1
   isInRange: 0
   isEmpty: 0
-  isForeverChest: 0
+  isForeverChest: 1
 --- !u!65 &6179049179559870219
 BoxCollider:
   m_ObjectHideFlags: 0

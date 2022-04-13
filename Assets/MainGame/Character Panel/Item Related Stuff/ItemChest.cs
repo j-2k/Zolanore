@@ -6,7 +6,9 @@ public class ItemChest : MonoBehaviour
 {
     [SerializeField] Item item;
     [SerializeField] Inventory inventory;
+    [SerializeField] ItemDatabase itemDB;
     [SerializeField] KeyCode itemPickup = KeyCode.E;
+    [SerializeField] bool shouldRoll = false;
     public int amount = 1;
     public bool isInRange = false;
     [SerializeField] bool isEmpty = false;       // dont need this can just null the item but if you dont want to lose the reference do this way
@@ -18,6 +20,32 @@ public class ItemChest : MonoBehaviour
     void Start()
     {
         chestVFX = GetComponentInChildren<ChestVFXManager>();
+        int randItem = Random.Range(0, 3);
+        item = itemDB.GetRandomItem((AllItemTypesDB)randItem, Random.Range(1,5));
+        if (randItem == (int)AllItemTypesDB.Coin)
+        {
+            amount = Random.Range(1, 10);
+        }
+        else
+        {
+            amount = 1;
+        }
+        StartCoroutine(InitInven());
+    }
+
+    //issue with script order i guess but this works really well
+    IEnumerator InitInven()
+    {
+        inventory = Inventory.Instance;
+        if (inventory != null)
+        {
+            yield return null;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            inventory = Inventory.Instance;
+        }
     }
 
     private void OnValidate()

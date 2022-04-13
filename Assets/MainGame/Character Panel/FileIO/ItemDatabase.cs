@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+public enum AllItemTypesDB
+{
+    Coin,
+    Potion,
+    Equipment
+}
+
 [CreateAssetMenu]
 public class ItemDatabase : ScriptableObject
 {
@@ -19,6 +26,55 @@ public class ItemDatabase : ScriptableObject
         }
         return null;
 
+    }
+
+    public Item GetRandomItem(AllItemTypesDB itemType,int index14,bool HPpot = true)
+    {
+        if (itemType == AllItemTypesDB.Coin)
+        {
+            return GetCoins();
+        }
+        else if (itemType == AllItemTypesDB.Potion)
+        {
+            return GetPotion(HPpot);
+        }
+        else if (itemType == AllItemTypesDB.Equipment)
+        {
+            return GetEquipment(index14);
+        }
+        
+        return null;
+    }
+
+    public Item GetCoins()
+    {
+        return items[items.Length-1];
+    }
+
+    public Item GetEquipment(int index)
+    {
+        if (index >= 1 && index <= 4)
+        {
+            return items[index];
+        }
+        else
+        {
+            //returning a item thats not equipable?? dont give anything
+            return null;
+        }
+    }
+
+    public Item GetPotion(bool HPpotion)
+    {
+        if (HPpotion)
+        {
+            return items[0];
+        }
+        else
+        {
+            //return a mana pot maybe or stam pot
+            return null;
+        }
     }
 
 

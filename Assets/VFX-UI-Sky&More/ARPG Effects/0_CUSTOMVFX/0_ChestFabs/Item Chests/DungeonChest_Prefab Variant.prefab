@@ -7,29 +7,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3518843176510556100, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3518843176510556100, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3518843176510556100, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3518843176510556100, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_Name
-      value: DungeonChest_Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 6179049179559870217, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
-      propertyPath: isForeverChest
-      value: 1
+      value: DungeonChest_Prefab Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6179049179559870218, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_RootOrder
@@ -37,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6179049179559870218, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.9206934
+      value: -3.6147428
       objectReference: {fileID: 0}
     - target: {fileID: 6179049179559870218, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0936177
+      value: 6.1037
       objectReference: {fileID: 0}
     - target: {fileID: 6179049179559870218, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.31540954
+      value: 25.061226
       objectReference: {fileID: 0}
     - target: {fileID: 6179049179559870218, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74,10 +54,6 @@ PrefabInstance:
     - target: {fileID: 6179049179559870218, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6179049179559870219, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
-      propertyPath: m_Center.y
-      value: 0.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
