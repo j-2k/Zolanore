@@ -375,7 +375,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996605805018256459}
-  m_LocalRotation: {x: -0, y: -0.9978329, z: -0, w: -0.06580006}
+  m_LocalRotation: {x: -0, y: -0.99783266, z: 0, w: -0.06580367}
   m_LocalPosition: {x: 6.84, y: -1.5, z: 8.7}
   m_LocalScale: {x: 2.6931295, y: 2.693129, z: 2.6931295}
   m_Children:
@@ -509,7 +509,7 @@ MonoBehaviour:
   curHealth: 0
   xp: 0
   bonusXP: 0
-  drop: {fileID: 0}
+  drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 5316012973965236135}
 --- !u!1 &996605805074387736

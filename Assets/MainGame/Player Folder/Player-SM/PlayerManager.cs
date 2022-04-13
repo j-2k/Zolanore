@@ -303,7 +303,7 @@ public class PlayerManager : MonoBehaviour
         hitColliders = Physics.OverlapSphere(hitboxPos.transform.position, attackColliderRadius);
 
         //out going dmg calc maybe change in the future for better results to scale to higher lvls
-        int levelBasedDmg = (int)((levelSystem.currentLevel + 10) * Random.Range(0.7f,1.1f));//help early game be useless lategame
+        int levelBasedDmg = (int)((levelSystem.currentLevel + 10) * Random.Range(0.7f,1.2f));//help early game be useless lategame
         outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.8f, 1.5f) + levelBasedDmg); //help lategame be useless early game
 
 
@@ -337,9 +337,9 @@ public class PlayerManager : MonoBehaviour
     {
         hitColliders = Physics.OverlapSphere(transform.position + transform.forward + transform.up, attackColliderRadius);
 
-        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 1.5f));
+        int levelBasedDmg = (int)((levelSystem.currentLevel + 8) * Random.Range(1f, 1.2f));
 
-        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.5f, 1f) + levelBasedDmg);
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.8f, 1.2f) + levelBasedDmg);
 
         foreach (Collider hitCollider in hitColliders)
         {
@@ -360,9 +360,9 @@ public class PlayerManager : MonoBehaviour
     {
         hitColliders = Physics.OverlapSphere(transform.position, 7);
 
-        int levelBasedDmg = (int)((levelSystem.currentLevel * 2) * Random.Range(1f, 1.5f));
+        int levelBasedDmg = (int)((levelSystem.currentLevel + 6) * Random.Range(1f, 1.2f));
 
-        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.6f, 0.8f) + levelBasedDmg);
+        outgoingDamage = (int)(characterManager.Strength.Value * Random.Range(0.8f, 1f) + levelBasedDmg);
 
         foreach (Collider hitCollider in hitColliders)
         {

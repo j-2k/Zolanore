@@ -42,12 +42,11 @@ public class EnemyStatManager : MonoBehaviour
     private void Awake()
     {
         //commented quest objects for testing
-        //questTracker = GameObject.Find("QuestTracker");
+        questTracker = GameObject.Find("QuestTracker");
     }
     void Start()
     {
-        //questTracker.SetActive(false);
-        drop = GameObject.Find("ItemDrop");
+        questTracker.SetActive(false);
         questManager = FindObjectOfType<QuestManager>();
 
         levelSystem = LevelSystem.instance;
@@ -122,15 +121,14 @@ public class EnemyStatManager : MonoBehaviour
                             }
                         }
                     }
-                    /*
+
                     questManager.Kill(questEnemyName);
-                    int dropPerc = Random.Range(1, 100);
+                    int dropPerc = Random.Range(0, 100);
                     Debug.Log(dropPerc);
-                    if (dropPerc <= 20)
+                    if (dropPerc <= 100)
                     {
                         Instantiate(drop, transform.position + Vector3.up * 2, Quaternion.identity);
                     }
-                    */
                     Destroy(gameObject);
                 }
             }

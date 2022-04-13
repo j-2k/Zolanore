@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class QuestSystem : MonoBehaviour
 {
-    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton,acceptButton;
+    [SerializeField] GameObject questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton,acceptButton;
 
     GameObject questInformation;
 
@@ -82,8 +82,6 @@ public class QuestSystem : MonoBehaviour
                         EnableCharacterRotation();
                     }
                 }
-                if (openedQuest) interactUI.SetActive(false);
-                else interactUI.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
@@ -280,7 +278,6 @@ public class QuestSystem : MonoBehaviour
             Destroy(questTracker.transform.GetChild(i));
         }
         questTracker.SetActive(false);
-        interactUI.SetActive(false);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
         Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);

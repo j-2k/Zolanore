@@ -1506,7 +1506,7 @@ MonoBehaviour:
   curHealth: 0
   xp: 0
   bonusXP: 0
-  drop: {fileID: 0}
+  drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 1160691174080609259}
 --- !u!114 &3696927322280092147

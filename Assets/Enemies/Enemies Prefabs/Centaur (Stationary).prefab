@@ -1944,7 +1944,7 @@ Transform:
   m_GameObject: {fileID: 8166254079092297896}
   m_LocalRotation: {x: -0, y: -0.99783266, z: 0, w: -0.06580367}
   m_LocalPosition: {x: 13.48, y: 8.7, z: 40.78}
-  m_LocalScale: {x: 2.6931293, y: 2.693129, z: 2.6931293}
+  m_LocalScale: {x: 2.693129, y: 2.693129, z: 2.693129}
   m_Children:
   - {fileID: 8166254079092580030}
   - {fileID: 8166254079092515156}
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   curHealth: 0
   xp: 0
   bonusXP: 0
-  drop: {fileID: 0}
+  drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 5583687565840631657}
 --- !u!1 &8166254079092297900
