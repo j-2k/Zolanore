@@ -12,6 +12,7 @@ public class FamiliarAttackState : State
     CharacterManager playerStats;
     
     EnemyStatManager enemyCache;
+    
 
     float attackTimer;
     bool isFarFromPlayer;
@@ -38,7 +39,7 @@ public class FamiliarAttackState : State
             assignOnce = false;
         }
 
-        if (playerFamiliar.lastestEnemyHit == null || playerFamiliar.callFamiliarBack || enemyCache == null)
+        if (playerFamiliar.lastestEnemyHit == null || playerFamiliar.callFamiliarBack || enemyCache == null || enemyCache.isDead)
         {
             return FinishedAttacking();
         }

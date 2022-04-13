@@ -27,6 +27,7 @@ public class EnemyStatManager : MonoBehaviour
     [SerializeField] int curHealth;
     [SerializeField] int xp;
     [SerializeField] int bonusXP;
+    public bool isDead = false;
 
     NavMeshAgent agent;
 
@@ -39,15 +40,22 @@ public class EnemyStatManager : MonoBehaviour
 
     public HealthBar hpBar;
 
+
     private void Awake()
     {
         //commented quest objects for testing
-        questTracker = GameObject.Find("QuestTracker");
+        if (!isBoss)
+        {
+            questTracker = GameObject.Find("QuestTracker");
+        }
     }
     void Start()
     {
-        questTracker.SetActive(false);
-        questManager = FindObjectOfType<QuestManager>();
+        if (!isBoss)
+        {
+            questTracker.SetActive(false);
+            questManager = FindObjectOfType<QuestManager>();
+        }
 
         levelSystem = LevelSystem.instance;
 
@@ -103,12 +111,14 @@ public class EnemyStatManager : MonoBehaviour
                 else if (curHealth <= 0)
                 {
                     boss.BossSwitchState(boss.deathState);
+                    isDead = true;
                 }
             }
             else
             {
                 if (curHealth <= 0)
                 {
+                    isDead = true;
                     levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
                     if (questTracker.transform.childCount != 0)
                     {
