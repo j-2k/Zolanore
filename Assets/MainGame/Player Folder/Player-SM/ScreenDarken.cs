@@ -23,19 +23,20 @@ public class ScreenDarken : MonoBehaviour
     {
         if (CharacterManager.isDead)
         {
-            if (GameSceneLoader.GetCurrentSceneName() == GameSceneLoader.SceneEnum.BossRealm.ToString())
-            {
-                BossRespawnVoid();
-            }
-            else
-            {
-                StartCoroutine(Respawn());
-            }
+            pm.DeadAirUpdate();
             
             colToChange = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, alpha);
             fadeImage.color = colToChange;
             if (alpha > 1)
             {
+                if (GameSceneLoader.GetCurrentSceneName() == GameSceneLoader.SceneEnum.BossRealm.ToString())
+                {
+                    BossRealmRespawn();
+                }
+                else
+                {
+                    StartCoroutine(Respawn());
+                }
                 alpha = 1;
             }
             else
@@ -61,36 +62,14 @@ public class ScreenDarken : MonoBehaviour
 
     IEnumerator Respawn()
     {
-        pm.DeadAirUpdate();
-        if (alpha>1)
-        {
-            cm.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-            yield return new WaitForSeconds(1);
-            cm.RespawnPlayer();
-        }
+        cm.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        yield return new WaitForSeconds(1);
+        cm.RespawnPlayer();
     }
 
-    IEnumerator BossRespawn()
+    void BossRealmRespawn()
     {
-        pm.DeadAirUpdate();
-        if (alpha > 1)
-        {
-            yield return new WaitForEndOfFrame();
-            cm.RespawnPlayer();
-            yield return new WaitForEndOfFrame();
-            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
-            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
-        }
-    }
-
-    void BossRespawnVoid()
-    {
-        pm.DeadAirUpdate();
-        if (alpha > 1)
-        {
-            cm.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-            cm.RespawnPlayer();
-            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
-        }
+        cm.RespawnPlayer();
+        GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
     }
 }
