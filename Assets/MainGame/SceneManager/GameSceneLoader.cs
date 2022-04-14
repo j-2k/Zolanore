@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public static class GameSceneLoader
 {
 
-    public enum Scene
+    public enum SceneEnum
     {
         MainMenu,
         ZolanoreRealm,
@@ -15,18 +15,19 @@ public static class GameSceneLoader
         Loading
     }
 
-    public static void LoadScene(Scene scene)
+    public static void LoadScene(SceneEnum scene)
     {
 
         onLoaderCallBack = () =>
         {
             BGM.instance.SwitchAudioBGM((int)scene);
-            if (scene == Scene.MainMenu)
+            if (scene == SceneEnum.MainMenu)
             {
                 PlayerManager.instance.gameObject.SetActive(false);
                 CameraControllerMain.instance.gameObject.SetActive(false);
                 PlayerFamiliar.instance.gameObject.SetActive(false);
                 CanvasSingleton.instance.gameObject.SetActive(false);
+                SceneManager.LoadScene(scene.ToString());
             }
             else
             {
@@ -34,11 +35,11 @@ public static class GameSceneLoader
                 CameraControllerMain.instance.gameObject.SetActive(true);
                 PlayerFamiliar.instance.gameObject.SetActive(true);
                 CanvasSingleton.instance.gameObject.SetActive(true);
+                SceneManager.LoadScene(scene.ToString());
             }
-            SceneManager.LoadScene(scene.ToString());
         };
 
-        SceneManager.LoadScene(Scene.Loading.ToString());
+        SceneManager.LoadScene(SceneEnum.Loading.ToString());
     }
 
     static Action onLoaderCallBack;
@@ -52,6 +53,18 @@ public static class GameSceneLoader
         }
     }
 
-    
+    public static string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 
+    public static IEnumerator PlayerSpawn()
+    {
+        PlayerCodes.godMode = true;
+        //PlayerManager.instance.enabled = false;
+        PlayerManager.instance.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        yield return new WaitForSeconds(0.5f);
+        //PlayerManager.instance.enabled = true;
+        PlayerCodes.godMode = false;
+    }
 }

@@ -72,7 +72,7 @@ public class IngameMenu : MonoBehaviour
         CloseMenu();
         Time.timeScale = 1;
         AudioListener.pause = false;
-        GameSceneLoader.LoadScene(GameSceneLoader.Scene.MainMenu);
+        GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.MainMenu);
     }
 
     public void CloseMenu()

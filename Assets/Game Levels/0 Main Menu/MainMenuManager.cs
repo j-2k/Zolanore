@@ -30,7 +30,7 @@ public class MainMenuManager : ScriptableObject
 
     public void NewGame()
     {
-        GameSceneLoader.LoadScene(GameSceneLoader.Scene.ZolanoreRealm);
+        GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.ZolanoreRealm);
         Debug.Log("New Game");
     }
 

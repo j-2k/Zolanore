@@ -30,16 +30,16 @@ public class SceneMovementTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            GameSceneLoader.LoadScene(GameSceneLoader.Scene.MainMenu);
+            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.MainMenu);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            GameSceneLoader.LoadScene(GameSceneLoader.Scene.ZolanoreRealm);
+            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.ZolanoreRealm);
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            GameSceneLoader.LoadScene(GameSceneLoader.Scene.BossRealm);
+            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
         }
     }
 }

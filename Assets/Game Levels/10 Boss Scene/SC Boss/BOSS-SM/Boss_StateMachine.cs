@@ -20,6 +20,7 @@ public class Boss_StateMachine : MonoBehaviour
 
     public Vector3 playerDirection;
 
+
     private void Start()
     {
         bossPhase = 1;
@@ -33,6 +34,7 @@ public class Boss_StateMachine : MonoBehaviour
     private void Update()
     {
         playerDirection = player.transform.position - transform.position;
+        
         currentState.UpdateState(this);
     }
 
