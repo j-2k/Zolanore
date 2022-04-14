@@ -69,10 +69,10 @@ public class IngameMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        ApplyAllChanges();
+        CloseMenu();
         Time.timeScale = 1;
         AudioListener.pause = false;
-        SceneManager.LoadScene(0);
+        GameSceneLoader.LoadScene(GameSceneLoader.Scene.MainMenu);
     }
 
     public void CloseMenu()

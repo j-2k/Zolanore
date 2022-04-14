@@ -6,11 +6,19 @@ public class DetectPlayerNode : Node<EnemyAgent>
 {
     public override NodeState Evaluate(EnemyAgent owner)
     {
-        var distance = Vector3.Distance(owner.player.transform.position, owner.transform.position);
-        if (distance < owner.distanceToDetect)
+        if (owner.player == null)
         {
-            return NodeState.SUCCESS;
+            owner.player = GameObject.FindGameObjectWithTag("Player");
+            return NodeState.FAILURE;
         }
-        else return NodeState.FAILURE;
+        else
+        {
+            var distance = Vector3.Distance(owner.player.transform.position, owner.transform.position);
+            if (distance < owner.distanceToDetect)
+            {
+                return NodeState.SUCCESS;
+            }
+            else return NodeState.FAILURE;
+        }
     }
 }

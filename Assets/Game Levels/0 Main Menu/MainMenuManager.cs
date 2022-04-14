@@ -30,11 +30,7 @@ public class MainMenuManager : ScriptableObject
 
     public void NewGame()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
-        {
-            SceneManager.LoadScene(nextSceneIndex);
-        }
+        GameSceneLoader.LoadScene(GameSceneLoader.Scene.ZolanoreRealm);
         Debug.Log("New Game");
     }
 

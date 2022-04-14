@@ -44,12 +44,21 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] GameObject interactUIPrompt;//could just change txt to be interact instead...
     [SerializeField] MainMenuManager getSensitivity;
 
+    public static CameraControllerMain instance;
 
     Transform firstChildRotX;
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        //transform.SetParent(null);
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        transform.SetParent(null);
         firstChildRotX = transform.GetChild(0);
     }
 
@@ -60,6 +69,7 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         cameraSensitivity = getSensitivity.mouseSensitivity;
         if (cameraSensitivity <= 0)
         {
