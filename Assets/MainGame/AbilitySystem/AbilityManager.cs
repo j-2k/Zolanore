@@ -6,16 +6,17 @@ public class AbilityManager : MonoBehaviour
 {
     #region Singleton LevelSystem Instance
     public static AbilityManager instance;
-
-    void Awake()
+    private void Awake()
     {
         if (instance != null)
         {
-            Debug.Log("Another Level System Script?? bug check");
-            return;
+            Destroy(this.gameObject);
         }
-
-        instance = this;
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
     #endregion
 

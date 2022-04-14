@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -17,11 +14,13 @@ public class LevelSystem : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.Log("Another Level System Script?? bug check");
-            return;
+            Destroy(this.gameObject);
         }
-
-        instance = this;
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
     #endregion
 

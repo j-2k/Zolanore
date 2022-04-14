@@ -48,7 +48,8 @@ public class CameraControllerMain : MonoBehaviour
     Transform firstChildRotX;
     private void Awake()
     {
-        transform.SetParent(null);
+        DontDestroyOnLoad(this.gameObject);
+        //transform.SetParent(null);
         firstChildRotX = transform.GetChild(0);
     }
 

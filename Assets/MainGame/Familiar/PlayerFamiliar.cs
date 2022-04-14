@@ -14,8 +14,21 @@ public class PlayerFamiliar : MonoBehaviour
     public bool abilityTrigger;
     public EnemyStatManager enemyAbilityFocus;
 
+    public static PlayerFamiliar instance;
+
     private void Awake()
     {
+
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+
         player = GameObject.FindGameObjectWithTag("Player");
         agentFamiliar = GetComponent<NavMeshAgent>();
     }
