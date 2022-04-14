@@ -11,7 +11,7 @@ public class AbilityExecuter : MonoBehaviour
     [SerializeField] int IndexOfExecuter;
     public float cooldownTime;
     public float cooldownTimeMax;
-    float activeTime;
+    public float activeTime;
     float gcd = 3;
 
     AbilityManager abilityManager;

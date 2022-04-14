@@ -173,6 +173,11 @@ public class PlayerManager : MonoBehaviour
         playerAnimator.SetFloat("rmVelocity", movementDir);
     }
 
+    public void StopPlayerAnim()
+    {
+        playerAnimator.SetFloat("rmVelocity", 0);
+    }
+
     void CCGroundCheckFunc()
     {
         if (cc.isGrounded)

@@ -195,6 +195,7 @@ public class CharacterManager : MonoBehaviour
     public void KillPlayer()
     {
         if (PlayerCodes.godMode) { return; }
+        AbilityManager.instance.StopAbilities();
         playerCurrentHealth = 0;
         RefreshPlayerUI();
         isDead = true;

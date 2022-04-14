@@ -61,10 +61,13 @@ public static class GameSceneLoader
     public static IEnumerator PlayerSpawn()
     {
         PlayerCodes.godMode = true;
-        //PlayerManager.instance.enabled = false;
+        AbilityManager.instance.StopAbilities();
+        PlayerManager.instance.enabled = false;
+        yield return new WaitForEndOfFrame();
         PlayerManager.instance.gameObject.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-        yield return new WaitForSeconds(0.5f);
-        //PlayerManager.instance.enabled = true;
+        PlayerManager.instance.StopPlayerAnim();
+        yield return new WaitForSeconds(0.25f);
+        PlayerManager.instance.enabled = true;
         PlayerCodes.godMode = false;
     }
 }

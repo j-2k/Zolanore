@@ -74,6 +74,7 @@ public class AbilityManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         {
             currentCombatStyle++;
@@ -96,6 +97,7 @@ public class AbilityManager : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     public void Activated(AbilityExecuter executer, CombatType type)
@@ -138,6 +140,14 @@ public class AbilityManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void StopAbilities()
+    {
+        for (int i = 0; i < allAbilities.Length; i++)
+        {
+            allAbilities[i].activeTime = 0;
+        }
     }
 
     /*
