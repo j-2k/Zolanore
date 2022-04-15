@@ -15,6 +15,7 @@ public class PlayerCodes : MonoBehaviour
     {
         if (IngameMenu.gameIsPaused)
         {
+            Debug.Log("GameIsPaused");
             if(Input.anyKeyDown)
             {
                 Debug.Log(godString.Length);

@@ -74,6 +74,7 @@ public class MainMenuManager : ScriptableObject
     public void SetMusicVolume(Slider sliderValue)
     {
         musicVolume = sliderValue.value/sliderValue.maxValue;
+        BGM.instance.currentBGM.volume = musicVolume;
     }
 
     public void SetSFXVolume(Slider sliderValue)

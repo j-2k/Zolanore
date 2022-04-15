@@ -31,10 +31,6 @@ public static class GameSceneLoader
             }
             else
             {
-                PlayerManager.instance.gameObject.SetActive(true);
-                CameraControllerMain.instance.gameObject.SetActive(true);
-                PlayerFamiliar.instance.gameObject.SetActive(true);
-                CanvasSingleton.instance.gameObject.SetActive(true);
                 SceneManager.LoadScene(scene.ToString());
             }
         };

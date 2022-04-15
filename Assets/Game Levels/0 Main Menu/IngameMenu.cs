@@ -8,7 +8,6 @@ using TMPro;
 public class IngameMenu : MonoBehaviour
 {
     [SerializeField] GameObject menu;
-    [SerializeField] AudioSource bgm;
     [SerializeField] MainMenuManager mmm;
     CameraControllerMain cam;
 
@@ -58,7 +57,8 @@ public class IngameMenu : MonoBehaviour
         }
         else
         {
-            StartCoroutine(HideCursorDelay());
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             ApplyAllChanges();
             menu.SetActive(false);
             AudioListener.pause = false;
@@ -69,9 +69,10 @@ public class IngameMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        CloseMenu();
-        Time.timeScale = 1;
-        AudioListener.pause = false;
+        gameIsPaused = !gameIsPaused;
+        PauseGame();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.MainMenu);
     }
 
@@ -84,15 +85,15 @@ public class IngameMenu : MonoBehaviour
     public void ApplyAllChanges()
     {
         cam.SetSens(mmm.mouseSensitivity);
-        bgm.volume = mmm.musicVolume;
+        BGM.instance.currentBGM.volume = mmm.musicVolume;
     }
 
-    IEnumerator HideCursorDelay()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        yield return new WaitForEndOfFrame();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    //IEnumerator HideCursorDelay()
+    //{
+    //    Cursor.visible = false;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    yield return new WaitForEndOfFrame();
+    //    Cursor.visible = false;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //}
 }
