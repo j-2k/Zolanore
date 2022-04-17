@@ -41,7 +41,7 @@ public class CameraControllerMain : MonoBehaviour
     bool shouldCameraRotate = true;
 
     [SerializeField] GameObject chestUIPrompt;
-    [SerializeField] GameObject interactUIPrompt;//could just change txt to be interact instead...
+    public GameObject interactUIPrompt;//could just change txt to be interact instead...
     [SerializeField] MainMenuManager getSensitivity;
 
     public static CameraControllerMain instance;
@@ -101,7 +101,7 @@ public class CameraControllerMain : MonoBehaviour
     }
 
     ItemChest itemChestCache;
-    PlayerInteractables interactable;
+    [SerializeField] PlayerInteractables interactable;
 
 
     void CameraChestHit()//all this needs to be refactored but running out of time.

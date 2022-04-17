@@ -18,10 +18,10 @@ public class PlayerInteractables : MonoBehaviour
         {
             if (isBossPortal)
             {
-                BossPortal();
+                StartCoroutine(BossCor());
                 return;
             }
-            if (isBossAltar() == true)
+            else if (isBossAltar() == true)
             {
                 return;
             }
@@ -49,6 +49,16 @@ public class PlayerInteractables : MonoBehaviour
 
     void BossPortal()
     {
+        isFocused = false;
+        CameraControllerMain.instance.interactUIPrompt.SetActive(false);
         GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
+    }
+
+    IEnumerator BossCor()
+    {
+        GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
+        yield return new WaitForEndOfFrame();
+        isFocused = false;
+        CameraControllerMain.instance.interactUIPrompt.SetActive(false);
     }
 }
