@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e096895e64f6b164fb88bdb2d824714a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalOpen: {fileID: 185454, guid: ade1f0bfc938f694ab4f3bc05fc5c55b, type: 3}
-  portalIdle: {fileID: 100898, guid: a25b3d9a8119bf047b7609dba7f57302, type: 3}
-  portalClose: {fileID: 129282, guid: 1be59f1cbeaab354f9ca4f2b66abda33, type: 3}
+  portalOpenPrefab: {fileID: 185454, guid: ade1f0bfc938f694ab4f3bc05fc5c55b, type: 3}
+  portalIdlePrefab: {fileID: 0}
+  portalClosePrefab: {fileID: 0}
   portalLifetime: 4

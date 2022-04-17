@@ -8882,7 +8882,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 1692190711}
-  bgm: {fileID: 0}
   mmm: {fileID: 11400000, guid: 2403b3734a228ef459d69099a7b2f4b6, type: 2}
   mouseInputField: {fileID: 243341580}
   mouseSlider: {fileID: 1301525073}

@@ -104,7 +104,7 @@ public class CameraControllerMain : MonoBehaviour
     PlayerInteractables interactable;
 
 
-    void CameraChestHit()
+    void CameraChestHit()//all this needs to be refactored but running out of time.
     {
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, firstChildRotX.forward, out chestHit, 5f, chestLayer))
@@ -135,7 +135,7 @@ public class CameraControllerMain : MonoBehaviour
                 }
                 itemChestCache.isInRange = true;
             }
-
+            
             if (chestHit.transform.tag == "Interactable")
             {
                 if (interactable == null)
