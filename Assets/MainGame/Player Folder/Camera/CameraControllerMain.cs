@@ -94,9 +94,9 @@ public class CameraControllerMain : MonoBehaviour
 
     void LateUpdate()
     {
-        CameraInput();
         CameraHandler();
         CameraCollisions();
+        CameraInput();
         CameraChestHit();
     }
 
@@ -210,14 +210,7 @@ public class CameraControllerMain : MonoBehaviour
     {
         //currentRotY = player.transform.eulerAngles.y;
 
-        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentRotY, transform.eulerAngles.z);
 
-        tiltX.eulerAngles = new Vector3(currentTiltX, tiltX.eulerAngles.y, tiltX.eulerAngles.z);
-        //THSI LINE BELOW FOR CAM MOVEMENT/SCROLLING
-        //mainCam.transform.position = transform.position + tiltX.forward * -currentCameraDistance;
-        //new col line
-        mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
 
         if (shouldCameraRotate && !IngameMenu.gameIsPaused)
         {
@@ -235,6 +228,17 @@ public class CameraControllerMain : MonoBehaviour
         {
             currentCameraDistance += 0.5f;
         }
+
+
+        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentRotY, transform.eulerAngles.z);
+
+        tiltX.eulerAngles = new Vector3(currentTiltX, tiltX.eulerAngles.y, tiltX.eulerAngles.z);
+        //THSI LINE BELOW FOR CAM MOVEMENT/SCROLLING
+        //mainCam.transform.position = transform.position + tiltX.forward * -currentCameraDistance;
+        //new col line
+        mainCam.transform.position = transform.position + tiltX.forward * -adjustedCamDistance;
+
 
         currentCameraDistance = Mathf.Clamp(currentCameraDistance, 0, cameraDistanceMax);
     }    

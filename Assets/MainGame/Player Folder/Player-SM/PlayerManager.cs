@@ -126,24 +126,9 @@ public class PlayerManager : MonoBehaviour
                 playerAnimator.SetFloat("rmVelocity", 0);
             }
         }
-        
     }
-
-    /*
-    void FixedUpdate()//fixed update results in jerkiness for some reason with RMs
-    {
-        if (!isMovingAbility)
-        {
-            if (!isAttacking)
-            {
-                MainMovement();
-            }
-            //RotationTransformCamera();
-        }
-        
-    }
-    */
-
+    
+    
     private void LateUpdate()
     {
         if (!isMovingAbility && !CharacterManager.isDead)
@@ -155,6 +140,7 @@ public class PlayerManager : MonoBehaviour
             RotationTransformCamera();
         }
     }
+    
 
 
     void BlendTreeAnimations()
