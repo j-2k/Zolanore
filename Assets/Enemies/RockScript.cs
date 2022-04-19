@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class RockScript : MonoBehaviour
 {
+    DealDamageToPlayer dd;
     void Start()
     {
-        Invoke("DestroyObj", 8);
+        dd = GetComponentInParent<DealDamageToPlayer>();
+        transform.parent = null;
+        Destroy(gameObject, 4);
     }
-    void DestroyObj()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        Destroy(this);
+        if (collision.transform.tag == "Player")
+        {
+                dd.DealDamage();
+                Destroy(gameObject);
+        }
     }
 }

@@ -95,7 +95,7 @@ public class EnemyAgent : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         if (Shot == false)
         {
-            GameObject tempBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+            GameObject tempBullet = Instantiate(bullet, shootPos.position, Quaternion.identity,transform);
             Rigidbody bulletRB = tempBullet.GetComponent<Rigidbody>();
             Vector3 targetDir = (player.transform.position - transform.position).normalized;
             bulletRB.AddForce(targetDir * bulletSpeed, ForceMode.Impulse);
