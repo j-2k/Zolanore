@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 1557924432556490985}
   - component: {fileID: 8419494899107371648}
   - component: {fileID: -7007054821180724760}
+  - component: {fileID: 3123228139027614575}
   m_Layer: 0
   m_Name: Golem (Ranged)
   m_TagString: Enemy
@@ -813,9 +814,23 @@ MonoBehaviour:
   curHealth: 0
   xp: 0
   bonusXP: 0
+  isDead: 0
   drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 3205308596221179550}
+--- !u!114 &3123228139027614575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557426616913078769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb6e8fdfb6ecb54c94e22589949f7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  esm: {fileID: -7007054821180724760}
 --- !u!1 &1557439343983684467
 GameObject:
   m_ObjectHideFlags: 0
