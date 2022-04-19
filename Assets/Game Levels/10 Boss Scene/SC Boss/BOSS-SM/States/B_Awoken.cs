@@ -29,6 +29,11 @@ public class B_Awoken : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        if (!BGM.instance.isBossFight)
+        {
+            BGM.instance.isBossFight = true;
+            BGM.instance.currentBGM.Play();
+        }
         selfTornado.Play();
         speed = 30;
         increment = 0;

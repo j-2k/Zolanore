@@ -6,7 +6,7 @@ public class B_Death : Boss_State
 {
     [SerializeField] ParticleSystem[] vfxs;
     [SerializeField] ParticleSystem thunderChaseVFX;
-
+    [SerializeField] GameObject portalObj;
 
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
     {
@@ -15,6 +15,9 @@ public class B_Death : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        portalObj.SetActive(true);
+        BGM.instance.isBossFight = false;
+        BGM.instance.BeatBoss();
         thunderChaseVFX.Stop();
         Destroy(thunderChaseVFX.transform.parent.gameObject,4);
         bsm.gameObject.GetComponent<CapsuleCollider>().enabled = false;
@@ -26,9 +29,13 @@ public class B_Death : Boss_State
         //enable loot somewhere & destroy body after 20
     }
 
+    
+    float lower = 0;
     public override void UpdateState(Boss_StateMachine bsm)
     {
         bsm.anim.SetBool("Death", true);
+
+
 
         //do loot stuff in case there is or other operations for proceeding
     }

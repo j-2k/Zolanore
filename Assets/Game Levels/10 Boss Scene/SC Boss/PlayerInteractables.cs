@@ -6,9 +6,19 @@ public class PlayerInteractables : MonoBehaviour
 {
     public bool isFocused = false;
     [SerializeField] bool isBossPortal = false;
+    [SerializeField] GameSceneLoader.SceneEnum sceneToGo;
     [SerializeField] KeyCode interact;
     [SerializeField] GameObject bossObject;
     [SerializeField] GameObject teleportLocation;
+
+    private void Start()
+    {
+        if (this.gameObject.name == "BOSSALTAR")
+        {
+            BGM.instance.isBossFight = false;
+            BGM.instance.currentBGM.Stop();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,7 +28,7 @@ public class PlayerInteractables : MonoBehaviour
         {
             if (isBossPortal)
             {
-                StartCoroutine(BossCor());
+                StartCoroutine(BossCor(sceneToGo));
                 return;
             }
             else if (isBossAltar() == true)
@@ -54,9 +64,9 @@ public class PlayerInteractables : MonoBehaviour
         GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
     }
 
-    IEnumerator BossCor()
+    IEnumerator BossCor(GameSceneLoader.SceneEnum sceneToChange)
     {
-        GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.BossRealm);
+        GameSceneLoader.LoadScene(sceneToChange);
         yield return new WaitForEndOfFrame();
         isFocused = false;
         CameraControllerMain.instance.interactUIPrompt.SetActive(false);

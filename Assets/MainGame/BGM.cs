@@ -8,6 +8,8 @@ public class BGM : MonoBehaviour
 
     public AudioSource currentBGM;
 
+    public bool isBossFight = false;
+
     public static BGM instance;
     private void Awake()
     {
@@ -31,7 +33,19 @@ public class BGM : MonoBehaviour
     public void SwitchAudioBGM(int index)
     {
         currentBGM.clip = audioClips[index];
-        currentBGM.Play();
+        if (index == 2)
+        {
+            currentBGM.Stop();
+        }
+        else
+        {
+            currentBGM.Play();
+        }
+    }
+
+    public void BeatBoss()
+    {
+        SwitchAudioBGM(audioClips.Count-1);
     }
 
 }

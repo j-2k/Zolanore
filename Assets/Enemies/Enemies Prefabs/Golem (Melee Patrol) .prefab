@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 7167536556386901108}
   - component: {fileID: 7168604432453105007}
   - component: {fileID: 4678073698244604698}
+  - component: {fileID: 8037454281522258321}
   m_Layer: 0
   m_Name: 'Golem (Melee Patrol) '
   m_TagString: Enemy
@@ -637,9 +638,23 @@ MonoBehaviour:
   curHealth: 0
   xp: 0
   bonusXP: 0
+  isDead: 0
   drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 6414154301367583386}
+--- !u!114 &8037454281522258321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168604432453105004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb6e8fdfb6ecb54c94e22589949f7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  esm: {fileID: 4678073698244604698}
 --- !u!1 &7168606783363174218
 GameObject:
   m_ObjectHideFlags: 0

@@ -853,6 +853,7 @@ GameObject:
   - component: {fileID: 7009520788913822314}
   - component: {fileID: 7009520788913822315}
   - component: {fileID: 1990155946256546807}
+  - component: {fileID: 8635073479767424203}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -994,9 +995,23 @@ MonoBehaviour:
   curHealth: 0
   xp: 0
   bonusXP: 0
+  isDead: 0
   drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 368970128047961759}
+--- !u!114 &8635073479767424203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009036162863313779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb6e8fdfb6ecb54c94e22589949f7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  esm: {fileID: 1990155946256546807}
 --- !u!1 &7009057686010425841
 GameObject:
   m_ObjectHideFlags: 0
