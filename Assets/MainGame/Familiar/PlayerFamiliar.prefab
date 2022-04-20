@@ -518,6 +518,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1697568072381860187}
     m_Modifications:
+    - target: {fileID: 1133305157437494, guid: 9a9680342d71ee147bcaafe9539665b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1207179939759570, guid: 9a9680342d71ee147bcaafe9539665b4, type: 3}
       propertyPath: m_Name
       value: 3_FamiliarVFX
@@ -576,6 +580,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4547987611104422, guid: 9a9680342d71ee147bcaafe9539665b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198971440803005312, guid: 9a9680342d71ee147bcaafe9539665b4, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.6603774
+      objectReference: {fileID: 0}
+    - target: {fileID: 198971440803005312, guid: 9a9680342d71ee147bcaafe9539665b4, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 0.008820768
+      objectReference: {fileID: 0}
+    - target: {fileID: 198971440803005312, guid: 9a9680342d71ee147bcaafe9539665b4, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
