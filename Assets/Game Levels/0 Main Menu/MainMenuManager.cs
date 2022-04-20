@@ -18,8 +18,8 @@ public class MainMenuManager : ScriptableObject
     {
         DontDestroyOnLoad(this);
         mouseSensitivity = 3;
-        musicVolume = 25;
-        SFXVolume = 25;
+        musicVolume = 0.5f;
+        SFXVolume = 0.5f;
     }
 
     // Update is called once per frame

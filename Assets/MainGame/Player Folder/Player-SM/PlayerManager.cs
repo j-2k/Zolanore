@@ -55,6 +55,8 @@ public class PlayerManager : MonoBehaviour
     public bool isRolling = false;
     bool lockForward;
 
+    [SerializeField] AudioSFX sfx;
+
     public static PlayerManager instance;
 
     private void Awake()
@@ -306,7 +308,9 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("Peak of Attack");
         //MIGHT USE ANOTHER TYPE OF COLLISION LOGIC HERE THIS IS PLACE HOLDER
-        
+
+        sfx.SwordSwingSFX();
+
         hitColliders = Physics.OverlapSphere(hitboxPos.transform.position, attackColliderRadius);
 
         //out going dmg calc maybe change in the future for better results to scale to higher lvls
