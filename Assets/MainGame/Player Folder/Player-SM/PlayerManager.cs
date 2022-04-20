@@ -56,6 +56,7 @@ public class PlayerManager : MonoBehaviour
     bool lockForward;
 
     [SerializeField] AudioSFX sfx;
+    [SerializeField] SwordVFX swordVFXScript;
 
     public static PlayerManager instance;
 
@@ -197,6 +198,7 @@ public class PlayerManager : MonoBehaviour
         if (comboStep >= 1)
         {
             isAttacking = true;
+            swordVFXScript.enabled = true;
         }
         else
         {
@@ -525,6 +527,11 @@ public class PlayerManager : MonoBehaviour
             }
         }
         
+    }
+
+    public bool GetIsAttackingBool()
+    {
+        return isAttacking;
     }
 
     private void OnDrawGizmos()
