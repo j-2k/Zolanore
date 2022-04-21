@@ -13764,8 +13764,8 @@ MonoBehaviour:
   player: {fileID: 217346399587231573}
   listOfBlocks: []
   buildCustomSize: 1
-  customSizeX: 1
-  customSizeY: 1
+  customSizeX: 6
+  customSizeY: 6
 --- !u!224 &578822500
 RectTransform:
   m_ObjectHideFlags: 0
