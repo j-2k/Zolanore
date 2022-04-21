@@ -18,11 +18,45 @@ public class BlockManager : MonoBehaviour
                 listOfBlocks.Add(Instantiate(block, new Vector3(x * 100, 0, y * 100), Quaternion.identity));
             }
         }
+        lastQuad = new Vector3(0, 0, 0);
     }
 
+    Vector3 lastQuad;
+    int arrayShift = 5;
+    int arrayStart = 0;
     // Update is called once per frame
     void Update()
     {
-        
+        if (player.transform.position.z >= lastQuad.z + 50)
+        {
+            Debug.Log("Front by 50");
+        }
+
+        if (player.transform.position.z <= lastQuad.z - 50)
+        {
+            Debug.Log("Back by 50");
+        }
+
+        if (player.transform.position.z >= lastQuad.z + 50 || player.transform.position.z <= lastQuad.z - 50)
+        {
+            //Debug.Log("Front by 50"); //entered a new chunk on z forward
+
+            for (int i = arrayStart; i < listOfBlocks.Count;)
+            {
+                listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x, listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z + 500);
+                i += arrayShift;
+            }
+
+            if (arrayStart >= 4)
+            {
+                arrayStart = 0;
+            }
+            else
+            {
+                arrayStart++;
+            }
+
+            lastQuad.z += 100;
+        }
     }
 }
