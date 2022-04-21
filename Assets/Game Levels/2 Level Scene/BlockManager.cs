@@ -27,15 +27,22 @@ public class BlockManager : MonoBehaviour
         }
         else
         {
-            for (int x = -customSizeX/2; x < (customSizeX/2); x++)
+            for (int x = 0; x < (customSizeX); x++)
             {
-                for (int y = -customSizeY/2; y < (customSizeY/2); y++)
+                for (int y = 0; y < (customSizeY); y++)
                 {
                     listOfBlocks.Add(Instantiate(block, new Vector3(x * 100, 0, y * 100), Quaternion.identity));
                 }
             }
             lastXCycle = (customSizeY * customSizeX) - customSizeY;
+            //should be doing this wherever i instanaitae but whatever
+            for (int i = 0; i < listOfBlocks.Count; i++)
+            {
+                listOfBlocks[i].transform.position -= new Vector3(((customSizeX-1) * 100)/2, 0, ((customSizeY-1) * 100)/2);
+            }
         }
+
+
         lastQuad = new Vector3(0, 0, 0);
     }
 
