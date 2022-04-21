@@ -13763,6 +13763,9 @@ MonoBehaviour:
   block: {fileID: 8182500306608668352, guid: ab43eb751f68d0946a7127881546baf5, type: 3}
   player: {fileID: 217346399587231573}
   listOfBlocks: []
+  buildCustomSize: 1
+  customSizeX: 5
+  customSizeY: 5
 --- !u!224 &578822500
 RectTransform:
   m_ObjectHideFlags: 0
