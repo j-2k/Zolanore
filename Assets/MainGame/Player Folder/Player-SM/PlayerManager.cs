@@ -57,6 +57,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] AudioSFX sfx;
     [SerializeField] SwordVFX swordVFXScript;
+    [SerializeField] ParticleSystem fancyStepVFX;
 
     public static PlayerManager instance;
 
@@ -390,6 +391,10 @@ public class PlayerManager : MonoBehaviour
 
     public void GroundedUpdate()
     {
+        if (!fancyStepVFX.isPlaying)
+        {
+            fancyStepVFX.Play();
+        }
 
         Vector3 downSlopeFix = (Vector3.down * cc.height / 2 * slopeForce);
 
@@ -414,6 +419,7 @@ public class PlayerManager : MonoBehaviour
 
     private void AirUpdate()
     {
+        fancyStepVFX.Stop();
         velocity.y -= gravity * Time.deltaTime;
         Vector3 displacement = velocity * Time.deltaTime;
         displacement += AirMovement();
