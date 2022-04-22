@@ -40,6 +40,8 @@ public class EnemyStatManager : MonoBehaviour
 
     public HealthBar hpBar;
 
+    [SerializeField] ParticleSystem hitVFX;
+
 
     private void Awake()
     {
@@ -99,6 +101,7 @@ public class EnemyStatManager : MonoBehaviour
             curHealth -= incDmg;
             //disabled for testing
             hpBar.SetHealth(curHealth);
+            hitVFX.Play();
 
             if (isBoss)
             {
