@@ -14,8 +14,8 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -13764,8 +13764,8 @@ MonoBehaviour:
   player: {fileID: 217346399587231573}
   listOfBlocks: []
   buildCustomSize: 1
-  customSizeX: 6
-  customSizeY: 6
+  customSizeX: 5
+  customSizeY: 5
 --- !u!224 &578822500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34039,7 +34039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawMovement: 1
-  movementSpeed: 50
+  movementSpeed: 15
   movementAir: 7
   jumpSpeed: 3
   jumpCurve: 0.1

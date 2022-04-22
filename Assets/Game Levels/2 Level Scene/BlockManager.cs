@@ -14,6 +14,33 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   //-2 -1 0 1 2 (5x5) | -1 0 1 (3x3) | -3 -2 -1 0 1 2 3(7x7)? 7/2 = 3.5
+
+        if (!buildCustomSize)
+        {
+            customSizeX = 5;
+            customSizeY = 5;
+        }
+
+        for (int x = 0; x < (customSizeX); x++)
+        {
+            for (int y = 0; y < (customSizeY); y++)
+            {
+                listOfBlocks.Add(Instantiate(block, new Vector3(x * 100, 0, y * 100), Quaternion.identity));
+            }
+        }
+        lastXCycle = (customSizeY * customSizeX) - customSizeY;
+        //should be doing this wherever i instanaitae but whatever
+        for (int i = 0; i < listOfBlocks.Count; i++)
+        {
+            listOfBlocks[i].transform.position -= new Vector3(((customSizeX - 1) * 100) / 2, 0, ((customSizeY - 1) * 100) / 2);
+        }
+
+        //OldStart();
+        lastQuad = new Vector3(0, 0, 0);
+    }
+
+    void OldStart()
+    {
         if (!buildCustomSize)
         {
             for (int x = -2; x < 3; x++)
@@ -27,6 +54,7 @@ public class BlockManager : MonoBehaviour
         }
         else
         {
+
             for (int x = 0; x < (customSizeX); x++)
             {
                 for (int y = 0; y < (customSizeY); y++)
@@ -38,12 +66,9 @@ public class BlockManager : MonoBehaviour
             //should be doing this wherever i instanaitae but whatever
             for (int i = 0; i < listOfBlocks.Count; i++)
             {
-                listOfBlocks[i].transform.position -= new Vector3(((customSizeX-1) * 100)/2, 0, ((customSizeY-1) * 100)/2);
+                listOfBlocks[i].transform.position -= new Vector3(((customSizeX - 1) * 100) / 2, 0, ((customSizeY - 1) * 100) / 2);
             }
         }
-
-
-        lastQuad = new Vector3(0, 0, 0);
     }
 
     Vector3 lastQuad;
