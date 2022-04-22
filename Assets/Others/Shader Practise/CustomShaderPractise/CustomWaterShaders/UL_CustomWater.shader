@@ -47,7 +47,7 @@ Shader "Unlit/ULCustomWater"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                float4 screenPosition : TEXCOORD1;
+                float4 screenPosition : TEXCOORD2;
                 float4 vertex : SV_POSITION;
                 UNITY_FOG_COORDS(1)
             };
