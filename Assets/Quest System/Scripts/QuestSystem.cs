@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class QuestSystem : MonoBehaviour
 {
-    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton;
+    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton, portalToBoss;
 
     GameObject questInformation;
 
@@ -42,6 +42,10 @@ public class QuestSystem : MonoBehaviour
 
     private void Update()
     {
+        if(completedQuests >= 3)
+        {
+            portalToBoss.SetActive(true);
+        }
         GetClosestQuestGiver();
         if (questGivers.Count > 0)
         {
