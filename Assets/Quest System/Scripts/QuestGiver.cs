@@ -26,9 +26,9 @@ public class QuestGiver : MonoBehaviour
     }
     private void Update()
     {
-        if(questSystem.closestQuestGiver == this.gameObject)
+        if(acceptedQuest)
         {
-
+            questActive = true;
         }
         if (claimedQuest)
         {
