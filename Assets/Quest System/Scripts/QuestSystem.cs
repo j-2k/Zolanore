@@ -29,24 +29,22 @@ public class QuestSystem : MonoBehaviour
     public bool questsActive = false;
     bool openedQuest = false;
 
-    private void Awake()
-    {
-        IntializeReferences();
-    }
-
-    private void Start()
-    {
-        levelSystem = LevelSystem.instance;
-        Cursor.visible = false;
-        questJournal.SetActive(false);
-        claimButton.SetActive(false);
-        questInformation.SetActive(false);
-    }
+    bool onFirstLoad = true;
 
     private void Update()
     {
         if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
+            if (onFirstLoad)
+            {
+                IntializeReferences();
+                levelSystem = LevelSystem.instance;
+                Cursor.visible = false;
+                questJournal.SetActive(false);
+                claimButton.SetActive(false);
+                questInformation.SetActive(false);
+                onFirstLoad = false;
+            }
             if (completedQuests >= 3)
             {
                 portalToBoss.SetActive(true);
@@ -101,7 +99,10 @@ public class QuestSystem : MonoBehaviour
                 }
             }
         }
-      
+        else
+        {
+            onFirstLoad = true;
+        }
     }
 
     private void OpenQuestJournal()
