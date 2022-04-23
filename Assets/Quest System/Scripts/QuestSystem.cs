@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestSystem : MonoBehaviour
 {
@@ -42,59 +43,63 @@ public class QuestSystem : MonoBehaviour
 
     private void Update()
     {
-        if(completedQuests >= 3)
+        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
-            portalToBoss.SetActive(true);
-        }
-        GetClosestQuestGiver();
-        if (questGivers.Count > 0)
-        {
-            CheckIfCloseToQuestGiver();
-            IfCloseActivateUI();
-
-            if (isNear)
+            if (completedQuests >= 3)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                portalToBoss.SetActive(true);
+            }
+            GetClosestQuestGiver();
+            if (questGivers.Count > 0)
+            {
+                CheckIfCloseToQuestGiver();
+                IfCloseActivateUI();
+
+                if (isNear)
                 {
-                    openedQuest = true;
-                    if (!questGiver.completedQuest)
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
-                        claimButton.SetActive(false);
-                    }
-                    if (questInformation.activeSelf)
-                    {
-                        CloseQuestInfo();
-                    }
-                    else if (questGiver.completedQuest)
-                    {
-                        closestQuestGiver.GetComponent<Animator>().SetTrigger("Finish");
-                        claimButton.SetActive(true);
-                        DisableCharacterRotation();
-                        questManager.InitializeWindow(questGiver.quest);
-                        Cursor.visible = true;
+                        openedQuest = true;
+                        if (!questGiver.completedQuest)
+                        {
+                            claimButton.SetActive(false);
+                        }
+                        if (questInformation.activeSelf)
+                        {
+                            CloseQuestInfo();
+                        }
+                        else if (questGiver.completedQuest)
+                        {
+                            closestQuestGiver.GetComponent<Animator>().SetTrigger("Finish");
+                            claimButton.SetActive(true);
+                            DisableCharacterRotation();
+                            questManager.InitializeWindow(questGiver.quest);
+                            Cursor.visible = true;
 
+                        }
+                        else if (!questGiver.acceptedQuest)
+                        {
+                            closestQuestGiver.GetComponent<Animator>().SetTrigger("Talk");
+                            acceptButton.SetActive(true);
+                            DisableCharacterRotation();
+                            questManager.InitializeWindow(questGiver.quest);
+                            Cursor.visible = true;
+                        }
+                        else
+                        {
+                            EnableCharacterRotation();
+                        }
                     }
-                    else if (!questGiver.acceptedQuest)
-                    {
-                        closestQuestGiver.GetComponent<Animator>().SetTrigger("Talk");
-                        acceptButton.SetActive(true);
-                        DisableCharacterRotation();
-                        questManager.InitializeWindow(questGiver.quest);
-                        Cursor.visible = true;
-                    }
-                    else
-                    {
-                        EnableCharacterRotation();
-                    }
+                    //if (openedQuest) interactUI.SetActive(false);
+                    //else interactUI.SetActive(true);
                 }
-                //if (openedQuest) interactUI.SetActive(false);
-                //else interactUI.SetActive(true);
-            }
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                OpenQuestJournal();
+                if (Input.GetKeyDown(KeyCode.J))
+                {
+                    OpenQuestJournal();
+                }
             }
         }
+       
     }
 
     private void OpenQuestJournal()
