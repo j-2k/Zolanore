@@ -16,10 +16,12 @@ public class QuestGiver : MonoBehaviour
     GameObject marker;
 
     QuestSystem questSystem;
+    QuestGiver questGiver;
     
     private void Awake()
     {
         questSystem = FindObjectOfType<QuestSystem>();
+        questGiver = GetComponent<QuestGiver>();
         marker = transform.GetChild(0).Find("Marker").gameObject;
     }
     private void Update()
@@ -33,7 +35,7 @@ public class QuestGiver : MonoBehaviour
             marker.SetActive(false);
             questActive = false;
             gameObject.tag = "Untagged";
-            GetComponent<QuestGiver>().enabled = false;
+            questGiver.enabled = false;
         }
         else
         {

@@ -16,7 +16,7 @@ MonoBehaviour:
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  Enemy: Centaur
+  Enemy: Ice Wolf
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Information:
     Icon: {fileID: 21300000, guid: f507f03eb80bcbf49bb458bd6a54bd9a, type: 3}
-    Name: Kill Creatures
+    Name: Kill Two types of wolf
     Description: Due to a sever wound in your chest you need to go and kill goblins,
       they murdered your family, go kill them asshole
   Reward:
