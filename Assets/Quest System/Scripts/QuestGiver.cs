@@ -17,6 +17,7 @@ public class QuestGiver : MonoBehaviour
 
     QuestSystem questSystem;
     QuestGiver questGiver;
+
     
     private void Awake()
     {

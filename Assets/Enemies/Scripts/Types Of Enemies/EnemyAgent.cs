@@ -73,6 +73,7 @@ public class EnemyAgent : MonoBehaviour
     public void Move(Vector3 destination)
     {
         navmesh.destination = destination;
+        transform.LookAt(destination);
     }
 
     public void Patrol(Vector3 destination)
