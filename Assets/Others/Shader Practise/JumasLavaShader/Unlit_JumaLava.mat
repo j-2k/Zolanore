@@ -20,18 +20,18 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e199ee8112362864f831425463b09fda, type: 3}
-        m_Scale: {x: 2, y: 2}
+        m_Texture: {fileID: 2800000, guid: 39a00f3a4d887cc448b5d165b19938eb, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
         m_Texture: {fileID: 2800000, guid: 39a00f3a4d887cc448b5d165b19938eb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 1
+    - _Amplitude: 2
     - _NoiseScale: 2
-    - _WaveDensitiy: 10
+    - _WaveDensitiy: 5
     m_Colors:
     - _Color: {r: 5.992157, g: 0.627451, b: 0, a: 1}
-    - _NoiseVelocity: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _NoiseVelocity: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

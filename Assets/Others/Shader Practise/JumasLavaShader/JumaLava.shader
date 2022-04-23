@@ -66,9 +66,9 @@ Shader "Unlit/JumaLava"
                 //float2 worldUVScroll = float2(o.worldUV.x + _Time.y * _NoiseVelocity.x,o.worldUV.z + _Time.y * _NoiseVelocity.y);//normalize(_NoiseVelocity.x) * windspeed
                 //o.worldUV.xz = (worldUVScroll.xy) * _NoiseScale;
 
-                //float noiseVal = tex2D(_NoiseTex, o.noiseUV).r;
-                float waveX = (_Amplitude * 1) * cos((v.uv.x + _Time.y) * _WaveDensitiy);//v.uv.x
-                float waveY = (_Amplitude * 1) * cos((v.uv.y+ _Time.y) * _WaveDensitiy);
+                float noiseVal = tex2Dlod(_MainTex, v.vertex).r;
+                float waveX = (_Amplitude) * cos((v.uv.x + _Time.y * 0.1) * 5 *_WaveDensitiy);//v.uv.x
+                float waveY = (_Amplitude) * cos((v.uv.y+ _Time.y * 0.1) * 5 *_WaveDensitiy);
                 o.vertex.y += (waveX + waveY);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
