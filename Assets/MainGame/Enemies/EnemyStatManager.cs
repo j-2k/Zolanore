@@ -38,6 +38,7 @@ public class EnemyStatManager : MonoBehaviour
     Vector3 initialPosition;
 
     QuestManager questManager;
+    QuestSystem questSystem;
 
     [SerializeField] GameObject drop;
     public uint hitID;
@@ -50,6 +51,7 @@ public class EnemyStatManager : MonoBehaviour
 
     private void Awake()
     {
+        questSystem = FindObjectOfType<QuestSystem>();
         //commented quest objects for testing
         if (!isBoss)
         {
@@ -138,6 +140,7 @@ public class EnemyStatManager : MonoBehaviour
                         dieAnimPlaying = true;
                     }
                     levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
+
                     if (questTracker.transform.childCount != 0)
                     {
                         for (int i = 0; i < questTracker.transform.childCount; i++)
@@ -146,11 +149,12 @@ public class EnemyStatManager : MonoBehaviour
                             if (tempString == questTracker.transform.GetChild(i).name)
                             {
                                 questTracker.GetComponent<QuestTracker>().IncrementCount(i);
+                                questManager.Kill(questEnemyName);
+
                             }
                         }
                     }
                     Invoke("OnDeath", 2);
-                    questManager.Kill(questEnemyName);
                 }
             }
         }

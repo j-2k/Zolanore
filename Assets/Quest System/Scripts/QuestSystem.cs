@@ -13,7 +13,7 @@ public class QuestSystem : MonoBehaviour
 
     QuestManager questManager;
     QuestWindow questWindow;
-    QuestGiver questGiver;
+    public QuestGiver questGiver;
 
     CameraControllerMain cameraController;
     TestMovement testMovement;
@@ -22,7 +22,7 @@ public class QuestSystem : MonoBehaviour
 
     bool isClose = false;
     bool isNear = false;
-    bool questsActive = false;
+    public bool questsActive = false;
     bool openedQuest = false;
 
     private void Awake()
