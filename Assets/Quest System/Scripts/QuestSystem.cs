@@ -83,8 +83,8 @@ public class QuestSystem : MonoBehaviour
                         EnableCharacterRotation();
                     }
                 }
-                if (openedQuest) interactUI.SetActive(false);
-                else interactUI.SetActive(true);
+                //if (openedQuest) interactUI.SetActive(false);
+                //else interactUI.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
