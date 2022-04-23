@@ -36,8 +36,6 @@ public class QuestSystem : MonoBehaviour
         questJournal.SetActive(false);
         claimButton.SetActive(false);
         questInformation.SetActive(false);
-
-        this.enabled = false;
     }
 
     private void Update()

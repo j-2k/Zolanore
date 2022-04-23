@@ -45,6 +45,7 @@ public class EnemyStatManager : MonoBehaviour
     public HealthBar hpBar;
 
     [SerializeField] ParticleSystem hitVFX;
+    Collider coll;
 
 
     private void Awake()
@@ -54,6 +55,7 @@ public class EnemyStatManager : MonoBehaviour
         {
             questTracker = GameObject.Find("QuestTracker");
         }
+        coll = GetComponent<Collider>();
     }
     void Start()
     {
@@ -120,6 +122,7 @@ public class EnemyStatManager : MonoBehaviour
                 {
                     boss.BossSwitchState(boss.deathState);
                     isDead = true;
+                    coll.enabled = false;
                 }
             }
             else
@@ -127,6 +130,7 @@ public class EnemyStatManager : MonoBehaviour
                 if (curHealth <= 0)
                 {
                     isDead = true;
+                    coll.enabled = false;
                     if (!dieAnimPlaying)
                     {
                         GetComponent<EnemyAgent>().enabled = false;
@@ -176,7 +180,9 @@ public class EnemyStatManager : MonoBehaviour
         transform.position = initialPosition;
         GetComponent<Animator>().SetInteger("state", 0);
         GetComponent<EnemyAgent>().enabled = true;
+        coll.enabled = true;
         gameObject.SetActive(true);
+        isDead = false;
     }
 }
 
