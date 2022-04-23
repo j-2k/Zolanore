@@ -12,6 +12,7 @@ public class EnemyStatManager : MonoBehaviour
     [Header("ENEMY LEVEL IS PRE-DEF TO PLAYER LVL CHECK CODE")]
     [SerializeField] string questEnemyName;
     [SerializeField] GameObject questTracker;
+    [SerializeField] int respawnTime;
     [SerializeField] int enemyLevel;
     [SerializeField] int bonusLevel;
     [SerializeField] int bonusDamage;
@@ -28,10 +29,13 @@ public class EnemyStatManager : MonoBehaviour
     [SerializeField] int xp;
     [SerializeField] int bonusXP;
     public bool isDead = false;
+    public bool dieAnimPlaying = false;
 
     NavMeshAgent agent;
 
     LevelSystem levelSystem;
+
+    Vector3 initialPosition;
 
     QuestManager questManager;
 
@@ -53,6 +57,7 @@ public class EnemyStatManager : MonoBehaviour
     }
     void Start()
     {
+        initialPosition = transform.position;
         if (!isBoss)
         {
             questTracker.SetActive(false);
@@ -122,6 +127,12 @@ public class EnemyStatManager : MonoBehaviour
                 if (curHealth <= 0)
                 {
                     isDead = true;
+                    if (!dieAnimPlaying)
+                    {
+                        GetComponent<EnemyAgent>().enabled = false;
+                        GetComponent<Animator>().SetInteger("state", 3);
+                        dieAnimPlaying = true;
+                    }
                     levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
                     if (questTracker.transform.childCount != 0)
                     {
@@ -134,15 +145,8 @@ public class EnemyStatManager : MonoBehaviour
                             }
                         }
                     }
-
+                    Invoke("OnDeath", 2);
                     questManager.Kill(questEnemyName);
-                    int dropPerc = Random.Range(1, 101);
-                    Debug.Log(dropPerc);
-                    if (dropPerc <= 20)
-                    {
-                        Instantiate(drop, transform.position, Quaternion.identity);
-                    }
-                    Destroy(gameObject);
                 }
             }
         }
@@ -151,4 +155,28 @@ public class EnemyStatManager : MonoBehaviour
             return;
         }
     }
+
+    public void OnDeath()
+    {
+        int dropPerc = Random.Range(1, 101);
+
+        if (dropPerc <= 20)
+        {
+            Instantiate(drop, transform.position, Quaternion.identity);
+        }
+        gameObject.SetActive(false);
+
+        Invoke("Respawn", respawnTime);
+    }
+
+    public void Respawn()
+    {
+        curHealth = maxHealth;
+        hpBar.SetMaxHealth(maxHealth);
+        transform.position = initialPosition;
+        GetComponent<Animator>().SetInteger("state", 0);
+        GetComponent<EnemyAgent>().enabled = true;
+        gameObject.SetActive(true);
+    }
 }
+

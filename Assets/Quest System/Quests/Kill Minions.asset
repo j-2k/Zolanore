@@ -16,7 +16,7 @@ MonoBehaviour:
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  Enemy: Centaur
+  Enemy: Ice Wolf
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
