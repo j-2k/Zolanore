@@ -32,10 +32,12 @@ public class QuestGiver : MonoBehaviour
         }
         if (claimedQuest)
         {
+            questSystem.completedQuests++;
             marker.SetActive(false);
             questActive = false;
             gameObject.tag = "Untagged";
             questGiver.enabled = false;
+            Invoke("DestroyQuestGiver", 15);
         }
         else
         {
@@ -48,6 +50,14 @@ public class QuestGiver : MonoBehaviour
             {
                 marker.SetActive(false);
             }
+        }
+    }
+
+    void DestroyQuestGiver()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 }

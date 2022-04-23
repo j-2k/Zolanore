@@ -15,6 +15,8 @@ public class QuestSystem : MonoBehaviour
     QuestWindow questWindow;
     public QuestGiver questGiver;
 
+    public int completedQuests = 0;
+
     CameraControllerMain cameraController;
     TestMovement testMovement;
 
@@ -275,9 +277,10 @@ public class QuestSystem : MonoBehaviour
     {
         for (int i = 0; i < questTracker.transform.childCount; i++)
         {
-            Destroy(questTracker.transform.GetChild(i));
+            Destroy(questTracker.transform.GetChild(i).gameObject);
         }
         questTracker.SetActive(false);
+        questTrackerName.SetActive(false);
         interactUI.SetActive(false);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
