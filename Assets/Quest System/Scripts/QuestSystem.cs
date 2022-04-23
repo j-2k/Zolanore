@@ -75,6 +75,7 @@ public class QuestSystem : MonoBehaviour
                             DisableCharacterRotation();
                             questManager.InitializeWindow(questGiver.quest);
                             Cursor.visible = true;
+                            Cursor.lockState = CursorLockMode.None;
 
                         }
                         else if (!questGiver.acceptedQuest)
@@ -84,14 +85,13 @@ public class QuestSystem : MonoBehaviour
                             DisableCharacterRotation();
                             questManager.InitializeWindow(questGiver.quest);
                             Cursor.visible = true;
+                            Cursor.lockState = CursorLockMode.None;
                         }
                         else
                         {
                             EnableCharacterRotation();
                         }
                     }
-                    //if (openedQuest) interactUI.SetActive(false);
-                    //else interactUI.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.J))
                 {
@@ -99,7 +99,7 @@ public class QuestSystem : MonoBehaviour
                 }
             }
         }
-       
+      
     }
 
     private void OpenQuestJournal()
@@ -117,6 +117,7 @@ public class QuestSystem : MonoBehaviour
         {
             questWindow.CloseWindow();
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             EnableCharacterRotation();
             questInformation.SetActive(false);
             questJournal.SetActive(false);
@@ -124,6 +125,7 @@ public class QuestSystem : MonoBehaviour
         else
         {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             DisableCharacterRotation();
             questJournal.SetActive(true);
         }
@@ -180,6 +182,7 @@ public class QuestSystem : MonoBehaviour
     {
         openedQuest = false;
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
         if (questJournal.activeSelf)
         {
             questJournal.SetActive(false);
@@ -199,6 +202,7 @@ public class QuestSystem : MonoBehaviour
     private void DisableCharacterRotation()
     {
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
         FindObjectOfType<CameraControllerMain>().enabled = false;
         GetComponent<CharacterManager>().enabled = false;
         GetComponent<PlayerManager>().enabled = false;
@@ -209,6 +213,7 @@ public class QuestSystem : MonoBehaviour
     public void EnableCharacterRotation()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
         FindObjectOfType<CameraControllerMain>().enabled = true;
         GetComponent<CharacterManager>().enabled = true;
         GetComponent<PlayerManager>().enabled = true;
@@ -256,6 +261,7 @@ public class QuestSystem : MonoBehaviour
     public void AcceptQuest()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         questManager.InstantiateQuestButton(questGiver.quest);
 
