@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 909889794, guid: aa5f5bcbe1f4ddc4cab4e817f48f6b81, type: 3}
+      propertyPath: respawnTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 909889794, guid: aa5f5bcbe1f4ddc4cab4e817f48f6b81, type: 3}
       propertyPath: questEnemyName
       value: Ice Wolf
       objectReference: {fileID: 0}
@@ -65,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2546088184911840587, guid: aa5f5bcbe1f4ddc4cab4e817f48f6b81, type: 3}
       propertyPath: m_Name
-      value: Ice Wolf (Stationary) (1)
+      value: Ice Wolf (Stationary) (1) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2546088184915019785, guid: aa5f5bcbe1f4ddc4cab4e817f48f6b81, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -802,6 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questEnemyName: Golem
   questTracker: {fileID: 0}
+  respawnTime: 30
   enemyLevel: 0
   bonusLevel: 0
   bonusDamage: 0
@@ -816,6 +817,7 @@ MonoBehaviour:
   xp: 0
   bonusXP: 0
   isDead: 0
+  dieAnimPlaying: 0
   drop: {fileID: 6179049179559870216, guid: 771841bd8b07b0540abc8f9cbc1d9474, type: 3}
   hitID: 0
   hpBar: {fileID: 3205308596221179550}

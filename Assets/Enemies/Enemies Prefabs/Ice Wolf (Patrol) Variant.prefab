@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9fd82968a99d7924187e69a7bbe74167, type: 2}
     - target: {fileID: 3696927322280092144, guid: c71ce3a0b2d494f4ba27e03ef1592c43, type: 3}
       propertyPath: m_Name
-      value: Ice Wolf (Patrol)
+      value: Ice Wolf (Patrol) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3696927322280092147, guid: c71ce3a0b2d494f4ba27e03ef1592c43, type: 3}
       propertyPath: Waypoints.Array.data[0]

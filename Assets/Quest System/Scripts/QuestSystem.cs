@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class QuestSystem : MonoBehaviour
 {
-    [SerializeField] GameObject questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton,acceptButton;
+    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton;
 
     GameObject questInformation;
 
@@ -36,8 +36,6 @@ public class QuestSystem : MonoBehaviour
         questJournal.SetActive(false);
         claimButton.SetActive(false);
         questInformation.SetActive(false);
-
-        this.enabled = false;
     }
 
     private void Update()
@@ -68,7 +66,7 @@ public class QuestSystem : MonoBehaviour
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
                         Cursor.visible = true;
-                        Cursor.lockState = CursorLockMode.None;
+
                     }
                     else if (!questGiver.acceptedQuest)
                     {
@@ -77,13 +75,14 @@ public class QuestSystem : MonoBehaviour
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
                         Cursor.visible = true;
-                        Cursor.lockState = CursorLockMode.None;
                     }
                     else
                     {
                         EnableCharacterRotation();
                     }
                 }
+                if (openedQuest) interactUI.SetActive(false);
+                else interactUI.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
@@ -189,7 +188,6 @@ public class QuestSystem : MonoBehaviour
     private void DisableCharacterRotation()
     {
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         FindObjectOfType<CameraControllerMain>().enabled = false;
         GetComponent<CharacterManager>().enabled = false;
         GetComponent<PlayerManager>().enabled = false;
@@ -280,6 +278,7 @@ public class QuestSystem : MonoBehaviour
             Destroy(questTracker.transform.GetChild(i));
         }
         questTracker.SetActive(false);
+        interactUI.SetActive(false);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
         Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);
