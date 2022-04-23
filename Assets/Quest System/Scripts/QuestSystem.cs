@@ -14,6 +14,7 @@ public class QuestSystem : MonoBehaviour
 
     QuestManager questManager;
     QuestWindow questWindow;
+    LevelSystem levelSystem;
     public QuestGiver questGiver;
 
     public int completedQuests = 0;
@@ -35,6 +36,7 @@ public class QuestSystem : MonoBehaviour
 
     private void Start()
     {
+        levelSystem = LevelSystem.instance;
         Cursor.visible = false;
         questJournal.SetActive(false);
         claimButton.SetActive(false);
@@ -297,6 +299,7 @@ public class QuestSystem : MonoBehaviour
         questTracker.SetActive(false);
         questTrackerName.SetActive(false);
         interactUI.SetActive(false);
+        levelSystem.onXPGainedDelegate.Invoke(levelSystem.currentLevel, questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
         Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);

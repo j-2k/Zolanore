@@ -17,13 +17,15 @@ public class QuestGiver : MonoBehaviour
 
     QuestSystem questSystem;
     QuestGiver questGiver;
-
     
     private void Awake()
     {
         questSystem = FindObjectOfType<QuestSystem>();
         questGiver = GetComponent<QuestGiver>();
         marker = transform.GetChild(0).Find("Marker").gameObject;
+    }
+    private void Start()
+    {
     }
     private void Update()
     {
