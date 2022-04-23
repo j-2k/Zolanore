@@ -147,6 +147,12 @@ public class CameraControllerMain : MonoBehaviour
 
                 interactUIPrompt.SetActive(true);
             }
+
+            if (chestHit.transform.tag == "QuestGiver")
+            {
+                interactUIPrompt.SetActive(true);
+            }
+            isInactive = true;
         }
         else
         {
@@ -165,8 +171,18 @@ public class CameraControllerMain : MonoBehaviour
                 interactable = null;
                 interactUIPrompt.SetActive(false);
             }
+
+            if (isInactive)
+            {
+                isInactive = false;
+                interactUIPrompt.SetActive(false);
+                chestUIPrompt.SetActive(false);
+            }
+
         }
     }
+
+    bool isInactive = false;
 
     void CameraInput()
     {

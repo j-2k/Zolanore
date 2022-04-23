@@ -66,7 +66,7 @@ public class QuestSystem : MonoBehaviour
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
                         Cursor.visible = true;
-
+                        Cursor.lockState = CursorLockMode.None;
                     }
                     else if (!questGiver.acceptedQuest)
                     {
@@ -75,14 +75,15 @@ public class QuestSystem : MonoBehaviour
                         DisableCharacterRotation();
                         questManager.InitializeWindow(questGiver.quest);
                         Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                     }
                     else
                     {
                         EnableCharacterRotation();
                     }
                 }
-                if (openedQuest) interactUI.SetActive(false);
-                else interactUI.SetActive(true);
+                //if (openedQuest) interactUI.SetActive(false);
+                //else interactUI.SetActive(true);
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
@@ -106,6 +107,7 @@ public class QuestSystem : MonoBehaviour
         {
             questWindow.CloseWindow();
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             EnableCharacterRotation();
             questInformation.SetActive(false);
             questJournal.SetActive(false);
@@ -113,6 +115,7 @@ public class QuestSystem : MonoBehaviour
         else
         {
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             DisableCharacterRotation();
             questJournal.SetActive(true);
         }
@@ -278,7 +281,7 @@ public class QuestSystem : MonoBehaviour
             Destroy(questTracker.transform.GetChild(i));
         }
         questTracker.SetActive(false);
-        interactUI.SetActive(false);
+        //interactUI.SetActive(false);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
         Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);
