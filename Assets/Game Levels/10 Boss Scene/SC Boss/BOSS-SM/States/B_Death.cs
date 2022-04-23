@@ -7,6 +7,7 @@ public class B_Death : Boss_State
     [SerializeField] ParticleSystem[] vfxs;
     [SerializeField] ParticleSystem thunderChaseVFX;
     [SerializeField] GameObject portalObj;
+    [SerializeField] GameObject itemChest;
 
     public override void BossOnCollisionEnter(Boss_StateMachine bsm, Collider collider)
     {
@@ -15,6 +16,7 @@ public class B_Death : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        itemChest.SetActive(true);
         portalObj.SetActive(true);
         BGM.instance.isBossFight = false;
         BGM.instance.BeatBoss();
