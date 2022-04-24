@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float gravity;             // 25
     public int outgoingDamage;
     float finalJumpCalc;
-    [SerializeField] bool isJumping;
+    public bool isJumping;
     Vector3 velocity;
 
     [SerializeField] bool isAttacking;

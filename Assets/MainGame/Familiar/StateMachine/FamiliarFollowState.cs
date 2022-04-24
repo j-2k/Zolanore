@@ -10,6 +10,7 @@ public class FamiliarFollowState : State
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
     GameObject player;
+    PlayerManager pm;
 
     float timeToTeleport;
     float teleTimer;
@@ -20,6 +21,7 @@ public class FamiliarFollowState : State
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
         familiarAgent = GetComponentInParent<NavMeshAgent>();
         player = playerFamiliar.player;
+        pm = PlayerManager.instance;
     }
 
     // Update is called once per frame
@@ -27,6 +29,12 @@ public class FamiliarFollowState : State
     {
         if (playerFamiliar.isEnemyHit)
         {
+            if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)//5+3
+            {
+                familiarAgent.enabled = false;
+                familiarAgent.transform.position = player.transform.position;
+            }
+
             if (playerFamiliar.abilityTrigger)
             {
                 if (playerFamiliar.lastestEnemyHit == null)
@@ -40,12 +48,13 @@ public class FamiliarFollowState : State
                     return abilityState;
                 }
             }
+            familiarAgent.enabled = true;
             playerFamiliar.callFamiliarBack = false;
             return chaseState;
         }
         else
         {
-            if (familiarAgent.enabled)
+            if (familiarAgent.enabled && !pm.isJumping)
             {
                 familiarAgent.SetDestination(player.transform.position);
             }
@@ -53,7 +62,7 @@ public class FamiliarFollowState : State
             if (Vector3.Distance(familiarAgent.transform.position, player.transform.position) >= familiarAgent.stoppingDistance + 3)//5+3
             {
                 teleTimer += Time.deltaTime;
-                if (teleTimer >= timeToTeleport)
+                if (teleTimer >= timeToTeleport && !pm.isJumping)
                 {
                     familiarAgent.enabled = false;
                     familiarAgent.transform.position = player.transform.position;
