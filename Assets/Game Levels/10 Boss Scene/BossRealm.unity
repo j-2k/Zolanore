@@ -3195,6 +3195,10 @@ PrefabInstance:
       propertyPath: portalObj
       value: 
       objectReference: {fileID: 1863337436}
+    - target: {fileID: 1992053562, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: m_Name
       value: Nightshade (BOSS)
