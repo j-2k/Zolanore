@@ -42,7 +42,7 @@ public class MainMenuManager : ScriptableObject
     public void QuitGame()
     {
         Debug.Log("Closing Application");
-        //Application.Quit();
+        Application.Quit();
     }
 
     List<int> widths = new List<int>() { 1920, 1600, 1280, 2560 };

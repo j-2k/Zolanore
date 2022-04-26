@@ -22,14 +22,14 @@ public class Inventory : ItemContainer
     {
         SingletonInstance();
         base.Awake();
-        SetStartingItems();
+        //SetStartingItems();
     }
 
     void SingletonInstance()
     {
         if (_instance != null && _instance != this)
         {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
             Debug.Log("Another inventory Script?? check bug");
             return;
         }
