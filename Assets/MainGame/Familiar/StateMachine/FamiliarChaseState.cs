@@ -30,7 +30,7 @@ public class FamiliarChaseState : State
         {
             familiarAgent.SetDestination(playerFamiliar.lastestEnemyHit.transform.position);
 
-            familiarAgent.stoppingDistance = 3;
+            familiarAgent.stoppingDistance = 4;
 
             if (Vector3.Distance(familiarAgent.transform.position, playerFamiliar.lastestEnemyHit.transform.position) <= familiarAgent.stoppingDistance) //familiarAgent.stoppingDistance this shit fucked me for 2 hours i had another number instead
             {   //IF U WANT TO CHANGE THE DISTANCE OF THE ATTACK RANGE YOU MUST CHANGE THE STOPPING DISTANCE  = familiarAgent.stoppingDistance I MESSED UP BEFORE
