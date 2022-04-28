@@ -12,7 +12,8 @@ public static class GameSceneLoader
         MainMenu,
         ZolanoreRealm,
         BossRealm,
-        Loading
+        Loading,
+        DarkScene
     }
 
     public static void LoadScene(SceneEnum scene)
@@ -21,12 +22,15 @@ public static class GameSceneLoader
         onLoaderCallBack = () =>
         {
             BGM.instance.SwitchAudioBGM((int)scene);
-            if (scene == SceneEnum.MainMenu)
+            if (scene == SceneEnum.MainMenu || scene == SceneEnum.DarkScene)
             {
-                PlayerManager.instance.gameObject.SetActive(false);
-                CameraControllerMain.instance.gameObject.SetActive(false);
-                PlayerFamiliar.instance.gameObject.SetActive(false);
-                CanvasSingleton.instance.gameObject.SetActive(false);
+                if (PlayerManager.instance != null)
+                {
+                    PlayerManager.instance.gameObject.SetActive(false);
+                    CameraControllerMain.instance.gameObject.SetActive(false);
+                    PlayerFamiliar.instance.gameObject.SetActive(false);
+                    CanvasSingleton.instance.gameObject.SetActive(false);
+                }
                 SceneManager.LoadScene(scene.ToString());
             }
             else

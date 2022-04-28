@@ -7,6 +7,7 @@ public class CameraControllerMain : MonoBehaviour
     //keys
     //KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
 
+
     //vars
     [SerializeField] float cameraVertical = 1, cameraHorizontal = 0, cameraDistanceMax = 10;
     //float cameraMaxTilt = 90;
@@ -17,7 +18,7 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] float cameraSensitivity = 3;
 
     //ref
-    Transform player;
+    Transform target;
     [SerializeField] Transform tiltX;
     Camera mainCam;
 
@@ -47,16 +48,21 @@ public class CameraControllerMain : MonoBehaviour
     public static CameraControllerMain instance;
 
     Transform firstChildRotX;
+    [SerializeField] bool creditObject;
     private void Awake()
     {
-        if (instance != null)
+        target = gameObject.transform.parent;
+        if (!creditObject)
         {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
         }
         transform.SetParent(null);
         firstChildRotX = transform.GetChild(0);
@@ -69,18 +75,23 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (!creditObject)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
         cameraSensitivity = getSensitivity.mouseSensitivity;
         if (cameraSensitivity <= 0)
         {
             cameraSensitivity = 3;
         }
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
+
         mainCam = Camera.main;
 
-        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
-        transform.rotation = player.transform.rotation;
+        transform.position = target.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
+        transform.rotation = target.transform.rotation;
 
         tiltX.eulerAngles = new Vector3(currentTiltX, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCam.transform.position += tiltX.forward * -currentCameraDistance;
@@ -246,7 +257,7 @@ public class CameraControllerMain : MonoBehaviour
         }
 
 
-        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
+        transform.position = target.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentRotY, transform.eulerAngles.z);
 
         tiltX.eulerAngles = new Vector3(currentTiltX, tiltX.eulerAngles.y, tiltX.eulerAngles.z);

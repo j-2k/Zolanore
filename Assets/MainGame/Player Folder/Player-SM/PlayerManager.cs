@@ -61,16 +61,21 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager instance;
 
+    [SerializeField] bool creditObject;
+
     private void Awake()
     {
-        if (instance != null)
+        if (!creditObject)
         {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
         }
     }
 

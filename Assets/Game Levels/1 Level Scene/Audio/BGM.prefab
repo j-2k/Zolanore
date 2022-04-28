@@ -145,5 +145,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c44f65bc237e143429b453b58960b593, type: 3}
   - {fileID: 8300000, guid: 7f2e74f19d6c83d4fa8e81a00f669acf, type: 3}
   - {fileID: 8300000, guid: 4ed9aca5261e8184b9a28032cbd12277, type: 3}
+  - {fileID: 8300000, guid: f526c69dc931d4b48b7c06d2e2a99c1d, type: 3}
   currentBGM: {fileID: 4955588939035084494}
   isBossFight: 0

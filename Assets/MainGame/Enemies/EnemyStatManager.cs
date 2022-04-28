@@ -51,17 +51,20 @@ public class EnemyStatManager : MonoBehaviour
 
     private void Awake()
     {
+        
         questSystem = FindObjectOfType<QuestSystem>();
         //commented quest objects for testing
         if (!isBoss)
         {
             questTracker = GameObject.Find("QuestTracker");
         }
-        coll = GetComponent<Collider>();
+        
     }
     void Start()
     {
+        coll = GetComponent<Collider>();
         initialPosition = transform.position;
+        
         if (!isBoss)
         {
             questTracker.SetActive(false);
@@ -141,6 +144,7 @@ public class EnemyStatManager : MonoBehaviour
                     }
                     levelSystem.onXPGainedDelegate.Invoke(enemyLevel, xp);
 
+                    
                     if (questTracker.transform.childCount != 0)
                     {
                         for (int i = 0; i < questTracker.transform.childCount; i++)
@@ -154,6 +158,7 @@ public class EnemyStatManager : MonoBehaviour
                             }
                         }
                     }
+                    
                     Invoke("OnDeath", 2);
                 }
             }
