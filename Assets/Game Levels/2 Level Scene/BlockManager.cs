@@ -7,6 +7,7 @@ public class BlockManager : MonoBehaviour
     [SerializeField] GameObject magicBlock;
     [SerializeField] GameObject player;
     [SerializeField] List<GameObject> listOfBlocks;
+    [SerializeField] GameObject[,] blocks2D;
 
     [SerializeField] bool buildCustomSize;
     [SerializeField] int customSizeX;
@@ -19,12 +20,15 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   //-2 -1 0 1 2 (5x5) | -1 0 1 (3x3) | -3 -2 -1 0 1 2 3(7x7)? 7/2 = 3.5
-
+        
         if (!buildCustomSize)
         {
             customSizeX = 5;
             customSizeY = 5;
         }
+
+        blocks2D = new GameObject[customSizeX, customSizeY];
+        Debug.Log(blocks2D.Length + " ");// + blocks2D[0,0].transform.position);
 
         //blockScale = 1;
         block.gameObject.transform.localScale = new Vector3(blockScale, blockScale, blockScale);
@@ -104,6 +108,32 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (usingMagicBlock)
+        {
+            ExecuteMagicBlockShifts();
+        }
+        else
+        {
+            ExecuteBlockShifts();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.MainMenu);
+        }
+    }
+
+    void ExecuteMagicBlockShifts()
+    {
+        if (player.transform.position.z >= lastQuad.z + executeOffset)
+        {
+            if ((lastQuad.z/50) % 2 == 0)
+            {
+
+            }
+        }
+
         if (player.transform.position.z >= lastQuad.z + executeOffset)
         {
             ExecuteZforward();
@@ -123,10 +153,28 @@ public class BlockManager : MonoBehaviour
         {
             ExecuteXleft();
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+    void ExecuteBlockShifts()
+    {
+        if (player.transform.position.z >= lastQuad.z + executeOffset)
         {
-            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.MainMenu);
+            ExecuteZforward();
+        }
+
+        if (player.transform.position.z <= lastQuad.z - executeOffset)
+        {
+            ExecuteZbackwards();
+        }
+
+        if (player.transform.position.x >= lastQuad.x + executeOffset)
+        {
+            ExecuteXright();
+        }
+
+        if (player.transform.position.x <= lastQuad.x - executeOffset)
+        {
+            ExecuteXleft();
         }
     }
 
