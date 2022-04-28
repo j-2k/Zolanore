@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MainGame/SceneManager/Loading.unity
     guid: a6033ddb7826b5e4989db8034fbcb266
+  - enabled: 1
+    path: Assets/Game Levels/2 Level Scene/DarkScene.unity
+    guid: 3b26300476441d74fa50d1da8aaab0ec
   m_configObjects: {}

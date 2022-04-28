@@ -16,17 +16,20 @@ public class PlayerFamiliar : MonoBehaviour
 
     public static PlayerFamiliar instance;
 
+    [SerializeField] bool creditObject;
     private void Awake()
     {
-
-        if (instance != null)
+        if (!creditObject)
         {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
         }
 
         player = GameObject.FindGameObjectWithTag("Player");

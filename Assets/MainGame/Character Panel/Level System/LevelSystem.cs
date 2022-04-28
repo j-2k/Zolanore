@@ -12,15 +12,17 @@ public class LevelSystem : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
+
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
+
     }
     #endregion
 
