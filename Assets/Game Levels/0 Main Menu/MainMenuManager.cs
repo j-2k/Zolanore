@@ -45,6 +45,11 @@ public class MainMenuManager : ScriptableObject
         Application.Quit();
     }
 
+    public void CreditsGame()
+    {
+        GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.DarkScene);
+    }
+
     List<int> widths = new List<int>() { 1920, 1600, 1280, 2560 };
     List<int> heights = new List<int>() { 1080, 900, 720, 1440 };
 

@@ -17,7 +17,7 @@ public class CameraControllerMain : MonoBehaviour
     [SerializeField] float cameraSensitivity = 3;
 
     //ref
-    Transform player;
+    Transform target;
     [SerializeField] Transform tiltX;
     Camera mainCam;
 
@@ -49,6 +49,7 @@ public class CameraControllerMain : MonoBehaviour
     Transform firstChildRotX;
     private void Awake()
     {
+        target = gameObject.transform.parent;
         if (instance != null)
         {
             Destroy(this.gameObject);
@@ -76,11 +77,13 @@ public class CameraControllerMain : MonoBehaviour
             cameraSensitivity = 3;
         }
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
+
         mainCam = Camera.main;
 
-        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
-        transform.rotation = player.transform.rotation;
+        transform.position = target.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
+        transform.rotation = target.transform.rotation;
 
         tiltX.eulerAngles = new Vector3(currentTiltX, transform.eulerAngles.y, transform.eulerAngles.z);
         mainCam.transform.position += tiltX.forward * -currentCameraDistance;
@@ -246,7 +249,7 @@ public class CameraControllerMain : MonoBehaviour
         }
 
 
-        transform.position = player.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
+        transform.position = target.transform.position + (Vector3.up * cameraVertical) + (Vector3.right * cameraHorizontal);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, currentRotY, transform.eulerAngles.z);
 
         tiltX.eulerAngles = new Vector3(currentTiltX, tiltX.eulerAngles.y, tiltX.eulerAngles.z);

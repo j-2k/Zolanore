@@ -99,6 +99,11 @@ public class BlockManager : MonoBehaviour
         {
             ExecuteXleft();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameSceneLoader.LoadScene(GameSceneLoader.SceneEnum.MainMenu);
+        }
     }
 
     void ExecuteZbackwards()
