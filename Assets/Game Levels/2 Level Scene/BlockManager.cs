@@ -4,12 +4,17 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
     [SerializeField] GameObject block;
+    [SerializeField] GameObject magicBlock;
     [SerializeField] GameObject player;
     [SerializeField] List<GameObject> listOfBlocks;
 
     [SerializeField] bool buildCustomSize;
     [SerializeField] int customSizeX;
     [SerializeField] int customSizeY;
+
+    [SerializeField] float blockScale;
+    [SerializeField] float executeOffset;
+    [SerializeField] bool usingMagicBlock;
 
     // Start is called before the first frame update
     void Start()
@@ -21,22 +26,41 @@ public class BlockManager : MonoBehaviour
             customSizeY = 5;
         }
 
+        //blockScale = 1;
+        block.gameObject.transform.localScale = new Vector3(blockScale, blockScale, blockScale);
+
         for (int x = 0; x < (customSizeX); x++)
         {
             for (int y = 0; y < (customSizeY); y++)
             {
-                listOfBlocks.Add(Instantiate(block, new Vector3(x * 100, 0, y * 100), Quaternion.identity));
+                if (usingMagicBlock)
+                {
+                    listOfBlocks.Add(Instantiate(block, new Vector3(x * (100), 0, y * (100)), Quaternion.identity));
+                }
+                else
+                {
+                    listOfBlocks.Add(Instantiate(block, new Vector3(x * (blockScale * 100), 0, y * (blockScale * 100)), Quaternion.identity));
+                }
             }
         }
         lastXCycle = (customSizeY * customSizeX) - customSizeY;
         //should be doing this wherever i instanaitae but whatever
         for (int i = 0; i < listOfBlocks.Count; i++)
         {
-            listOfBlocks[i].transform.position -= new Vector3(((customSizeX - 1) * 100) / 2, 0, ((customSizeY - 1) * 100) / 2);
+            if (usingMagicBlock)
+            {
+                listOfBlocks[i].transform.position -= new Vector3(((customSizeX - 1) * (100)) / 2, 0, ((customSizeY - 1) * (100)) / 2);
+            }
+            else
+            {
+                listOfBlocks[i].transform.position -= new Vector3(((customSizeX - 1) * (blockScale * 100)) / 2, 0, ((customSizeY - 1) * (blockScale * 100)) / 2);
+            }
+            
         }
 
         //OldStart();
         lastQuad = new Vector3(0, 0, 0);
+        executeOffset = (blockScale * 100)/2;
     }
 
     void OldStart()
@@ -80,22 +104,22 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.z >= lastQuad.z + 50)
+        if (player.transform.position.z >= lastQuad.z + executeOffset)
         {
             ExecuteZforward();
         }
 
-        if (player.transform.position.z <= lastQuad.z - 50)
+        if (player.transform.position.z <= lastQuad.z - executeOffset)
         {
             ExecuteZbackwards();
         }
 
-        if (player.transform.position.x >= lastQuad.x + 50)
+        if (player.transform.position.x >= lastQuad.x + executeOffset)
         {
             ExecuteXright();
         }
 
-        if (player.transform.position.x <= lastQuad.x - 50)
+        if (player.transform.position.x <= lastQuad.x - executeOffset)
         {
             ExecuteXleft();
         }
@@ -120,11 +144,11 @@ public class BlockManager : MonoBehaviour
         Debug.Log("Executing Z backward Shift");
         for (int i = arrayZShift; i < listOfBlocks.Count;)
         {
-            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x, listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z - (customSizeY*100));
+            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x, listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z - (customSizeY * (blockScale * 100)));
             i += customSizeY;
         }
 
-        lastQuad.z -= 100;
+        lastQuad.z -= (blockScale * 100);
     }
 
     void ExecuteZforward()
@@ -132,7 +156,7 @@ public class BlockManager : MonoBehaviour
         Debug.Log("Executing Z Forward Shift");
         for (int i = arrayZShift; i < listOfBlocks.Count;)
         {
-            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x, listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z + (customSizeY * 100));
+            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x, listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z + (customSizeY * (blockScale * 100)));
             i += customSizeY;
         }
         
@@ -145,7 +169,7 @@ public class BlockManager : MonoBehaviour
             arrayZShift++;
         }
 
-        lastQuad.z += 100;
+        lastQuad.z += (blockScale * 100);
     }
 
     void ExecuteXleft()
@@ -162,7 +186,7 @@ public class BlockManager : MonoBehaviour
         Debug.Log("Executing X Left Shift");
         for (int i = arrayXShift; i < listOfBlocks.Count;)
         {
-            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x - (customSizeX * 100), listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z);
+            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x - (customSizeX * (blockScale * 100)), listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z);
             i++;
 
             increment++;
@@ -173,7 +197,7 @@ public class BlockManager : MonoBehaviour
             }
         }
 
-        lastQuad.x -= 100;
+        lastQuad.x -= (blockScale * 100);
     }
 
     void ExecuteXright()
@@ -181,7 +205,7 @@ public class BlockManager : MonoBehaviour
         Debug.Log("Executing X Right Shift");
         for (int i = arrayXShift; i < listOfBlocks.Count;)
         {
-            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x + (customSizeX * 100), listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z);
+            listOfBlocks[i].transform.position = new Vector3(listOfBlocks[i].transform.position.x + (customSizeX * (blockScale * 100)), listOfBlocks[i].transform.position.y, listOfBlocks[i].transform.position.z);
             i++;
 
             increment++;
@@ -201,6 +225,6 @@ public class BlockManager : MonoBehaviour
             arrayXShift += customSizeY;
         }
 
-        lastQuad.x += 100;
+        lastQuad.x += (blockScale * 100);
     }
 }
