@@ -412,6 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea68bafb4ca0bb4daa8c8fa323b29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliderSetting: {fileID: 0}
+  mm: {fileID: 11400000, guid: 2403b3734a228ef459d69099a7b2f4b6, type: 2}
+  currentSliderType: 1
 --- !u!1 &26326029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea68bafb4ca0bb4daa8c8fa323b29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliderSetting: {fileID: 0}
+  mm: {fileID: 0}
+  currentSliderType: 0
 --- !u!1001 &190353781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22393,6 +22399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea68bafb4ca0bb4daa8c8fa323b29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliderSetting: {fileID: 0}
+  mm: {fileID: 11400000, guid: 2403b3734a228ef459d69099a7b2f4b6, type: 2}
+  currentSliderType: 2
 --- !u!1 &1857953932
 GameObject:
   m_ObjectHideFlags: 0
@@ -24362,6 +24371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea68bafb4ca0bb4daa8c8fa323b29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliderSetting: {fileID: 0}
+  mm: {fileID: 11400000, guid: 2403b3734a228ef459d69099a7b2f4b6, type: 2}
+  currentSliderType: 0
 --- !u!4 &2709110099244899
 Transform:
   m_ObjectHideFlags: 0

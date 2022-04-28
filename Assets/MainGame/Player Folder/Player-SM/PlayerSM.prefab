@@ -24763,6 +24763,7 @@ MonoBehaviour:
   sfx: {fileID: 2115562039}
   swordVFXScript: {fileID: 478533714}
   fancyStepVFX: {fileID: 3906149472947772528}
+  creditObject: 0
 --- !u!114 &8892587702508662005
 MonoBehaviour:
   m_ObjectHideFlags: 0

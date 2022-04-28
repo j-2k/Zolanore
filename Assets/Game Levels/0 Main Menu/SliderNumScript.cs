@@ -6,17 +6,42 @@ using TMPro;
 
 public class SliderNumScript : MonoBehaviour
 {
-    Slider sliderSetting;
+    [SerializeField] Slider sliderSetting;
     TextMeshProUGUI sliderText;
+    [SerializeField] MainMenuManager mm;
+
+    enum SliderType
+    {
+        MusicSlider,
+        SFXSlider,
+        Null
+    }
+
+    [SerializeField] SliderType currentSliderType;
     // Start is called before the first frame update
 
     private void Awake()
     {
+        
         sliderSetting = GetComponentInChildren<Slider>();
+
         if (GetComponentInChildren<TextMeshProUGUI>() != null)
         {
             sliderText = GetComponentInChildren<TextMeshProUGUI>();
             sliderText.text = sliderSetting.value.ToString();
+        }
+    }
+
+    private void Start()
+    {
+        if (currentSliderType == SliderType.MusicSlider)
+        {
+            sliderSetting.value = mm.musicVolume * 100;
+        }
+
+        if (currentSliderType == SliderType.SFXSlider)
+        {
+            sliderSetting.value = mm.SFXVolume * 100;
         }
     }
 
