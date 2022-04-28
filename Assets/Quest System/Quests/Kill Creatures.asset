@@ -35,8 +35,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbb8692f7fa07c46b8b1659984d1298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentAmount: 2
   RequiredAmount: 2
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  Enemy: Golem
+  Enemy: Green Golem

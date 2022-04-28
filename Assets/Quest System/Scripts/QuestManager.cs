@@ -53,5 +53,4 @@ public class QuestManager : MonoBehaviour
         questsContent.GetChild(CurrentQuests.IndexOf(quest)).Find("Checkmark").gameObject.SetActive(true);
     }
 
-
 }

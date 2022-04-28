@@ -25,4 +25,5 @@ public class KillingGoals : Quest.QuestGoal
             Evaluate();
         }
     }
+
 }

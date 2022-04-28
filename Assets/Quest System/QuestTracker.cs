@@ -22,7 +22,6 @@ public class QuestTracker : MonoBehaviour
 
     public void IncrementCount(int goalIndex)
     {
-
         GameObject goalToIncrement = transform.GetChild(goalIndex).gameObject;
         GameObject goalCounter = goalToIncrement.transform.Find("Counter").gameObject;
 
@@ -30,13 +29,32 @@ public class QuestTracker : MonoBehaviour
         {
             if (questGiver.quest.Goals[i].GetDescription() == transform.GetChild(goalIndex).gameObject.name)
             {
+                Debug.Log("increment");
                 count[i]++;
                 goalCounter.GetComponent<Text>().text = count[i] + " / " + questGiver.quest.Goals[i].RequiredAmount;
                 Debug.Log(questGiver.quest.Goals[i].CurrentAmount);
                 if (count[i] >= questGiver.quest.Goals[i].RequiredAmount)
                 {
                     goalToIncrement.transform.GetChild(2).gameObject.SetActive(true);
+                    for (int j = 0; j < count.Count; j++)
+                    {
+                        count[j] = 0;
+                    }
                 }
+            }
+        }
+    }
+
+    public void OnQuestClaim(int goalIndex)
+    {
+
+        for (int i = 0; i < questGiver.quest.Goals.Count; i++)
+        {
+            if (questGiver.quest.Goals[i].GetDescription() == transform.GetChild(goalIndex).gameObject.name)
+            {
+                Debug.Log("increment");
+                Debug.Log(questGiver.quest.Goals[i].CurrentAmount);
+                
             }
         }
     }

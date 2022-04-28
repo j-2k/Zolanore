@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +32,7 @@ public class QuestWindow : MonoBehaviour
         foreach (var goal in quest.Goals)
         {
             GameObject goalObj = Instantiate(goalPrefab, goalsContent);
-            goalObj.transform.Find("Goal Name").GetComponent<Text>().text = goal.GetDescription();
+            goalObj.transform.Find("Goal Name").GetComponent<Text>().text = Regex.Replace(goal.GetDescription(), @"[\d-]", string.Empty);
 
             counter = goalObj.transform.Find("Counter").gameObject;
 

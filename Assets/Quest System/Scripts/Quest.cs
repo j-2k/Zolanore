@@ -32,7 +32,7 @@ public class Quest : ScriptableObject
     public abstract class QuestGoal : ScriptableObject
     {
         protected string Description;
-        public int CurrentAmount { get; protected set; }
+        public int CurrentAmount;
         public int RequiredAmount = 1;
 
         public bool Completed { get; protected set; }
@@ -61,7 +61,15 @@ public class Quest : ScriptableObject
         private void Complete()
         {
             Completed = true;
+            try
+            {
+
             GoalCompleted.Invoke();
+            }
+            catch
+            {
+                Debug.Log("cant");
+            }
             GoalCompleted.RemoveAllListeners();
         }
     }

@@ -15,6 +15,7 @@ public class QuestSystem : MonoBehaviour
     QuestManager questManager;
     QuestWindow questWindow;
     LevelSystem levelSystem;
+    public QuestTracker questTrackerSc;
     public QuestGiver questGiver;
 
     public int completedQuests = 0;
@@ -93,10 +94,7 @@ public class QuestSystem : MonoBehaviour
                         }
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.J))
-                {
-                    OpenQuestJournal();
-                }
+
             }
         }
         else
@@ -293,17 +291,25 @@ public class QuestSystem : MonoBehaviour
 
     public void Claim()
     {
-        for (int i = 0; i < questTracker.transform.childCount; i++)
-        {
-            Destroy(questTracker.transform.GetChild(i).gameObject);
-        }
-        questTracker.SetActive(false);
-        questTrackerName.SetActive(false);
+        
         interactUI.SetActive(false);
         levelSystem.onXPGainedDelegate.Invoke(levelSystem.currentLevel, questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
-        Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);
+        //Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);
+        if (questTracker.transform.childCount != 0)
+        {
+            for (int i = 0; i < questTracker.transform.childCount; i++)
+            {
+                questTrackerSc.OnQuestClaim(i);
+            }
+        }
+        questTracker.SetActive(false);
+        for (int i = 0; i < questTracker.transform.childCount; i++)
+        {
+            Destroy(questTracker.transform.GetChild(i).gameObject);
+        }
+        questTrackerName.SetActive(false);
         questManager.CurrentQuests.Remove(questGiver.quest);
         questWindow.CloseWindow();
         questGiver.claimedQuest = true;
