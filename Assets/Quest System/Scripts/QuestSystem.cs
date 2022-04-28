@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class QuestSystem : MonoBehaviour
 {
-    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton, portalToBoss;
+    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton;
 
     GameObject questInformation;
 
@@ -32,6 +32,8 @@ public class QuestSystem : MonoBehaviour
 
     bool onFirstLoad = true;
 
+    public bool bossPortal = false;
+
     private void Update()
     {
         if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
@@ -48,7 +50,7 @@ public class QuestSystem : MonoBehaviour
             }
             if (completedQuests >= 3)
             {
-                portalToBoss.SetActive(true);
+                bossPortal = true;
             }
             GetClosestQuestGiver();
             if (questGivers.Count > 0)
