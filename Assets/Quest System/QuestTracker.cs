@@ -17,7 +17,6 @@ public class QuestTracker : MonoBehaviour
 
     private void Update()
     {
-        questGiver = questSystem.closestQuestGiver.GetComponent<QuestGiver>();
     }
 
     public void IncrementCount(int goalIndex)
@@ -25,37 +24,24 @@ public class QuestTracker : MonoBehaviour
         GameObject goalToIncrement = transform.GetChild(goalIndex).gameObject;
         GameObject goalCounter = goalToIncrement.transform.Find("Counter").gameObject;
 
-        for (int i = 0; i < questGiver.quest.Goals.Count; i++)
+        for (int i = 0; i < questSystem.questGivers.Count; i++)
         {
-            if (questGiver.quest.Goals[i].GetDescription() == transform.GetChild(goalIndex).gameObject.name)
+            for (int j = 0; j < questSystem.questGivers[i].GetComponent<QuestGiver>().quest.Goals.Count; j++)
             {
-                Debug.Log("increment");
-                count[i]++;
-                goalCounter.GetComponent<Text>().text = count[i] + " / " + questGiver.quest.Goals[i].RequiredAmount;
-                Debug.Log(questGiver.quest.Goals[i].CurrentAmount);
-                if (count[i] >= questGiver.quest.Goals[i].RequiredAmount)
+                if (questSystem.questGivers[i].GetComponent<QuestGiver>().quest.Goals[j].GetDescription() == transform.GetChild(goalIndex).gameObject.name)
                 {
-                    goalToIncrement.transform.GetChild(2).gameObject.SetActive(true);
-                    for (int j = 0; j < count.Count; j++)
+                    count[goalIndex]++;
+                    goalCounter.GetComponent<Text>().text = count[goalIndex] + " / " + questSystem.questGivers[i].GetComponent<QuestGiver>().quest.Goals[j].RequiredAmount;
+                    if (count[goalIndex] >= questSystem.questGivers[i].GetComponent<QuestGiver>().quest.Goals[j].RequiredAmount)
                     {
-                        count[j] = 0;
+                        goalToIncrement.transform.GetChild(2).gameObject.SetActive(true);
                     }
+                    return;
                 }
             }
-        }
-    }
 
-    public void OnQuestClaim(int goalIndex)
-    {
-
-        for (int i = 0; i < questGiver.quest.Goals.Count; i++)
-        {
-            if (questGiver.quest.Goals[i].GetDescription() == transform.GetChild(goalIndex).gameObject.name)
-            {
-                Debug.Log("increment");
-                Debug.Log(questGiver.quest.Goals[i].CurrentAmount);
-                
-            }
         }
+
+
     }
 }

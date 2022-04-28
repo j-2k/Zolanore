@@ -23,7 +23,7 @@ public class QuestSystem : MonoBehaviour
     CameraControllerMain cameraController;
     TestMovement testMovement;
 
-    List<GameObject> questGivers;
+    public List<GameObject> questGivers;
 
     bool isClose = false;
     bool isNear = false;
@@ -268,7 +268,7 @@ public class QuestSystem : MonoBehaviour
 
         questTracker.SetActive(true);
         questTrackerName.SetActive(true);
-        questTrackerName.GetComponent<Text>().text = closestQuestGiver.GetComponent<QuestGiver>().quest.name;
+        questTrackerName.GetComponent<Text>().text = "Quest Tracker";
         for (int i = 0; i < closestQuestGiver.GetComponent<QuestGiver>().quest.Goals.Count; i++)
         {
             GameObject goalPrefab = Instantiate(questTrackerGoalPrefab, questTracker.transform);
@@ -297,19 +297,23 @@ public class QuestSystem : MonoBehaviour
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.XP);
         Debug.LogWarning("Congrats ! " + questGiver.quest.Reward.Currency);
         //Destroy(questManager.questsContent.GetChild(questManager.CurrentQuests.IndexOf(questGiver.quest)).gameObject);
-        if (questTracker.transform.childCount != 0)
-        {
-            for (int i = 0; i < questTracker.transform.childCount; i++)
-            {
-                questTrackerSc.OnQuestClaim(i);
-            }
-        }
-        questTracker.SetActive(false);
         for (int i = 0; i < questTracker.transform.childCount; i++)
         {
-            Destroy(questTracker.transform.GetChild(i).gameObject);
+            for (int j = 0; j < questGiver.quest.Goals.Count; j++)
+            {
+                if (questGiver.quest.Goals[j].GetDescription() == questTracker.transform.GetChild(i).name)
+                {
+                    questTracker.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+            
         }
-        questTrackerName.SetActive(false);
+        if(questTracker.transform.childCount ==0 )
+        {
+            questTracker.SetActive(false);
+            questTrackerName.SetActive(false);
+        }
+        
         questManager.CurrentQuests.Remove(questGiver.quest);
         questWindow.CloseWindow();
         questGiver.claimedQuest = true;
