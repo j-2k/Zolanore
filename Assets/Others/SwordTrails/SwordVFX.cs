@@ -10,7 +10,10 @@ public class SwordVFX : MonoBehaviour
 
     private void Start()
     {
-        pm = PlayerManager.instance;
+        if (pm == null)
+        {
+            pm = PlayerManager.instance;
+        }
     }
 
     // Update is called once per frame

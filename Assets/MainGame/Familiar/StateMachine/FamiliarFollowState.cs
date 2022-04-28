@@ -10,7 +10,7 @@ public class FamiliarFollowState : State
     PlayerFamiliar playerFamiliar;
     NavMeshAgent familiarAgent;
     GameObject player;
-    PlayerManager pm;
+    [SerializeField] PlayerManager pm;
 
     float timeToTeleport;
     float teleTimer;
@@ -21,7 +21,11 @@ public class FamiliarFollowState : State
         playerFamiliar = GetComponentInParent<PlayerFamiliar>();
         familiarAgent = GetComponentInParent<NavMeshAgent>();
         player = playerFamiliar.player;
-        pm = PlayerManager.instance;
+
+        if (pm == null)
+        {
+            pm = PlayerManager.instance;
+        }
     }
 
     // Update is called once per frame

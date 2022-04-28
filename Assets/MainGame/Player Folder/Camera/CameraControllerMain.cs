@@ -7,6 +7,7 @@ public class CameraControllerMain : MonoBehaviour
     //keys
     //KeyCode LMB = KeyCode.Mouse0, RMB = KeyCode.Mouse1, MMB = KeyCode.Mouse2;
 
+
     //vars
     [SerializeField] float cameraVertical = 1, cameraHorizontal = 0, cameraDistanceMax = 10;
     //float cameraMaxTilt = 90;
@@ -47,17 +48,21 @@ public class CameraControllerMain : MonoBehaviour
     public static CameraControllerMain instance;
 
     Transform firstChildRotX;
+    [SerializeField] bool creditObject;
     private void Awake()
     {
         target = gameObject.transform.parent;
-        if (instance != null)
+        if (!creditObject)
         {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
         }
         transform.SetParent(null);
         firstChildRotX = transform.GetChild(0);
@@ -70,7 +75,10 @@ public class CameraControllerMain : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (!creditObject)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
         cameraSensitivity = getSensitivity.mouseSensitivity;
         if (cameraSensitivity <= 0)
         {
