@@ -36,9 +36,10 @@ public class B_Death : Boss_State
     public override void UpdateState(Boss_StateMachine bsm)
     {
         bsm.anim.SetBool("Death", true);
-
-
-
+        foreach (ParticleSystem vfx in vfxs)
+        {
+            vfx.Stop();
+        }
         //do loot stuff in case there is or other operations for proceeding
     }
 }
