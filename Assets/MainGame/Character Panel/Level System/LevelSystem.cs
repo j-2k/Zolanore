@@ -9,10 +9,12 @@ public class LevelSystem : MonoBehaviour
 
     #region Singleton LevelSystem Instance
     public static LevelSystem instance;
+    [SerializeField] bool creditObject;
 
     void Awake()
     {
-
+        if (!creditObject)
+        {
             if (instance != null)
             {
                 Destroy(this.gameObject);
@@ -22,7 +24,11 @@ public class LevelSystem : MonoBehaviour
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
-
+        }
+        else
+        {
+            this.enabled = false;
+        }
     }
     #endregion
 
