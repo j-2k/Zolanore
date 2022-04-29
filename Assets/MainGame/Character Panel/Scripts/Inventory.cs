@@ -22,7 +22,7 @@ public class Inventory : ItemContainer
     {
         SingletonInstance();
         base.Awake();
-        //SetStartingItems();
+        SetStartingItems();
     }
 
     void SingletonInstance()
