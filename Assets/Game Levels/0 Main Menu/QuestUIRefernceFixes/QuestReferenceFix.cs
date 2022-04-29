@@ -10,7 +10,9 @@ public class QuestReferenceFix : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(this.gameObject.name == "Accept")
+        button = GetComponent<Button>();
+
+        if (this.gameObject.name == "Accept")
         {
             button.onClick.AddListener(PlayerManager.instance.gameObject.GetComponent<QuestSystem>().AcceptQuest);
         }
