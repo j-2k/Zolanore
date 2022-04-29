@@ -25,10 +25,6 @@ public class LevelSystem : MonoBehaviour
                 DontDestroyOnLoad(this.gameObject);
             }
         }
-        else
-        {
-            this.enabled = false;
-        }
     }
     #endregion
 

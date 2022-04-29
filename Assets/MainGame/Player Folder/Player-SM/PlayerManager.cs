@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
     public Transform cameraRig;
 
     CharacterManager characterManager;
-    LevelSystem levelSystem;
+    [SerializeField] LevelSystem levelSystem;
 
     public bool isMovingAbility;
     Transform hitboxPos;
@@ -87,7 +87,10 @@ public class PlayerManager : MonoBehaviour
 
         hitboxPos = transform.GetChild(1);
         isMovingAbility = false;
-        levelSystem = LevelSystem.instance;
+        if(levelSystem == null)
+        {
+            levelSystem = LevelSystem.instance;
+        }
         cameraRig = GameObject.FindGameObjectWithTag("CameraManager").transform;
         characterManager = GetComponent<CharacterManager>();
         cc = GetComponent<CharacterController>();
