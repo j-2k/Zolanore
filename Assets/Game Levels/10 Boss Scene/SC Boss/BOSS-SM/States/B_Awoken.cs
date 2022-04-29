@@ -14,6 +14,8 @@ public class B_Awoken : Boss_State
     [SerializeField] float timer;
     [SerializeField] int end;
 
+    [SerializeField] GameObject portalObj;
+
     [SerializeField] ParticleSystem awokenTornado;
     [SerializeField] ParticleSystem selfTornado;
 
@@ -29,6 +31,7 @@ public class B_Awoken : Boss_State
 
     public override void StartState(Boss_StateMachine bsm)
     {
+        portalObj.SetActive(false);
         if (!BGM.instance.isBossFight)
         {
             BGM.instance.isBossFight = true;

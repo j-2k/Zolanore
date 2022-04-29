@@ -3180,6 +3180,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1089616974}
     - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
+      propertyPath: portalObj
+      value: 
+      objectReference: {fileID: 1863337436}
+    - target: {fileID: 1331210814, guid: 687f982660b113b42b962f9262159d33, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 732602873}
@@ -8491,7 +8495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1863350898
 GameObject:
   m_ObjectHideFlags: 0
