@@ -35419,8 +35419,8 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 3
   m_Range: 50
   m_SpotAngle: 40
   m_InnerSpotAngle: 4
@@ -35478,7 +35478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361011039}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 23.22, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 0.5555556, y: 0.5555556, z: 0.5555556}
   m_Children: []
   m_Father: {fileID: 217346399587231574}
@@ -37237,7 +37237,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 157195810415763359, guid: cb4638e42cd130141a8688369f12a4e0, type: 3}
       propertyPath: m_Name
-      value: EmptyPlane50x50 Variant
+      value: Plane
       objectReference: {fileID: 0}
     - target: {fileID: 677132505676154149, guid: cb4638e42cd130141a8688369f12a4e0, type: 3}
       propertyPath: m_RootOrder
@@ -37310,11 +37310,37 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533795851}
   m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 3, z: 5}
+  m_Center: {x: 0, y: -0.9, z: 0}
+--- !u!114 &1533795853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533795851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4778a61be82bf7e4991e6de92ffb5533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+--- !u!65 &1533795854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533795851}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5, y: 2, z: 5}
-  m_Center: {x: 0, y: -0.9, z: 0}
+  m_Center: {x: 0, y: -2, z: 0}
 --- !u!1 &1538212653 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8182500306608668352, guid: ab43eb751f68d0946a7127881546baf5, type: 3}
