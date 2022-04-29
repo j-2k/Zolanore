@@ -21749,13 +21749,16 @@ MonoBehaviour:
   player: {fileID: 217346399587231573}
   listOfBlocks: []
   buildCustomSize: 1
-  customSizeX: 3
-  customSizeY: 3
+  customSizeX: 5
+  customSizeY: 5
   blockScale: 0.5
   executeOffset: 0
   usingMagicBlock: 1
   lastQuad: {x: 0, y: 0, z: 0}
+  playerVector: {x: 0, y: 0, z: 0}
   magicBlockQuad: {x: 0, y: 0, z: 0}
+  zOffset: 0
+  xOffset: 0
 --- !u!1 &563100978
 GameObject:
   m_ObjectHideFlags: 0
@@ -24441,12 +24444,12 @@ GameObject:
   - component: {fileID: 797082203}
   - component: {fileID: 797082202}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: FloorTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &797082202
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24480,7 +24483,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 45a92a0a4bd22ae40a8d48757363d706, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24518,7 +24521,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797082201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}

@@ -28,11 +28,22 @@ public class BlockManager : MonoBehaviour
             customSizeY = 5;
         }
 
-        blocks2D = new GameObject[customSizeX, customSizeY];
-        Debug.Log(blocks2D.Length + " ");// + blocks2D[0,0].transform.position);
+        if (usingMagicBlock)
+        {
+            blockScale = 0.5f;
+            shiftOffset = (int)(blockScale * 200);
+            executeOffset = (blockScale * 100) / 2;
+        }
+        else
+        {
+            blockScale = 1;
+            shiftOffset = (int)(blockScale * 100);
+            executeOffset = (blockScale * 100) / 2;
+        }
 
-        //blockScale = 1;
+        blocks2D = new GameObject[customSizeX, customSizeY];
         block.gameObject.transform.localScale = new Vector3(blockScale, blockScale, blockScale);
+        magicBlock.gameObject.transform.localScale = new Vector3(blockScale, blockScale, blockScale);
 
         for (int x = 0; x < (customSizeX); x++)
         {
@@ -65,16 +76,6 @@ public class BlockManager : MonoBehaviour
 
         //OldStart();
         lastQuad = new Vector3(0, 0, 0);
-        executeOffset = (blockScale * 100)/2;
-
-        if (usingMagicBlock)
-        {
-            shiftOffset = (int)(blockScale * 200);
-        }
-        else
-        {
-            shiftOffset = (int)(blockScale * 100);
-        }
     }
 
     void OldStart()
@@ -110,6 +111,7 @@ public class BlockManager : MonoBehaviour
     }
 
     [SerializeField] Vector3 lastQuad;
+    [SerializeField] Vector3 playerVector;
     [SerializeField] Vector3 magicBlockQuad;
     int arrayShift = 5;
     int arrayZShift = 0; //0 for forward 4 for back
@@ -119,6 +121,7 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerVector = player.transform.position;
 
         if (usingMagicBlock)
         {
@@ -135,44 +138,160 @@ public class BlockManager : MonoBehaviour
         }
     }
 
+    [SerializeField] int zOffset = 0;
+    [SerializeField] int xOffset = 0;
 
     void ExecuteMagicBlockShifts()
     {
+        Debug.Log("Modulo = " + (lastQuad.z / 50) % 2);
         if (player.transform.position.z >= lastQuad.z + executeOffset)
         {
             Debug.Log("Forward Check");
             if ((lastQuad.z/50) % 2 == 0)
             {
-                Debug.Log("Magic Block Forward");
-                magicBlock.transform.position = new Vector3(magicBlock.transform.position.x, 0, lastQuad.z + (blockScale * 100));
-                lastQuad.z += (blockScale * 100);
+                Debug.Log("Magic Block Forward EVEN");
+                magicBlock.transform.position = new Vector3(lastQuad.x, 0, lastQuad.z + (blockScale * 100));
+                lastQuad.z += (blockScale * 100);//50
+                zOffset = 1;
                 return;
             }
-            ExecuteZforward();
-        }
 
+            if (Mathf.Abs((lastQuad.z / 50) % 2) == 1)
+            {
+                Debug.Log("Block Forward ODD");
+                if (zOffset == -1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x, 0, lastQuad.z + (blockScale * 100));
+                    }
+                    lastQuad.z += (blockScale * 100);
+                    return;
+                }
+
+                if (zOffset == 1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x, 0, lastQuad.z + (blockScale * 100));
+                    }
+                    ExecuteZforward();
+                }
+                return;
+            }
+        }
+        
         if (player.transform.position.z <= lastQuad.z - executeOffset)
         {
             Debug.Log("Backward Check");
             if ((lastQuad.z / 50) % 2 == 0)
             {
-                Debug.Log("Magic Block Backward");
-                magicBlock.transform.position = new Vector3(magicBlock.transform.position.x, 0, lastQuad.z - (blockScale * 100));
-                lastQuad.z -= (blockScale * 100);
+                Debug.Log("Magic Block Backward EVEN");
+                magicBlock.transform.position = new Vector3(lastQuad.x, 0, lastQuad.z - (blockScale * 100));
+                lastQuad.z -= (blockScale * 100);//50
+                zOffset = -1;
                 return;
             }
-            ExecuteZbackwards();
+
+            if (Mathf.Abs((lastQuad.z / 50) % 2) == 1)
+            {
+                Debug.Log("Block Backward ODD");
+                if (zOffset == 1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x, 0, lastQuad.z - (blockScale * 100));
+                    }
+                    lastQuad.z -= (blockScale * 100);
+                    return;
+                }
+
+                if (zOffset == -1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x, 0, lastQuad.z - (blockScale * 100));
+                    }
+                    ExecuteZbackwards();
+                }
+                return;
+            }
         }
 
         if (player.transform.position.x >= lastQuad.x + executeOffset)
         {
-            //ExecuteXright();
+            Debug.Log("Right Check");
+            if ((lastQuad.x / 50) % 2 == 0)
+            {
+                Debug.Log("Magic Block Right EVEN");
+                magicBlock.transform.position = new Vector3(lastQuad.x + (blockScale * 100), 0, lastQuad.z);
+                lastQuad.x += (blockScale * 100);//50
+                xOffset = 1;
+                return;
+            }
+
+            if (Mathf.Abs((lastQuad.x / 50) % 2) == 1)
+            {
+                Debug.Log("Block Right ODD");
+                if (xOffset == -1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x + (blockScale * 100), 0, lastQuad.z);
+                    }
+                    lastQuad.x += (blockScale * 100);
+                    return;
+                }
+
+                if (xOffset == 1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x + (blockScale * 100), 0, lastQuad.z);
+                    }
+                    ExecuteXright();
+                }
+                return;
+            }
         }
 
         if (player.transform.position.x <= lastQuad.x - executeOffset)
         {
-            //ExecuteXleft();
+            Debug.Log("Left Check");
+            if ((lastQuad.x / 50) % 2 == 0)
+            {
+                Debug.Log("Magic Block Left EVEN");
+                magicBlock.transform.position = new Vector3(lastQuad.x - (blockScale * 100), 0, lastQuad.z);
+                lastQuad.x -= (blockScale * 100);//50
+                xOffset = -1;
+                return;
+            }
+
+            if (Mathf.Abs((lastQuad.x / 50) % 2) == 1)
+            {
+                Debug.Log("Block Left ODD");
+                if (xOffset == 1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x - (blockScale * 100), 0, lastQuad.z);
+                    }
+                    lastQuad.x -= (blockScale * 100);
+                    return;
+                }
+
+                if (xOffset == -1)
+                {
+                    if ((Mathf.Abs((lastQuad.x / 50) % 2) == 1) && (Mathf.Abs((lastQuad.z / 50) % 2) == 1))
+                    {
+                        magicBlock.transform.position = new Vector3(lastQuad.x - (blockScale * 100), 0, lastQuad.z);
+                    }
+                    ExecuteXleft();
+                }
+                return;
+            }
         }
+        
     }
 
     void ExecuteBlockShifts()
@@ -237,7 +356,9 @@ public class BlockManager : MonoBehaviour
             arrayZShift++;
         }
 
+
         lastQuad.z += (blockScale * 100);
+
     }
 
     void ExecuteXleft()
