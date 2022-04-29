@@ -34,7 +34,7 @@ Material:
     m_Floats:
     - _FlowOffset: 0.5
     - _FlowStrength: 0.1
-    - _Glossiness: 1
+    - _Glossiness: 0
     - _HeightScale: 2
     - _HeightScaleModulated: 50
     - _Metallic: 0
@@ -43,5 +43,5 @@ Material:
     - _UJump: 0
     - _VJump: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.08483097, b: 0, a: 1}
+    - _Color: {r: 0.39215687, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
