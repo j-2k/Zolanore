@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class QuestSystem : MonoBehaviour
 {
-    [SerializeField] GameObject interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton;
+    [SerializeField] GameObject questCanvas, interactUI, questTracker, questTrackerName, questTrackerGoalPrefab, questJournal, claimButton, acceptButton;
 
     GameObject questInformation;
 
@@ -15,7 +15,6 @@ public class QuestSystem : MonoBehaviour
     QuestManager questManager;
     QuestWindow questWindow;
     LevelSystem levelSystem;
-    public QuestTracker questTrackerSc;
     public QuestGiver questGiver;
 
     public int completedQuests = 0;
@@ -103,6 +102,7 @@ public class QuestSystem : MonoBehaviour
         {
             onFirstLoad = true;
         }
+
     }
 
     private void OpenQuestJournal()
@@ -239,6 +239,9 @@ public class QuestSystem : MonoBehaviour
         InitializeQuestUI();
         InitializeQuestGiversList();
         InitializeCharacterControls();
+        questCanvas = GameObject.Find("Quest Canvas").gameObject;
+        questTrackerName = questCanvas.transform.GetChild(4).gameObject;
+        questTrackerName.SetActive(false);
     }
 
     private void InitializeQuestManagers()
@@ -268,9 +271,12 @@ public class QuestSystem : MonoBehaviour
 
         questManager.InstantiateQuestButton(questGiver.quest);
 
+        if(questTracker == null)
+        {
+            questTracker = questCanvas.transform.GetChild(3).gameObject;
+        }
         questTracker.SetActive(true);
         questTrackerName.SetActive(true);
-        questTrackerName.GetComponent<Text>().text = "Quest Tracker";
         for (int i = 0; i < closestQuestGiver.GetComponent<QuestGiver>().quest.Goals.Count; i++)
         {
             GameObject goalPrefab = Instantiate(questTrackerGoalPrefab, questTracker.transform);

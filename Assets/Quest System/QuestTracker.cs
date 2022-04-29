@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestTracker : MonoBehaviour
 {
-    QuestGiver questGiver;
     QuestSystem questSystem;
 
     List<int> count = new List<int> { 0, 0, 0, 0, 0 };
 
     private void Awake()
     {
-        questSystem = FindObjectOfType<QuestSystem>();
     }
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            if (questSystem == null)
+            {
+                questSystem = FindObjectOfType<QuestSystem>();
+            }
+        }
     }
 
     public void IncrementCount(int goalIndex)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestGiver : MonoBehaviour
 {
@@ -17,19 +18,32 @@ public class QuestGiver : MonoBehaviour
 
     QuestSystem questSystem;
     QuestGiver questGiver;
+
+    bool onFirstLoad = true;
     
     private void Awake()
     {
-        questSystem = FindObjectOfType<QuestSystem>();
-        questGiver = GetComponent<QuestGiver>();
-        marker = transform.GetChild(0).Find("Marker").gameObject;
+        
     }
     private void Start()
     {
     }
     private void Update()
     {
-        if(acceptedQuest)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            if (onFirstLoad)
+            {
+                questSystem = FindObjectOfType<QuestSystem>();
+                questGiver = GetComponent<QuestGiver>();
+                marker = transform.GetChild(0).Find("Marker").gameObject;
+            }
+        }
+        else
+        {
+            onFirstLoad = true;
+        }
+        if (acceptedQuest)
         {
             questActive = true;
         }
@@ -54,6 +68,7 @@ public class QuestGiver : MonoBehaviour
                 marker.SetActive(false);
             }
         }
+
     }
 
     void DestroyQuestGiver()
