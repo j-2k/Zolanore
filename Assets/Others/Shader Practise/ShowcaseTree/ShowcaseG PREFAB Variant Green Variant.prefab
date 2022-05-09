@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a29fb073540906c46ac1b5af4cd1e2a9, type: 2}
     - target: {fileID: 2363447979084309533, guid: c21fea8a6b95c2540b079f0b82942acc, type: 3}
       propertyPath: m_Name
-      value: ShowcaseG PREFAB Variant Green
+      value: ShowcaseG PREFAB Variant Green Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3136607360674381479, guid: c21fea8a6b95c2540b079f0b82942acc, type: 3}
       propertyPath: m_RootOrder
