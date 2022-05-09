@@ -247,11 +247,11 @@ public class CameraControllerMain : MonoBehaviour
         
         currentTiltX = Mathf.Clamp(currentTiltX, -90, 90);
 
-        if (Input.mouseScrollDelta.y == 1)
+        if (Input.mouseScrollDelta.y == 1 && !Input.GetKey(KeyCode.LeftControl))
         {
             currentCameraDistance -= 0.5f;
         }
-        else if (Input.mouseScrollDelta.y == -1)
+        else if (Input.mouseScrollDelta.y == -1 && !Input.GetKey(KeyCode.LeftControl))
         {
             currentCameraDistance += 0.5f;
         }

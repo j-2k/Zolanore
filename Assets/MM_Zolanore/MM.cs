@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class MM : MonoBehaviour
 {
+    [SerializeField]
+    float scrollSpeed = 0.1f;
+
+    [SerializeField]
+    float maxZoom = 10f;
+
+    [SerializeField]
+    float minZoom = 1f;
+
     public static MM instance;
 
     private void Awake()
@@ -33,9 +42,11 @@ public class MM : MonoBehaviour
 
     Matrix4x4 transformationMatrixMap;
 
+    MM_Icon playerMMIcon;
+
     Dictionary<MM_WorldObject, MM_Icon> MM_WorldObjectLookup = new Dictionary<MM_WorldObject, MM_Icon>();
 
-    public void CreateMMWorldObject(MM_WorldObject worldObject)
+    public void CreateMMWorldObject(MM_WorldObject worldObject, bool isPlayer = false)
     {
         MM_Icon mapIcon = Instantiate(mmIconPrefab);
         mapIcon.transform.SetParent(contentRectTransform);
@@ -45,6 +56,8 @@ public class MM : MonoBehaviour
         mapIcon.SetText(worldObject.text);
         mapIcon.SetTextSize(worldObject.textSize);
         MM_WorldObjectLookup[worldObject] = mapIcon;
+
+        if (isPlayer) { playerMMIcon = mapIcon; }
     }
 
     public void CalculateTransformations()
@@ -70,11 +83,41 @@ public class MM : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            ScrollMap(scroll);
+        }
         UpdateAllIcons();
+        MMPlayerOrigin();
+    }
+
+    void MMPlayerOrigin()
+    {
+        if (playerMMIcon != null)
+        {
+            float mapScale = contentRectTransform.transform.localScale.x;
+            // we simply move the map in the opposite direction the player moved, scaled by the mapscale
+            contentRectTransform.transform.localPosition = (-playerMMIcon.transform.localPosition * mapScale);
+        }
+    }
+
+    void ScrollMap(float scroll)
+    {
+        if (scroll == 0)
+            return;
+
+        float currentMapScale = contentRectTransform.localScale.x;
+        // we need to scale the scroll speed by the current map scale to keep the zooming linear
+        float scrollAmount = (scroll > 0 ? scrollSpeed : -scrollSpeed) * currentMapScale;
+        float newScale = currentMapScale + scrollAmount;
+        float clampedScale = Mathf.Clamp(newScale, minZoom, maxZoom);
+        contentRectTransform.localScale = Vector3.one * clampedScale;
     }
 
     void UpdateAllIcons()
     {
+        float iconScale = 1 / contentRectTransform.transform.localScale.x;
         foreach (var kvp in MM_WorldObjectLookup)
         {
             MM_WorldObject mmWO = kvp.Key;
@@ -87,7 +130,7 @@ public class MM : MonoBehaviour
             //rotation
             Vector3 iconRot = mmWO.transform.rotation.eulerAngles;
             mmI.iconRectTransform.localRotation = Quaternion.AngleAxis(-iconRot.y, Vector3.forward);
-
+            mmI.iconRectTransform.localScale = Vector3.one * iconScale;
             //contentRectTransform.anchoredPosition = new Vector2(-mapIconPos.x, -mapIconPos.y);
         }
     }
