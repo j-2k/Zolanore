@@ -8,6 +8,8 @@ public class MM_WorldObject : MonoBehaviour
     public Color col = Color.white;
     public string text;
     public int textSize = 10;
+    public float scaleIcon = 10;
+
 
     // Start is called before the first frame update
     void Start()
