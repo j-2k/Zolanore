@@ -43,11 +43,11 @@ Shader "Unlit/CircleMapShader"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-
                 float2 centerUV = (i.uv.xy * 2)-1;
                 float radialLength = length(centerUV) * 1.1f;
                 clip(1 - radialLength);
                 return col;
+                //return float4(centerUV.xy,0,0);
             }
             ENDCG
         }
