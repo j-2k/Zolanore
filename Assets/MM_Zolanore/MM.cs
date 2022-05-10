@@ -120,6 +120,15 @@ public class MM : MonoBehaviour
         currClampZoomScale = clampedScale;
     }
 
+    public void DestroyCorrespondingMiniMapIcon(MM_WorldObject miniMapWorldObject)
+    {
+        if (MM_WorldObjectLookup.TryGetValue(miniMapWorldObject, out MM_Icon icon))
+        {
+            MM_WorldObjectLookup.Remove(miniMapWorldObject);
+            Destroy(icon.gameObject);
+        }
+    }
+
     void UpdateAllIcons()
     {
         float iconScale = 1 / contentRectTransform.transform.localScale.x;

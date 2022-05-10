@@ -19,14 +19,14 @@ public class QuestGiver : MonoBehaviour
     QuestSystem questSystem;
     QuestGiver questGiver;
 
+    MM_WorldObject questIcon;
+
+
     bool onFirstLoad = true;
     
-    private void Awake()
-    {
-        
-    }
     private void Start()
     {
+        questIcon = GetComponent<MM_WorldObject>();
     }
     private void Update()
     {
@@ -54,7 +54,8 @@ public class QuestGiver : MonoBehaviour
             questActive = false;
             gameObject.tag = "Untagged";
             questGiver.enabled = false;
-            Invoke("DestroyQuestGiver", 15);
+            Invoke("DestroyQuestGiver", 5);
+            questIcon.enabled = false;
         }
         else
         {

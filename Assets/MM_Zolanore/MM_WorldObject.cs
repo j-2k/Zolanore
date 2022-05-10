@@ -19,4 +19,9 @@ public class MM_WorldObject : MonoBehaviour
     {
         MM.instance.CreateMMWorldObject(this,isPlayerObject);
     }
+
+    private void OnDisable()
+    {
+        MM.instance.DestroyCorrespondingMiniMapIcon(this);
+    }
 }
