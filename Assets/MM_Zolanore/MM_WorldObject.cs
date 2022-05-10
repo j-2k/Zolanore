@@ -5,6 +5,7 @@ using UnityEngine;
 public class MM_WorldObject : MonoBehaviour
 {
     [SerializeField] bool isPlayerObject = false;
+    public bool isIconQuaternionIdentity = false;
 
     public Sprite icon;
     public Color col = Color.white;

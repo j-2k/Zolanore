@@ -82,7 +82,7 @@ public class MM : MonoBehaviour
     private void Start()
     {
         CalculateTransformations();
-        //contentRectTransform.localScale = Vector3.one * clampedScale;
+        ScrollMap(0.1f);
     }
 
     private void Update()
@@ -133,10 +133,12 @@ public class MM : MonoBehaviour
             mmI.rectTransform.anchoredPosition = mapIconPos;
 
             //rotation
-            Vector3 iconRot = mmWO.transform.rotation.eulerAngles;
-            mmI.iconRectTransform.localRotation = Quaternion.AngleAxis(-iconRot.y, Vector3.forward);
+            if (!mmWO.isIconQuaternionIdentity)
+            {
+                Vector3 iconRot = mmWO.transform.rotation.eulerAngles;
+                mmI.iconRectTransform.localRotation = Quaternion.AngleAxis(-iconRot.y, Vector3.forward);
+            }
             mmI.iconRectTransform.localScale = Vector3.one * iconScale;
-            //contentRectTransform.anchoredPosition = new Vector2(-mapIconPos.x, -mapIconPos.y);
         }
     }
 
