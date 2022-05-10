@@ -5,6 +5,9 @@ using UnityEngine;
 public class MM : MonoBehaviour
 {
     [SerializeField]
+    float currClampZoomScale = 0;
+
+    [SerializeField]
     float scrollSpeed = 0.1f;
 
     [SerializeField]
@@ -79,6 +82,7 @@ public class MM : MonoBehaviour
     private void Start()
     {
         CalculateTransformations();
+        //contentRectTransform.localScale = Vector3.one * clampedScale;
     }
 
     private void Update()
@@ -113,6 +117,7 @@ public class MM : MonoBehaviour
         float newScale = currentMapScale + scrollAmount;
         float clampedScale = Mathf.Clamp(newScale, minZoom, maxZoom);
         contentRectTransform.localScale = Vector3.one * clampedScale;
+        currClampZoomScale = clampedScale;
     }
 
     void UpdateAllIcons()
