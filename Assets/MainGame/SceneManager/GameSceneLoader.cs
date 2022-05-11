@@ -69,5 +69,6 @@ public static class GameSceneLoader
         yield return new WaitForSeconds(0.25f);
         PlayerManager.instance.enabled = true;
         PlayerCodes.godMode = false;
+        PlayerManager.instance.gameObject.GetComponent<MM_WorldObject>().CreateMMWOIcon();
     }
 }

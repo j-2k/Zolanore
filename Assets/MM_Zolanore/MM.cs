@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MM : MonoBehaviour
 {
@@ -67,11 +68,23 @@ public class MM : MonoBehaviour
     public void CalculateTransformations()
     {
         Vector2 mmDimension = contentRectTransform.rect.size;
-        Vector2 terrainDimension = new Vector2(terrain.terrainData.size.x * 2, terrain.terrainData.size.z);
+        int offset = 1;
+        float dimensionOffset = 0;
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            offset = 2;
+            dimensionOffset = -mmDimension.y / 2;
+        }
+        else
+        {
+            offset = 1;
+            dimensionOffset = 0;
+        }
+        Vector2 terrainDimension = new Vector2(terrain.terrainData.size.x * offset, terrain.terrainData.size.z);
 
 
         Vector2 scaleRatioOnMM = mmDimension / terrainDimension;
-        Vector2 IconTranslations = new Vector2(0, (-mmDimension.y/2));// (-mmDimension.y / 3) - 20);
+        Vector2 IconTranslations = new Vector2(0, dimensionOffset);
 
         transformationMatrixMap = Matrix4x4.TRS(IconTranslations, Quaternion.identity, scaleRatioOnMM);
         //  |scaleratio.x,         0,          0,          icoTranslation.x,   |

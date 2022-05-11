@@ -19,11 +19,19 @@ public class MM_WorldObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thisWorldObjectIcon = MM.instance.CreateMMWorldObject(this,isPlayerObject);
+        CreateMMWOIcon();
     }
 
     public void DestoryThisMMIcon()
     {
         MM.instance.DestroyCorrespondingMiniMapIcon(this);
+    }
+
+    public void CreateMMWOIcon()
+    {
+        if (thisWorldObjectIcon == null)
+        {
+            thisWorldObjectIcon = MM.instance.CreateMMWorldObject(this, isPlayerObject);
+        }
     }
 }
