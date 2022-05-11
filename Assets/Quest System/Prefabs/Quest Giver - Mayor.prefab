@@ -507,6 +507,7 @@ GameObject:
   - component: {fileID: 4066596080398727805}
   - component: {fileID: 4066596080398727682}
   - component: {fileID: 719758026290450476}
+  - component: {fileID: 3674823492251378158}
   m_Layer: 0
   m_Name: Quest Giver - Mayor
   m_TagString: QuestGiver
@@ -581,6 +582,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 5, z: 1}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &3674823492251378158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3796000430297267578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2703b6051f7691f4ab7bd3f9bcfc9ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerObject: 0
+  isIconQuaternionIdentity: 1
+  icon: {fileID: 21300000, guid: f26fa8880b3aeef4b8516c82dc12f2a5, type: 3}
+  col: {r: 1, g: 1, b: 1, a: 1}
+  text: 
+  textSize: 10
+  scaleIcon: 30
 --- !u!1 &3866627266607801899
 GameObject:
   m_ObjectHideFlags: 0

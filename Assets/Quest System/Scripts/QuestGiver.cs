@@ -55,7 +55,7 @@ public class QuestGiver : MonoBehaviour
             gameObject.tag = "Untagged";
             questGiver.enabled = false;
             Invoke("DestroyQuestGiver", 5);
-            questIcon.enabled = false;
+            questIcon.DestoryThisMMIcon();
         }
         else
         {

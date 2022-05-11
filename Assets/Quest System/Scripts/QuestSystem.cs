@@ -47,7 +47,7 @@ public class QuestSystem : MonoBehaviour
                 questInformation.SetActive(false);
                 onFirstLoad = false;
             }
-            if (completedQuests >= 3)
+            if (completedQuests >= 1)
             {
                 bossPortal = true;
             }

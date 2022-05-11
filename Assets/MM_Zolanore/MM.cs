@@ -49,7 +49,7 @@ public class MM : MonoBehaviour
 
     Dictionary<MM_WorldObject, MM_Icon> MM_WorldObjectLookup = new Dictionary<MM_WorldObject, MM_Icon>();
 
-    public void CreateMMWorldObject(MM_WorldObject worldObject, bool isPlayer = false)
+    public MM_Icon CreateMMWorldObject(MM_WorldObject worldObject, bool isPlayer = false)
     {
         MM_Icon mapIcon = Instantiate(mmIconPrefab);
         mapIcon.transform.SetParent(contentRectTransform);
@@ -61,6 +61,7 @@ public class MM : MonoBehaviour
         MM_WorldObjectLookup[worldObject] = mapIcon;
 
         if (isPlayer) { playerMMIcon = mapIcon; }
+        return mapIcon;
     }
 
     public void CalculateTransformations()
@@ -126,6 +127,8 @@ public class MM : MonoBehaviour
         {
             MM_WorldObjectLookup.Remove(miniMapWorldObject);
             Destroy(icon.gameObject);
+            
+            //icon.gameObject.SetActive(false);
         }
     }
 

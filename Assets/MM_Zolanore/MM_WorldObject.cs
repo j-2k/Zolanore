@@ -13,14 +13,16 @@ public class MM_WorldObject : MonoBehaviour
     public int textSize = 10;
     public float scaleIcon = 10;
 
+    public MM_Icon thisWorldObjectIcon;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        MM.instance.CreateMMWorldObject(this,isPlayerObject);
+        thisWorldObjectIcon = MM.instance.CreateMMWorldObject(this,isPlayerObject);
     }
 
-    private void OnDisable()
+    public void DestoryThisMMIcon()
     {
         MM.instance.DestroyCorrespondingMiniMapIcon(this);
     }
