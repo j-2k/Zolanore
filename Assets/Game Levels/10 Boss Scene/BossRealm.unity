@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 288112082}
   - component: {fileID: 288112081}
   - component: {fileID: 288112085}
+  - component: {fileID: 288112086}
   m_Layer: 11
   m_Name: BOSSALTAR
   m_TagString: Interactable
@@ -348,6 +349,26 @@ MonoBehaviour:
   interact: 101
   bossObject: {fileID: 1499823363}
   teleportLocation: {fileID: 0}
+--- !u!114 &288112086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288112080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2703b6051f7691f4ab7bd3f9bcfc9ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerObject: 0
+  isIconQuaternionIdentity: 1
+  icon: {fileID: 21300000, guid: cf6478ef684ce7f4c830edba147c7607, type: 3}
+  col: {r: 1, g: 1, b: 1, a: 1}
+  text: 
+  textSize: 10
+  scaleIcon: 15
+  thisWorldObjectIcon: {fileID: 0}
 --- !u!1 &300159009
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +715,7 @@ GameObject:
   - component: {fileID: 434450475}
   - component: {fileID: 434450477}
   - component: {fileID: 434450476}
+  - component: {fileID: 434450478}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -758,6 +780,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434450474}
   m_CullTransparentMesh: 1
+--- !u!114 &434450478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434450474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2e9f06e736891498c0471dc3746722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icons: []
 --- !u!1 &555975381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,6 +3642,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6187643201853825559, guid: 687f982660b113b42b962f9262159d33, type: 3}
   m_PrefabInstance: {fileID: 1632074343}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1499823364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499823363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2703b6051f7691f4ab7bd3f9bcfc9ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerObject: 0
+  isIconQuaternionIdentity: 0
+  icon: {fileID: 21300000, guid: cf6478ef684ce7f4c830edba147c7607, type: 3}
+  col: {r: 1, g: 1, b: 1, a: 1}
+  text: 
+  textSize: 10
+  scaleIcon: 15
+  thisWorldObjectIcon: {fileID: 0}
 --- !u!114 &1500795869 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1500795869, guid: 1fe724075dbf17b4ea93dc7c2045b58f, type: 3}
@@ -9019,7 +9074,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863337436}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5.41, y: 18.9, z: 25.38}
+  m_LocalPosition: {x: 13.5, y: 18.9, z: -31.6}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1863609028}

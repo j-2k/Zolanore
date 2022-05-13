@@ -28,6 +28,7 @@ public class B_Death : Boss_State
             vfx.Stop();
         }
         Destroy(bsm.gameObject, 20);
+        GetComponentInParent<MM_WorldObject>().DestoryThisMMIcon();
         //enable loot somewhere & destroy body after 20
     }
 

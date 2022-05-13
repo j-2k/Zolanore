@@ -47,6 +47,8 @@ public class PlayerInteractables : MonoBehaviour
         if (this.gameObject.name == "BOSSALTAR")
         {
             bossObject.SetActive(true);
+            GetComponent<MM_WorldObject>().DestoryThisMMIcon();
+            this.enabled = false;
             return true;
         }
         return false;
