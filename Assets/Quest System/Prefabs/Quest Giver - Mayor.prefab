@@ -600,7 +600,8 @@ MonoBehaviour:
   col: {r: 1, g: 1, b: 1, a: 1}
   text: 
   textSize: 10
-  scaleIcon: 30
+  scaleIcon: 15
+  thisWorldObjectIcon: {fileID: 0}
 --- !u!1 &3866627266607801899
 GameObject:
   m_ObjectHideFlags: 0

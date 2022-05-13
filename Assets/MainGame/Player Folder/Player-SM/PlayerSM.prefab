@@ -24875,7 +24875,7 @@ MonoBehaviour:
   col: {r: 0.030668259, g: 0, b: 1, a: 1}
   text: 
   textSize: 10
-  scaleIcon: 20
+  scaleIcon: 10
   thisWorldObjectIcon: {fileID: 0}
 --- !u!114 &372427906
 MonoBehaviour:

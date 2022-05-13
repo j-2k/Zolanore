@@ -96,7 +96,7 @@ public class MM : MonoBehaviour
     private void Start()
     {
         CalculateTransformations();
-        ScrollMap(0.1f);
+        ScrollMap(1);
     }
 
     private void Update()

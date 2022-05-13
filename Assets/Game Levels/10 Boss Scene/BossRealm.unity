@@ -1525,7 +1525,7 @@ MonoBehaviour:
   currClampZoomScale: 0
   scrollSpeed: 0.1
   maxZoom: 4
-  minZoom: 1.5
+  minZoom: 2
   terrain: {fileID: 1702890634}
   sViewRectTransform: {fileID: 745853985}
   contentRectTransform: {fileID: 434450475}

@@ -11,7 +11,7 @@ public class MM_WorldObject : MonoBehaviour
     public Color col = Color.white;
     public string text;
     public int textSize = 10;
-    public float scaleIcon = 10;
+    public float scaleIcon = 15;
 
     public MM_Icon thisWorldObjectIcon;
 
