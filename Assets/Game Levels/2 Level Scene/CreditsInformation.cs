@@ -9,6 +9,9 @@ public class CreditsInformation : MonoBehaviour
     [SerializeField] TextMeshProUGUI creditText;
     [SerializeField] string[] creditsString;
     IEnumerator currentCor;
+
+    [SerializeField] GameObject creditsTitle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,15 +35,17 @@ public class CreditsInformation : MonoBehaviour
     float speed;
     IEnumerator CreditsCor()
     {
-        creditText.text = "";
+        creditsTitle.SetActive(true);
+        //creditText.text = "";
         for (int i = 0; i < creditsString.Length; i++)
         {
+            creditText.text = "";
             for (int j = 0; j < creditsString[i].Length; j++)
             {
                 creditText.text += creditsString[i][j];
                 yield return new WaitForSeconds(0.05f);
             }
-            if (i <= 2)
+            if (i <= 2 || i == creditsString.Length-1)
             {
                 speed = 5;
             }
@@ -49,8 +54,9 @@ public class CreditsInformation : MonoBehaviour
                 speed = 2;
             }
             yield return new WaitForSeconds(speed);
-            creditText.text = "";
         }
-        creditText.text = creditsString[creditsString.Length-1];
+        creditsTitle.SetActive(false);
+        creditText.text = "";
+        //creditText.text = creditsString[creditsString.Length-1];
     }
 }

@@ -2019,6 +2019,7 @@ MonoBehaviour:
   - Jonas - Designer
   - Alwin & Ahmad - Helped in many issues
   - Thanks for playing!      (Press R to restart the credits log)
+  creditsTitle: {fileID: 290753787}
 --- !u!1 &173339688
 GameObject:
   m_ObjectHideFlags: 0
@@ -41009,6 +41010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca84d83724a67e46907c8df1686da96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questCanvas: {fileID: 0}
   interactUI: {fileID: 0}
   questTracker: {fileID: 0}
   questTrackerName: {fileID: 0}
@@ -41017,7 +41019,6 @@ MonoBehaviour:
   claimButton: {fileID: 0}
   acceptButton: {fileID: 0}
   closestQuestGiver: {fileID: 0}
-  questTrackerSc: {fileID: 0}
   questGiver: {fileID: 0}
   completedQuests: 0
   questGivers: []
