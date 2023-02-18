@@ -1,7 +1,7 @@
 # Zolanore
-**CHECK OUT THE LATEST RELEASES TO PLAY THE GAME! (CLICK [HERE](https://github.com/turmoil2k/Zolanore/releases) FOR A DIRECT LINK TO RELEASES)**
+**CHECK OUT THE LATEST RELEASES TO PLAY THE GAME! (CLICK [HERE](https://github.com/j-2k/Zolanore/releases) FOR A DIRECT LINK TO RELEASES)**
 
-**DIRECT ITCH.IO PAGE CLICK [HERE](https://turmoil2k.itch.io/zolanore)**
+**DIRECT ITCH.IO PAGE CLICK [HERE](https://j-2k.itch.io/zolanore)**
 
 **DISCLAIMER: THIS PROJECT HAS BEEN SHELVED AS OF 26/5/2022**
 ![Zolanore1920](https://user-images.githubusercontent.com/52252068/168269264-6733e53f-731d-42e4-ae25-625709c3d4ba.jpg)
